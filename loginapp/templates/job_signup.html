@@ -1,7 +1,7 @@
 {% extends 'base2.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style>
-  html,body{
+  html{
   background-color: #F9F9F9;
   }
   .additionalTxt{
@@ -41,52 +41,59 @@
   </style>
   <!-- <div class="container"> -->
   <hr class="uk-box-shadow-medium ">
-  <div class="" style="margin-top: -20px;background-color: #F9F9F9;">
-    <div class="container "  id="home">
-      <div class="uk-card uk-card-default " >
+  <div class="" style="margin-top: -20px;">
+    <div class="container  " id="home">
+      <div class="uk-card uk-card-default">
         <div class="uk-card-body uk-margin-remove">
-          <div class="col-md-4 col-md-offset-4">
+            <h2 class="text-center">Sign Up</h2>
+           
+           
+          <!-- <div class="col-md-4 col-md-offset-4">  -->
+            <div class="container" style="width: 60%">
+            
+
             <!-- <div class="panel panel-default"> -->
             <!-- <div class="panel-body"> -->
             <!-- <div class="text-center"> -->
             <!-- <h3><i class="fa fa-lock fa-4x"></i></h3> -->
-            <h2 class="text-center">Login</h2>
-            <br>
-            <!-- <p>คุณสามารถเเปลี่ยนพาสเวิร์ดของคุณได้ที่นี่</p> -->
+          
+       
             <div class="panel-body uk-text-left">
+              <p>เพียง 3 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</p>
+              <br>
               <form id="register-form" role="form" autocomplete="off" class="form" method="post">
                 {% csrf_token %}
                 <div class="form-group">
+                   <div  class="uk-margin-bottom ">
+                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
+                    {{form.username |add_class:"uk-input"|attr:"placeholder:Username"}}
+                  </div>
                   <div  class="uk-margin-bottom ">
                     <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                    {{form.username |add_class:"uk-input"|attr:"placeholder:Username or Email"}}
+                    {{form.email |add_class:"uk-input"|attr:"placeholder:Email"}}
                   </div>
                   <div  class="uk-margin-bottom ">
                     <!-- <label class=" "  for=" ">พาสเวิร์ดเใหม่</label> -->
-                    {{form.password |add_class:"uk-input"|attr:"placeholder:Password " }}
+                    {{form.password1 |add_class:"uk-input"|attr:"placeholder:Password " }}
+                  </div>
+                     <div  class="uk-margin-bottom ">
+                    <!-- <label class=" "  for=" ">พาสเวิร์ดเใหม่</label> -->
+                    {{form.password2 |add_class:"uk-input"|attr:"placeholder:Password Confirmation " }}
                   </div>
                   <div class="form-group">
                     <br>
                     <!-- <button type="submit"></button> -->
-                    <button   class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;"><h2 class="uk-margin-small-top">Login</h2> </button>
+                    <button   class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;"><h2 class="uk-margin-small-top">ถัดไป</h2> </button>
                   </div>
                   <!-- <input type="hidden" class="hide" name="token" id="token" value=""> -->
                 </div>
               </form>
             </div>
-            <p class="additionalTxt " >You don't have an account? <a class="uk-button-text link"  href="{% url 'choose_signup' %}">   Sign up here</a> </p>
+             
+         
             <br>
-<div class="strike">
-            <span>OR</span>
-          </div>
-          <br>
-          <div class="uk-text-center">
-              <a href=" " class="uk-margin-remove-top "><img style="height: 36px; width: 36px" class="uk-margin-small-bottom" src="{% static "images/gg.png" %}"/>  
-</a>
 
-
-          </div>
-                     
+                               
 
             <!-- </div> -->
           <!-- </div>
@@ -96,9 +103,6 @@
   </div>
 </div>
 </div>
-
-                <img style="height: 100%; width: 100%" class="uk-margin-small-bottom" src="{% static "images/people.png" %}"/>
-         
 <!-- </div> -->
 {% endblock %}
 <!-- </div> -->
