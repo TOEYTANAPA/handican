@@ -21,6 +21,20 @@ class JobSignUpForm(UserCreationForm):
         model = User
         fields = (  'username','email', 'password1', 'password2', )
         # exclude = ['username',]
+class JobInformationForm(forms.Form):
+    first_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    last_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    age =  forms.CharField(max_length=10, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    address =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    disability_cate =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    lastest_job =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
+    lastest_office =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    expected_salary =  forms.CharField(max_length=50, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    phone_no =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    expected_welfare =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    profile_image = forms.FileField()
+
 
 # class UserCreationForm(forms.ModelForm):
 #     """
