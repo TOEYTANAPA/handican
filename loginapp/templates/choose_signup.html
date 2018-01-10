@@ -1,0 +1,97 @@
+{% extends 'base2.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<style>
+	html,body{
+	background-color: #F9F9F9;
+	}
+	.additionalTxt{
+	color: #C4C4C4;
+	}
+	.link{
+	color: #47CCA6;
+	}
+	.strike {
+	display: block;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	}
+	.strike > span {
+	position: relative;
+	display: inline-block;
+	}
+	.strike > span:before,
+	.strike > span:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	width: 9999px;
+	height: 1px;
+	background: #c6c6c6;
+	}
+	.strike > span:before {
+	right: 100%;
+	margin-right: 15px;
+	}
+	.strike > span:after {
+	left: 100%;
+	margin-left: 15px;
+	}
+	.panel{
+	border-color: #47CCA6;
+	}
+	i,.textInPanel{
+		color: #47CCA6;
+	}
+	</style>
+	<!-- <div class="container"> -->
+	<hr class="uk-box-shadow-medium ">
+	<div class="" style="background-color: #F9F9F9;margin-top: -20px;">
+		<div class="container  " id="home">
+			<div class="uk-card uk-card-default">
+				<div class="uk-card-body uk-margin-remove">
+					<h2 class="text-center">Sign Up</h2>
+					<br><br>
+					<div class="container  " id="home">
+						<div class="uk-child-width-1-2@m uk-child-width-1-1@s uk-text-center" uk-grid>
+							
+							<div>
+								<a class="uk-link-reset" href="{% url 'job_signup' %}">
+								<div  class="panel panel-default">
+									<h2><i class="fa fa-user-o fa-5x" aria-hidden="true"></i></h2>
+									<div class="panel-body"><h3 class="textInPanel">LOOKING FOR JOB</h3></div>
+								</div>
+								</a>
+							</div>
+							<div>
+								<a class="uk-link-reset" href="{% url 'company_signup' %}">
+								<div class="panel panel-default">
+									<h2><i class="fa fa-user-o fa-5x" aria-hidden="true"></i></h2>
+									<div class="panel-body"><h3 class="textInPanel">LOOKING FOR DISABLED PEOPLE</h3></div>
+								</div>
+							</a>
+							</div>
+							
+							<br>
+							
+							<!-- </div> -->
+						<!-- </div>
+					</div> -->
+				</div>
+				<br>	<br>
+				<p class="additionalTxt  uk-text-center" >มีบัญชีผู้ใช้แล้ว? <a class="uk-button-text link"  href=" ">   เข้าสู่ระบบที่นี่ </a> </p>
+				<br>
+				
+				
+			</div>
+			<!-- end container -->
+		</div>
+	</div>
+</div>
+</div>
+<div>
+<img style="height: 100%; width: 100%" class="uk-margin-small-bottom" src="{% static "images/people.png" %}"/>
+</div>
+<!-- </div> -->
+{% endblock %}
+<!-- </div> -->
