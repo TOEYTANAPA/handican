@@ -73,7 +73,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'handican.wsgi.application'
 
-
+AUTHENTICATION_BACKENDS = (
+    'backends.email-auth.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -138,4 +141,4 @@ STATICFILES_DIRS = [
 ]
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')

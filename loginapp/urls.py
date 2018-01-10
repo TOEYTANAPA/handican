@@ -22,7 +22,9 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout,{'next_page': 'home'}, name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
-    # url(r'^signup/$', views.signup, name='signup'),
+    url(r'^signup-1/$', views.choose_signup, name='choose_signup'),
+    url(r'^signup-2/$', views.job_signup, name='job_signup'),
+    url(r'^signup-company/$', views.company_signup, name='company_signup'),
     # url(r'^settings/$', views.profile, name="profile"),
     # url(r'^password/$', views.change_password, name='change_password'),
 
