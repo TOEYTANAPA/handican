@@ -21,10 +21,36 @@ class JobSignUpForm(UserCreationForm):
         model = User
         fields = (  'username','email', 'password1', 'password2', )
         # exclude = ['username',]
+
+class CompanySignUpForm(UserCreationForm):
+    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.filter(email=data).exists():
+            raise forms.ValidationError("This email already used")
+        return data
+
+
+    class Meta:
+    
+        model = User
+        fields = ( 'email', 'password1', 'password2', )
+        exclude = ['username',]
+
 class JobInformationForm(forms.Form):
+    
+    GENDER_CHOICES = (
+    (0, 'ชาย'),
+    (1, 'หญิง')
+    )
     first_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     last_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    age =  forms.CharField(max_length=10, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    age =  forms.IntegerField( help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    sex = forms.ChoiceField(choices = GENDER_CHOICES, label="",initial='', widget=forms.Select())
     address =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     disability_cate =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     lastest_job =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
@@ -32,9 +58,27 @@ class JobInformationForm(forms.Form):
     expected_salary =  forms.CharField(max_length=50, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     phone_no =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     expected_welfare =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent =  forms.CharField(max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent2 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent3 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    more_resume = forms.FileField()
     profile_image = forms.FileField()
+    get_more_info = forms.BooleanField()
 
+class CompanyInformationForm(forms.Form):
+    
+
+    th_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    en_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    address =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    info =  forms.CharField(max_length=2000, help_text='',widget=forms.Textarea(attrs={'rows': 3,'class': 'uk-textarea', }))
+    website =  forms.CharField(max_length=50,required=False, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    phone_no =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    hr_no =  forms.IntegerField( help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
+    fax = forms.CharField(max_length=50,required=False, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    company_type =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    company_image = forms.FileField()
+    get_more_info = forms.BooleanField()
 
 # class UserCreationForm(forms.ModelForm):
 #     """

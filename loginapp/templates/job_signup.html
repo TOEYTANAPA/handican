@@ -67,7 +67,7 @@
     <div class="container  " id="home">
       <div class="uk-card uk-card-default">
         <div class="uk-card-body uk-margin-remove">
-            <h2 class="text-center">Sign Up</h2>
+            <h2 class="text-center">สมัครบัญชีผู้ใช้</h2>
            
            
           <!-- <div class="col-md-4 col-md-offset-4">  -->
@@ -79,30 +79,31 @@
             <!-- <div class="text-center"> -->
             <!-- <h3><i class="fa fa-lock fa-4x"></i></h3> -->
           
-       <progress class="uk-progress" value="30" max="100"></progress>
-<div class="container">
+       <!-- <progress class="uk-progress" value="30" max="100"></progress> -->
+<!-- <div class="container">
       <ul class="progressbar">
         <li class="active">Step 1</li>
         <li>Step 2</li>
         <li>Step 3</li>
       </ul>
-    </div>  <div class="row bs-wizard" style="border-bottom:0;">
+    </div>   -->
+    <div class="row bs-wizard uk-text-center" style="border-bottom:0;">
                 
-                <div class="col-md-3 bs-wizard-step active">
+                <div class="col-md-4 bs-wizard-step active">
                   <div class="text-center bs-wizard-stepnum">Step 1</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <!-- <div class="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div> -->
                 </div>
                 
-                <div class="col-md-3 bs-wizard-step "><!-- complete -->
+                <div class="col-md-4 bs-wizard-step disabled"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">Step 2</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
               <!--     <div class="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div> -->
                 </div>
                 
-                <div class="col-md-3 bs-wizard-step disabled"><!-- complete -->
+                <div class="col-md-4 bs-wizard-step disabled"><!-- complete -->
                   <div class="text-center bs-wizard-stepnum">Step 3</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
@@ -126,19 +127,19 @@
                 <div class="form-group">
                    <div  class="uk-margin-bottom ">
                     <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                    {{form.username |add_class:"uk-input"|attr:"placeholder:Username"}}
+                    {{form.username |add_class:"uk-input"|attr:"placeholder:ชื่อบัญชีผู้ใช้"}}
                   </div>
                   <div  class="uk-margin-bottom ">
                     <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                    {{form.email |add_class:"uk-input"|attr:"placeholder:Email"}}
+                    {{form.email |add_class:"uk-input"|attr:"placeholder:อีเมล"}}
                   </div>
                   <div  class="uk-margin-bottom ">
                     <!-- <label class=" "  for=" ">พาสเวิร์ดเใหม่</label> -->
-                    {{form.password1 |add_class:"uk-input"|attr:"placeholder:Password " }}
+                    {{form.password1 |add_class:"uk-input"|attr:"placeholder:พาสเวิร์ด " }}
                   </div>
                      <div  class="uk-margin-bottom ">
                     <!-- <label class=" "  for=" ">พาสเวิร์ดเใหม่</label> -->
-                    {{form.password2 |add_class:"uk-input"|attr:"placeholder:Password Confirmation " }}
+                    {{form.password2 |add_class:"uk-input"|attr:"placeholder:ยืนยันพาสเวิร์ด " }}
                   </div>
                   <div class="form-group">
                     <br>
@@ -149,7 +150,7 @@
                 </div>
               </form>
             </div>
-            <p class="additionalTxt  uk-text-center" >มีบัญชีผู้ใช้แล้ว? <a class="uk-button-text link"  href=" ">   เข้าสู่ระบบที่นี่ </a> </p>
+            <p class="additionalTxt  uk-text-center" >มีบัญชีผู้ใช้แล้ว? <a class="uk-button-text link"  href=" {% url 'login' %}">   เข้าสู่ระบบที่นี่ </a> </p>
          
             <br>
 

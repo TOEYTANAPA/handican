@@ -24,7 +24,11 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
     url(r'^signup-1/$', views.choose_signup, name='choose_signup'),
     url(r'^signup-2/$', views.job_signup, name='job_signup'),
+    url(r'^signup-2-2/$', views.job_signup2, name='job_signup2'),
+    # return redirect('job_signup2')
     url(r'^signup-company/$', views.company_signup, name='company_signup'),
+    url(r'^signup-company-2/$', views.company_signup2, name='company_signup2'),
+    url(r'^signup-success/$', views.signup_success, name='signup_success'),
     # url(r'^settings/$', views.profile, name="profile"),
     # url(r'^password/$', views.change_password, name='change_password'),
 
