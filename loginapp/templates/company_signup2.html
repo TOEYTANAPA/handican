@@ -1,4 +1,4 @@
-{% extends 'base2.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style>
   html,body{
@@ -69,8 +69,7 @@
   color: red;
   }
   </style>
-  <!-- <div class="container"> -->
-  <hr class="uk-box-shadow-medium ">
+
   <div class="" style="margin-top: -20px;">
     <div class="container  " id="home">
       <div class="uk-card uk-card-default">
@@ -96,15 +95,15 @@
             </div>   -->
             <div class="row bs-wizard uk-text-center" style="border-bottom:0;">
               
-              <div class="col-md-4 bs-wizard-step complete">
-                <div class="text-center bs-wizard-stepnum">Step 1</div>
+              <div class="col-md-6 bs-wizard-step complete">
+                <div class="text-center bs-wizard-stepnum">สร้างบัญชี</div>
                 <div class="progress"><div class="progress-bar"></div></div>
                 <a href="#" class="bs-wizard-dot"></a>
                 <!-- <div class="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div> -->
               </div>
               
-              <div class="col-md-4 bs-wizard-step active"><!-- complete -->
-              <div class="text-center bs-wizard-stepnum">Step 2</div>
+              <div class="col-md-6 bs-wizard-step active"><!-- complete -->
+              <div class="text-center bs-wizard-stepnum">ข้อมูลบริษัทเบื้องต้น</div>
               <div class="progress"><div class="progress-bar"></div></div>
               <a href="#" class="bs-wizard-dot"></a>
               <!--     <div class="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div> -->
@@ -194,7 +193,7 @@
                   <label class=" "  for=" ">ประเภทบริษัท <b>*</b></label>
                   {{form.company_type |add_class:"uk-input"|attr:"placeholder: " }}
                 </div>
-                <div  class="uk-margin-bottom ">
+                <div  class="uk-margin-bottom uk-margin-top">
          
                   {{form.get_more_info |add_class:"uk-checkbox" }} <label class=" "  for=" ">
                   รับข่าวสาร กิจกรรม และสิทธิพิเศษจากเราทางอีเมล </label>
@@ -222,7 +221,7 @@ error!
 {% endif %}  
                 <div class="form-group">
              
-                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;"><h2 class="uk-margin-small-top">ยืนยัน</h2> </button>
+                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">ยืนยัน</button>
                 </div>
                
               </div>

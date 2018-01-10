@@ -80,7 +80,11 @@
     margin-top:-40px;
     }
     
-    
+    button{
+    background-color:#47CCA6;
+    color: white;
+    border-color: #47CCA6;
+    }
     
     .nav-desktop .container{
     width: 90%;
@@ -148,10 +152,8 @@
     .container{
     width: 98%;
     }
-
-       .action {
+    .action {
     margin-top:25px;
-
     }
     
     .logo {
@@ -210,9 +212,8 @@
     width: 98%;
     }
     
-         .action {
+    .action {
     margin-top:25px;
-
     }
     
     .logo {
@@ -233,15 +234,12 @@
     margin-top:-50px;
     margin-bottom: -20px;
     }
-
-
     .logo {
     height: 100%;
     width: 150px;
     margin-top:-45px; margin-bottom: -20px;
     }
-
-      .serach-input {
+    .serach-input {
     width: 35%;
     margin-top:29px;
     text-align: center;
@@ -271,7 +269,7 @@
     -moz-column-width: 150px; /* Firefox */
     column-width: 150px;
     }
-  
+    
     
     }
     /* Medium devices (desktops, 992px and up) */
@@ -282,12 +280,9 @@
     text-align: left;
     margin-left: -250px;
     }
-
     .action {
     margin-top:-60px;
     }
-
-
     .logo {
     height: 100%;
     width: 120px;
@@ -333,7 +328,7 @@
                                 <ul>
                                     <li><a href="" id="input"> <img class="img-user"  src="../{{profile}}"/></a></li>
                                     <li><a href="" id="input"> <img class="img-user"  src="../{{profile}}"/></a></li>
-                                    <li><a href="{% url 'profile' %}" class="input">{{user.username}} </a>
+                                    <li><a href="" class="input">{{user.username}} </a>
                                     
                                     
                                 </ul>
@@ -364,7 +359,6 @@
                                     
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                     <div class="row">
@@ -382,13 +376,11 @@
                     </div>
                 </div>
             </div>
-
-
         {% else %}
             <div class="nav-desktop ">
                 <div class="container">
                     <div class="row">
-                       
+                        
                         <div class="col-md-3">
                             <div class="social pull-left">
                                 <a href=""> <img class="pull-left logo"  " src="{% static "images/logo.png" %}"/> </a>
@@ -407,7 +399,7 @@
                         <div class="col-md-3">
                             <div class="action pull-right user">
                                 <ul>
-                                   <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
+                                    <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
                                     <li><a href="#modal-sections" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
                                     <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
                                     
@@ -430,10 +422,9 @@
                         </div>
                         
                         <div class="col-md-6">
-
-                       <div class="action pull-right user">
+                            <div class="action pull-right user">
                                 <ul>
-                                   <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
+                                    <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
                                     <li><a href="#modal-sections" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
                                     <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
                                     
@@ -441,7 +432,7 @@
                                 </ul>
                             </div>
                             
-                           <!--  <nav class="navbar navbar-default action user">
+                            <!--  <nav class="navbar navbar-default action user">
                                 <div class="navbar-header">
                                     
                                     <button class="uk-button uk-button-default uk-button-small uk-margin-small-right " type="button" uk-toggle="target: #offcanvas-nav-primary;flip: true"><i class="fa fa-bars " aria-hidden="true" style="font-size: 20px;" ></i></button>

@@ -1,4 +1,4 @@
-{% extends 'base2.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style>
   html,body{
@@ -70,20 +70,7 @@
           
           <!-- <div class="col-md-4 col-md-offset-4">  -->
           <div class="container" style="width: 60%">
-            
-            <!-- <div class="panel panel-default"> -->
-            <!-- <div class="panel-body"> -->
-            <!-- <div class="text-center"> -->
-            <!-- <h3><i class="fa fa-lock fa-4x"></i></h3> -->
-            
-            <!-- <progress class="uk-progress" value="30" max="100"></progress> -->
-            <!-- <div class="container">
-              <ul class="progressbar">
-                <li class="active">Step 1</li>
-                <li>Step 2</li>
-                <li>Step 3</li>
-              </ul>
-            </div>   -->
+         
             <div>
               <div class="row bs-wizard uk-text-center" style="border-bottom:0;">
                 
@@ -101,14 +88,7 @@
                 
               </div>
             </div>
-            <!-- complete -->
-            <!--       <div class="col-md-4 bs-wizard-step disabled">
-              <div class="text-center bs-wizard-stepnum">Step 3</div>
-              <div class="progress"><div class="progress-bar"></div></div>
-              <a href="#" class="bs-wizard-dot"></a>
-              
-            </div>
-            -->
+           
           </div>
           
           <div class="panel-body uk-text-left">
@@ -126,7 +106,7 @@
                   {{form.email |add_class:"uk-input"|attr:"placeholder:อีเมล"}}
 
                    {% if form.errors.email %}
-                            <div class="alert alert-danger uk-margin-top">
+           <div class="uk-alert-danger" uk-alert>
                       <p> {{ form.errors.email }} </p>
                     </div>
                        {% endif %}
@@ -140,7 +120,7 @@
                   {{form.password2 |add_class:"uk-input"|attr:"placeholder:ยืนยันพาสเวิร์ด " }}
                   {% if form.errors.password2 %}
                     
-                    <div class="alert alert-danger uk-margin-top">
+              <div class="uk-alert-danger" uk-alert>
                       <p> {{ form.errors.password2 }} </p>
                     </div>
                   {% endif %}
@@ -148,7 +128,7 @@
                 <div class="form-group">
                   <br>
                   <!-- <button type="submit"></button> -->
-                  <button   class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;"><h2 class="uk-margin-small-top">ถัดไป</h2> </button>
+                  <button   class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">ถัดไป </button>
                 </div>
                 <!-- <input type="hidden" class="hide" name="token" id="token" value=""> -->
               </div>
@@ -157,10 +137,7 @@
           <p class="additionalTxt  uk-text-center" >มีบัญชีผู้ใช้แล้ว? <a class="uk-button-text link"  href=" {% url 'login' %}">   เข้าสู่ระบบที่นี่ </a> </p>
           
           <br>
-          
-          <!-- </div> -->
-        <!-- </div>
-      </div> -->
+       
     </div>
   </div>
 </div>
