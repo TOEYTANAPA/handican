@@ -1,4 +1,4 @@
-{% extends 'base2.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style>
   html,body{
@@ -69,8 +69,7 @@
   color: red;
   }
   </style>
-  <!-- <div class="container"> -->
-  <hr class="uk-box-shadow-medium ">
+
   <div class="" style="margin-top: -20px;">
     <div class="container  " id="home">
       <div class="uk-card uk-card-default">
@@ -94,50 +93,40 @@
                 <li>Step 3</li>
               </ul>
             </div>   -->
-            <div class="row bs-wizard uk-text-center" style="border-bottom:0;">
-              
-              <div class="col-md-4 bs-wizard-step complete">
-                <div class="text-center bs-wizard-stepnum">Step 1</div>
-                <div class="progress"><div class="progress-bar"></div></div>
-                <a href="#" class="bs-wizard-dot"></a>
-                <!-- <div class="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div> -->
-              </div>
-              
-              <div class="col-md-4 bs-wizard-step active"><!-- complete -->
-              <div class="text-center bs-wizard-stepnum">Step 2</div>
-              <div class="progress"><div class="progress-bar"></div></div>
-              <a href="#" class="bs-wizard-dot"></a>
+         <div class="row bs-wizard uk-text-center" style="border-bottom:0;">
+                
+                <div class="col-md-6 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">สร้างบัญชีผู้ใช้</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <!-- <div class="bs-wizard-info text-center"></div> -->
+                </div>
+                
+                <div class="col-md-6 bs-wizard-step active"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">กรอกข้อมูส่วนตัว</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
               <!--     <div class="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div> -->
+                </div>
+                
+              
+                
+         
             </div>
-            
-            <div class="col-md-4 bs-wizard-step disabled"><!-- complete -->
-            <div class="text-center bs-wizard-stepnum">Step 3</div>
-            <div class="progress"><div class="progress-bar"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
-            <!--  <div class="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi bibendum bibendum</div> -->
-          </div>
-          
-          <!-- active -->
-          <!--     <div class="col-xs-3 bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">Step 4</div>
-            <div class="progress"><div class="progress-bar"></div></div>
-            <a href="#" class="bs-wizard-dot"></a>
-            <div class="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div>
-          </div> -->
-        </div>
         <div class="panel-body uk-text-left">
           <!--               <p>เพียง 3 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</p>
           -->              <br>
           <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
             {% csrf_token %}
             <div class="form-group">
-              <div  class="uk-margin-bottom uk-child-width-1-4@m uk-child-width-1-1@s uk-text-center"  uk-margin>
+              <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
+                 <label  for=" ">อัพโหลดรูปภาพโปรไฟล์ <b>*</b></label>
                 <div> <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/person.png" %}" alt="your image" /></div>
                 
                 <div >
                   <div uk-form-custom="target: true" >
                     {{form.profile_image|add_class:"uk-input"|attr:"id:imgInp"}}
-                    <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="อัพโหลดรูปภาพโปรไฟล์" disabled>
+                    <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
                   </div>
                 </div>
               </div>
@@ -274,7 +263,7 @@ error!
 {% endif %}  
                 <div class="form-group">
              
-                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;"><h2 class="uk-margin-small-top">ยืนยัน</h2> </button>
+                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">ยืนยัน </button>
                 </div>
                
               </div>
