@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^signup-company/$', views.company_signup, name='company_signup'),
     url(r'^signup-company-2/$', views.company_signup2, name='company_signup2'),
     url(r'^signup-success/$', views.signup_success, name='signup_success'),
-    # url(r'^settings/$', views.profile, name="profile"),
+    url(r'^settings/$', views.profile, name="profile"),
     # url(r'^password/$', views.change_password, name='change_password'),
 
 ]
