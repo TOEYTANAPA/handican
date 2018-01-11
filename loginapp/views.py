@@ -98,3 +98,6 @@ def company_signup2(request):
     else:
         form = CompanyInformationForm()
     return render(request, 'company_signup2.html', {'form': form})    
+
+def profile(request):
+    return render(request, 'profile.html')

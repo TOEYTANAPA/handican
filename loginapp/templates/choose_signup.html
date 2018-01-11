@@ -1,9 +1,7 @@
-{% extends 'base2.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<style>
-	html,body{
-	background-color: #F9F9F9;
-	}
+
 	.additionalTxt{
 	color: #C4C4C4;
 	}
@@ -43,9 +41,9 @@
 	i,.textInPanel{
 		color: #47CCA6;
 	}
+
 	</style>
-	<!-- <div class="container"> -->
-	<hr class="uk-box-shadow-medium ">
+
 	<div class="" style="background-color: #F9F9F9;margin-top: -20px;">
 		<div class="container  " id="home">
 			<div class="uk-card uk-card-default">
@@ -58,7 +56,8 @@
 							<div>
 								<a class="uk-link-reset" href="{% url 'job_signup' %}">
 								<div  class="panel panel-default">
-									<h2><i class="fa fa-user-o fa-5x" aria-hidden="true"></i></h2>
+									<br>
+									<h2><img  class="imgCrop" style="width: 150px;height: 150px" src="{% static "images/employee.png" %}" alt="your image" /></h2> 
 									<div class="panel-body"><h3 class="textInPanel">LOOKING FOR JOB</h3></div>
 								</div>
 								</a>
@@ -66,7 +65,8 @@
 							<div>
 								<a class="uk-link-reset" href="{% url 'company_signup' %}">
 								<div class="panel panel-default">
-									<h2><i class="fa fa-user-o fa-5x" aria-hidden="true"></i></h2>
+									<br>
+									<h2><img  class="imgCrop" style="width: 150px;height: 150px" src="{% static "images/manager.png" %}" alt="your image" /></h2> 
 									<div class="panel-body"><h3 class="textInPanel">LOOKING FOR DISABLED PEOPLE</h3></div>
 								</div>
 							</a>
