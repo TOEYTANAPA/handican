@@ -39,9 +39,11 @@
         <link href="{% static 'css/css_home/style.css' %}" rel="stylesheet">
         <link href="{% static 'css/css_home/responsive.css' %}" rel="stylesheet">
         <link href="{% static 'css/css_home/pure_slide.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/css_home/owl.carousel.css' %}" type="text/css" media="all">
         
         <!-- <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"> -->
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/css_home/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
         <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/easy-responsive-tabs.css' %}" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -51,10 +53,8 @@
         
     </head>
     <style>
-    
-    body{
-    /*font-size: 150%;*/
-    }
+
+   
     
     
     h1,h2,h3,h4,h5{
@@ -112,7 +112,11 @@
     #input {
     color:#4D5656;
     font-family: 'Kanit', sans-serif;
-    }
+    } 
+    #input :hover {
+    color: #4fe3b9;
+    /*font-family: 'Kanit', sans-serif;*/
+    } 
     
     .search-cate-mobile {
     -webkit-column-width: 100px;
@@ -126,6 +130,28 @@
     .action {
     margin-top:25px;
     }
+
+         .ps-slider {
+        position: relative;
+        width: 100%;
+        background-color: #333;
+        height: 100vh;
+        overflow: hidden;
+        /*margin-top: -10px;*/
+        
+        }
+         .ps-slider-nav ul li a {
+        display: block;
+        width: 15px;
+        height: 15px;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        outline: 0;
+        transition: all .3s
+        }
     
     /*#totop{
     position: fixed;
@@ -135,7 +161,27 @@
     }*/
     /* Extra small devices (phones, less than 768px) */
     @media (max-width: 479px) {
-    
+     .ps-slider {
+        position: relative;
+        width: 100%;
+        background-color: #333;
+        height: 10em;
+        overflow: hidden;
+        margin-top: -20px;
+        }
+        .ps-slider-nav ul li a {
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        margin-bottom: -0.5em;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        outline: 0;
+        transition: all .3s
+        }
     .nav-desktop{
     display: none;
     visibility: hidden;
@@ -177,6 +223,28 @@
     z-index: 1;
     
     }*/
+
+       .ps-slider {
+        position: relative;
+        width: 100%;
+        background-color: #333;
+        height: 20em;
+        overflow: hidden;
+        margin-top: -20px;
+        }
+        .ps-slider-nav ul li a {
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        margin-bottom: -0.5em;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        outline: 0;
+        transition: all .3s
+        }
     
     .image-mobile{
     display: block;
@@ -229,6 +297,28 @@
     }
     /* Small devices (tablets, 768px and up) */
     @media (min-width: 768px) and (max-width: 992px) {
+    
+.ps-slider {
+        position: relative;
+        width: 100%;
+        background-color: #333;
+        height: 45vh;
+        overflow: hidden;
+        margin-top: -35px;
+        }
+        .ps-slider-nav ul li a {
+        display: block;
+        width: 1.2em;
+        height: 1.2em;
+        margin-bottom: -0.3em;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        outline: 0;
+        transition: all .3s
+        }
     .action {
     margin-top:-50px;
     margin-bottom: -20px;
@@ -331,13 +421,14 @@
                         <div class="col-md-3">
                             <div class="action pull-right user">
                                 <ul>
-                                    <li><a href="" id="input"> <img class="img-user"  src="../{{profile}}"/></a></li>
-                                    <li><a href="" id="input"> <img class="img-user"  src="../{{profile}}"/></a></li>
-                                    <li><a href="{% url 'profile' %}" class="input">{{user.username}} </a>
                                     
+                                  
                                     
-                                </ul>
-                                
+                                </li>
+                                    
+                                 </li>
+                              
+                            </ul>
                             </div>
                         </div>
                     </div>
@@ -408,8 +499,8 @@
                             <div class="action pull-right user">
                                 <ul>
                                    <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
-                                    <li><a href="#modal-sections" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
-                                    <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
+                                    <li><a href="{% url 'login' %}" class="uk-link-reset" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
+                                    <li><a href="#modal-sections" class="uk-link-reset" > <h3 id="input"> คำถาม</h3></a></li>
                                     
                                     
                                 </ul>
@@ -487,8 +578,10 @@
             
             
         {% endif %}
-        <hr class="uk-box-shadow-medium">
+        <hr class="uk-box-shadow-medium uk-margin-remove-bottom">
+        <div class="uk-background-muted ">
         {% block content %} {% endblock %}
+        </div>
         <!-- <div class="uk-position-bottom-right"> -->
         <!-- </div> -->
         <div class="uk-section uk-section-secondary uk-light">
