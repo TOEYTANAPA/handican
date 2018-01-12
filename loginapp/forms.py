@@ -56,7 +56,7 @@ class JobInformationForm(forms.Form):
     talent =  forms.CharField(max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent2 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent3 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    more_resume = forms.FileField()
+    more_resume = forms.FileField(required=False,)
     profile_image = forms.FileField()
     get_more_info = forms.BooleanField(required=False,initial=False)
 

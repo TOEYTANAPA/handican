@@ -31,7 +31,6 @@ class DisabilityInfo(models.Model):
 		
 class CompanyInfo(models.Model):
 	profile = models.ForeignKey(Profile, on_delete=models.SET_NULL,blank=True,null=True)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
 	th_name = models.CharField(max_length=100,editable=True )
 	en_name = models.CharField(max_length=100,editable=True )
 	phone_no = models.CharField(max_length=20,default="-")

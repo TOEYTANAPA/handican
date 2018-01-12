@@ -418,7 +418,7 @@
                             <div class="action pull-right user">
                                 <ul>
                                     <li><a href="" id="input"> <img class="img-user"  src="../{{profile}}"/></a></li>
-                                    <li><a href="" class="input">{{user.username}} </a>
+                                    <li><a href="{% url 'profile' %}" class="input">{{user.username}} </a>
                                     
                                     
                                     
@@ -449,7 +449,7 @@
                         <ul >
                             <li><a href="" class="input"> <img class="img-user"  src="../{{profile}}"/>
                             </a></li>
-                            <li><a href="" ><h3 id="input">{{user.username}} </h3></a></li>
+                            <li><a href="{% url 'profile' %}" ><h3 id="input">{{user.username}} </h3></a></li>
                             
                         </ul>
                     </div>
@@ -519,7 +519,7 @@
                     <div class="action pull-right user">
                         <ul>
                             <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
-                            <li><a href="#modal-sections" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
+                            <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
                             <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
                             
                             

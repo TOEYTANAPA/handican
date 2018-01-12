@@ -56,8 +56,17 @@
     margin: 10px 0;
     }
     </style>
-     
-        <div class="uk-alert-success " uk-alert>
+     {% block messages %}
+    {% if messages %}
+        {% for message in messages %}
+            <div id="alertMsg" class="alert alert-{{ message.tags }}">  <!-- singular -->
+                <a class="close" data-dismiss="alert">×</a>
+                {{ message|safe }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+        <!-- <div class="uk-alert-success " uk-alert>
             <a class="uk-alert-close" uk-close></a>
             {% if messages %}
                 <ul class="messages">
@@ -66,7 +75,7 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-        </div>
+        </div> -->
     <!-- <hr class="uk-box-shadow-medium "> -->
     <div class="uk-background-muted profile-desktop " id="home" style="margin-top: -20px;">
         <br>
@@ -86,7 +95,7 @@
                             
                             <li><a class="uk-link-reset" href="">พาสเวิร์ดและความปลอดภัย</a></li>
                             <li><a class="uk-link-reset" href="">การตั้งค่าการแจ้งเตือน</li>
-                            <li><a class="uk-link-reset" href="">ออกจากระบบ</li>
+                            <li><a class="uk-link-reset" href="{% url 'logout' %}">ออกจากระบบ</li>
                         </ul>
                     </div>
                     
@@ -201,7 +210,11 @@
         </div>
     </div>
     <script type="text/javascript">
-    $(".uk-alert").fadeOut(3000);
+    $("#alertMsg").fadeOut(5000);
+    if ($('#alerId').css('display') == 'block') {
+              swal("Success", "สมัครบัญชีผู้ใช้สำเร็จแล้ว", "success");
+   
+    } 
     $("#love").css("display", "none");
     $("#order").css("display", "none");
     $("#review").css("display", "none");

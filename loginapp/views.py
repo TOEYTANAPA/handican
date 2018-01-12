@@ -24,12 +24,13 @@ def job_signup(request):
         if form.is_valid():
             print("Earn")
            
-            form.save()
-            username = form.cleaned_data.get('username')
+            # form.save()
             email=form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
-            new_user = authenticate(username=username, password=raw_password)
-            login(request, new_user)
+            user=User.objects.create_user(username=email, password=raw_password,email=email)
+            user.save()
+            user = authenticate(username=email,password=raw_password)
+            login(request, user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)
@@ -45,8 +46,9 @@ def job_signup2(request):
         if form.is_valid():
             print("Earn")
             print("request.user",request.user)
-  
-            profile = Profile.objects.create(user=request.user,
+            profile = Profile.objects.create(user=request.user,profile_picture = request.FILES['profile_image'],)
+            disability = DisabilityInfo.objects.create(
+                profile = profile,
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['first_name'],
                 email = request.user.email,
@@ -64,8 +66,8 @@ def job_signup2(request):
                 talent3 = form.cleaned_data['talent3'],
                 more_resume = request.FILES['more_resume'],
                 get_more_info = form.cleaned_data['get_more_info'],
-                profile_picture = request.FILES['profile_image'],
                 )
+            messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
             return redirect('signup_success')
             # redirect process3
     else:
@@ -103,7 +105,7 @@ def company_signup2(request):
         if form.is_valid():
             print("Earn")
             profile = Profile.objects.create(user=request.user,profile_picture = request.FILES['company_image'],)
-            comp = Company.objects.create(user=request.user,
+            comp = CompanyInfo.objects.create(
                 profile =profile,
                 th_name=form.cleaned_data['th_name'],
                 en_name=form.cleaned_data['en_name'],
@@ -117,7 +119,7 @@ def company_signup2(request):
            
                 )
         
-            messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
 
             return redirect('profile')
             # redirect process3
