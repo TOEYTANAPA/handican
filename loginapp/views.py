@@ -28,7 +28,8 @@ def job_signup(request):
             username = form.cleaned_data.get('username')
             email=form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            new_user = authenticate(username=username, password=raw_password)
+            login(request, new_user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)
@@ -43,16 +44,28 @@ def job_signup2(request):
         form = JobInformationForm(request.POST, request.FILES)
         if form.is_valid():
             print("Earn")
-            name = form.cleaned_data['get_more_info'],
-            print("name",name)
-            # form.save()
-            # username = form.cleaned_data.get('username')
-            # email=form.cleaned_data.get('email')
-            # raw_password = form.cleaned_data.get('password1')
-            # user = authenticate(username=username, password=raw_password)
-            # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
-            # p.save()
-            # login(request, user)
+            print("request.user",request.user)
+  
+            profile = Profile.objects.create(user=request.user,
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['first_name'],
+                email = request.user.email,
+                sex = form.cleaned_data['sex'],
+                age = form.cleaned_data['age'],
+                phone_no = form.cleaned_data['phone_no'],
+                address = form.cleaned_data['address'],
+                disability_cate = form.cleaned_data['disability_cate'],
+                lastest_job = form.cleaned_data['lastest_job'],
+                lastest_office = form.cleaned_data['lastest_office'],
+                expected_salary = form.cleaned_data['expected_salary'],
+                expected_welfare = form.cleaned_data['expected_welfare'],
+                talent = form.cleaned_data['talent'],
+                talent2 = form.cleaned_data['talent2'],
+                talent3 = form.cleaned_data['talent3'],
+                more_resume = request.FILES['more_resume'],
+                get_more_info = form.cleaned_data['get_more_info'],
+                profile_picture = request.FILES['profile_image'],
+                )
             return redirect('signup_success')
             # redirect process3
     else:
@@ -72,8 +85,8 @@ def company_signup(request):
             raw_password = form.cleaned_data.get('password1')
             user=User.objects.create_user(username=email, password=raw_password,email=email)
             user.save()
-            
             user = authenticate(username=email,password=raw_password)
+            login(request, user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)
@@ -89,11 +102,24 @@ def company_signup2(request):
         form = CompanyInformationForm(request.POST, request.FILES)
         if form.is_valid():
             print("Earn")
+            profile = Profile.objects.create(user=request.user,profile_picture = request.FILES['company_image'],)
+            comp = Company.objects.create(user=request.user,
+                profile =profile,
+                th_name=form.cleaned_data['th_name'],
+                en_name=form.cleaned_data['en_name'],
+                info = form.cleaned_data['info'],
+                website = form.cleaned_data['website'],
+                phone_no = form.cleaned_data['phone_no'],
+                address = form.cleaned_data['address'],
+                fax = form.cleaned_data['fax'],
+                company_type = form.cleaned_data['company_type'],
+                get_more_info = form.cleaned_data['get_more_info'],
            
-      
-            # p.save()
-            # login(request, user)
-            return redirect('signup_success')
+                )
+        
+            messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+
+            return redirect('profile')
             # redirect process3
     else:
         form = CompanyInformationForm()
