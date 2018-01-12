@@ -99,16 +99,7 @@
               <form id="register-form" role="form" autocomplete="off" class="form" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                   <div  class="uk-margin-bottom ">
-                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                    {{form.username |add_class:"uk-input"|attr:"placeholder:ชื่อบัญชีผู้ใช้"}}
-                     {% if form.errors.username %}
-                    
-                   <div class="uk-alert-danger" uk-alert>
-                      <p> {{ form.errors.username }} </p>
-                    </div>
-                  {% endif %}
-                  </div>
+               
                   <div  class="uk-margin-bottom ">
                     <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
                     {{form.email |add_class:"uk-input"|attr:"placeholder:อีเมล"}}

@@ -5,9 +5,7 @@ from django.contrib.auth.models import User
 
 
 class JobSignUpForm(UserCreationForm):
-    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-
+    
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
     def clean_email(self):
@@ -20,12 +18,9 @@ class JobSignUpForm(UserCreationForm):
     
         model = User
         fields = (  'username','email', 'password1', 'password2', )
-        # exclude = ['username',]
+        exclude = ['username',]
 
 class CompanySignUpForm(UserCreationForm):
-    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
     def clean_email(self):
@@ -56,14 +51,14 @@ class JobInformationForm(forms.Form):
     lastest_job =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
     lastest_office =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     expected_salary =  forms.CharField(max_length=50, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    phone_no =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    phone_no =  forms.CharField(max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     expected_welfare =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent =  forms.CharField(max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent2 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent3 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     more_resume = forms.FileField()
     profile_image = forms.FileField()
-    get_more_info = forms.BooleanField()
+    get_more_info = forms.BooleanField(required=False,initial=False)
 
 class CompanyInformationForm(forms.Form):
     
@@ -73,12 +68,12 @@ class CompanyInformationForm(forms.Form):
     address =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     info =  forms.CharField(max_length=2000, help_text='',widget=forms.Textarea(attrs={'rows': 3,'class': 'uk-textarea', }))
     website =  forms.CharField(max_length=50,required=False, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    phone_no =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    hr_no =  forms.IntegerField( help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
-    fax = forms.CharField(max_length=50,required=False, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    phone_no =  forms.CharField(max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    hr_no =  forms.CharField(max_length=13,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
+    fax = forms.CharField(max_length=30,required=False, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     company_type =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     company_image = forms.FileField()
-    get_more_info = forms.BooleanField()
+    get_more_info = forms.BooleanField(required=False,initial=False)
 
 # class UserCreationForm(forms.ModelForm):
 #     """
