@@ -11,3 +11,5 @@ from datetime import date
 # Create your views here.
 def home(request):
     return render(request, 'home.html',{'username': request.user.username})
+def search(request):
+    return render(request, 'search.html',{})

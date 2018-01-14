@@ -35,7 +35,7 @@
   left: 100%;
   margin-left: 15px;
   }
-  .bs-wizard {margin-top: 40px;}
+  
   /*Form Wizard*/
   .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
   .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
@@ -57,40 +57,40 @@
   .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
   /*END Form Wizard*/
   </style>
-#
+
   <div class="" style="margin-top: -20px;">
-    <div class="container  " id="home">
+    <div class="container" >
+      <br>  
       <div class="uk-card uk-card-default">
         <div class="uk-card-body uk-margin-remove">
           <h2 class="text-center">สมัครบัญชีผู้ใช้</h2>
           
           
           <!-- <div class="col-md-4 col-md-offset-4">  -->
-          <div class="container" style="width: 60%">
-         
-            <div>
-              <div class="row bs-wizard uk-text-center" style="border-bottom:0;">
-                
-                <div class="col-xs-6 bs-wizard-step active">
-                  <div class="text-center bs-wizard-stepnum">สร้างบัญชี</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#" class="bs-wizard-dot"></a>
-                  <!-- <div class="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div> -->
-                </div>
-                
-                <div class="col-xs-6 bs-wizard-step disabled"><!-- complete -->
-                <div class="text-center bs-wizard-stepnum">ข้อมูลบริษัทเบื้องต้น</div>
+             <div class="container" id="inContainer">
+            
+            <div class="row bs-wizard uk-text-center nav-desktop" style="border-bottom:0;">
+              
+              <div class="col-md-6 bs-wizard-step active">
+                <div class="text-center bs-wizard-stepnum">สร้างบัญชีผู้ใช้</div>
                 <div class="progress"><div class="progress-bar"></div></div>
                 <a href="#" class="bs-wizard-dot"></a>
-                
               </div>
-            </div>
-           
+              
+              <div class="col-md-6 bs-wizard-step disabled"><!-- complete -->
+              <div class="text-center bs-wizard-stepnum">กรอกข้อมูส่วนตัว</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <a href="#" class="bs-wizard-dot"></a>
+            
+              </div>
           </div>
+         
           
           <div class="panel-body uk-text-left">
-            <p>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</p>
-            <br>
+            <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3>
+             <div class="nav-mobile">
+<h3>ขั้นตอนที่ 1 </h3>
+           </div>
             <form id="register-form" role="form" autocomplete="off" class="form" method="post">
               {% csrf_token %}
               <div class="form-group">
