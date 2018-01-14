@@ -10,6 +10,9 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     url(r'^$', views.home, name='home'),
+    url(r'^search/$',views.search, name="search"),
+    url(r'^employer-search/$',views.employer_search, name="employer_search"),
+    url(r'^create-job/$',views.create_job, name="create_job"),
     # url(r'^',  include('myapp.urls',namespace='mainapp')),
     # url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
     # url(r'^logout/$', auth_views.logout,{'next_page': 'home'}, name='logout'),

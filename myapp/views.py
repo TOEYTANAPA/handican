@@ -11,3 +11,11 @@ from datetime import date
 # Create your views here.
 def home(request):
     return render(request, 'home.html',{'username': request.user.username})
+def search(request):
+    return render(request, 'search.html',{})
+
+def employer_search(request):
+    return render(request, 'employer_search.html',{})
+
+def create_job(request):
+    return render(request, 'create_job.html',{})
