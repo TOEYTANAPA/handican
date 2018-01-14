@@ -11,6 +11,7 @@ from datetime import date
 from .forms import ContactForm
 # Create your views here.
 def home(request):
+
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 	else :
@@ -33,3 +34,14 @@ def contact(request):
         form = NameForm()
 
     return render(request, 'name.html', {'form': form})
+
+    return render(request, 'home.html',{'username': request.user.username})
+def search(request):
+    return render(request, 'search.html',{})
+
+def employer_search(request):
+    return render(request, 'employer_search.html',{})
+
+def create_job(request):
+    return render(request, 'create_job.html',{})
+
