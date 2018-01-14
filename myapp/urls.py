@@ -10,6 +10,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     url(r'^$', views.home, name='home'),
+    url(r'^contact-us/$', views.contact, name='contact'),
     # url(r'^',  include('myapp.urls',namespace='mainapp')),
     # url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
     # url(r'^logout/$', auth_views.logout,{'next_page': 'home'}, name='logout'),

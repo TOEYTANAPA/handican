@@ -1,362 +1,493 @@
-{% extends 'base.html' %}{% load static %} {% block content %} 
-<style type="text/css">
-/*
-Fade content bs-carousel with hero headers
-Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
-Image credits: unsplash.com
-*/
-
-/********************************/
-/*       Fade Bs-carousel       */
-/********************************/
-.fade-carousel {
-    position: relative;
-    height: 100vh;
-}
-.fade-carousel .carousel-inner .item {
-    height: 100vh;
-}
-.fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
-    background-color: #f39c12;
-    border-color: #f39c12;
-    opacity: .7;
-}
-.fade-carousel .carousel-indicators > li.active {
-  width: 10px;
-  height: 10px;
-  opacity: 1;
-}
-
-/********************************/
-/*          Hero Headers        */
-/********************************/
-.hero {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 3;
-    color: #FDFEFE;
-    text-align: left;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
-
-      -webkit-transform: translate3d(-50%,-50%,0);
-         -moz-transform: translate3d(-50%,-50%,0);
-          -ms-transform: translate3d(-50%,-50%,0);
-           -o-transform: translate3d(-50%,-50%,0);
-              transform: translate3d(-50%,-50%,0);
-}
-.hero h1 {
-    font-size: 3em;    
-    font-weight: bold;
-	color :#FDFEFE;
-	margin-top: -100px;
-    margin-left: -190px;
-    margin-bottom: -150px;
-    padding: 180px;
-}
-#s2 {
-    font-size: 3em;    
-    font-weight: bold;
-	color :#FDFEFE;
-	margin-top: -200px;
-    margin-left: -300px;
-    margin-bottom: -280px;
-    padding: 300px;
-}
-
-
-
-.fade-carousel .carousel-inner .item .hero {
-    opacity: 0.5;
-    -webkit-transition: 0.5s all ease-in-out .0s;
-       -moz-transition: 0.5s all ease-in-out .0s; 
-        -ms-transition: 0.5s all ease-in-out .0s; 
-         -o-transition: 0.5s all ease-in-out .0s; 
-            transition: 0.5 all ease-in-out .0s; 
-}
-.fade-carousel .carousel-inner .item.active .hero {
-    opacity: 1;
-    -webkit-transition: 0.5 all ease-in-out .0s;
-       -moz-transition: 0.5s all ease-in-out .0s; 
-        -ms-transition: 0.5s all ease-in-out .0s; 
-         -o-transition: 0.5s all ease-in-out .0s; 
-            transition: 0.5s all ease-in-out .0s;    
-}
-
-/********************************/
-/*            Overlay           */
-/********************************/
-/*.overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    background-color: #080d15;
-    opacity: .7;
-}*/
-
-/********************************/
-/*          Custom Buttons      */
-/********************************/
-.btn.btn-lg {padding: 10px 40px;}
-.btn.btn-hero,
-.btn.btn-hero:hover,
-.btn.btn-hero:focus {
-    color: #f5f5f5;
-    background-color: #1abc9c;
-    border-color: #1abc9c;
-    outline: none;
-    margin: 20px auto;
-}
-
-/********************************/
-/*       Slides backgrounds     */
-/********************************/
-.fade-carousel .slides .slide-1, 
-.fade-carousel .slides .slide-2,
-.fade-carousel .slides .slide-3 {
-  height: 100vh;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-.fade-carousel .slides .slide-1 {
-  background-image: url('{% static "images/banner-2.jpg" %}'); 
-}
-.fade-carousel .slides .slide-2 {
-  background-image: url('{% static "images/banner-1.jpg" %}');
-}
-
-.uk-button, .uk-button:hover{
-	background-color: #1abc9c;
+{% extends 'base.html' %}{% load static %} {% block content %}
+	<style type="text/css">
+	/*
+	Fade content bs-carousel with hero headers
+	Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
+	Image credits: unsplash.com
+	*/
+	/********************************/
+	/*       Fade Bs-carousel       */
+	/********************************/
+	.fade-carousel {
+	position: relative;
+	height: 100vh;
+	}
+	.fade-carousel .carousel-inner .item {
+	height: 100vh;
+	}
+	.fade-carousel .carousel-indicators > li {
+	margin: 0 2px;
+	background-color: #f39c12;
+	border-color: #f39c12;
+	opacity: .7;
+	}
+	.fade-carousel .carousel-indicators > li.active {
+	width: 10px;
+	height: 10px;
+	opacity: 1;
+	}
+	/********************************/
+	/*          Hero Headers        */
+	/********************************/
+	.hero {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	z-index: 3;
+	color: #FDFEFE;
+	text-align: left;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+	-webkit-transform: translate3d(-50%,-50%,0);
+	-moz-transform: translate3d(-50%,-50%,0);
+	-ms-transform: translate3d(-50%,-50%,0);
+	-o-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+	}
+	.hero h1 {
+	font-size: 3em;
+	font-weight: bold;
+		color :#FDFEFE;
+		margin-top: -150px;
+	margin-left: -190px;
+	margin-bottom: -150px;
+	padding: 180px;
+	}
+	#s2 {
+	font-size: 3em;
+	font-weight: bold;
+		color :#FDFEFE;
+		margin-top: -200px;
+	margin-left: -300px;
+	margin-bottom: -280px;
+	padding: 300px;
+	}
+	.fade-carousel .carousel-inner .item .hero {
+	opacity: 0.5;
+	-webkit-transition: 0.5s all ease-in-out .0s;
+	-moz-transition: 0.5s all ease-in-out .0s;
+	-ms-transition: 0.5s all ease-in-out .0s;
+	-o-transition: 0.5s all ease-in-out .0s;
+	transition: 0.5 all ease-in-out .0s;
+	}
+	.fade-carousel .carousel-inner .item.active .hero {
+	opacity: 1;
+	-webkit-transition: 0.5 all ease-in-out .0s;
+	-moz-transition: 0.5s all ease-in-out .0s;
+	-ms-transition: 0.5s all ease-in-out .0s;
+	-o-transition: 0.5s all ease-in-out .0s;
+	transition: 0.5s all ease-in-out .0s;
+	}
+	/********************************/
+	/*            Overlay           */
+	/********************************/
+	/*.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background-color: #080d15;
+	opacity: .7;
+	}*/
+	/********************************/
+	/*          Custom Buttons      */
+	/********************************/
+	.btn.btn-lg {padding: 10px 40px;}
+	.btn.btn-hero,
+	.btn.btn-hero:hover,
+	.btn.btn-hero:focus {
 	color: #f5f5f5;
-	margin-top: 20px;
+	background-color: #1abc9c;
 	border-color: #1abc9c;
-}
-
-#s-btn{
-	margin-left: 10px;
-}
-
-
-/********************************/
-/*          Media Queries       */
-/********************************/
-@media screen and (min-width: 980px){
-    .hero { width: 980px; }    
-}
-@media screen and (max-width: 640px){
-    .hero h1 { font-size: 4em; }    
-}
-</style>
-<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
-  <!-- Overlay -->
-  <div class="overlay"></div>
-
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#bs-carousel" data-slide-to="1"></li>
-    
-  </ol>
-  
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item slides active">
-      <div class="slide-1"></div>
-      <div class="hero">
-        <hgroup>
-            <h1 id =" s1">PROVIDE WITH YOUT BEST OPPORTUNITY FOR FINDING THE BEST JOB THAT MATCHES YOU</h1>        
-            <h2 style="color :#FDFEFE; font-style: italic;">Join the world of opportunities</h2>
-        </hgroup>
-       
-          <button class="uk-button uk-button-default uk-button-large">Find Jobs</button>
-           <button id="s-btn" class="uk-button uk-button-default uk-button-large">Find Disabled People</button>
-      </div>
-    </div>
-    <div class="item slides">
-      <div class="slide-2"></div>
-      <div class="hero">        
-        <hgroup>
-            <h1 id="s2">HELPING PEOPLE WITH DISABILITIES GET A RELEVANT JOB</h1>        
-            <h2 style="color :#FDFEFE; font-style: italic;">Join the world of opportunities</h2>
-        </hgroup>       
-     <button class="uk-button uk-button-default uk-button-large">Find Jobs</button>
-           <button   id="s-btn" class="uk-button uk-button-default uk-button-large">Find Disabled People</button>
-      </div>
-    </div>
-  
-  </div> 
-</div>
-
-		</ul>
-		<ol>
-		</ol>
-			<i class="left"></i><i class="right"></i>
-			 <div class="banner_wthree_agile_info">
-				<h3>Residential and commercial building, remodeling &amp; renovations experience</h3>
-					<div class="social_list_w3ls">
-						<a href="#" class="w3_agile_facebook_agile"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-						<a href="#" class="agile_twitter_agile"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-						<a href="#" class="w3_agile_dribble_agile"><span class="fa fa-dribbble" aria-hidden="true"></span></a>
-						<a href="#" class="w3_agile_vimeo_agile"><span class="fa fa-vimeo" aria-hidden="true"></span></a>
-					</div>
+	outline: none;
+	margin: 20px auto;
+	}
+	/********************************/
+	/*       Slides backgrounds     */
+	/********************************/
+	.fade-carousel .slides .slide-1,
+	.fade-carousel .slides .slide-2,
+	.fade-carousel .slides .slide-3 {
+	height: 80vh;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	}
+	.fade-carousel .slides .slide-1 {
+	background-image: url('{% static "images/banner-3.jpg" %}');
+	}
+	.fade-carousel .slides .slide-2 {
+	background-image: url('{% static "images/banner-1.jpg" %}');
+	}
+	.btn-head, .btn-head:hover{
+		background-color: #1abc9c;
+		color: #f5f5f5;
+		margin-top: 20px;
+		border-color: #1abc9c;
+	}
+	#s-btn{
+		margin-left: 10px;
+	}
+	.btn{
+		color: #1abc9c;
+		margin-top: 50px;
+	}
+	li a:hover{
+	color: #47cca6;
+	}
+	li a{
+		color:#8b8b8b;
+	}
+	.logo-brand {
+		width: 100px;
+		height: auto;
+	}
+	.head-container{
+		width: 30%;
+		text-align: center;
+	}
+	.uk-container-brand{
+		width: 60%;
+	}
+	ul{
+			list-style: none outside none;
+		padding-left: 0;
+	margin: 0;
+		}
+	.demo .item{
+		/*margin-top: -60px;*/
+	/*margin-bottom: -60px;*/
+	}
+		.content-slider li{
+		/*background-color: #ed3020;*/
+		text-align: center;
+		color: #FFF;
+		}
+		.content-slider h3 {
+		margin: 0;
+		padding: 0px 0;
+		}
+	/********************************/
+	/*          Media Queries       */
+	/********************************/
+	@media screen and (min-width: 980px){
+	.hero { width: 980px; }
+	}
+	@media screen and (max-width: 640px){
+	.hero h1 { font-size: 4em; }
+	}
+	</style>
+	<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+		<!-- Overlay -->
+		<div class="overlay"></div>
+		<!-- Indicators -->
+		<!-- 	<ol class="carousel-indicators">
+				<li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+				
+		</ol> -->
+		
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+			<div class="item slides active">
+				<div class="slide-1"></div>
+				<div class="hero">
+					<hgroup>
+					<h1 id =" s1">PROVIDE WITH YOUT BEST OPPORTUNITY FOR FINDING THE BEST JOB THAT MATCHES YOU</h1>
+					<h2 style="color :#FDFEFE; font-style: italic;">Join the world of opportunities</h2>
+					</hgroup>
+					
+					<button class="uk-button uk-button-default uk-button-large btn-head">Find Jobs</button>
+					<button id="s-btn" class="uk-button uk-button-default uk-button-large btn-head">Find Disabled People</button>
+				</div>
 			</div>
-	</div>	
-</div> -->
-<!-- //banner -->
-<script>
-        $(function(){ 
+			
+		</div>
+	</div>
+	<!-- //banner -->
+	<div class="uk-section uk-section-muted uk-padding-remove-top">
+		<div class="container ">
+			<h1 class="uk-text-center uk-align-top uk-margin-remove-top">How it works</h1>
+			<div class="uk-grid uk-child-width-1-4@m" uk-grid>
+				<div >
+					<img  src="{% static "images/home1.png" %}" >
+					<hr>
+					<p class="uk-text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+				</div>
+				<div>
+					<img src="{% static "images/home2.png" %}">
+					<hr>
+					<p class="uk-text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+				</div>
+				<div>
+					<img src="{% static "images/home3.png" %}">
+					<hr>
+					<p class="uk-text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+				</div>
+				<div>
+					<img src="{% static "images/home4.png" %}">
+					<hr>
+					<p class="uk-text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="uk-section uk-section-default " style="background-color: #47cca6">
+		<div class="uk-container ">
+			<h3 class="uk-text-center " style="color: white; font-style: italic;" ><i class="fa fa-quote-left"></i></h3>
+			<br>
+			<!--  <h2 class="uk-text-center " style="color: white; font-style: italic;">Your ability is stronger than your disability</h2> -->
+			
+			<p style="font-size: 1.4em;color: white; font-style: italic; margin-top: -20px; " class="uk-heading-line uk-text-center ">Your ability is stronger than your disability</p>
+			<!--
+			<h1 style="font-size: 1.5em;color: white; font-style: italic;" class="uk-heading-line uk-text-center"><span>Your ability is stronger than your disability</span></h1> -->
+			
+		</div>
+	</div>
+	<div class="uk-section uk-section-default">
+		<div class="uk-container ">
+			<div class=" head-container uk-align-center">
+				<h1 class="uk-heading-line " style="font-style: italic;"><span  >OUR BLOGS</span></h1>
+				
+			</div>
+			<br>
+			<div class="uk-child-width-1-3@m" uk-grid>
+				<div>
+					<div class="uk-card uk-card-default">
+						<div class="uk-card-media-top imgCrop" >
+							<img class="inImg" src="{% static "images/banner-1.jpg" %}" alt="">
+						</div>
+						<div class="uk-card-body uk-padding-small">
+							<h3 class="uk-card-title uk-margin uk-text-bold">Since I have been working here. I'm inspired make my dream come true.</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+						</div>
+						<div class="uk-padding-small">
+							<div class="uk-grid-small uk-flex-middle" uk-grid>
+								<div class="uk-width-auto">
+									<img class="uk-border-circle" src="{% static "images/avatar.jpg" %}"  style="width: 50px;height: 50px;">
+								</div>
+								<div class="uk-width-expand">
+									<h5 class="uk-card-title uk-margin-remove-bottom">TOEY</h5>
+									<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="uk-card uk-card-default">
+						<div class="uk-card-media-top imgCrop" >
+							<img class="inImg" src="{% static "images/people.png" %}" alt="">
+						</div>
+						<div class="uk-card-body uk-padding-small">
+							<h3 class="uk-card-title uk-margin uk-text-bold">Since I have been working here. I'm inspired make my dream come true.</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+						</div>
+						<div class="uk-padding-small">
+							<div class="uk-grid-small uk-flex-middle" uk-grid>
+								<div class="uk-width-auto">
+									<img class="uk-border-circle" src="{% static "images/avatar.jpg" %}"  style="width: 50px;height: 50px;">
+								</div>
+								<div class="uk-width-expand">
+									<h5 class="uk-card-title uk-margin-remove-bottom">TOEY</h5>
+									<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="uk-card uk-card-default">
+						<div class="uk-card-media-top imgCrop" >
+							<img class="inImg" src="{% static "images/banner-2.jpg" %}" alt="">
+						</div>
+						<div class="uk-card-body uk-padding-small ">
+							<h3 class="uk-card-title uk-margin uk-text-bold">Since I have been working here. I'm inspired make my dream come true.</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+						</div>
+						<div class="uk-padding-small">
+							<div class="uk-grid-small uk-flex-middle" uk-grid>
+								<div class="uk-width-auto">
+									<img class="uk-border-circle" src="{% static "images/avatar.jpg" %}"  style="width: 50px;height: 50px;">
+								</div>
+								<div class="uk-width-expand">
+									<h5 class="uk-card-title uk-margin-remove-bottom">TOEY</h5>
+									<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="uk-text-center">
+				
+				<a class="uk-button uk-button-default btn uk-button-large">See More Stories</a>
+			</div>
+		</div>
+	</div>
+	<div class="uk-section uk-section-muted">
+		<div class="uk-container-small uk-align-center ">
+			<h3  class="uk-text-center uk-margin-bottom uk-text-muted">TOP BUSINESS HIRING ON HANDIJOB</h3>
+			<div class=" uk-child-width-1-5@s " uk-grid>
+				
+				<div>
+					<img class="logo-brand" src="{% static "images/cpall.png" %}"  >
+					
+				</div>
+				<div>
+					<img class="logo-brand" src="{% static "images/leave.png" %}"  >
+				</div>
+				<div>
+					<img class="logo-brand" src="{% static "images/betagen.png" %}"  >
+				</div>
+				<div>
+					<img class="logo-brand" src="{% static "images/izuzu.png" %}"  >
+				</div>
+				<div>
+					<img class="logo-brand" src="{% static "images/ptt.png" %}"  >
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="uk-section uk-section-muted">
+		<div class="container uk-text-muted">
+			<h1 class="uk-heading-divider uk-margin ">BROWSE TOP JOBS</h1>
+			<div class="uk-child-width-1-4@s" uk-grid>
+				<div >
+					<ul class="uk-list ">
+						<li><a >Artists</a></li>
+						<li><a >Braille Teachers</a></li>
+						<li><a >Developers</a></li>
+						<li><a >Facebook Marketers</a></li>
+						<li><a >Mechanicians</a></li>
+						
+						
+					</ul>
+				</div>
+				<div>
+					<ul class="uk-list ">
+						<li><a >Architects</a></li>
+						<li><a >Creators</a></li>
+						<li><a >Email Marketing Consultants</a></li>
+						<li><a >Graphic Designers</a></li>
+						<li><a >Operators</a></li>
+					</ul>
+				</div>
+				<div>
+					<ul class="uk-list ">
+						<li><a >Accountants</a></li>
+						<li><a >Consultants</a></li>
+						<li><a >Electicians</a></li>
+						<li><a >Lapidarians</a></li>
+						<li><a >Sign Language Teachers</a></li>
+					</ul>
+				</div>
+				<div>
+					<ul class="uk-list ">
+						<li><a >Bookkeepers</a></li>
+						<li><a >Document Destroyers</a></li>
+						<li><a >Firefighters</a></li>
+						<li><a >Masseuses</a></li>
+						<li><a >Writers</a></li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="uk-section uk-section-default">
+		<div class="container">
+			<h2 class="uk-heading-divider uk-margin-bottom">กิจกรรมที่น่าสนใจ</h2>
+			<!-- <div class="uk-grid-match " uk-grid> -->
+			<div class="demo ">
+				
+				<div class="item">
+					<ul id="content-slider" class="content-slider">
+						<li >
+							<h3  > <img src="{% static "images/banner-1.jpg" %}">	</h3>
+							<!-- <img class="logo-brand"   src="{% static "images/banner-1.jpg" %}"  > -->
+						</li>
+						<li>
+							<h3> <img src="{% static "images/banner-2.jpg" %}">	</h3>
+						</li>
+						<li>
+							<h3> <img src="{% static "images/banner-1.jpg" %}">	</h3>
+						</li>
+						<li>
+							<h3> <img src="{% static "images/banner-2.jpg" %}">	</h3>
+						</li>
+						<li>
+							<h3> <img src="{% static "images/banner-1.jpg" %}">	</h3>
+						</li>
+						
+					</ul>
+				</div>
+				<!-- </div> -->
+			</div>
+		</div>
+	</div>
+	<div class="uk-section uk-section-default uk-padding-small" style="background-color: #47cca6">
+		<div class="uk-container-small uk-align-center ">
+			<div class="uk-text-center uk-grid-large" uk-grid>
+				<!-- <div></div> -->
+				<div class="uk-width-expand ">
+					<img class="logo-brand" style="width: 50px;height: auto;" src="{% static "images/facebook.png" %}"  >
+					<img class="logo-brand" style="width: 50px;height: auto;"  src="{% static "images/instagram.png" %}"  >
+					
+					<img class="logo-brand" style="width: 50px;height: auto;"  src="{% static "images/youtube.png" %}"  >
+					<img class="logo-brand" style="width: 50px;height: auto;"  src="{% static "images/line.png" %}"  >
+				</div>
+				<!-- <div>
+				</div>
+				<div>
+				</div>
+				<div>
+				</div> -->
+				<!-- <div></div> -->
+			</div>
+			
+		</div>
+	</div>
+	<div class="uk-section uk-section-secondary uk-light">
+		<div class="uk-container">
+			<h1 class="uk-text-center ">ติดต่อเรา</h1>
+			<br>
+			<div class="container">
+				<div class=" uk-child-width-1-2@s uk-grid-divider" uk-grid>
+					
+					<div >
+						<h2><i class="fa fa-phone" aria-hidden="true"></i> 02-5999999</h2>
+						<h2><i class="fa fa-envelope-o" aria-hidden="true"></i> info@handican.com</h2>
+						<p>Faculty of Architecture and Planing,Thammasat University</p>
+						 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.15372692931!2d100.60657461483407!3d14.068098090143396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d8040089d11c1%3A0x15b128028a5662b6!2z4LiE4LiT4Liw4Liq4LiW4Liy4Lib4Lix4LiV4Lii4LiB4Lij4Lij4Lih4Lio4Liy4Liq4LiV4Lij4LmM4LmB4Lil4Liw4LiB4Liy4Lij4Lic4Lix4LiH4LmA4Lih4Li34Lit4LiHIOC4oeC4q-C4suC4p-C4tOC4l-C4ouC4suC4peC4seC4ouC4mOC4o-C4o-C4oeC4qOC4suC4quC4leC4o-C5jA!5e0!3m2!1sth!2sth!4v1515896528578" width="380" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+		
+					</div>
+					<div>
+						<form action="/home/" method="post">
+						    {% csrf_token %}
+						    {{ form }}
 
-  // parameters
-  // image height
-  var images_height = '650px';
-  // array of images
-  var images_url = [
-      '{% static "images/banner-2.jpg" %}',
-      '{% static "images/banner-1.jpg" %}',
-
-  ];
-  var images_count = images_url.length;
-
-  // create nodes
-  for(var j=0;j<images_count+1;j++){
-      $('.banner ul').append('<li></li>')
-  }
-
-  // pagination
-  for(var j=0;j<images_count;j++){
-      if(j==0){
-          $('.banner ol').append('<li class="current"></li>')
-      }else{
-          $('.banner ol').append('<li></li>')
-      }
-  }
-
-  // convert images into backgrounds
-  $('.banner ul li').css('background-image','url('+images_url[0]+')');
-  
-  $.each(images_url,function(key,value){
-      $('.banner ul li').eq(key).css('background-image','url('+value+')');
-  });
-
-  $('.banner').css('height',images_height);
-
-  $('.banner ul').css('width',(images_count+1)*100+'%');
-
-  $('.banner ol').css('width',images_count*20+'px');
-  $('.banner ol').css('margin-left',-images_count*20*0.5-10+'px');
-
-  var num = 0;
-
-  var window_width = $(window).width();
-
-  // $(window).resize(function(){
-  //     window_width = $(window).width();
-  //     $('.banner ul li').css({width:window_width});
-  //     clearInterval(timer);
-  //     nextPlay();
-  //     timer = setInterval(nextPlay,2000);
-  // });
-
-  $('.banner ul li').width(window_width);
-
-  // pagination dots
-  $('.banner ol li').mouseover(function(){
-      $(this).addClass('current').siblings().removeClass('current');
-      var i = $(this).index();
-      //console.log(i);
-      $('.banner ul').stop().animate({left:-i*window_width},500);
-      num = i;
-  });
-
-  // autoplay
-  var timer = null;
-
-  function prevPlay(){
-      num--;
-      if(num<0){
-          $('.banner ul').css({left:-window_width*images_count}).stop().animate({left:-window_width*(images_count-1)},500);
-          num=images_count-1;
-      }else{
-          $('.banner ul').stop().animate({left:-num*window_width},500);
-      }
-      if(num==images_count-1){
-          $('.banner ol li').eq(images_count-1).addClass('current').siblings().removeClass('current');
-      }else{
-          $('.banner ol li').eq(num).addClass('current').siblings().removeClass('current');
-
-      }
-  }
-
-  function nextPlay(){
-      num++;
-      if(num>images_count){
-          $('.banner ul').css({left:0}).stop().animate({left:-window_width},500);
-          num=1;
-      }else{
-          $('.banner ul').stop().animate({left:-num*window_width},500);
-      }
-      if(num==images_count){
-          $('.banner ol li').eq(0).addClass('current').siblings().removeClass('current');
-      }else{
-          $('.banner ol li').eq(num).addClass('current').siblings().removeClass('current');
-
-      }
-  }
-
-  timer = setInterval(nextPlay,2000);
-
-  // auto pause on mouse enter
-  $('.banner').mouseenter(function(){
-      clearInterval(timer);
-      $('.banner i').fadeIn();
-  }).mouseleave(function(){
-      timer = setInterval(nextPlay,2000);
-      $('.banner i').fadeOut();
-  });
-
-  // goto next
-  $('.banner .right').click(function(){
-      nextPlay();
-  });
-
-  // back to previous
-  $('.banner .left').click(function(){
-      prevPlay();
-  });
-
-});
-    </script>
-<br>
-<!-- <script>
-    var ps = new PureSlider(
-            {
-                autoplay: true,
-                showNav: true, showBtn:true,
-                direction: 'forward',
-                laps: 2000,
-                onBeforeStartCb: function (ps) {
-                    //console.log('start');
-                },
-                onBeforeSlideChangeCb: function (ps) {
-                    //console.log('before slide change');
-                },
-                onAfterSlideChangeCb: function (ps) {
-                    //console.log('after slide change');
-                    //console.log(ps.vars.currentSlide);
-                },
-                onBeforeStopCb: function (ps) {
-                    //console.log(ps.vars.interval);
-                },
-                onAfterStopCb: function (ps) {
-                    //console.log(ps.vars.interval);
-                }
-            }
-            );
-    ps.init(document.querySelector('#slider2'));
-</script> -->
-
+						    <input class="uk-button uk-button-default uk-margin" type="submit" value="Submit" />
+						</form>
+					</div>
+				</div>
+			</div>
+				<br>
+				<p class="uk-text-center ">©2017Handican Co., Ltd.</p>
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="{% static 'js/lightslider.js' %}"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+				$("#content-slider").lightSlider({
+					loop:true,
+					keyPress:true,
+					item :4,
+					slideMove: 1
+				});
+			});
+	</script>
 {% endblock %}
