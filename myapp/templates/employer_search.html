@@ -31,6 +31,9 @@
     .linkInNave{
     color: white;
     }
+    .imgCircle{
+    border-radius: 50%;
+    }
     </style>
     
     <!-- <div class="container" > -->
@@ -51,17 +54,59 @@
             </div>
         </div>
     </nav> -->
-   
+    
     <div class="container nav-desktop"> <br>
         <div class="uk-card uk-card-default uk-card-body">
             <ul uk-tab>
                 <li><a href="#">หน้าหลัก</a></li>
-                <li><a href="#">งานที่สมัคร</a></li>
-                <li><a href="#">ได้รับการเชิญ</a></li>
+                <li><a href="#">สร้างประกาศงานใหม่</a></li>
+                <li><a href="#">หาผู้สมัครงาน</a></li>
             </ul>
             <!-- <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button> -->
             <ul class="uk-switcher uk-margin">
-                <li><p class="uk-text-muted">ยินดีต้อนรับสู่ระบบค้นหางาน !</p>
+                <li>
+                    <table class="uk-table  uk-table-divider">
+                        <thead>
+                            <tr>
+                                <th class="uk-table-expand">งานที่เคยลงประกาศ</th>
+                                <th class="uk-table-expand">ฉบับร่าง</th>
+                                <th class="uk-text-center">ผู้สมัครงาน</th>
+                                <th class="uk-text-center">วันที่ลงประกาศ</th>
+                                <th class="uk-text-center"> สถานะ
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td class="uk-text-center">Table Data</td>
+                                <td class="uk-text-center">Table Data</td>
+                                <td class="uk-text-center">Table Data</td>
+                            </tr>
+                            <tr>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                            </tr>
+                            <tr>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                                <td>Table Data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </li>
+                <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
+                </li>
+                <li>
+<p class="uk-text-muted">ค้นหาผู้สมัครงาน
+</p>
                 <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
                     <form action="" method="POST" class="uk-search uk-search-default " >
                         <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
@@ -101,18 +146,20 @@
                                 </div>
                             </div>
                             <div>
-                                <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button>
+                                <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน
+</button>
                                 
                             </div>
                         </div>
                         
                     </form>
                 </div>
-                <hr>
-                <h2 class="uk-heading-bullet uk-margin-remove-top">งานที่แนะนำ </h2>
+            <br>    
+                <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
                 <br>
+<!-- <label class="uk-text-muted"> </label><br>     -->
                 
-                <div class="container">
+                <div class="container ">  
                     <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
                         <div class="uk-width-auto@m  ">
                             <img class="imgCrop uk-align-center"  style="width: 80px;height: 80px" src="{% static "images/wcb.jpg" %}" alt="your image" />
@@ -174,9 +221,6 @@
                 <hr>
                 <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
             </li>
-            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
-            </li>
-            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.</li>
         </ul>
         
     </div>
@@ -185,12 +229,16 @@
     <div class="uk-card uk-card-default uk-card-body">
         <ul uk-tab>
             <li><a href="#">หน้าหลัก</a></li>
-                <li><a href="#">งานที่สมัคร</a></li>
-                <li><a href="#">ได้รับการเชิญ</a></li>
+                <li><a href="#">สร้างประกาศงานใหม่</a></li>
+                <li><a href="#">หาผู้สมัครงาน</a></li>
         </ul>
         <!-- <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button> -->
         <ul class="uk-switcher uk-margin">
-            <li><p class="uk-text-muted">ยินดีต้อนรับสู่ระบบค้นหางาน !</p>
+            <li>
+            </li>
+            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
+            </li>
+            <li><p class="uk-text-muted">ค้นหาผู้สมัครงาน</p>
             <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
                 <form action="" method="POST" class="uk-search uk-search-default " >
                     <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
@@ -230,21 +278,22 @@
                             </div>
                         </div>
                         <div>
-                            <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button>
+                            <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน
+</button>
                             
                         </div>
                     </div>
                     
                 </form>
             </div>
-            <hr>
-            <h2 class="uk-heading-bullet uk-margin-remove-top">งานที่แนะนำ </h2>
+          <br>  
+         <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
             
              <article class="uk-comment uk-visible-toggle">
                 <header class="uk-comment-header uk-position-relative">
                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                         <div class="uk-width-auto">
-                            <img class="imgCrop" src="{% static "images/cpall.png" %}" style="width: 80px;height: 80px" alt="">
+                            <img class="imgCrop imgCircle" src="{% static "images/cpall.png" %}" style="width: 80px;height: 80px" alt="">
                             
                         </div>
                         <div class="uk-width-expand ">
@@ -274,7 +323,7 @@
         <div class="uk-column-1-1@s " >
             
             <div class=" uk-width-1-2@s">
-                <div> <img class="imgCrop "  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
+                <div> <img class="imgCrop imgCircle"  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
                 </div>
                 
             </div>
@@ -300,7 +349,7 @@
             <!-- </div> -->
             
             <div >
-                <button  type="submit" class="uk-button uk-button-default uk-button-small   " >อ่านเพิ่มเติม
+                <button  type="submit" class="uk-button uk-button-default uk-button-small   " >เชิญร่วมงาน
                 </button>
                 <button  type="submit" class="uk-button uk-button-default uk-button-small   " >บันทึก
                 </button>
@@ -312,15 +361,30 @@
             <!-- <button  type="submit" class="uk-button uk-button-default uk-button-small t " ></button> -->
             <!-- <button  type="submit" class="uk-button uk-button-default uk-width-1-1" >รายละเอียดเพิ่มเติม</button> -->
             <hr>
-            <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
-            </li>
-            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
-            </li>
-            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.</li>
+         
         
     </ul>
 </div>
 </div>
+<!--  <div class="nav-mobile ">
+    <div class="uk-card uk-card-default uk-card-body">
+        <ul class="" uk-tab>
+            <li><a href="#">หน้าหลัก</a></li>
+            <li><a href="#">สร้างประกาศงานใหม่</a></li>
+            <li><a href="#">หาผู้สมัครงาน</a></li>
+        </ul>
+        
+        <ul class="uk-switcher uk-margin">
+            <li>
+            </li>
+            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
+            </li>
+            <li>
+            </li>
+            
+        </ul>
+    </div>
+</div> -->
 <br>
 {% endblock %}
 <!-- <form action="" method="POST" class="uk-search uk-search-default serach-input" >
@@ -328,3 +392,100 @@
 <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
 <input  name="search" class="uk-search-input" type="search" placeholder="" >
 </form> -->
+
+<div class="nav-mobile">   <p class="uk-text-muted">ค้นหาผู้สมัครงาน</p>
+                    <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
+                        <form action="" method="POST" class="uk-search uk-search-default " >
+                            <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
+                                {% csrf_token %}
+                                
+                                
+                                <div >
+                                    
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            <input name="job_title" class="uk-input" type="search" placeholder="ชื่อตำแหน่งงาน">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-list" aria-hidden="true"></i></span>
+                                            <input name="disability_type" class="uk-input" type="search" placeholder="ประเภทความพิการ">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                                <div >
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-btc" aria-hidden="true"></i></span>
+                                            <input name="salary" class="uk-input" type="search" placeholder="10,000 - 25,000 ">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                            <input name="location" class="uk-input" type="search" placeholder="สถานที่ตั้ง">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน</button>
+                                    
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <hr>
+                    <h2 class="uk-heading-bullet uk-margin-remove-top">งานที่แนะนำ </h2>
+                    
+                    
+                    <hr>
+                    <div class="uk-column-1-1@s " >
+                        
+                        <div class=" uk-width-1-2@s">
+                            <div> <img class="imgCrop imgCircle"  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
+                            </div>
+                            
+                        </div>
+                        <br>
+                        <div >
+                            <label for="" class="">Web Courses Bangkok     <p>Position: </p></label>
+                            
+                        </div>
+                        <div >
+                            
+                            <p >
+                                <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> <span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
+                                
+                                <p> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> สีลม</span>
+                            </p></p>
+                            
+                            
+                            <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
+                            
+                            
+                            
+                        </div>
+                        <!-- </div> -->
+                        
+                        <div >
+                            <button  type="submit" class="uk-button uk-button-default uk-button-small   " >อ่านเพิ่มเติม
+                            </button>
+                            <button  type="submit" class="uk-button uk-button-default uk-button-small   " >บันทึก
+                            </button>
+                        </div>
+                        <!-- <div class="uk-width-1-1@s">
+                            <button  type="submit" class="uk-button uk-button-default uk-button-small   " >สมัครงาน
+                            </button>
+                        </div>  -->
+                        <!-- <button  type="submit" class="uk-button uk-button-default uk-button-small t " ></button> -->
+                        <!-- <button  type="submit" class="uk-button uk-button-default uk-width-1-1" >รายละเอียดเพิ่มเติม</button> -->
+                        <hr>
+                        <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
+                    </div>
+                </div>
