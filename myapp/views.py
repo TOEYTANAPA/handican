@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.http import Http404
 from datetime import date
-from .forms import ContactForm
+from .forms import *
 # Create your views here.
 def home(request):
 
@@ -36,6 +36,7 @@ def contact(request):
     return render(request, 'name.html', {'form': form})
 
     return render(request, 'home.html',{'username': request.user.username})
+
 def search(request):
     return render(request, 'search.html',{})
 
@@ -43,5 +44,30 @@ def employer_search(request):
     return render(request, 'employer_search.html',{})
 
 def create_job(request):
-    return render(request, 'create_job.html',{})
+    if request.method == 'POST':
+        form = CreateJobForm(request.POST, request.FILES)
+        if form.is_valid():
+            company = Company.objects.get(profile__user=request.user)
+            cj = Job.objects.create(
+                company =company,
+                title_th=form.cleaned_data['title_th'],
+                title_en=form.cleaned_data['title_en'],
+                age = form.cleaned_data['age'],
+                sex = form.cleaned_data['sex'],
+                detail = form.cleaned_data['detail'],
+                disability_cate = form.cleaned_data['disability_tyoe'],
+                traveling = form.cleaned_data['traveling'],
+                welfare = form.cleaned_data['welfare'],
+                salary = form.cleaned_data['salary'],
+                company_image =request.FILES['company_image'],
+           
+                )
+        
+            messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            redirect('employer_search')
+
+
+    else :
+        form = CreateJobForm()
+    return render(request, 'create_job.html',{'form':form})
 

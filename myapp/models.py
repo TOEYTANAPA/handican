@@ -41,3 +41,17 @@ class CompanyInfo(models.Model):
 	company_type = models.CharField(max_length=100)
 	get_more_info = models.BooleanField()
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
+
+class Job(models.Model): 
+	company = models.ForeignKey(CompanyInfo, on_delete=models.SET_NULL,blank=True,null=True)
+	title_th = models.CharField(max_length=100,editable=True )
+	title_en = models.CharField(max_length=100,editable=True )
+	age = models.IntegerField()
+	sex = models.CharField(max_length=10)
+	detail = models.CharField(max_length=2000,default="")
+	disability_cate = models.CharField(max_length=100)
+	traveling = models.CharField(max_length=1000)
+	welfare = models.CharField(max_length=1000)
+	salary = models.CharField(max_length=50)
+	company_image=models.ImageField(upload_to="createJob/",default="")
+	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
