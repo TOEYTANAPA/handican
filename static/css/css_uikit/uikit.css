@@ -554,7 +554,7 @@ a.uk-link-reset:hover,
  ========================================================================== */
 .uk-heading-divider {
   padding-bottom: 10px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #47cca6;
 }
 /* Bullet
  ========================================================================== */
@@ -577,7 +577,7 @@ a.uk-link-reset:hover,
   /* 3 */
   height: 0.9em;
   margin-right: 10px;
-  border-left: 5px solid #FFBF00;
+  border-left: 5px solid #47cca6;
 }
 /* Line
  ========================================================================== */

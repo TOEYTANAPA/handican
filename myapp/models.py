@@ -41,3 +41,11 @@ class CompanyInfo(models.Model):
 	company_type = models.CharField(max_length=100)
 	get_more_info = models.BooleanField()
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
+
+
+class Contact(models.Model):
+	email= models.CharField(max_length=100,editable=True )
+	name = models.CharField(max_length=100,editable=True )
+	phone= models.CharField(max_length=20,editable=True )
+	subject = models.CharField(max_length=100,editable=True )
+	message= models.CharField(max_length=1000,editable=True )

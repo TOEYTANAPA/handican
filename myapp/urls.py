@@ -11,10 +11,10 @@ urlpatterns = [
 
     url(r'^$', views.home, name='home'),
 
-    url(r'^contact-us/$', views.contact, name='contact'),
     url(r'^search/$',views.search, name="search"),
     url(r'^employer-search/$',views.employer_search, name="employer_search"),
     url(r'^create-job/$',views.create_job, name="create_job"),
+    url(r'^contactus/$',views.contact, name="contactus"),
 
     # url(r'^',  include('myapp.urls',namespace='mainapp')),
     # url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),

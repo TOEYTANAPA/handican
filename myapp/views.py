@@ -14,28 +14,25 @@ def home(request):
 
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
+		if form.is_valid():
+			email= form.cleaned_data.get('email')
+			name = form.cleaned_data.get('name')
+			phone= form.cleaned_data.get('phone')
+			subject = form.cleaned_data.get('subject')
+			message= form.cleaned_data.get('message')
+			status = True
+
+			Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
+
+		return render(request, 'home.html',{'username': request.user.username,'form':form,'status':status})
+
+
+
 	else :
 		form = ContactForm()
 	return render(request, 'home.html',{'username': request.user.username,'form':form})
 
-def contact(request):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = NameForm()
-
-    return render(request, 'name.html', {'form': form})
-
-    return render(request, 'home.html',{'username': request.user.username})
 def search(request):
     return render(request, 'search.html',{})
 
@@ -45,3 +42,24 @@ def employer_search(request):
 def create_job(request):
     return render(request, 'create_job.html',{})
 
+
+def contact(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			email= form.cleaned_data.get('email')
+			name = form.cleaned_data.get('name')
+			phone= form.cleaned_data.get('phone')
+			subject = form.cleaned_data.get('subject')
+			message= form.cleaned_data.get('message')
+			status = True
+
+			Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
+
+		return render(request, 'contact.html',{'username': request.user.username,'form':form,'status':status})
+
+
+
+	else :
+		form = ContactForm()
+	return render(request, 'contact.html',{'username': request.user.username,'form':form})
