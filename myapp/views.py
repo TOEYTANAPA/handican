@@ -32,6 +32,21 @@ def home(request):
 		form = ContactForm()
 	return render(request, 'home.html',{'username': request.user.username,'form':form})
 
+    
+
+def check_login(request):
+    if request.user.groups.filter(name='company').exists():
+        return redirect('employer_search')
+    else:
+        return redirect('search')
+
+def job_detail(request,job_name,job_id):
+    # comp = CompanyInfo.objects.get(profile__user= request.user)
+    job = Job.objects.get(title_th=job_name,id=job_id)
+    
+
+
+    return render(request, 'job_detail.html', {'job':job})
 
 def contact(request):
     if request.method == 'POST':
@@ -56,21 +71,47 @@ def search(request):
     return render(request, 'search.html',{})
 
 def employer_search(request):
-    return render(request, 'employer_search.html',{})
-
-def create_job(request):
     if request.method == 'POST':
         form = CreateJobForm(request.POST, request.FILES)
         if form.is_valid():
-            company = Company.objects.get(profile__user=request.user)
+            company = CompanyInfo.objects.get(profile__user=request.user)
             cj = Job.objects.create(
                 company =company,
                 title_th=form.cleaned_data['title_th'],
                 title_en=form.cleaned_data['title_en'],
                 age = form.cleaned_data['age'],
                 sex = form.cleaned_data['sex'],
-                detail = form.cleaned_data['detail'],
-                disability_cate = form.cleaned_data['disability_tyoe'],
+                detail = form.cleaned_data['job_detail'],
+                disability_cate = form.cleaned_data['disability_type'],
+                traveling = form.cleaned_data['traveling'],
+                welfare = form.cleaned_data['welfare'],
+                salary = form.cleaned_data['salary'],
+                company_image =request.FILES['company_image'],
+           
+                )
+        
+            messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            redirect('employer_search')
+
+
+    else :
+        form = CreateJobForm()
+
+    return render(request, 'employer_search.html',{'form':form})
+
+def create_job(request):
+    if request.method == 'POST':
+        form = CreateJobForm(request.POST, request.FILES)
+        if form.is_valid():
+            company = CompanyInfo.objects.get(profile__user=request.user)
+            cj = Job.objects.create(
+                company =company,
+                title_th=form.cleaned_data['title_th'],
+                title_en=form.cleaned_data['title_en'],
+                age = form.cleaned_data['age'],
+                sex = form.cleaned_data['sex'],
+                detail = form.cleaned_data['job_detail'],
+                disability_cate = form.cleaned_data['disability_type'],
                 traveling = form.cleaned_data['traveling'],
                 welfare = form.cleaned_data['welfare'],
                 salary = form.cleaned_data['salary'],
