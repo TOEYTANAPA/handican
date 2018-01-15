@@ -14,9 +14,24 @@ def home(request):
 
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
+		if form.is_valid():
+			email= form.cleaned_data.get('email')
+			name = form.cleaned_data.get('name')
+			phone= form.cleaned_data.get('phone')
+			subject = form.cleaned_data.get('subject')
+			message= form.cleaned_data.get('message')
+			status = True
+
+			Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
+
+		return render(request, 'home.html',{'username': request.user.username,'form':form,'status':status})
+
+
+
 	else :
 		form = ContactForm()
 	return render(request, 'home.html',{'username': request.user.username,'form':form})
+
 
 def contact(request):
     if request.method == 'POST':
@@ -71,3 +86,24 @@ def create_job(request):
         form = CreateJobForm()
     return render(request, 'create_job.html',{'form':form})
 
+
+def contact(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			email= form.cleaned_data.get('email')
+			name = form.cleaned_data.get('name')
+			phone= form.cleaned_data.get('phone')
+			subject = form.cleaned_data.get('subject')
+			message= form.cleaned_data.get('message')
+			status = True
+
+			Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
+
+		return render(request, 'contact.html',{'username': request.user.username,'form':form,'status':status})
+
+
+
+	else :
+		form = ContactForm()
+	return render(request, 'contact.html',{'username': request.user.username,'form':form})

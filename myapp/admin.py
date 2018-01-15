@@ -14,3 +14,7 @@ admin.site.register(DisabilityInfo, DisabilityInfoAdmin)
 class CompanyInfoAdmin(admin.ModelAdmin):
 	list_display=[f.name for f in CompanyInfo._meta.fields]
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
+
+class ContactAdmin(admin.ModelAdmin):
+	list_display=[f.name for f in Contact._meta.fields]
+admin.site.register(Contact, ContactAdmin)
