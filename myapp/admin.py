@@ -18,3 +18,8 @@ admin.site.register(CompanyInfo, CompanyInfoAdmin)
 class ContactAdmin(admin.ModelAdmin):
 	list_display=[f.name for f in Contact._meta.fields]
 admin.site.register(Contact, ContactAdmin)
+
+
+class JobAdmin(admin.ModelAdmin):
+	list_display=[f.name for f in Job._meta.fields]
+admin.site.register(Job, JobAdmin)

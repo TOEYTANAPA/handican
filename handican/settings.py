@@ -125,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'check_login'
 
 
 STATIC_URL = '/static/'

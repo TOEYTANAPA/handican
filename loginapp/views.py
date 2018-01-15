@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,update_session_auth_hash
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import Group
 from myapp.models import *
 from loginapp.forms import *
 # change password
@@ -31,6 +32,8 @@ def job_signup(request):
             user.save()
             user = authenticate(username=email,password=raw_password)
             login(request, user)
+            my_group = Group.objects.get(name='disability') 
+            my_group.user_set.add(user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)
@@ -89,6 +92,8 @@ def company_signup(request):
             user.save()
             user = authenticate(username=email,password=raw_password)
             login(request, user)
+            my_group = Group.objects.get(name='company') 
+            my_group.user_set.add(user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)

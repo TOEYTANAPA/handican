@@ -10,10 +10,11 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     url(r'^$', views.home, name='home'),
-
+    url(r'^checklogin/$',views.check_login, name="check_login"),
     url(r'^search/$',views.search, name="search"),
     url(r'^employer-search/$',views.employer_search, name="employer_search"),
     url(r'^create-job/$',views.create_job, name="create_job"),
+    url(r'^job/(?P<job_name>.*)/(?P<job_id>\d+)$',views.job_detail, name="job_detail"),
     url(r'^contactus/$',views.contact, name="contactus"),
 
     # url(r'^',  include('myapp.urls',namespace='mainapp')),
