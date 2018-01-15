@@ -42,7 +42,7 @@ class CompanyInfo(models.Model):
 	get_more_info = models.BooleanField()
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
 
-<<<<<<< HEAD
+
 class Job(models.Model): 
 	company = models.ForeignKey(CompanyInfo, on_delete=models.SET_NULL,blank=True,null=True)
 	title_th = models.CharField(max_length=100,editable=True )
@@ -56,7 +56,7 @@ class Job(models.Model):
 	salary = models.CharField(max_length=50)
 	company_image=models.ImageField(upload_to="createJob/",default="")
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
-=======
+
 
 class Contact(models.Model):
 	email= models.CharField(max_length=100,editable=True )
@@ -64,4 +64,3 @@ class Contact(models.Model):
 	phone= models.CharField(max_length=20,editable=True )
 	subject = models.CharField(max_length=100,editable=True )
 	message= models.CharField(max_length=1000,editable=True )
->>>>>>> fbdf87b60de0ea76c9d3b3498009b26731502cef
