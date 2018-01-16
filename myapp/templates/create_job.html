@@ -35,33 +35,13 @@
   margin-left: 15px;
   }
   .imgCrop{
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   width: 100%;
   height: 100%;
   overflow: hidden;
   position:  relative;
   }
 
-  /*Form Wizard*/
-  .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
-  .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
-  .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-  .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
-  .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
-  .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;}
-  .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; }
-  .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
-  .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
-  .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
-  .bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
-  .bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
-  .bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
-  .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
-  .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
-  .bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
-  .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
-  .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
-  /*END Form Wizard*/
   b{
   color: red;
   }
@@ -71,156 +51,87 @@
       <br>  
       <div class="uk-card uk-card-default">
         <div class="uk-card-body uk-margin-remove">
-          <h2 class="text-center">สมัครบัญชีผู้ใช้</h2>
+          <h2 class="text-center">สร้างประกาศงาน</h2>
           
           <div class="container" id="inContainer">
             
-            <div class="row bs-wizard uk-text-center nav-desktop" style="border-bottom:0;">
-              
-              <div class="col-md-6 bs-wizard-step complete">
-                <div class="text-center bs-wizard-stepnum">สร้างบัญชีผู้ใช้</div>
-                <div class="progress"><div class="progress-bar"></div></div>
-                <a href="#" class="bs-wizard-dot"></a>
-              </div>
-              
-              <div class="col-md-6 bs-wizard-step active"><!-- complete -->
-              <div class="text-center bs-wizard-stepnum">กรอกข้อมูส่วนตัว</div>
-              <div class="progress"><div class="progress-bar"></div></div>
-              <a href="#" class="bs-wizard-dot"></a>
-              
-            </div>
-          </div>
-          
+            
+      
           
           <div class="panel-body uk-text-left">
             <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
-            <div class="nav-mobile">
-              <h3>ขั้นตอนที่ 2 </h3>
-            </div>
+         
             <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
               {% csrf_token %}
               <div class="form-group">
+
+                <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                  <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
+                  <div>
+                    <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
+                    {{form.title_en }}
+                  </div>
+                  <div>
+                    <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
+                    {{form.title_th}}
+                  </div>
+                  
+                </div>
+               
+                <div  class="uk-margin-bottom ">
+                  <label  for=" ">รายละเอียดงาน <b>*</b></label>
+                  {{form.job_detail}}
+                </div>
+             
+                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                  <div>
+                    <label class=" "  for=" "> เพศ
+                  </label>
+                    {{form.sex |add_class:"uk-select" }}
+                  </div>
+                  <div>
+                    <label class=" "  for=" ">อายุ </label>
+                    {{form.age}}
+                  </div>
+                  
+                </div>
+
+                      
+
+                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                  <div>
+                    <label class=" "  for=" "> ประเภทความพิการ <b>*</b></label>
+                    {{form.disability_type  }}
+                  </div>
+                  <div>
+                    <label class=" "  for=" "> เงินเดือน <b>*</b></label>
+                    {{form.salary }}
+                  </div>
+                  
+                </div>
+                <div  class="uk-margin-bottom ">
+                  <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
+                  {{form.welfare}}
+                </div>
                 <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
-                  <label  for=" ">อัพโหลดรูปภาพโปรไฟล์ <b>*</b></label>
-                  <div> <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/person.png" %}" alt="your image" /></div>
+                  <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
+                  <div > 
+                    <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
+                  </div>
                   
                   <div >
                     <div uk-form-custom="target: true" >
-                      {{form.profile_image|add_class:"uk-input"|attr:"id:imgInp"}}
+                      {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
                       <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
                     </div>
                   </div>
                 </div>
-                <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                  <div>
-                    <label  for=" ">ชื่อจริง <b>*</b></label>
-                    {{form.first_name |add_class:"uk-input"|attr:"placeholder:"}}
-                  </div>
-                  <div>
-                    <label  for=" ">นามสกุล <b>*</b></label>
-                    {{form.last_name |add_class:"uk-input"|attr:"placeholder:"}}
-                  </div>
-                  
-                </div>
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label  for=" ">เพศ <b>*</b></label>
-                    {{form.sex |add_class:"uk-select"}}
-                  </div>
-                  <div>
-                    <label  for=" ">อายุ <b>*</b></label>
-                    {{form.age |add_class:"uk-input"|attr:"placeholder:อายุ"}}
-                  </div>
-                  
-                </div>
                 <div  class="uk-margin-bottom ">
-                  <label  for=" ">ที่อยู่ <b>*</b></label>
-                  {{form.address |add_class:"uk-input"|attr:"placeholder:"}}
+                  <label class=" "  for=" "> การเดินทาง <b>*</b></label>
+                  {{form.traveling  }}
                 </div>
-                <!--   <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> เบอร์โทรศัพท์
-                  <b>*</b></label>
-                  {{form.phone_no |add_class:"uk-input"|attr:"placeholder: " }}
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" ">ประเภทความพิการ <b>*</b></label>
-                  {{form.disability_cate |add_class:"uk-input"|attr:"placeholder: " }}
-                </div> -->
-                <!--   <div  class="uk-margin-bottom ">
-                  
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> บริษัทที่ทำงานล่าสุด <b>*</b></label>
-                  {{form.lastest_office |add_class:"uk-input"|attr:"placeholder: " }}
-                </div> -->
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> เบอร์โทรศัพท์
-                    <b>*</b></label>
-                    {{form.phone_no |add_class:"uk-input"|attr:"placeholder: " }}
-                  </div>
-                  <div>
-                    <label class=" "  for=" ">ประเภทความพิการ <b>*</b></label>
-                    {{form.disability_cate |add_class:"uk-input"|attr:"placeholder: " }}
-                  </div>
-                  
-                </div>
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> ตำแหน่งงานล่าสุด <b>*</b></label>
-                    {{form.lastest_job |add_class:"uk-input"|attr:"placeholder: " }}
-                  </div>
-                  <div>
-                    <label class=" "  for=" "> บริษัทที่ทำงานล่าสุด <b>*</b></label>
-                    {{form.lastest_office |add_class:"uk-input"|attr:"placeholder: " }}
-                  </div>
-                  
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> เงินเดือนที่คาดหวัง <b>*</b></label>
-                  {{form.expected_salary |add_class:"uk-input"|attr:"placeholder: " }}
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> สวัสดิการที่คาดหวัง <b>*</b></label>
-                  {{form.expected_welfare |add_class:"uk-input"|attr:"placeholder: " }}
-                </div>
-                <!--          first_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                last_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                age =  forms.CharField(max_length=10, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                sex = forms.ChoiceField(choices = GENDER_CHOICES, label="",initial='', widget=forms.Select())
-                address =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                disability_cate =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                lastest_job =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                lastest_office =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                expected_salary =  forms.CharField(max_length=50, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                phone_no =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                expected_welfare =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                talent =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-                profile_image = forms.FileField()
-                get_more_info = forms.BooleanField() -->
-                <div  class="uk-margin-bottom "  uk-margin>
-                  <label class=" "  for=" ">ความสามารถจุดเด่น 3 อย่างของคุณ <b>*</b></label>
-                  {{form.talent |add_class:"uk-input"|attr:"placeholder: 1." }}
-                  <!-- <br>   -->
-                  {{form.talent2 |add_class:"uk-input"|attr:"placeholder: 2." }}
-                  <!-- <br>  -->
-                  {{form.talent3 |add_class:"uk-input"|attr:"placeholder: 3." }}
-                </div>
-                <div  class="uk-margin" uk-margin>
-                  <p> </p>
-                  <label class=" "  for=" ">อัพโหลดเรซูมเม่ส่วนตัวของคุณเพิ่มเติม </label>
-                  <div uk-form-custom="target: true" >
-                    
-                    {{form.more_resume|add_class:"uk-input"}}
-                    <input class="uk-input uk-form-width-medium uk-margin-left"  type="text" placeholder="เลือกไฟล์" disabled>
-                  </div>
-                </div>
-                <div  class="uk-margin-bottom ">
-                  
-                  {{form.get_more_info |add_class:"uk-checkbox" }} <label class=" "  for=" ">
-                  รับข่าวสาร กิจกรรม และสิทธิพิเศษจากเราทางอีเมล </label>
-                </div>
+             
+               
                 <br>
                 {% if form.errors %}
                   {% for field in form %}
@@ -244,13 +155,13 @@
                 {% endif %}
                 <div class="form-group">
                   
-                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">ยืนยัน </button>
+                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">สร้างประกาศงาน </button>
                 </div>
                 
               </div>
             </form>
             
-            <p class="additionalTxt  uk-text-center" >มีบัญชีผู้ใช้แล้ว? <a class="uk-button-text link"  href=" {% url 'login' %}">   เข้าสู่ระบบที่นี่ </a> </p>
+            <p class="additionalTxt  uk-text-center" > <a class="uk-button-text additionalTxt"  href=" {% url 'employer_search' %}">   ยังไม่ลงประกาศงานตอนนี้ </a> </p>
             
             <br>
             
