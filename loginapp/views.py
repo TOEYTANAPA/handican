@@ -45,7 +45,7 @@ def job_signup(request):
 
 def job_signup2(request):
     if request.method == 'POST':
-        form = JobInformationForm(request.POST, request.FILES)
+        form = JobInformationForm(request.POST,request.FILES or None)
         if form.is_valid():
             print("Earn")
             print("request.user",request.user)
@@ -71,7 +71,7 @@ def job_signup2(request):
                 get_more_info = form.cleaned_data['get_more_info'],
                 )
             messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
-            return redirect('signup_success')
+            return redirect('check_login')
             # redirect process3
     else:
         form = JobInformationForm()
@@ -126,7 +126,7 @@ def company_signup2(request):
         
             messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
 
-            return redirect('profile')
+            return redirect('check_login')
             # redirect process3
     else:
         form = CompanyInformationForm()

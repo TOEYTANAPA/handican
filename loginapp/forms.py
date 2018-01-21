@@ -42,6 +42,7 @@ class JobInformationForm(forms.Form):
     (0, 'ชาย'),
     (1, 'หญิง')
     )
+
     first_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     last_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     age =  forms.IntegerField( help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
@@ -50,12 +51,15 @@ class JobInformationForm(forms.Form):
     disability_cate =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     lastest_job =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
     lastest_office =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    expected_salary =  forms.CharField(max_length=50, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    expected_salary = forms.ChoiceField(choices=(('น้อยกว่า 10,000','น้อยกว่า 10,000' ),('10,000-19,000','10,000-19,000')
+        ,('20,000-29,999','20,000-29,999'),('30,000-39,000','30,000-39,000'),('40,000-49,000','40,000-49,000')
+        ,('50,000 ขึ้นไป','50,000 ขึ้นไป')), required=True)
+
     phone_no =  forms.CharField(max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     expected_welfare =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent =  forms.CharField(max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent2 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent3 =  forms.CharField(max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent2 =  forms.CharField(required=False,max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent3 =  forms.CharField(required=False,max_length=300, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     more_resume = forms.FileField(required=False,)
     profile_image = forms.FileField()
     get_more_info = forms.BooleanField(required=False,initial=False)
