@@ -60,7 +60,7 @@ def job_signup2(request):
                 phone_no = form.cleaned_data['phone_no'],
                 address = form.cleaned_data['address'],
                 disability_cate = form.cleaned_data['disability_cate'],
-                lastest_job = form.cleaned_data['lastest_job'],
+                job_interest = form.cleaned_data['job_interest'],
                 lastest_office = form.cleaned_data['lastest_office'],
                 expected_salary = form.cleaned_data['expected_salary'],
                 expected_welfare = form.cleaned_data['expected_welfare'],

@@ -19,30 +19,34 @@ class DisabilityInfo(models.Model):
 	sex = models.CharField(max_length=10)
 	email = models.EmailField(max_length=100)
 	phone_no = models.CharField(max_length=20,default="-")
-	address = models.CharField(max_length=1000,blank=True,null=True,default="-")
+	address = models.CharField(max_length=5000,blank=True,null=True,default="-")
 	disability_cate = models.CharField(max_length=100)
-	lastest_job = models.CharField(max_length=100)
-	lastest_office = models.CharField(max_length=100)
+	job_interest = models.CharField(max_length=100)
+	job_exp = models.CharField(max_length=5000,default="")
 	expected_salary = models.CharField(max_length=50)
-	expected_welfare = models.CharField(max_length=500)
-	talent = models.CharField(max_length=300)
-	talent2 = models.CharField(max_length=300)
-	talent3 = models.CharField(max_length=300)
-	more_resume = models.FileField(upload_to="resume/",default="")
+	expected_welfare = models.CharField(max_length=1000)
+	talent = models.CharField(max_length=1000)
+	talent2 = models.CharField(max_length=1000,default="")
+	talent3 = models.CharField(max_length=1000,default="")
+	more_resume = models.FileField(upload_to="resume/",default=None,blank=True,null=True,)
 	get_more_info = models.BooleanField()
+	def __str__(self):
+		return "%s"%(self.first_name)
 		
 class CompanyInfo(models.Model):
 	profile = models.ForeignKey(Profile, on_delete=models.SET_NULL,blank=True,null=True)
 	th_name = models.CharField(max_length=100,editable=True )
 	en_name = models.CharField(max_length=100,editable=True )
 	phone_no = models.CharField(max_length=20,default="-")
-	address = models.CharField(max_length=1000,default="-")
-	info = models.CharField(max_length=1000,default="-")
+	address = models.CharField(max_length=5000,default="-")
+	info = models.CharField(max_length=5000,default="-")
 	website = models.CharField(max_length=50)
 	fax = models.CharField(max_length=30)
 	company_type = models.CharField(max_length=100)
 	get_more_info = models.BooleanField()
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
+	def __str__(self):
+		return "%s"%(self.th_name)
 
 
 class Job(models.Model): 
@@ -51,18 +55,19 @@ class Job(models.Model):
 	title_en = models.CharField(max_length=100,editable=True )
 	age = models.IntegerField(blank=True,null=True)
 	sex = models.CharField(max_length=10)
-	detail = models.CharField(max_length=2000,default="")
+	detail = models.CharField(max_length=5000,default="")
 	disability_cate = models.CharField(max_length=100)
 	traveling = models.CharField(max_length=1000)
 	welfare = models.CharField(max_length=1000)
 	salary = models.CharField(max_length=50)
 	company_image=models.ImageField(upload_to="createJob/",default="")
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
-
+	def __str__(self):
+		return "%s"%(self.title_th)
 
 class Contact(models.Model):
 	email= models.CharField(max_length=100,editable=True )
 	name = models.CharField(max_length=100,editable=True )
 	phone= models.CharField(max_length=20,editable=True )
 	subject = models.CharField(max_length=100,editable=True )
-	message= models.CharField(max_length=1000,editable=True )
+	message= models.CharField(max_length=5000,editable=True )
