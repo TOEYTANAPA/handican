@@ -51,7 +51,16 @@
             </div>
         </div>
     </nav> -->
-   
+     {% block messages %}
+        {% if messages %}
+            {% for message in messages %}
+                <div id="alertMsg" class="alert alert-{{ message.tags }}">  <!-- singular -->
+                <a class="close" data-dismiss="alert">×</a>
+                {{ message|safe }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
     <div class="container nav-desktop"> <br>
         <div class="uk-card uk-card-default uk-card-body">
             <ul uk-tab>

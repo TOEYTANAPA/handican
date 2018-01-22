@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,update_session_auth_hash
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect,HttpResponse,Http404
 from django.contrib.auth.models import Group
 from myapp.models import *
 from loginapp.forms import *
@@ -31,47 +32,56 @@ def job_signup(request):
             user=User.objects.create_user(username=email, password=raw_password,email=email)
             user.save()
             user = authenticate(username=email,password=raw_password)
-            login(request, user)
+            # login(request, user)
+            
             my_group = Group.objects.get(name='disability') 
             my_group.user_set.add(user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)
-            return redirect('job_signup2')
-            # redirect process3
+
+            # return redirect('job_signup2')
+            return redirect('job_signup2', uid=user.id)
+     
     else:
         form = JobSignUpForm()
     return render(request, 'job_signup.html', {'form': form})
 
-def job_signup2(request):
+def job_signup2(request,uid):
     if request.method == 'POST':
-        form = JobInformationForm(request.POST, request.FILES)
+        form = JobInformationForm(request.POST,request.FILES or None)
         if form.is_valid():
             print("Earn")
-            print("request.user",request.user)
-            profile = Profile.objects.create(user=request.user,profile_picture = request.FILES['profile_image'],)
+            user = User.objects.get(id=uid)
+            print(user)
+            try:
+                more_resume = request.FILES['more_resume']
+            except Exception as e:
+                more_resume = None
+            
+            profile = Profile.objects.create(user=user,profile_picture = request.FILES['profile_image'],)
             disability = DisabilityInfo.objects.create(
                 profile = profile,
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['first_name'],
-                email = request.user.email,
+                email = user.email,
                 sex = form.cleaned_data['sex'],
                 age = form.cleaned_data['age'],
                 phone_no = form.cleaned_data['phone_no'],
                 address = form.cleaned_data['address'],
                 disability_cate = form.cleaned_data['disability_cate'],
-                lastest_job = form.cleaned_data['lastest_job'],
-                lastest_office = form.cleaned_data['lastest_office'],
+                job_interest = form.cleaned_data['job_interest'],
+                job_exp = form.cleaned_data['job_exp'],
                 expected_salary = form.cleaned_data['expected_salary'],
                 expected_welfare = form.cleaned_data['expected_welfare'],
                 talent = form.cleaned_data['talent'],
                 talent2 = form.cleaned_data['talent2'],
                 talent3 = form.cleaned_data['talent3'],
-                more_resume = request.FILES['more_resume'],
+                more_resume = more_resume,
                 get_more_info = form.cleaned_data['get_more_info'],
                 )
             messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
-            return redirect('signup_success')
+            return redirect('home')
             # redirect process3
     else:
         form = JobInformationForm()
@@ -91,25 +101,27 @@ def company_signup(request):
             user=User.objects.create_user(username=email, password=raw_password,email=email)
             user.save()
             user = authenticate(username=email,password=raw_password)
-            login(request, user)
+            # login(request, user)
             my_group = Group.objects.get(name='company') 
             my_group.user_set.add(user)
             # p = Profile(picture = request.FILES['image'],user=user,name=username,email=email)
             # p.save()
             # login(request, user)
-            return redirect('company_signup2')
+            return redirect('company_signup2', uid=user.id)
+            # return redirect('company_signup2')
             # redirect process3
     else:
         form = CompanySignUpForm()
     return render(request, 'company_signup.html', {'form': form})
 
 
-def company_signup2(request):
+def company_signup2(request,uid):
     if request.method == 'POST':
         form = CompanyInformationForm(request.POST, request.FILES)
         if form.is_valid():
             print("Earn")
-            profile = Profile.objects.create(user=request.user,profile_picture = request.FILES['company_image'],)
+            user = User.objects.get(id=uid)
+            profile = Profile.objects.create(user=user,profile_picture = request.FILES['company_image'],)
             comp = CompanyInfo.objects.create(
                 profile =profile,
                 th_name=form.cleaned_data['th_name'],
@@ -126,7 +138,7 @@ def company_signup2(request):
         
             messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
 
-            return redirect('profile')
+            return redirect('home')
             # redirect process3
     else:
         form = CompanyInformationForm()
