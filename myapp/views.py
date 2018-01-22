@@ -12,33 +12,32 @@ from .forms import *
 # Create your views here.
 def home(request):
 
-	if request.method == 'POST':
-		form = ContactForm(request.POST)
-		if form.is_valid():
-			email= form.cleaned_data.get('email')
-			name = form.cleaned_data.get('name')
-			phone= form.cleaned_data.get('phone')
-			subject = form.cleaned_data.get('subject')
-			message= form.cleaned_data.get('message')
-			status = True
-
-			Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
-
-		return render(request, 'home.html',{'username': request.user.username,'form':form,'status':status})
-
-
-
-	else :
-		form = ContactForm()
-	return render(request, 'home.html',{'username': request.user.username,'form':form})
-
-    
-
-def check_login(request):
     if request.user.groups.filter(name='company').exists():
         return redirect('employer_search')
     else:
         return redirect('search')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            email= form.cleaned_data.get('email')
+            name = form.cleaned_data.get('name')
+            phone= form.cleaned_data.get('phone')
+            subject = form.cleaned_data.get('subject')
+            message= form.cleaned_data.get('message')
+            status = True
+
+            Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
+
+        return render(request, 'home.html',{'username': request.user.username,'form':form,'status':status})
+
+
+    else :
+        form = ContactForm()    
+    return render(request, 'home.html',{'username': request.user.username,'form':form})
+
+    
+
+
 
 def job_detail(request,job_name,job_id):
     # comp = CompanyInfo.objects.get(profile__user= request.user)
