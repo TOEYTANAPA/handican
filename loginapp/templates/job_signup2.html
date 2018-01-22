@@ -166,20 +166,18 @@
                   </div>
                   
                 </div>
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> ตำแหน่งงานล่าสุด <b>*</b></label>
-                    {{form.lastest_job |add_class:"uk-input"|attr:"placeholder: " }}
+               <div class="uk-margin-bottom"  >
+                    <label for=" ">งานที่สนใจ </label>
+                    {{form.job_interest |add_class:"uk-input"|attr:"placeholder: นักบัญชี, นักออกแบบ, โปรแกรมเมอร์ " }}
                   </div>
-                  <div>
-                    <label class=" "  for=" "> บริษัทที่ทำงานล่าสุด <b>*</b></label>
-                    {{form.lastest_office |add_class:"uk-input"|attr:"placeholder: " }}
-                  </div>
-                  
+             <div  class="uk-margin-bottom ">
+                  <label  for=" ">ประสบการณ์การทำงาน <b>*</b></label>
+                  {{form.job_exp}}
                 </div>
+
                 <div  class="uk-margin-bottom ">
                   <label class=" "  for=" "> เงินเดือนที่คาดหวัง <b>*</b></label>
-                  {{form.expected_salary |add_class:"uk-input"|attr:"placeholder: " }}
+                  {{form.expected_salary |add_class:"uk-select"|attr:"placeholder: " }}
                 </div>
                 <div  class="uk-margin-bottom ">
                   <label class=" "  for=" "> สวัสดิการที่คาดหวัง <b>*</b></label>

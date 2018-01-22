@@ -35,30 +35,345 @@
     border-radius: 50%;
     }
     b{
-        color: red;
+    color: red;
     }
     </style>
-    
-    <!-- <div class="container" > -->
-    <!--  <br>
-    -->
-    
-    
-    <!--
-    <nav  class=" nav-inSearch" uk-navbar>
-        <div class="container" >
-            <div class="uk-navbar-left ">
-                <ul class="uk-navbar-nav  uk-margin-remove-bottom">
-                    <li class="uk-active"><a href="#" ><h4 class="linkInNave">งานที่สมัคร</h4></a></li>
-                    <li class=""><a href="#" ><h4 class="linkInNave">ได้รับการเชิญ</h4></a></li>
-                    
-                </ul>
-                
+    {% block messages %}
+        {% if messages %}
+            {% for message in messages %}
+                <div id="alertMsg" class="alert alert-{{ message.tags }}">  <!-- singular -->
+                <a class="close" data-dismiss="alert">×</a>
+                {{ message|safe }}
             </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+<!-- <div class="container" > -->
+<!--  <br>
+-->
+<!--
+<nav  class=" nav-inSearch" uk-navbar>
+    <div class="container" >
+        <div class="uk-navbar-left ">
+            <ul class="uk-navbar-nav  uk-margin-remove-bottom">
+                <li class="uk-active"><a href="#" ><h4 class="linkInNave">งานที่สมัคร</h4></a></li>
+                <li class=""><a href="#" ><h4 class="linkInNave">ได้รับการเชิญ</h4></a></li>
+                
+            </ul>
+            
         </div>
-    </nav> -->
-    
-    <div class="container nav-desktop"> <br>
+    </div>
+</nav> -->
+<div class="container nav-desktop"> <br>
+    <div class="uk-card uk-card-default uk-card-body">
+        <ul uk-tab>
+            <li><a href="#">หน้าหลัก</a></li>
+            <li><a href="#">สร้างประกาศงานใหม่</a></li>
+            <li><a href="#">หาผู้สมัครงาน</a></li>
+        </ul>
+        <!-- <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button> -->
+        <ul class="uk-switcher uk-margin">
+            <li>
+                <table class="uk-table  uk-table-divider">
+                    <thead>
+                        <tr>
+                            <th class="uk-table-expand">งานที่เคยลงประกาศ</th>
+                            <th class="uk-table-expand">ฉบับร่าง</th>
+                            <th class="uk-text-center">ผู้สมัครงาน</th>
+                            <th class="uk-text-center">วันที่ลงประกาศ</th>
+                            <th class="uk-text-center"> สถานะ
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td class="uk-text-center">Table Data</td>
+                            <td class="uk-text-center">Table Data</td>
+                            <td class="uk-text-center">Table Data</td>
+                        </tr>
+                        <tr>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                        </tr>
+                        <tr>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </li>
+            <li>
+                <h2 class="text-center">สร้างประกาศงาน</h2>
+                
+                <div class="container" id="inContainer">
+                    
+                    
+                    
+                    
+                    <div class="panel-body uk-text-left">
+                        <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
+                        
+                        <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
+                                    
+                                    <div>
+                                        <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
+                                        {{form.title_th}}
+                                    </div>
+                                    <div>
+                                        <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
+                                        {{form.title_en }}
+                                    </div>
+                                </div>
+                                
+                                <div  class="uk-margin-bottom ">
+                                    <label  for=" ">รายละเอียดงาน <b>*</b></label>
+                                    {{form.job_detail}}
+                                </div>
+                                
+                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                    <div>
+                                        <label class=" "  for=" "> เพศ
+                                        </label>
+                                        {{form.sex |add_class:"uk-select" }}
+                                    </div>
+                                      <div>
+                                        <label class=" "  for=" "> อายุ </label>
+                                        
+                                        <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
+                                            <div class="form-group ">
+                                                <div class="input-group">
+                                                    {{form.age1}}
+                                                    <div class="input-group-addon">
+                                                        ถึง
+                                                    </div>
+                                                    {{form.age2}}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                    <div>
+                                        <label class=" "  for=" "> ประเภทความพิการ <b>*</b></label>
+                                        {{form.disability_type  }}
+                                    </div>
+                                    <div>
+                                        <label class=" "  for=" "> เงินเดือน <b>*</b></label>
+                                        
+                                        <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
+                                            <div class="form-group ">
+                                                <div class="input-group">
+                                                    {{form.salary1}}
+                                                    <div class="input-group-addon">
+                                                        ถึง
+                                                    </div>
+                                                    {{form.salary2}}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                     </div> 
+                                    <div  class="uk-margin-bottom ">
+                                        <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
+                                        {{form.welfare}}
+                                    </div>
+                                    <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
+                                        <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
+                                        <div >
+                                            <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
+                                        </div>
+                                        
+                                        <div >
+                                            <div uk-form-custom="target: true" >
+                                                {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
+                                                <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="uk-margin-bottom ">
+                                        <label class=" "  for=" "> การเดินทาง <b>*</b></label>
+                                        {{form.traveling  }}
+                                    </div>
+                                    
+                                    
+                                    <br>
+                                    {% if form.errors %}
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% for error in form.non_field_errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% for i in form.errors %}
+                                        {{i}}
+                                    {% endfor %}
+                                    {% if form.errors %}
+                                        error!
+                                    {% endif %}
+                                    <div class="form-group">
+                                        
+                                        <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">สร้างประกาศงาน </button>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                            
+                            <p class="additionalTxt  uk-text-center" > <a class="uk-button-text additionalTxt"  href=" {% url 'employer_search' %}">   ยังไม่ลงประกาศงานตอนนี้ </a> </p>
+                            
+                            <br>
+                            
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p class="uk-text-muted">ค้นหาผู้สมัครงาน
+                    </p>
+                    <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
+                        <form action="" method="POST" class="uk-search uk-search-default " >
+                            <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
+                                {% csrf_token %}
+                                
+                                
+                                <div >
+                                    
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            <input name="job_title" class="uk-input" type="search" placeholder="ชื่อตำแหน่งงาน">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-list" aria-hidden="true"></i></span>
+                                            <input name="disability_type" class="uk-input" type="search" placeholder="ประเภทความพิการ">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                                <div >
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-btc" aria-hidden="true"></i></span>
+                                            <input name="salary" class="uk-input" type="search" placeholder="10,000 - 25,000 ">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" ><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                            <input name="location" class="uk-input" type="search" placeholder="สถานที่ตั้ง">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <br>
+                    <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
+                    <br>
+                    <!-- <label class="uk-text-muted"> </label><br>     -->
+                    
+                    <div class="container ">
+                        <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
+                            <div class="uk-width-auto@m  ">
+                                <img class="imgCrop uk-align-center"  style="width: 80px;height: 80px" src="{% static "images/wcb.jpg" %}" alt="your image" />
+                                
+                            </div>
+                            <div class="uk-width-expand@m  ">
+                                <div  uk-grid>
+                                    <div class="uk-width-1-2@m uk-width-1-2@s">
+                                        <label for="">Web Courses Bangkok     <p>Position: </p></label>
+                                    </div>
+                                    <div class="uk-width-1-2@m uk-width-1-2@s ">
+                                        <div class="uk-margin uk-align-right">
+                                            <button  type="submit" class="uk-button uk-button-default  uk-button-small " >รายละเอียดเพิ่มเติม</button> <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
+                                        </div>
+                                        <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
+                                    </div>
+                                </div>
+                                
+                                <!-- <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button> -->
+                                <br>
+                                <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span><span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
+                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true">Rama VI</span>
+                                <!--   <p>  <h3> </h3></p>
+                                <label for="">as</label> -->
+                                
+                                <p> </p>
+                                <p class="uk-text-muted">I am ready for the job and I hope you will give me a chance to work for you or with your team and company. I can do anything about maintenance.</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
+                            <div class="uk-width-auto@m  ">
+                                <img class="imgCrop uk-align-center"  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
+                                
+                            </div>
+                            <div class="uk-width-expand@m  ">
+                                <div  uk-grid>
+                                    <div class="uk-width-1-2@m uk-width-1-2@s">
+                                        <label for="">CP All    <p>Position: </p></label>
+                                    </div>
+                                    <div class="uk-width-1-2@m uk-width-1-2@s ">
+                                        <div class="uk-margin uk-align-right">
+                                            <button  type="submit" class="uk-button uk-button-default  uk-button-small " >รายละเอียดเพิ่มเติม</button> <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
+                                        </div>
+                                        <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
+                                    </div>
+                                </div>
+                                <br>
+                                <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span><span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
+                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true">สีลม</span>
+                                <!--   <p>  <h3> </h3></p>
+                                <label for="">as</label> -->
+                                
+                                <p> </p>
+                                <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <div class="nav-mobile ">
         <div class="uk-card uk-card-default uk-card-body">
             <ul uk-tab>
                 <li><a href="#">หน้าหลัก</a></li>
@@ -68,165 +383,123 @@
             <!-- <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button> -->
             <ul class="uk-switcher uk-margin">
                 <li>
-                    <table class="uk-table  uk-table-divider">
-                        <thead>
-                            <tr>
-                                <th class="uk-table-expand">งานที่เคยลงประกาศ</th>
-                                <th class="uk-table-expand">ฉบับร่าง</th>
-                                <th class="uk-text-center">ผู้สมัครงาน</th>
-                                <th class="uk-text-center">วันที่ลงประกาศ</th>
-                                <th class="uk-text-center"> สถานะ
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td class="uk-text-center">Table Data</td>
-                                <td class="uk-text-center">Table Data</td>
-                                <td class="uk-text-center">Table Data</td>
-                            </tr>
-                            <tr>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                            </tr>
-                            <tr>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                                <td>Table Data</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                </li>
+                <li>  <h2 class="text-center">สร้างประกาศงาน</h2>
                     
-                </li>
-                <li>
-                      <h2 class="text-center">สร้างประกาศงาน</h2>
-          
-          <div class="container" id="inContainer">
-            
-            
-      
-          
-          <div class="panel-body uk-text-left">
-            <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
-         
-            <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
-              {% csrf_token %}
-              <div class="form-group">
-
-                <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                  <div>
-                    <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
-                    {{form.title_en }}
-                  </div>
-                  <div>
-                    <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
-                    {{form.title_th}}
-                  </div>
-                  
-                </div>
-               
-                <div  class="uk-margin-bottom ">
-                  <label  for=" ">รายละเอียดงาน <b>*</b></label>
-                  {{form.job_detail}}
-                </div>
-             
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> เพศ
-                  </label>
-                    {{form.sex |add_class:"uk-select" }}
-                  </div>
-                  <div>
-                    <label class=" "  for=" ">อายุ </label>
-                    {{form.age}}
-                  </div>
-                  
-                </div>
-
-                      
-
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> ประเภทความพิการ <b>*</b></label>
-                    {{form.disability_type  }}
-                  </div>
-                  <div>
-                    <label class=" "  for=" "> เงินเดือน <b>*</b></label>
-                    {{form.salary }}
-                  </div>
-                  
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
-                  {{form.welfare}}
-                </div>
-                <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
-                  <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
-                  <div > 
-                    <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
-                  </div>
-                  
-                  <div >
-                    <div uk-form-custom="target: true" >
-                      {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
-                      <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
+                    <div class="container" id="inContainer">
+                        
+                        
+                        
+                        
+                        <div class="panel-body uk-text-left">
+                            <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
+                            
+                            <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                        <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
+                                        
+                                        <div>
+                                            <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
+                                            {{form.title_th}}
+                                        </div>
+                                        <div>
+                                            <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
+                                            {{form.title_en }}
+                                        </div>
+                                    </div>
+                                    
+                                    <div  class="uk-margin-bottom ">
+                                        <label  for=" ">รายละเอียดงาน <b>*</b></label>
+                                        {{form.job_detail}}
+                                    </div>
+                                    
+                                    <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                        <div>
+                                            <label class=" "  for=" "> เพศ
+                                            </label>
+                                            {{form.sex |add_class:"uk-select" }}
+                                        </div>
+                                        <div>
+                                            <label class=" "  for=" ">อายุ </label>
+                                            {{form.age}}
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                        <div>
+                                            <label class=" "  for=" "> ประเภทความพิการ <b>*</b></label>
+                                            {{form.disability_type  }}
+                                        </div>
+                                        <div>
+                                            <label class=" "  for=" "> เงินเดือน <b>*</b></label>
+                                            {{form.salary |add_class:"uk-select" }}
+                                        </div>
+                                        
+                                    </div>
+                                    <div  class="uk-margin-bottom ">
+                                        <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
+                                        {{form.welfare}}
+                                    </div>
+                                    <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
+                                        <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
+                                        <div >
+                                            <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
+                                        </div>
+                                        
+                                        <div >
+                                            <div uk-form-custom="target: true" >
+                                                {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
+                                                <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="uk-margin-bottom ">
+                                        <label class=" "  for=" "> การเดินทาง <b>*</b></label>
+                                        {{form.traveling  }}
+                                    </div>
+                                    
+                                    
+                                    <br>
+                                    {% if form.errors %}
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% for error in form.non_field_errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% for i in form.errors %}
+                                        {{i}}
+                                    {% endfor %}
+                                    {% if form.errors %}
+                                        error!
+                                    {% endif %}
+                                    <div class="form-group">
+                                        
+                                        <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">สร้างประกาศงาน </button>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                            
+                            <p class="additionalTxt  uk-text-center" > <a class="uk-button-text additionalTxt"  href=" {% url 'employer_search' %}">   ยังไม่ลงประกาศงานตอนนี้ </a> </p>
+                            
+                            <br>
+                            
+                            <!-- </div> -->
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> การเดินทาง <b>*</b></label>
-                  {{form.traveling  }}
-                </div>
-             
-               
-                <br>
-                {% if form.errors %}
-                  {% for field in form %}
-                    {% for error in field.errors %}
-                      <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                      </div>
-                    {% endfor %}
-                  {% endfor %}
-                  {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                      <strong>{{ error|escape }}</strong>
-                    </div>
-                  {% endfor %}
-                {% endif %}
-                {% for i in form.errors %}
-                  {{i}}
-                {% endfor %}
-                {% if form.errors %}
-                  error!
-                {% endif %}
-                <div class="form-group">
-                  
-                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">สร้างประกาศงาน </button>
-                </div>
-                
-              </div>
-            </form>
-            
-            <p class="additionalTxt  uk-text-center" > <a class="uk-button-text additionalTxt"  href=" {% url 'employer_search' %}">   ยังไม่ลงประกาศงานตอนนี้ </a> </p>
-            
-            <br>
-            
-            <!-- </div> -->
-          </div>
-        </div>
                 </li>
-                <li>
-<p class="uk-text-muted">ค้นหาผู้สมัครงาน
-</p>
+                <li><p class="uk-text-muted">ค้นหาผู้สมัครงาน</p>
                 <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
                     <form action="" method="POST" class="uk-search uk-search-default " >
                         <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
@@ -267,364 +540,116 @@
                             </div>
                             <div>
                                 <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน
-</button>
+                                </button>
                                 
                             </div>
                         </div>
                         
                     </form>
                 </div>
-            <br>    
-                <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
                 <br>
-<!-- <label class="uk-text-muted"> </label><br>     -->
+                <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
                 
-                <div class="container ">  
-                    <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
-                        <div class="uk-width-auto@m  ">
-                            <img class="imgCrop uk-align-center"  style="width: 80px;height: 80px" src="{% static "images/wcb.jpg" %}" alt="your image" />
-                         
-                        </div>
-                        <div class="uk-width-expand@m  ">
-                            <div  uk-grid>
-                                <div class="uk-width-1-2@m uk-width-1-2@s">
-                                    <label for="">Web Courses Bangkok     <p>Position: </p></label>
-                                </div>
-                                  <div class="uk-width-1-2@m uk-width-1-2@s ">
-                                    <div class="uk-margin uk-align-right">
-                                        <button  type="submit" class="uk-button uk-button-default  uk-button-small " >รายละเอียดเพิ่มเติม</button> <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
-                                    </div>
-                                    <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
-                                </div>
+                <article class="uk-comment uk-visible-toggle">
+                    <header class="uk-comment-header uk-position-relative">
+                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                            <div class="uk-width-auto">
+                                <img class="imgCrop imgCircle" src="{% static "images/cpall.png" %}" style="width: 80px;height: 80px" alt="">
+                                
                             </div>
-                            
-                            <!-- <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button> -->
-                            <br>
-                            <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span><span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
-                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true">Rama VI</span>
-                            <!--   <p>  <h3> </h3></p>
-                            <label for="">as</label> -->
-                            
-                            <p> </p>
-                            <p class="uk-text-muted">I am ready for the job and I hope you will give me a chance to work for you or with your team and company. I can do anything about maintenance.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
-                        <div class="uk-width-auto@m  ">
-                            <img class="imgCrop uk-align-center"  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
-                            
-                        </div>
-                        <div class="uk-width-expand@m  ">
-                            <div  uk-grid>
-                                <div class="uk-width-1-2@m uk-width-1-2@s">
-                                    <label for="">CP All    <p>Position: </p></label>
+                            <div class="uk-width-expand ">
+                                <div class="uk-magin">
+                                    <button  type="submit" class="uk-button uk-button-default uk-button-small   " >อ่านเพิ่มเติม
+                                    </button>
+                                    <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก
+                                    </button>
                                 </div>
-                                <div class="uk-width-1-2@m uk-width-1-2@s ">
-                                    <div class="uk-margin uk-align-right">
-                                        <button  type="submit" class="uk-button uk-button-default  uk-button-small " >รายละเอียดเพิ่มเติม</button> <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
-                                    </div>
-                                    <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
-                                </div>
+                                
                             </div>
-                            <br>
-                            <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span><span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
-                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true">สีลม</span>
-                            <!--   <p>  <h3> </h3></p>
-                            <label for="">as</label> -->
-                            
-                            <p> </p>
-                            <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
                         </div>
-                    </div>
+                        
+                    </header>
+                    <div class="uk-comment-body">
+                        <label for="" class="">Web Courses Bangkok     <p>Position: </p></label>
+                        <label for=""> <p>  <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> <span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span></p>
+                        
+                        <p> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> สีลม</span>
+                    </p></label>
+                    <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
+                    
+                    
                 </div>
+            </article>
+            <hr>
+            <div class="uk-column-1-1@s " >
+                
+                <div class=" uk-width-1-2@s">
+                    <div> <img class="imgCrop imgCircle"  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
+                    </div>
+                    
+                </div>
+                <br>
+                <div >
+                    <label for="" class="">Web Courses Bangkok     <p>Position: </p></label>
+                    
+                </div>
+                <div >
+                    
+                    <p >
+                        <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> <span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
+                        
+                        <p> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> สีลม</span>
+                    </p></p>
+                    
+                    
+                    <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
+                    
+                    
+                    
+                </div>
+                <!-- </div> -->
+                
+                <div >
+                    <button  type="submit" class="uk-button uk-button-default uk-button-small   " >เชิญร่วมงาน
+                    </button>
+                    <button  type="submit" class="uk-button uk-button-default uk-button-small   " >บันทึก
+                    </button>
+                </div>
+                <!-- <div class="uk-width-1-1@s">
+                    <button  type="submit" class="uk-button uk-button-default uk-button-small   " >สมัครงาน
+                    </button>
+                </div>  -->
+                <!-- <button  type="submit" class="uk-button uk-button-default uk-button-small t " ></button> -->
+                <!-- <button  type="submit" class="uk-button uk-button-default uk-width-1-1" >รายละเอียดเพิ่มเติม</button> -->
                 <hr>
-                <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
-            </li>
-        </ul>
-        
+                
+                
+            </ul>
+        </div>
     </div>
-</div>
-<div class="nav-mobile ">
-    <div class="uk-card uk-card-default uk-card-body">
-        <ul uk-tab>
-            <li><a href="#">หน้าหลัก</a></li>
+    <!--  <div class="nav-mobile ">
+        <div class="uk-card uk-card-default uk-card-body">
+            <ul class="" uk-tab>
+                <li><a href="#">หน้าหลัก</a></li>
                 <li><a href="#">สร้างประกาศงานใหม่</a></li>
                 <li><a href="#">หาผู้สมัครงาน</a></li>
-        </ul>
-        <!-- <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button> -->
-        <ul class="uk-switcher uk-margin">
-            <li>
-            </li>
-            <li>  <h2 class="text-center">สร้างประกาศงาน</h2>
-          
-          <div class="container" id="inContainer">
+            </ul>
             
-            
-      
-          
-          <div class="panel-body uk-text-left">
-            <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
-         
-            <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
-              {% csrf_token %}
-              <div class="form-group">
-
-                <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                  <div>
-                    <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
-                    {{form.title_en }}
-                  </div>
-                  <div>
-                    <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
-                    {{form.title_th}}
-                  </div>
-                  
-                </div>
-               
-                <div  class="uk-margin-bottom ">
-                  <label  for=" ">รายละเอียดงาน <b>*</b></label>
-                  {{form.job_detail}}
-                </div>
-             
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> เพศ
-                  </label>
-                    {{form.sex |add_class:"uk-select" }}
-                  </div>
-                  <div>
-                    <label class=" "  for=" ">อายุ </label>
-                    {{form.age}}
-                  </div>
-                  
-                </div>
-
-                      
-
-                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                  <div>
-                    <label class=" "  for=" "> ประเภทความพิการ <b>*</b></label>
-                    {{form.disability_type  }}
-                  </div>
-                  <div>
-                    <label class=" "  for=" "> เงินเดือน <b>*</b></label>
-                    {{form.salary }}
-                  </div>
-                  
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
-                  {{form.welfare}}
-                </div>
-                <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
-                  <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
-                  <div > 
-                    <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
-                  </div>
-                  
-                  <div >
-                    <div uk-form-custom="target: true" >
-                      {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
-                      <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
-                    </div>
-                  </div>
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> การเดินทาง <b>*</b></label>
-                  {{form.traveling  }}
-                </div>
-             
-               
-                <br>
-                {% if form.errors %}
-                  {% for field in form %}
-                    {% for error in field.errors %}
-                      <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                      </div>
-                    {% endfor %}
-                  {% endfor %}
-                  {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                      <strong>{{ error|escape }}</strong>
-                    </div>
-                  {% endfor %}
-                {% endif %}
-                {% for i in form.errors %}
-                  {{i}}
-                {% endfor %}
-                {% if form.errors %}
-                  error!
-                {% endif %}
-                <div class="form-group">
-                  
-                  <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-3@m uk-align-center  " style="color: white;">สร้างประกาศงาน </button>
-                </div>
+            <ul class="uk-switcher uk-margin">
+                <li>
+                </li>
+                <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
+                </li>
+                <li>
+                </li>
                 
-              </div>
-            </form>
-            
-            <p class="additionalTxt  uk-text-center" > <a class="uk-button-text additionalTxt"  href=" {% url 'employer_search' %}">   ยังไม่ลงประกาศงานตอนนี้ </a> </p>
-            
-            <br>
-            
-            <!-- </div> -->
-          </div>
+            </ul>
         </div>
-            </li>
-            <li><p class="uk-text-muted">ค้นหาผู้สมัครงาน</p>
-            <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
-                <form action="" method="POST" class="uk-search uk-search-default " >
-                    <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
-                        {% csrf_token %}
-                        
-                        
-                        <div >
-                            
-                            <div class="uk-margin">
-                                <div class="uk-inline">
-                                    <span class="uk-form-icon" ><i class="fa fa-search" aria-hidden="true"></i></span>
-                                    <input name="job_title" class="uk-input" type="search" placeholder="ชื่อตำแหน่งงาน">
-                                </div>
-                            </div>
-                            <div class="uk-margin">
-                                <div class="uk-inline">
-                                    <span class="uk-form-icon" ><i class="fa fa-list" aria-hidden="true"></i></span>
-                                    <input name="disability_type" class="uk-input" type="search" placeholder="ประเภทความพิการ">
-                                </div>
-                            </div>
-                            
-                            
-                            
-                        </div>
-                        <div >
-                            <div class="uk-margin">
-                                <div class="uk-inline">
-                                    <span class="uk-form-icon" ><i class="fa fa-btc" aria-hidden="true"></i></span>
-                                    <input name="salary" class="uk-input" type="search" placeholder="10,000 - 25,000 ">
-                                </div>
-                            </div>
-                            <div class="uk-margin">
-                                <div class="uk-inline">
-                                    <span class="uk-form-icon" ><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                    <input name="location" class="uk-input" type="search" placeholder="สถานที่ตั้ง">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน
-</button>
-                            
-                        </div>
-                    </div>
-                    
-                </form>
-            </div>
-          <br>  
-         <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
-            
-             <article class="uk-comment uk-visible-toggle">
-                <header class="uk-comment-header uk-position-relative">
-                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                        <div class="uk-width-auto">
-                            <img class="imgCrop imgCircle" src="{% static "images/cpall.png" %}" style="width: 80px;height: 80px" alt="">
-                            
-                        </div>
-                        <div class="uk-width-expand ">
-                            <div class="uk-magin">
-                                <button  type="submit" class="uk-button uk-button-default uk-button-small   " >อ่านเพิ่มเติม
-                                </button>
-                                <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก
-                                </button>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                </header>
-                <div class="uk-comment-body">
-                    <label for="" class="">Web Courses Bangkok     <p>Position: </p></label>
-                    <label for=""> <p>  <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> <span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span></p>
-                    
-                    <p> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> สีลม</span>
-                </p></label>
-                <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
-                
-                
-            </div>
-        </article>
-        <hr>
-        <div class="uk-column-1-1@s " >
-            
-            <div class=" uk-width-1-2@s">
-                <div> <img class="imgCrop imgCircle"  style="width: 80px;height: 80px" src="{% static "images/cpall.png" %}" alt="your image" />
-                </div>
-                
-            </div>
-            <br>
-            <div >
-                <label for="" class="">Web Courses Bangkok     <p>Position: </p></label>
-                
-            </div>
-            <div >
-                
-                <p >
-                    <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> <span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
-                    
-                    <p> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> สีลม</span>
-                </p></p>
-                
-                
-                <p class="uk-text-muted">I have a chance to training I believe that I can do everything. Just wait for the opportunity</p>
-                
-                
-                
-            </div>
-            <!-- </div> -->
-            
-            <div >
-                <button  type="submit" class="uk-button uk-button-default uk-button-small   " >เชิญร่วมงาน
-                </button>
-                <button  type="submit" class="uk-button uk-button-default uk-button-small   " >บันทึก
-                </button>
-            </div>
-            <!-- <div class="uk-width-1-1@s">
-                <button  type="submit" class="uk-button uk-button-default uk-button-small   " >สมัครงาน
-                </button>
-            </div>  -->
-            <!-- <button  type="submit" class="uk-button uk-button-default uk-button-small t " ></button> -->
-            <!-- <button  type="submit" class="uk-button uk-button-default uk-width-1-1" >รายละเอียดเพิ่มเติม</button> -->
-            <hr>
-         
-        
-    </ul>
-</div>
-</div>
-<!--  <div class="nav-mobile ">
-    <div class="uk-card uk-card-default uk-card-body">
-        <ul class="" uk-tab>
-            <li><a href="#">หน้าหลัก</a></li>
-            <li><a href="#">สร้างประกาศงานใหม่</a></li>
-            <li><a href="#">หาผู้สมัครงาน</a></li>
-        </ul>
-        
-        <ul class="uk-switcher uk-margin">
-            <li>
-            </li>
-            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
-            </li>
-            <li>
-            </li>
-            
-        </ul>
-    </div>
-</div> -->
-<br>
+    </div> -->
+    <br>
 {% endblock %}
 <!-- <form action="" method="POST" class="uk-search uk-search-default serach-input" >
-{% csrf_token %}
-<button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
-<input  name="search" class="uk-search-input" type="search" placeholder="" >
+    {% csrf_token %}
+    <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
+    <input  name="search" class="uk-search-input" type="search" placeholder="" >
 </form> -->

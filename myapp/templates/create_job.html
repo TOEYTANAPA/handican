@@ -67,22 +67,25 @@
 
                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                   <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                  <div>
-                    <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
-                    {{form.title_en }}
-                  </div>
+                 
                   <div>
                     <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
                     {{form.title_th}}
                   </div>
-                  
+                   <div>
+                    <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
+                    {{form.title_en }}
+                  </div>
                 </div>
                
                 <div  class="uk-margin-bottom ">
                   <label  for=" ">รายละเอียดงาน <b>*</b></label>
                   {{form.job_detail}}
                 </div>
-             
+             <div  class="uk-margin-bottom ">
+                  <label  for=" ">ทักษะที่ต้องการ <b>*</b></label>
+                  {{form.qualification}}
+                </div>
                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                   <div>
                     <label class=" "  for=" "> เพศ
@@ -105,7 +108,7 @@
                   </div>
                   <div>
                     <label class=" "  for=" "> เงินเดือน <b>*</b></label>
-                    {{form.salary }}
+                    {{form.salary |add_class:"uk-select" }}
                   </div>
                   
                 </div>
