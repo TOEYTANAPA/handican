@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,update_session_auth_hash
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect,HttpResponse,Http404
 from myapp.models import *
 from django.views.generic.edit import UpdateView
 # change password
@@ -64,33 +65,46 @@ def contact(request):
 
     return render(request, 'name.html', {'form': form})
 
-    return render(request, 'home.html',{'username': request.user.username})
 
 def search(request):
     return render(request, 'search.html',{})
 
 def employer_search(request):
+    # dis_person = DisabilityInfo.objects.get(profile__user=request.user)
+
     if request.method == 'POST':
         form = CreateJobForm(request.POST, request.FILES)
         if form.is_valid():
             company = CompanyInfo.objects.get(profile__user=request.user)
+            age1 = 0
+            age2 = 0 
+            salary1 = 0
+            salary2 = 0
+            if form.cleaned_data['age1'] >= form.cleaned_data['age2'] :
+                age2 = form.cleaned_data['age1']
+                age1 = form.cleaned_data['age2']
+            if form.cleaned_data['salary1'] >= form.cleaned_data['salary2'] :
+                salary2 = form.cleaned_data['salary1']
+                salary1 = form.cleaned_data['salary2']
             cj = Job.objects.create(
                 company =company,
                 title_th=form.cleaned_data['title_th'],
                 title_en=form.cleaned_data['title_en'],
-                age = form.cleaned_data['age'],
+                age1 = age1,
+                age2 = age2,
                 sex = form.cleaned_data['sex'],
                 detail = form.cleaned_data['job_detail'],
                 disability_cate = form.cleaned_data['disability_type'],
                 traveling = form.cleaned_data['traveling'],
                 welfare = form.cleaned_data['welfare'],
-                salary = form.cleaned_data['salary'],
+                salary1 = salary1,
+                salary2 = salary2,
                 company_image =request.FILES['company_image'],
            
                 )
         
-            messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
-            redirect('employer_search')
+            messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
+            return HttpResponseRedirect('/employer-search/')
 
 
     else :
