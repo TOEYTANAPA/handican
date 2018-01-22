@@ -4,12 +4,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse,Http404
 from myapp.models import *
 from django.views.generic.edit import UpdateView
+from django.db.models import Q
 # change password
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.http import Http404
 from datetime import date
 from .forms import *
+
 # Create your views here.
 def home(request):
 
@@ -161,3 +163,10 @@ def contact(request):
 	else :
 		form = ContactForm()
 	return render(request, 'contact.html',{'username': request.user.username,'form':form})
+
+def employer_search_disability(request):
+    disability_list = DisabilityInfo.objects.get(
+    Q(question__startswith='Who'),
+    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))
+    )
+    pass

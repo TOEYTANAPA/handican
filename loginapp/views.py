@@ -72,7 +72,8 @@ def job_signup2(request,uid):
                 disability_cate = form.cleaned_data['disability_cate'],
                 job_interest = form.cleaned_data['job_interest'],
                 job_exp = form.cleaned_data['job_exp'],
-                expected_salary = form.cleaned_data['expected_salary'],
+                expected_salary1 = form.cleaned_data['expected_salary1'],
+                expected_salary2 = form.cleaned_data['expected_salary2'],
                 expected_welfare = form.cleaned_data['expected_welfare'],
                 talent = form.cleaned_data['talent'],
                 talent2 = form.cleaned_data['talent2'],
@@ -81,6 +82,7 @@ def job_signup2(request,uid):
                 get_more_info = form.cleaned_data['get_more_info'],
                 )
             messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            login(request, user)
             return redirect('home')
             # redirect process3
     else:
@@ -135,7 +137,7 @@ def company_signup2(request,uid):
                 get_more_info = form.cleaned_data['get_more_info'],
            
                 )
-        
+            login(request, user)
             messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
 
             return redirect('home')
