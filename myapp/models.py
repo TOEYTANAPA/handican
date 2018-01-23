@@ -80,5 +80,5 @@ class Notifications(models.Model):
 	tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
 	action = models.CharField(max_length=20,editable=True )
 	is_read = models.BooleanField(default=False)
-	message= models.CharField(max_length=5000,editable=True )
-
+	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
+	# message= models.CharField(max_length=5000,editable=True )
