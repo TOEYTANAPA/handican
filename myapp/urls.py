@@ -11,11 +11,12 @@ urlpatterns = [
     url(r'^employer-search/$',views.employer_search, name="employer_search"),
     url(r'^create-job/$',views.create_job, name="create_job"),
     url(r'^job/(?P<job_name>.*)/(?P<job_id>\d+)$',views.job_detail, name="job_detail"),
+
     url(r'^contactus/$',views.contact, name="contactus"),
     url(r'^searchtest/$', views.employer_search_disability, name='employer_search_disability'),
-
+    url(r'^notifications/$',views.notification_mobile, name="noti"),
     # url(r'^contactus/$',views.contact, name="contactus"),
-    
+
 
     # url(r'^',  include('myapp.urls',namespace='mainapp')),
     # url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),

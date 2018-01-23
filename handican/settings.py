@@ -147,5 +147,10 @@ MEDIA_URL = '/media/'
 
 
 # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_URL = '/static/'
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

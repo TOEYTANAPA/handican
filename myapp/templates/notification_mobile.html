@@ -1,0 +1,52 @@
+{% extends 'base.html' %}{% load static %} {% block content %}
+	<div class="uk-background-default ">
+		<div class="container ">
+			<p class="uk-text-muted uk-margin-top ">การแจ้งเตือน</p>
+			
+			<!-- <br> -->
+			<ul class="uk-list uk-list-divider">
+				{% for i in noti %}
+					{% if not i.is_read %}
+						<li  class="uk-active">
+							<a class="uk-link-reset" href="#">
+								
+								<div class="uk-grid-small uk-flex-middle" uk-grid>
+									<div class="uk-width-auto">
+										<img style="width: 80px;height: auto;" class="noti"  src="{{i.img}}" />
+									</div>
+									<div class="uk-width-expand">
+										
+										<p class="uk-margin-remove-bottom"></i> {{i.name}}<b> {{i.action}} </b>{{i.obj}} </p> 
+										<p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time > {{i.time}}</time></p>
+									</div>
+								</div>
+							</a>
+						</li>
+					{% else %}
+						
+						<li  class=" uk-background-muted uk-margin-remove-top ">
+							<a class="uk-text-muted" href="#">
+								
+								
+								<div class="uk-grid-small uk-flex-middle" uk-grid>
+									<div class="uk-width-auto">
+										<img style="width: 80px;height: auto;opacity: .5;" class="noti"  src="{{i.img}}" />
+									</div>
+									<div class="uk-width-expand">
+										<p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
+										<p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time}}</time></p>
+									</div>
+								</div>
+							</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+				
+				
+				
+				
+			</ul>
+			
+		</div>
+	</div>
+{% endblock %}

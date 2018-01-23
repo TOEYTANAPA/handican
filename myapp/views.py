@@ -15,27 +15,31 @@ from .forms import *
 # Create your views here.
 def home(request):
 
-    if request.user.groups.filter(name='company').exists():
-        return redirect('employer_search')
-    else:
-        return redirect('search')
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            email= form.cleaned_data.get('email')
-            name = form.cleaned_data.get('name')
-            phone= form.cleaned_data.get('phone')
-            subject = form.cleaned_data.get('subject')
-            message= form.cleaned_data.get('message')
-            status = True
+    if request.user.is_authenticated():
 
-            Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
-
-        return render(request, 'home.html',{'username': request.user.username,'form':form,'status':status})
-
-
+        if request.user.groups.filter(name='company').exists():
+            return redirect('employer_search')
+        else:
+            return redirect('search')
     else :
-        form = ContactForm()    
+
+        if request.method == 'POST':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                email= form.cleaned_data.get('email')
+                name = form.cleaned_data.get('name')
+                phone= form.cleaned_data.get('phone')
+                subject = form.cleaned_data.get('subject')
+                message= form.cleaned_data.get('message')
+                status = True
+
+                Contact.objects.create(email=email,name=name,phone=phone,subject=subject,message=message)
+
+            return render(request, 'home.html',{'username': request.user.username,'form':form,'status':status})
+
+
+        else :
+            form = ContactForm()    
     return render(request, 'home.html',{'username': request.user.username,'form':form})
 
     
@@ -66,6 +70,48 @@ def contact(request):
         form = NameForm()
 
     return render(request, 'name.html', {'form': form})
+
+def notification_mobile(request):
+    list_noti =[]
+    try :
+     
+        noti = Notifications.objects.filter(user=request.user)
+        for i in noti:
+            
+            temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False}
+            
+            try :
+                dis = CompanyInfo.objects.get(profile=i.tarket)
+
+                temp['name'] = dis.th_name
+                temp['action'] = i.action
+                temp['obj'] = i.obj
+                temp['time'] = i.created_at
+                temp['is_read'] = i.is_read
+                temp['img'] = i.tarket.profile_picture.url
+                if temp['is_read'] == False and read:
+                    read = False
+
+              
+                list_noti.append(temp)
+            except :
+                comp = DisabilityInfo.objects.get(profile=i.tarket)
+                temp['name'] = comp.first_name
+                temp['action'] = i.action
+                temp['obj'] = i.obj
+                temp['time'] = i.created_at
+                temp['is_read'] = i.is_read
+                temp['img'] = i.tarket.profile_picture.url
+                if temp['is_read'] == False and read:
+                    read = False
+
+              
+                list_noti.append(temp)
+
+            
+    except :
+        raise
+    return render(request, 'notification_mobile.html',{'noti':list_noti})
 
 
 def search(request):
