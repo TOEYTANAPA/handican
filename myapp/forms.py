@@ -38,4 +38,5 @@ class CreateJobForm(forms.Form):
 	welfare = forms.CharField(max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea', }))
 	traveling = forms.CharField(max_length=1000, help_text='',widget=forms.Textarea(attrs={'rows': 3,'class': 'uk-textarea', }))
 	qualification = forms.CharField(max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea', }))
+	province =  forms.CharField(max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	company_image = forms.FileField()

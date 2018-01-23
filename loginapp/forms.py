@@ -51,10 +51,11 @@ class JobInformationForm(forms.Form):
     disability_cate =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     job_interest =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
     job_exp =  forms.CharField(max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea', }))
-    expected_salary = forms.ChoiceField(choices=(('น้อยกว่า 10,000','น้อยกว่า 10,000' ),('10,000-19,000','10,000-19,000')
-        ,('20,000-29,999','20,000-29,999'),('30,000-39,000','30,000-39,000'),('40,000-49,000','40,000-49,000')
-        ,('50,000 ขึ้นไป','50,000 ขึ้นไป')), required=True, widget=forms.Select())
-
+    # expected_salary = forms.ChoiceField(choices=(('น้อยกว่า 10,000','น้อยกว่า 10,000' ),('10,000-19,999','10,000-19,999')
+    #     ,('20,000-29,999','20,000-29,999'),('30,000-39,000','30,000-39,000'),('40,000-49,999','40,000-49,999')
+    #     ,('50,000 ขึ้นไป','50,000 ขึ้นไป')), required=True, widget=forms.Select())
+    expected_salary1 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
+    expected_salary2 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
     phone_no =  forms.CharField(max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     expected_welfare =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     talent =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
@@ -62,6 +63,7 @@ class JobInformationForm(forms.Form):
     talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     more_resume = forms.FileField(required=False,)
     profile_image = forms.FileField()
+    province =  forms.CharField(max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     get_more_info = forms.BooleanField(required=False,initial=False)
 
 class CompanyInformationForm(forms.Form):

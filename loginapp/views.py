@@ -58,7 +58,15 @@ def job_signup2(request,uid):
                 more_resume = request.FILES['more_resume']
             except Exception as e:
                 more_resume = None
-            
+            expected_salary1 = 0 
+            expected_salary2 = 0   
+            if form.cleaned_data['expected_salary1'] >= form.cleaned_data['expected_salary2']:
+                expected_salary1 = form.cleaned_data['expected_salary2']
+                expected_salary2 = form.cleaned_data['expected_salary1']
+            else:
+                expected_salary1 = form.cleaned_data['expected_salary1']
+                expected_salary2 = form.cleaned_data['expected_salary2']
+
             profile = Profile.objects.create(user=user,profile_picture = request.FILES['profile_image'],)
             disability = DisabilityInfo.objects.create(
                 profile = profile,
@@ -72,16 +80,21 @@ def job_signup2(request,uid):
                 disability_cate = form.cleaned_data['disability_cate'],
                 job_interest = form.cleaned_data['job_interest'],
                 job_exp = form.cleaned_data['job_exp'],
-                expected_salary = form.cleaned_data['expected_salary'],
+                expected_salary1 = expected_salary1,
+                expected_salary2 = expected_salary2,
                 expected_welfare = form.cleaned_data['expected_welfare'],
                 talent = form.cleaned_data['talent'],
                 talent2 = form.cleaned_data['talent2'],
                 talent3 = form.cleaned_data['talent3'],
                 more_resume = more_resume,
+                province = form.cleaned_data['province'],
                 get_more_info = form.cleaned_data['get_more_info'],
                 )
-            messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
-            return redirect('home')
+            # messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            # print(user.password)
+            # user = authenticate(username=user.email,password=user.password)
+            # login(request, user, backend='backends.email-auth.EmailBackend')
+            return redirect('login')
             # redirect process3
     else:
         form = JobInformationForm()
@@ -135,10 +148,11 @@ def company_signup2(request,uid):
                 get_more_info = form.cleaned_data['get_more_info'],
            
                 )
-        
-            messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            # user_auth = authenticate(username=user.email,password=user.password)
+            # login(request, user_auth, backend='django.contrib.auth.backends.ModelBackend')
+            # messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
 
-            return redirect('home')
+            return redirect('login')
             # redirect process3
     else:
         form = CompanyInformationForm()
