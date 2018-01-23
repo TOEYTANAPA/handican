@@ -138,6 +138,10 @@
                   <label  for=" ">ที่อยู่ <b>*</b></label>
                   {{form.address |add_class:"uk-input"|attr:"placeholder:"}}
                 </div>
+                  <div  class="uk-margin-bottom ">
+                  <label  for=" ">จังหวัดที่อาศัยอยู่ในปัจจุบัน <b>*</b></label>
+                  {{form.province }}
+                </div>
                 <!--   <div  class="uk-margin-bottom ">
                   <label class=" "  for=" "> เบอร์โทรศัพท์
                   <b>*</b></label>
@@ -167,7 +171,7 @@
                   
                 </div>
                <div class="uk-margin-bottom"  >
-                    <label for=" ">งานที่สนใจ </label>
+                    <label for=" ">งานที่สนใจ (กรณีที่มีหลายงานให้ขั้นด้วยลูกน้ำ (,) )</label>
                     {{form.job_interest |add_class:"uk-input"|attr:"placeholder: นักบัญชี, นักออกแบบ, โปรแกรมเมอร์ " }}
                   </div>
              <div  class="uk-margin-bottom ">
@@ -177,14 +181,14 @@
 
                 <div  class="uk-margin-bottom ">
                   <label class=" "  for=" "> เงินเดือนที่คาดหวัง <b>*</b></label>
-              <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
+              <div  class="uk-margin-bottom uk-width-1-2@m  " uk-grid>
                                             <div class="form-group ">
                                                 <div class="input-group">
-                                                    {{form.age1}}
+                                                    {{form.expected_salary1}}
                                                     <div class="input-group-addon">
                                                         ถึง
                                                     </div>
-                                                    {{form.age2}}
+                                                    {{form.expected_salary2}}
                                                 </div>
                                             </div>
                                             

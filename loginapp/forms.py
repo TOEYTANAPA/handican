@@ -63,6 +63,7 @@ class JobInformationForm(forms.Form):
     talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     more_resume = forms.FileField(required=False,)
     profile_image = forms.FileField()
+    province =  forms.CharField(max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     get_more_info = forms.BooleanField(required=False,initial=False)
 
 class CompanyInformationForm(forms.Form):

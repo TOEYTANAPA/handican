@@ -82,9 +82,12 @@
                         <form action="" method="POST" class="uk-search uk-search-default " >
                             <div class="uk-child-width-1-1@s uk-child-width-1-4@m uk-grid-small " uk-grid>
                                 {% csrf_token %}
+                                <select class="target">
+    <option value="option1" selected="selected">Option 1</option>
+    <option value="option2">Option 2</option>
+  </select>
                                 
-                                
-                                <div >
+                              <!--   <div >
                                     
                                     <div class="uk-margin">
                                         <div class="uk-inline">
@@ -120,7 +123,7 @@
                                     <button  type="submit" class="uk-button  " style="color: white;">ค้นหาผู้สมัครงาน
                                     </button>
                                     
-                                </div>
+                                </div> -->
                             </div>
                             
                         </form>
@@ -211,7 +214,7 @@
                                     
                                     <div>
                                         <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
-                                        {{form.title_th}}
+                                        {{form.title_th |attr:"placeholder:โปรดระบุชื่องาน และชื่อตำแหน่งงาน"}}
                                     </div>
                                     <div>
                                         <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
@@ -672,6 +675,9 @@ $("#imgInp").change(function() {
 readURL(this);
 });
 
+$( ".target" ).change(function() {
+  alert( "Handler for .change() called." );
+});
 // UIkit.switcher('#mySwitcher').show(2);
 </script>
 {% endblock %}

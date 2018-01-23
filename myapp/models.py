@@ -23,12 +23,13 @@ class DisabilityInfo(models.Model):
 	disability_cate = models.CharField(max_length=100)
 	job_interest = models.CharField(max_length=100)
 	job_exp = models.CharField(max_length=5000,default="")
-	expected_salary1 = models.IntegerField(max_length=30,blank=True,null=True,)
-	expected_salary2 = models.IntegerField(max_length=30,blank=True,null=True,)
+	expected_salary1 = models.IntegerField(blank=True,null=True,)
+	expected_salary2 = models.IntegerField(blank=True,null=True,)
 	expected_welfare = models.CharField(max_length=1000)
 	talent = models.CharField(max_length=1000)
 	talent2 = models.CharField(max_length=1000,default="")
 	talent3 = models.CharField(max_length=1000,default="")
+	province = models.CharField(max_length=250,default="",blank=True,null=True,)
 	more_resume = models.FileField(upload_to="resume/",default=None,blank=True,null=True,)
 	get_more_info = models.BooleanField()
 	def __str__(self):
@@ -65,6 +66,7 @@ class Job(models.Model):
 	salary2 = models.IntegerField(blank=True,null=True)
 	qulification = models.CharField(max_length=5000,blank=True,null=True)
 	company_image=models.ImageField(upload_to="createJob/",default="")
+	province = models.CharField(max_length=250,default="",blank=True,null=True,)
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
 	def __str__(self):
 		return "%s"%(self.title_th)
@@ -81,5 +83,5 @@ class Notifications(models.Model):
 	tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
 	action = models.CharField(max_length=20,editable=True )
 	is_read = models.BooleanField(default=False)
-	message= models.CharField(max_length=5000,editable=True )
+	message= models.CharField(max_length=5000,editable=True,blank=True,null=True)
 
