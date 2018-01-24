@@ -44,6 +44,10 @@
   margin-top: 40px;
   /*align-items: center;*/
   }
+
+  
+
+  
   
   .inImgProfile{
   position: absolute;
@@ -68,6 +72,9 @@
   <!-- style="width: 100px;height: 100px" -->
   <div class="container  ">
     
+
+    
+   
     
     <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
       <div class="uk-card-media-left uk-cover-container uk-width-auto">
@@ -77,6 +84,7 @@
         <div class="imgCropProfile">
           <img src=" {% static "images/wcb.jpg" %}" class="inImgProfile" alt="">
         </div>
+
       </div>
       <div>
         <div class="uk-card-body">
@@ -84,6 +92,17 @@
           <!--   <h4>We give you skills to grow ideas</h4>
           <label for="">We give you skills to grow ideas</label> -->
           <p>We give you skills to grow ideas</p>
+ {% if process %}
+          
+
+                 <a href="" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
+    <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
+     
+    {% else %}
+
+  <button  class="uk-margin-remove-bottom uk-button " style="color: white;">สมัครงาน </button>
+
+    {% endif %}
         </div>
       </div>
       <br>
@@ -293,7 +312,9 @@
         </div>
 
         <!--end section -->
-          <button  class="uk-margin-top uk-margin-remove-bottom uk-button uk-width-1-1@s  uk-width-1-2@m uk-align-center  " style="color: white;">สมัครงาน </button>
+        <hr>
+
+        
       </div>
       
     </div>

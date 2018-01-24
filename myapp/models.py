@@ -80,6 +80,7 @@ class Contact(models.Model):
 
 class Notifications(models.Model):
 	user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
+	job = models.ForeignKey(Job,on_delete=models.SET_NULL,blank=True,null=True)
 	tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
 	action = models.CharField(max_length=20,editable=True )
 	obj = models.CharField(max_length=20,editable=True ,blank=True,null=True)
@@ -87,3 +88,15 @@ class Notifications(models.Model):
 	message= models.CharField(max_length=5000,editable=True,blank=True,null=True)
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
 	# message= models.CharField(max_length=5000,editable=True )
+
+class InviteProcess(models.Model):
+	STATUS_CHOICES = (
+		('ยังไม่ส่งคำเชิญ', 'ยังไม่ส่งคำเชิญ'),
+		('ส่งคำเชิญ', 'ส่งคำเชิญ'),
+		('ตอบรับคำเชิญ', 'ตอบรับคำเชิญ'),
+	
+	)
+
+	disability = models.ForeignKey(DisabilityInfo, on_delete=models.SET_NULL,blank=True,null=True)
+	status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+	job = models.ForeignKey(Job, on_delete=models.SET_NULL,blank=True,null=True)

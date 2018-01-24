@@ -27,3 +27,7 @@ admin.site.register(Job, JobAdmin)
 class NotificationsAdmin(admin.ModelAdmin):
 	list_display=[f.name for f in Notifications._meta.fields]
 admin.site.register(Notifications, NotificationsAdmin)
+
+class InviteProcessAdmin(admin.ModelAdmin):
+	list_display=[f.name for f in InviteProcess._meta.fields]
+admin.site.register(InviteProcess, InviteProcessAdmin)
