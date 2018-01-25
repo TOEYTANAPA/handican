@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import login, authenticate,update_session_auth_hash
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse,Http404
@@ -47,14 +48,88 @@ def home(request):
     
 
 
+def disable_detail(request,dis_id):
+    dis = DisabilityInfo.objects.get(id=dis_id)
+    status = "ยังไม่ส่งคำเชิญ"
+    try :
+        status = InviteProcess.objects.get(disability=dis,job__id=3)
+        status = status.status
+
+    except :
+        pass
+
+    return render(request, 'disable_detail.html', {'dis':dis,'status':status,'job_id':3})
+
+def invite_job_to_disability(request,dis_id,job_id):
+    tarket = DisabilityInfo.objects.get(id=dis_id)
+    
+  
+    job = Job.objects.get(id=job_id)
+    Notifications.objects.create(user=request.user,job=job,tarket=tarket.profile,
+        action="ส่งคำเชิญ",obj="สมัครงาน")
+
+    status = InviteProcess.objects.create(disability=tarket,status="ส่งคำเชิญ",job=job)
+
+    # status = 0
+    # try :
+    #     temp = statusDisability.objects.get(disability=tarket,job=job)
+    #     if temp.status == "ยังไม่ส่งคำเชิญ" :
+    #         status = 0
+    #     elif temp.status == "ส่งคำเชิญ" :
+    #         status = 2
+    #     elif temp.status == "ตอบรับคำเชิญ" :
+
+
+    return render(request, 'disable_detail.html', {'dis':tarket,'status':status.status,'job_id':job.id})
 
 def job_detail(request,job_name,job_id):
     # comp = CompanyInfo.objects.get(profile__user= request.user)
+
     job = Job.objects.get(title_th=job_name,id=job_id)
+    processing = False
+
+    
+    if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+        try :
+
+            profile = Profile.objects.get(user=request.user)
+            dis = DisabilityInfo.objects.get(profile=profile)
+            o = InviteProcess.objects.all()
+        
+            for i in o :
+                print(i.status)
+                print(i.disability)
+                print(i.job)
+                print(job)
+            try :
+                InviteProcess.objects.get(disability=dis,status="ส่งคำเชิญ",job=job)
+                processing = True
+            except :
+                raise
+
+
+
+   
+        except :
+            raise
+
+    return render(request, 'job_detail.html', {'job':job,'process':processing})
+
+def click_noti(request,job_name,job_id,noti_id):
+    noti = Notifications.objects.filter(id=noti_id).update(is_read=True)
+    print("Delete")
+    
+
     
 
 
-    return render(request, 'job_detail.html', {'job':job})
+    return job_detail(request,job_name,job_id)
+
+def confirm_job(request,job_name,job_id):
+    job = Job.objects.get(title_th=job_name,id=job_id)
+    ConfirmJob.objects.create(user=request.user,job=job)
+    return render(request, 'job_detail.html', {'job':job,'status':1})
+
 
 def contact(request):
     if request.method == 'POST':

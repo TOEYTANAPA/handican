@@ -4,6 +4,7 @@ from myapp.models import *
 def profile(request):
 	profile_picture=""
 	profile_name=""
+	profile_id = 0
 	noti= ""
 	list_noti = []
 	read = True
@@ -14,22 +15,28 @@ def profile(request):
 		try :
 			temp = DisabilityInfo.objects.get(profile=profile)
 			profile_name = temp.first_name
+			profile_id = temp.id
 
-			noti = Notifications.objects.filter(user=request.user)
+			noti = Notifications.objects.filter(tarket=profile)
+	
 			for i in noti:
-			
-				temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False}
-				print(temp)
-				
-				dis = CompanyInfo.objects.get(profile=i.tarket)
 
+			
+				temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+				'job_name':"",'job_id':0,'noti_id':0}
+				print(temp)
+				p = Profile.objects.get(user=i.user)
+				dis = CompanyInfo.objects.get(profile=p)
+				job = Job.objects.get(company=dis)
+				temp['job_name'] = job.title_th
+				temp['job_id'] = job.id
 				temp['name'] = dis.th_name
 				temp['action'] = i.action
 				temp['obj'] = i.obj
 				temp['time'] = i.created_at
 				temp['is_read'] = i.is_read
 				temp['img'] = i.tarket.profile_picture.url
-
+				temp['noti_id'] = i.id
 				if temp['is_read'] == False and read:
 					read = False
 
@@ -38,17 +45,18 @@ def profile(request):
 				list_noti.append(temp)
 			
 		except :
-			raise
-			# temp = CompanyInfo.objects.get(profile=profile)	
-			# profile_name = temp.th_name
-			# print(profile_name,"5555")
+			# raise
+			temp = CompanyInfo.objects.get(profile=profile)	
+			profile_name = temp.th_name
+	
 
 		
 
 
 	except:
 		pass
-	return {'profile': profile_picture,'name':profile_name,'noti':list_noti,'read':read} # of course some filter here
+	return {'profile': profile_picture,'name':profile_name,'noti':list_noti,'read':read
+	,'id':profile_id} # of course some filter here
 
 
 # def profile_name(request):
