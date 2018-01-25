@@ -71,7 +71,7 @@ def job_signup2(request,uid):
             disability = DisabilityInfo.objects.create(
                 profile = profile,
                 first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
                 email = user.email,
                 sex = form.cleaned_data['sex'],
                 age = form.cleaned_data['age'],
