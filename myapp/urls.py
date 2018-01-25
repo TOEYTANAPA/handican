@@ -11,17 +11,15 @@ urlpatterns = [
     url(r'^employer-search/$',views.employer_search, name="employer_search"),
     url(r'^job/(?P<job_name>.*)/(?P<job_id>\d+)$',views.job_detail, name="job_detail"),
     url(r'^detail/(?P<job_name>.*)/(?P<job_id>\d+)/(?P<noti_id>\d+)$',views.click_noti, name="click_noti"),
-    url(r'^profile/(?P<dis_id>\d+)$',views.disable_detail, name="dis_detail"),
+    url(r'^profile/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.disable_detail, name="dis_detail"),
     url(r'^request-job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.invite_job_to_disability, name="request_job"),
     url(r'^contactus/$',views.contact, name="contactus"),
     url(r'^search-disability-person/$', views.employer_search_disability, name='employer_search_disability'),
     url(r'^notifications/$',views.notification_mobile, name="noti"),
-<<<<<<< HEAD
+    url(r'^confirm_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.confirm_job, name="confirm_job"),
+    url(r'^apply_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.apply_job, name="apply_job")
+  
     
-    # url(r'^create-job/$',views.create_job, name="create_job"),
-=======
-    url(r'^confirm/(?P<job_name>.*)/(?P<job_id>\d+)$',views.confirm_job, name="confirm_job"),
->>>>>>> 2f632d24777ed8c2db3aa41e8a3fb327762b7882
     # url(r'^contactus/$',views.contact, name="contactus"),
 
 

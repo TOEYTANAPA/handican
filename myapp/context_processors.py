@@ -40,15 +40,37 @@ def profile(request):
 				if temp['is_read'] == False and read:
 					read = False
 
-
-				print(temp)
 				list_noti.append(temp)
 			
 		except :
 			# raise
 			temp = CompanyInfo.objects.get(profile=profile)	
 			profile_name = temp.th_name
-	
+
+			noti = Notifications.objects.filter(tarket=profile)
+		
+			for i in noti:
+
+				temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+				'job_name':"",'job_id':0,'noti_id':0}
+
+				p = Profile.objects.get(user=i.user)
+				actor = DisabilityInfo.objects.get(profile=p)
+				temp['name'] = actor.first_name
+				temp['img'] =  p.profile_picture.url
+				temp['action'] = i.action
+				temp['obj'] = i.obj
+				temp['time'] = i.created_at
+				temp['is_read'] = i.is_read
+				temp['job_name'] = i.job.title_th
+				temp['job_id'] = i.job.id
+				temp['noti_id'] = i.id
+				if temp['is_read'] == False and read:
+					read = False
+				list_noti.append(temp)
+
+
+
 
 		
 
