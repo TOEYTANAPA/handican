@@ -44,9 +44,7 @@
   margin-top: 40px;
   /*align-items: center;*/
   }
-
   
-
   
   
   .inImgProfile{
@@ -73,8 +71,9 @@
   <div class="container  ">
     
 
+    งาน
     
-   
+    
     
     <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
       <div class="uk-card-media-left uk-cover-container uk-width-auto">
@@ -84,7 +83,6 @@
         <div class="imgCropProfile">
           <img src=" {% static "images/wcb.jpg" %}" class="inImgProfile" alt="">
         </div>
-
       </div>
       <div>
         <div class="uk-card-body">
@@ -92,17 +90,23 @@
           <!--   <h4>We give you skills to grow ideas</h4>
           <label for="">We give you skills to grow ideas</label> -->
           <p>We give you skills to grow ideas</p>
- {% if process %}
+            {% if status == "ส่งคำเชิญ" %}
+        
           
+              <a href="{% url "confirm_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
+              <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
+              
+            {% elif status == "ตอบรับคำเชิญ" %}
+              <button class="uk-button uk-button-default " type="button" disabled>
+              <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญ</button>
+              {% elif status == "ยังไม่ส่งคำเชิญ" %}
 
-                 <a href="" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
-    <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
-     
-    {% else %}
+                <a href="{% url "apply_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">สมัครงาน</a>
 
-  <button  class="uk-margin-remove-bottom uk-button " style="color: white;">สมัครงาน </button>
-
-    {% endif %}
+                {% elif status == "สมัครงาน" %}
+                <button class="uk-button uk-button-default " type="button" disabled>
+              <i class="fa fa-check" aria-hidden="true"></i>  สมัครงานแล้ว</button>
+            {% endif %}
         </div>
       </div>
       <br>
@@ -154,7 +158,7 @@
                 <li>UI design in both Sketch and Photoshop</li>
                 <li>Working hours 9 AM - 5 PM  Monday-Friday</li>
               </ul>
-                         <!--    <p class=" "  >Looking for a good UX/UI designer who can build wireframe at low-fidelities designs</p>
+              <!--    <p class=" "  >Looking for a good UX/UI designer who can build wireframe at low-fidelities designs</p>
               <p>UX research, design and testing</p>
               <p>UI design in both Sketch and Photoshop</p>
               <p>Working hours 9 AM - 5 PM  Monday-Friday</p> -->
@@ -221,16 +225,14 @@
                 <li>Human support (7%)</li>
                 <li>Assistive technology or physical adjustments (4%)</li>
               </ul>
-             
-                                                                                 
+              
+              
             </div>
             
           </div>
         </div>
-
-
         <!-- end section -->
-          <h2 class="uk-heading-bullet uk-margin-remove-top ">ติดต่อบริษัท </h2>
+        <h2 class="uk-heading-bullet uk-margin-remove-top ">ติดต่อบริษัท </h2>
         <div class="uk-margin-left">
           <div  class="  " uk-grid>
             <div class="uk-width-1-6@m">
@@ -243,7 +245,7 @@
             </div>
             
           </div>
-             <div  class="  " uk-grid>
+          <div  class="  " uk-grid>
             <div class="uk-width-1-6@m">
               <p class=" uk-text-right"  >ที่อยู่:</p>
               
@@ -265,8 +267,7 @@
             </div>
             
           </div>
-
-           <div  class="  " uk-grid>
+          <div  class="  " uk-grid>
             <div class="uk-width-1-6@m">
               <p class=" uk-text-right"  >Accessibilities:</p>
               
@@ -277,7 +278,7 @@
             </div>
             
           </div>
-   <div  class="  " uk-grid>
+          <div  class="  " uk-grid>
             <div class="uk-width-1-6@m">
               <p class=" uk-text-right"  >  Opening Hours:</p>
               
@@ -288,32 +289,25 @@
             </div>
             
           </div>
-
-
         </div>
-
-
-         <!--end section  -->
-
-<br>
-         <h2 class="uk-heading-bullet uk-margin-remove-top ">Accessibilities </h2>
+        <!--end section  -->
+        <br>
+        <h2 class="uk-heading-bullet uk-margin-remove-top ">Accessibilities </h2>
         <div class="uk-margin-left">
-        <!--   <label for="">Web Courses Bangkok   <span>
+          <!--   <label for="">Web Courses Bangkok   <span>
             <p>      http://www.webcoursesbangkok.com</p>
             
           </span> </label>
-           -->
-         
+          -->
+          
           <p class=" "  > Accessibilities from you location :</p>
           <div class=" uk-align-center uk-margin-remove-top">
             <img style="width: 100%;height: 100%" src="{% static "images/map.png" %}" alt="">
           </div>
           
         </div>
-
         <!--end section -->
         <hr>
-
         
       </div>
       

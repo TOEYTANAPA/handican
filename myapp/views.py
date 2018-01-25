@@ -48,88 +48,96 @@ def home(request):
     
 
 
-def disable_detail(request,dis_id):
+def disable_detail(request,dis_id,job_id):
     dis = DisabilityInfo.objects.get(id=dis_id)
     status = "ยังไม่ส่งคำเชิญ"
+    job = Job.objects.get(id=job_id)
     try :
-        status = InviteProcess.objects.get(disability=dis,job__id=3)
+        status = InviteProcess.objects.get(disability=dis,job__id=job_id)
         status = status.status
 
     except :
         pass
 
-    return render(request, 'disable_detail.html', {'dis':dis,'status':status,'job_id':3})
+    return render(request, 'disable_detail.html', {'dis':dis,'status':status,'job':job})
 
 def invite_job_to_disability(request,dis_id,job_id):
     tarket = DisabilityInfo.objects.get(id=dis_id)
     
   
     job = Job.objects.get(id=job_id)
-    Notifications.objects.create(user=request.user,job=job,tarket=tarket.profile,
-        action="ส่งคำเชิญ",obj="สมัครงาน")
 
-    status = InviteProcess.objects.create(disability=tarket,status="ส่งคำเชิญ",job=job)
+    Notifications.objects.get_or_create(user=request.user,job=job,tarket=tarket.profile,
+        action="ส่งคำเชิญ",obj="สมัครงาน", defaults={})
+    # Notifications.objects.create(user=request.user,job=job,tarket=tarket.profile,
+    #     action="ส่งคำเชิญ",obj="สมัครงาน")
 
-    # status = 0
-    # try :
-    #     temp = statusDisability.objects.get(disability=tarket,job=job)
-    #     if temp.status == "ยังไม่ส่งคำเชิญ" :
-    #         status = 0
-    #     elif temp.status == "ส่งคำเชิญ" :
-    #         status = 2
-    #     elif temp.status == "ตอบรับคำเชิญ" :
+    status,created = InviteProcess.objects.get_or_create(disability=tarket,status="ส่งคำเชิญ",job=job, defaults={})
 
-
-    return render(request, 'disable_detail.html', {'dis':tarket,'status':status.status,'job_id':job.id})
+    return render(request, 'disable_detail.html', {'dis':tarket,'status':status.status})
 
 def job_detail(request,job_name,job_id):
     # comp = CompanyInfo.objects.get(profile__user= request.user)
 
     job = Job.objects.get(title_th=job_name,id=job_id)
-    processing = False
-
+    status = "ยังไม่ส่งคำเชิญ"
+    profile = Profile.objects.get(user=request.user)
+    dis = DisabilityInfo.objects.get(profile=profile)
     
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+        
         try :
 
-            profile = Profile.objects.get(user=request.user)
-            dis = DisabilityInfo.objects.get(profile=profile)
-            o = InviteProcess.objects.all()
-        
-            for i in o :
-                print(i.status)
-                print(i.disability)
-                print(i.job)
-                print(job)
-            try :
-                InviteProcess.objects.get(disability=dis,status="ส่งคำเชิญ",job=job)
-                processing = True
-            except :
-                raise
-
-
-
-   
+            invite = InviteProcess.objects.get(disability=dis,job=job) 
+            status = invite.status
+            return render(request, 'job_detail.html', {'job':job,'status':status,'dis':dis.id})
         except :
-            raise
+            pass
 
-    return render(request, 'job_detail.html', {'job':job,'process':processing})
+
+
+    return render(request, 'job_detail.html', {'job':job,'status':status,'dis':dis.id})
+
 
 def click_noti(request,job_name,job_id,noti_id):
-    noti = Notifications.objects.filter(id=noti_id).update(is_read=True)
-    print("Delete")
-    
-
-    
+    noti = Notifications.objects.get(id=noti_id)
 
 
-    return job_detail(request,job_name,job_id)
+    print(noti.is_read)
+    if not noti.is_read :
+        noti.is_read = True
+        noti.save()
+        # is_read.update(is_read=True)
 
-def confirm_job(request,job_name,job_id):
-    job = Job.objects.get(title_th=job_name,id=job_id)
-    ConfirmJob.objects.create(user=request.user,job=job)
-    return render(request, 'job_detail.html', {'job':job,'status':1})
+    if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+ 
+        return job_detail(request,job_name,job_id)
 
+    else :
+        p = Profile.objects.get(user=noti.user)
+        profile = DisabilityInfo.objects.get(profile=p)
+        return disable_detail(request,profile.id,job_id)
+
+def confirm_job(request,dis_id,job_id):
+    job = Job.objects.get(id=job_id)
+    InviteProcess.objects.filter(disability__id=dis_id,job__id=job_id).update(status="ตอบรับคำเชิญ")
+    status = InviteProcess.objects.get(disability__id=dis_id,job__id=job_id)
+    Notifications.objects.get_or_create(user=request.user,job=job,tarket=job.company.profile,
+        action="ตอบรับคำเชิญ",obj="สมัครงาน", defaults={})
+    # return render(request, 'job_detail.html', {'job':job,'status':status.status})
+    if User.objects.filter(pk=request.user.id, groups__name='company').exists() :
+        return render(request, 'disable_detail.html', {'job':job,'status':status.status})
+    else :
+        return render(request, 'job_detail.html', {'job':job,'status':status.status})
+
+  
+
+def apply_job(request,dis_id,job_id):
+    job = Job.objects.get(id=job_id)
+    Notifications.objects.get_or_create(user=request.user,job=job,tarket=job.company.profile,
+        action="สมัครงาน",obj=job.title_th, defaults={})
+    status,created = InviteProcess.objects.get_or_create(disability=DisabilityInfo.objects.get(id=dis_id),status="สมัครงาน",job=job, defaults={})
+    return render(request, 'job_detail.html', {'job':job,'status':status.status})
 
 def contact(request):
     if request.method == 'POST':
@@ -460,10 +468,10 @@ def employer_search(request):
         temp_dict_reverse = sorted(temp_dict, key=temp_dict.get, reverse=True)
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
-            temp={"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
+            temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
             "job_exp":"","dis_cate":"","province":"","score":0}
             dis = DisabilityInfo.objects.get(id=r)
-
+            temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
             temp['name'] = dis.first_name+" "+dis.last_name
             temp['job_interest'] = dis.job_interest
@@ -479,7 +487,7 @@ def employer_search(request):
         print (output_match)
         form = CreateJobForm()
 
-    return render(request, 'employer_search.html',{'form':form,'job_declared':job_declared,'output':output_match})
+    return render(request, 'employer_search.html',{'form':form,'job_declared':job_declared,'output':output_match,'job_id':job_required.id})
 
 
 def contact(request):
@@ -605,10 +613,10 @@ def employer_search_disability(request):
         temp_dict_reverse = sorted(temp_dict, key=temp_dict.get, reverse=True)
         # print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
-            temp={"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
+            temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
             "job_exp":"","dis_cate":"","province":"","score":0}
             dis = DisabilityInfo.objects.get(id=r)
-
+            temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
             temp['name'] = dis.first_name+" "+dis.last_name
             temp['job_interest'] = dis.job_interest
@@ -620,7 +628,7 @@ def employer_search_disability(request):
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
             output.append(temp)
         # print (output)
-        return render(request, 'employer_search.html',{'output':output,'job_declared':job_declared,'job_title_th':job_title_th})
+        return render(request, 'employer_search.html',{'output':output,'job_declared':job_declared,'job_title_th':job_title_th,'job_id':job_required.id})
 
 @login_required
 def disable_search_job(request):

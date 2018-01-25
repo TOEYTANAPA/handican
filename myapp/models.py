@@ -94,9 +94,11 @@ class InviteProcess(models.Model):
 		('ยังไม่ส่งคำเชิญ', 'ยังไม่ส่งคำเชิญ'),
 		('ส่งคำเชิญ', 'ส่งคำเชิญ'),
 		('ตอบรับคำเชิญ', 'ตอบรับคำเชิญ'),
+		('สมัครงาน', 'สมัครงาน'),
 	
 	)
 
 	disability = models.ForeignKey(DisabilityInfo, on_delete=models.SET_NULL,blank=True,null=True)
 	status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 	job = models.ForeignKey(Job, on_delete=models.SET_NULL,blank=True,null=True)
+	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
