@@ -24,9 +24,11 @@
         <br>
         <!-- {{output}} -->
       
-        <h2 class="uk-heading-bullet uk-margin-remove-top">ผลการค้นหา </h2>
-        <br>
         
+         <h2 class="uk-heading-bullet ">ผลการค้นหา <a href="{% url 'search' %}" class="uk-text-small uk-button-link">งานที่แนะนำ</a> </h2> 
+
+   
+         <br>
         <div class="container ">
                  {% for o in output_search %}
             <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
