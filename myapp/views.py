@@ -80,9 +80,18 @@ def job_detail(request,job_name,job_id):
     # comp = CompanyInfo.objects.get(profile__user= request.user)
 
     job = Job.objects.get(title_th=job_name,id=job_id)
+    company = job.company
+    # company_image = Job
     status = "ยังไม่ส่งคำเชิญ"
     profile = Profile.objects.get(user=request.user)
     dis = DisabilityInfo.objects.get(profile=profile)
+    sex=""
+    if job.sex =='0':
+        sex= "ชาย"
+    elif job.sex=='1':
+        sex ="หญิง"
+    elif job.sex=='2':
+        sex ="หญิง, ชาย"    
     print(status,":status")
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         
@@ -90,14 +99,15 @@ def job_detail(request,job_name,job_id):
 
             invite = InviteProcess.objects.get(disability=dis,job=job) 
             status = invite.status
+
             print(status,":status")
             return render(request, 'job_detail.html', {'job':job,'status':status,'dis':dis.id})
         except :
             pass
 
 
-
-    return render(request, 'job_detail.html', {'job':job,'status':status,'dis':dis.id})
+    # print("info ",company)
+    return render(request, 'job_detail.html', {'job':job,'company':company,'status':status,'dis':dis.id,'sex':sex})
 
 
 def click_noti(request,job_name,job_id,noti_id):
@@ -370,13 +380,23 @@ def employer_search(request):
     # dis_person = DisabilityInfo.objects.get(profile__user=request.user)
 
     if request.method == 'POST':
+        print("ads")
         form = CreateJobForm(request.POST, request.FILES)
         if form.is_valid():
+            print("valid")
             company = CompanyInfo.objects.get(profile__user=request.user)
             age1 = 0
             age2 = 0 
             salary1 = 0
             salary2 = 0
+            all_qualification = (form.cleaned_data['qualification']+','
+                +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
+                +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
+                +','+form.cleaned_data['qualification6']+','+form.cleaned_data['qualification7']
+                +','+form.cleaned_data['qualification8']
+                +','+form.cleaned_data['qualification9']
+                +','+form.cleaned_data['qualification10'])
+
             if form.cleaned_data['age1'] >= form.cleaned_data['age2'] :
                 age2 = form.cleaned_data['age1']
                 age1 = form.cleaned_data['age2']
@@ -395,21 +415,26 @@ def employer_search(request):
                 company =company,
                 title_th=form.cleaned_data['title_th'],
                 title_en=form.cleaned_data['title_en'],
+                email=form.cleaned_data['email'],
+                phone_no=form.cleaned_data['phone_no'],
                 age1 = age1,
                 age2 = age2,
                 sex = form.cleaned_data['sex'],
                 detail = form.cleaned_data['job_detail'],
                 disability_cate = form.cleaned_data['disability_type'],
-                traveling = form.cleaned_data['traveling'],
                 welfare = form.cleaned_data['welfare'],
                 salary1 = salary1,
                 salary2 = salary2,
-                company_image =request.FILES['company_image'],
+                qualification = all_qualification,
+                province=form.cleaned_data['province'],
+                address=form.cleaned_data['location'],
            
                 )
-        
+            print(cj)
             messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            return HttpResponseRedirect('/employer-search/')
+            print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
+            nextPage = "employer-search"
+            return HttpResponse(nextPage)
 
 
     else :
@@ -530,7 +555,7 @@ def employer_search(request):
         print (output_match)
         form = CreateJobForm()
 
-    return render(request, 'employer_search.html',{'form':form,'job_declared':job_declared,'output':output_match,'job_id':job_required.id})
+        return render(request, 'employer_search.html',{'form':form,'job_declared':job_declared,'output':output_match,'job_id':job_required.id})
 
 
 def contact(request):
@@ -693,6 +718,32 @@ def disable_search_job(request):
     return render(request, 'search.html',{'search_job_list':search_job_list,
         'job_title_th':job_title_th,'dis_cate':dis_cate,'location':location,
         'salary1':salary1,'salary2':salary2})
+
+
+def image_upload(request):
+    if 'file' in request.FILES:
+        the_file = request.FILES['file']
+        allowed_types = ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/gif']
+        if not the_file.content_type in allowed_types:
+            return HttpResponse(json.dumps({'error': _('You can only upload images.')}),
+                                content_type="application/json")
+        # Other data on the request.FILES dictionary:
+        # filesize = len(file['content'])
+        # filetype = file['content-type']
+        upload_to = getattr(settings, 'FROALA_UPLOAD_PATH', 'uploads/froala_editor/images/')
+        path = default_storage.save(os.path.join(upload_to, the_file.name), the_file)
+        link = default_storage.url(path)
+        # return JsonResponse({'link': link})
+        return HttpResponse(json.dumps({'link': link}), content_type="application/json")
+
+
+def file_upload(request):
+    if 'file' in request.FILES:
+        the_file = request.FILES['file']
+        upload_to = getattr(settings, 'FROALA_UPLOAD_PATH', 'uploads/froala_editor/files/')
+        path = default_storage.save(os.path.join(upload_to, the_file.name), the_file)
+        link = default_storage.url(path)
+        return HttpResponse(json.dumps({'link': link}), content_type="application/json")
 
 # 'job_declared':job_declared,'job_title_th':job_title_th
     # company = CompanyInfo.objects.get(profile__user=request.user)
