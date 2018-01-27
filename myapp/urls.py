@@ -19,7 +19,8 @@ urlpatterns = [
     url(r'^notifications/$',views.notification_mobile, name="noti"),
     url(r'^confirm/(?P<job_name>.*)/(?P<job_id>\d+)$',views.confirm_job, name="confirm_job"),
     url(r'^confirm_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.confirm_job, name="confirm_job"),
-    url(r'^apply_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.apply_job, name="apply_job")
+    url(r'^apply_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.apply_job, name="apply_job"),
+    url(r'^notificationsall/$',views.show_notifications, name="show_notifications")
   
     
 

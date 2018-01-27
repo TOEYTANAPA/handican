@@ -1,0 +1,55 @@
+{% extends 'base.html' %}{% load static %} {% block content %}
+    <div class="container ">
+    <br>
+    <div class="uk-card uk-card-default uk-card-body">
+      <p class="uk-text-muted  uk-margin-remove-top">การแจ้งเตือนทั้งหมด</p>
+      <!-- <hr> -->
+      <br>
+      <ul class="uk-list uk-list-divider uk-padding-remove-bottom ">
+        {% for i in noti %}
+          {% if not i.is_read %}
+            <li  class="uk-padding-small">
+              <a class="uk-link-reset" href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
+                
+                <div class="uk-grid-small uk-flex-middle " uk-grid>
+                  <div class="uk-width-auto ">
+                    <img style="width: 150px;height: auto;" class="noti"  src="{{i.img}}" />
+                  </div>
+                  <div class="uk-width-expand ">
+                    
+                    <p class="uk-margin-remove-bottom"></i> {{i.name}}<b> {{i.action}} </b>{{i.obj}} </p> 
+                    <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time > {{i.time}}</time></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+
+          {% else %}
+            
+            <li  class=" uk-background-muted uk-margin-remove-top uk-padding-small ">
+              <a class="uk-text-muted " href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
+                
+                
+                <div class="uk-grid-small uk-flex-middle " uk-grid>
+                  <div class="uk-width-auto">
+                    <img style="width: 150px;height: auto;opacity: .5;" class="noti"  src="{{i.img}}" />
+                  </div>
+                  <div class="uk-width-expand">
+                    <p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
+                    <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time}}</time></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          {% endif %}
+
+        {% endfor %}
+        
+        
+        
+        
+      </ul>
+      
+    </div>
+  </div>
+{% endblock %}
