@@ -85,13 +85,12 @@ def job_detail(request,job_name,job_id):
     status = "ยังไม่ส่งคำเชิญ"
     profile = Profile.objects.get(user=request.user)
     dis = DisabilityInfo.objects.get(profile=profile)
-    sex=""
-    if job.sex =='0':
-        sex= "ชาย"
-    elif job.sex=='1':
-        sex ="หญิง"
-    elif job.sex=='2':
-        sex ="หญิง, ชาย"    
+    job_qualification = ""
+    qualification_list = job.qualification.split(",") 
+    # for q in qualification_list:
+
+
+    
     print(status,":status")
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         
@@ -107,7 +106,8 @@ def job_detail(request,job_name,job_id):
 
 
     # print("info ",company)
-    return render(request, 'job_detail.html', {'job':job,'company':company,'status':status,'dis':dis.id,'sex':sex})
+    return render(request, 'job_detail.html', {'job':job,'company':company,'status':status,
+        'dis':dis.id,'qualification_list':qualification_list})
 
 
 def click_noti(request,job_name,job_id,noti_id):
@@ -301,7 +301,7 @@ def search(request):
             if me.disability_cate in job.disability_cate:
                 score +=20
             if me.province in job.province:
-                score += 20
+                score += 5
             else:
                 if job.province in north:
                     company_zone = "ภาคเหนือ"
@@ -315,7 +315,11 @@ def search(request):
                     company_zone = "ภาคตะวันตก"           
 
                 if zone == company_zone:
-                    score +=10
+                    score +=5
+
+
+            if me.sex in job.sex:
+                score +=5
 
             for myjob in myjob_interest_split:
                 
@@ -323,24 +327,30 @@ def search(request):
                 percen = seq.ratio()*100
                 print("percen ",percen)
                 if percen >= 30.0:
-                    score += 20
+                    score += 25
                 elif percen>=10.0 and percen <=29.0:
                     score += 10
                 elif percen < 10.0:
                     score+=0   
            
+            qualification_list = job.qualification.split(",")
+            for i in qualification_list:
+                if i :
+                    if me.talent in i or me.talent2 in i or me.talent3 in i:
+                        score+=25
+                        break
 
             if me.expected_salary1 <= job.salary1 or me.expected_salary1 <= job.salary2 :
                 if me.expected_salary2 <= job.salary2:
-                    score +=20
+                    score +=10
                 elif me.expected_salary2 > job.salary2  :
-                    score +=15
+                    score +=5
                 else:
-                    score +=15
-                     
+                    score +=5
+            
 
             if me.age >= job.age1 and me.age <= job.age2 :
-                score +=20
+                score +=10
             elif  me.age >= job.age1 and me.age >= job.age2 :
                 score +=5
             elif  me.age <= job.age1 :
@@ -382,6 +392,7 @@ def employer_search(request):
     if request.method == 'POST':
         print("ads")
         form = CreateJobForm(request.POST, request.FILES)
+        print(form.errors)
         if form.is_valid():
             print("valid")
             company = CompanyInfo.objects.get(profile__user=request.user)
@@ -389,6 +400,14 @@ def employer_search(request):
             age2 = 0 
             salary1 = 0
             salary2 = 0
+            sex = ""
+            if form.cleaned_data['sex'] == 0:
+                sex = "ชาย"
+            elif form.cleaned_data['sex'] == 1:
+                sex = "หญิง"
+            elif form.cleaned_data['sex'] == 2:
+                sex = "หญิงชาย"    
+
             all_qualification = (form.cleaned_data['qualification']+','
                 +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
                 +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
@@ -419,10 +438,9 @@ def employer_search(request):
                 phone_no=form.cleaned_data['phone_no'],
                 age1 = age1,
                 age2 = age2,
-                sex = form.cleaned_data['sex'],
+                sex =sex,
                 detail = form.cleaned_data['job_detail'],
                 disability_cate = form.cleaned_data['disability_type'],
-                welfare = form.cleaned_data['welfare'],
                 salary1 = salary1,
                 salary2 = salary2,
                 qualification = all_qualification,
@@ -434,7 +452,7 @@ def employer_search(request):
             messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
             print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
             nextPage = "employer-search"
-            return HttpResponse(nextPage)
+            return HttpResponseRedirect(nextPage)
 
 
     else :
@@ -476,7 +494,7 @@ def employer_search(request):
             if d.disability_cate in job_required.disability_cate:
                 score +=20
             if d.province in job_required.province:
-                score += 20
+                score += 5
             else:
                 if job_required.province in north:
                     zone = "ภาคเหนือ"
@@ -500,31 +518,40 @@ def employer_search(request):
                 elif d.province in west:
                     dis_zone = "ภาคตะวันตก" 
                 if zone == dis_zone:
-                    score +=10
+                    score +=5
             for jl in j_split:
                 
                 seq = difflib.SequenceMatcher(None,job_required.title_th,jl)
                 percen = seq.ratio()*100
                 print("percen ",percen)
                 if percen >= 30.0:
-                    score += 20
+                    score += 25
                 elif percen>=10.0 and percen <=29.0:
-                    score += 10
+                    score += 5
                 elif percen < 10.0:
                     score+=0   
-           
+            qualification_list = job_required.qualification.split(",")
+            for i in qualification_list:
+                if i :
+                    if d.talent in i or  d.talent2 in i or d.talent3 in i:
+                        score+=25
+                        break
+
+
+
 
             if d.expected_salary1 <= job_required.salary1 or d.expected_salary1 <= job_required.salary2 :
                 if d.expected_salary2 <= job_required.salary2:
-                    score +=20
+                    score +=10
                 elif d.expected_salary2 > job_required.salary2  :
-                    score +=15
+                    score +=5
                 else:
-                    score +=15
-                     
+                    score +=5
+            if d.sex in job_required.sex:
+                score +=5        
 
             if d.age >= job_required.age1 and d.age <= job_required.age2 :
-                score +=20
+                score +=10
             elif  d.age >= job_required.age1 and d.age >= job_required.age2 :
                 score +=5
             elif  d.age <= job_required.age1 :
@@ -585,14 +612,9 @@ def employer_search_disability(request):
     job_declared = Job.objects.filter(company=company)
     if request.method == 'POST':
         job_title_th = request.POST['selectJob']
-        # job_title_th = "เว็บคอร์สแบงก์ค็อก2 นักออกแบบบ้าน"
         temp_dict = {}
         temp_dict2 = {}
-        print("aaaaaaaaaaaaaaaaaaaa",job_title_th)
-        # company = CompanyInfo.objects.get(profile__user=request.user)
-        # if request.is_ajax():
-        #     address = request.GET.get('address',False)
-        #     phone_number = request.GET.get('phone_number',False)
+   
         job_required = Job.objects.get(title_th=job_title_th) 
         dis_list = DisabilityInfo.objects.all()
         print(dis_list)
@@ -622,7 +644,7 @@ def employer_search_disability(request):
             if d.disability_cate in job_required.disability_cate:
                 score +=20
             if d.province in job_required.province:
-                score += 20
+                score += 5
             else:
                 if job_required.province in north:
                     zone = "ภาคเหนือ"
@@ -646,34 +668,45 @@ def employer_search_disability(request):
                 elif d.province in west:
                     dis_zone = "ภาคตะวันตก" 
                 if zone == dis_zone:
-                    score +=10
+                    score +=5
             for jl in j_split:
                 
                 seq = difflib.SequenceMatcher(None,job_required.title_th,jl)
                 percen = seq.ratio()*100
                 print("percen ",percen)
                 if percen >= 30.0:
-                    score += 20
+                    score += 25
                 elif percen>=10.0 and percen <=29.0:
-                    score += 10
+                    score += 5
                 elif percen < 10.0:
                     score+=0   
-           
+            qualification_list = job_required.qualification.split(",")
+            for i in qualification_list:
+                if i :
+                    if d.talent in i or  d.talent2 in i or d.talent3 in i:
+                        score+=25
+                        break
+
+
+
 
             if d.expected_salary1 <= job_required.salary1 or d.expected_salary1 <= job_required.salary2 :
                 if d.expected_salary2 <= job_required.salary2:
-                    score +=20
-                elif d.expected_salary2 > job_required.salary2:
-                    score +=15
+                    score +=10
+                elif d.expected_salary2 > job_required.salary2  :
+                    score +=5
                 else:
-                    score +=15 
+                    score +=5
+            if d.sex in job_required.sex:
+                score +=5        
 
             if d.age >= job_required.age1 and d.age <= job_required.age2 :
-                score +=20
+                score +=10
             elif  d.age >= job_required.age1 and d.age >= job_required.age2 :
                 score +=5
             elif  d.age <= job_required.age1 :
                 score +=5
+
 
             # print (score)
             temp_dict[d.id] = score
@@ -719,31 +752,6 @@ def disable_search_job(request):
         'job_title_th':job_title_th,'dis_cate':dis_cate,'location':location,
         'salary1':salary1,'salary2':salary2})
 
-
-def image_upload(request):
-    if 'file' in request.FILES:
-        the_file = request.FILES['file']
-        allowed_types = ['image/jpeg', 'image/jpg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/gif']
-        if not the_file.content_type in allowed_types:
-            return HttpResponse(json.dumps({'error': _('You can only upload images.')}),
-                                content_type="application/json")
-        # Other data on the request.FILES dictionary:
-        # filesize = len(file['content'])
-        # filetype = file['content-type']
-        upload_to = getattr(settings, 'FROALA_UPLOAD_PATH', 'uploads/froala_editor/images/')
-        path = default_storage.save(os.path.join(upload_to, the_file.name), the_file)
-        link = default_storage.url(path)
-        # return JsonResponse({'link': link})
-        return HttpResponse(json.dumps({'link': link}), content_type="application/json")
-
-
-def file_upload(request):
-    if 'file' in request.FILES:
-        the_file = request.FILES['file']
-        upload_to = getattr(settings, 'FROALA_UPLOAD_PATH', 'uploads/froala_editor/files/')
-        path = default_storage.save(os.path.join(upload_to, the_file.name), the_file)
-        link = default_storage.url(path)
-        return HttpResponse(json.dumps({'link': link}), content_type="application/json")
 
 # 'job_declared':job_declared,'job_title_th':job_title_th
     # company = CompanyInfo.objects.get(profile__user=request.user)
@@ -915,32 +923,30 @@ def file_upload(request):
     # print(job_required)
     # pass
 
-
-    # def create_job(request):
-    # if request.method == 'POST':
-    #     form = CreateJobForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         company = CompanyInfo.objects.get(profile__user=request.user)
-    #         cj = Job.objects.create(
-    #             company =company,
-    #             title_th=form.cleaned_data['title_th'],
-    #             title_en=form.cleaned_data['title_en'],
-    #             age = form.cleaned_data['age'],
-    #             sex = form.cleaned_data['sex'],
-    #             detail = form.cleaned_data['job_detail'],
-    #             disability_cate = form.cleaned_data['disability_type'],
-    #             traveling = form.cleaned_data['traveling'],
-    #             welfare = form.cleaned_data['welfare'],
-    #             salary = form.cleaned_data['salary'],
-    #             company_image =request.FILES['company_image'],
+def create_job(request):
+    if request.method == 'POST':
+        form = CreateJobForm(request.POST, request.FILES)
+        if form.is_valid():
+            company = CompanyInfo.objects.get(profile__user=request.user)
+            cj = Job.objects.create(
+                company =company,
+                title_th=form.cleaned_data['title_th'],
+                title_en=form.cleaned_data['title_en'],
+                age = form.cleaned_data['age'],
+                sex = form.cleaned_data['sex'],
+                detail = form.cleaned_data['job_detail'],
+                disability_cate = form.cleaned_data['disability_type'],
+                # traveling = form.cleaned_data['traveling'],
+                welfare = form.cleaned_data['welfare'],
+                salary = form.cleaned_data['salary'],
+                company_image =request.FILES['company_image'],
            
-    #             )
+                )
         
-    #         messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
-    #         redirect('employer_search')
+            messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
+            redirect('employer_search')
 
-
-    # else :
-    #     form = CreateJobForm()
-    # return render(request, 'create_job.html',{'form':form})
+    else :
+        form = CreateJobForm()
+    return render(request, 'create_job.html',{'form':form})
 
