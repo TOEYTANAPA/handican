@@ -159,4 +159,6 @@ def company_signup2(request,uid):
     return render(request, 'company_signup2.html', {'form': form})    
 
 def profile(request):
-    return render(request, 'profile.html')
+    profile = Profile.objects.get(user=request.user)
+    dis = DisabilityInfo.objects.get(profile=profile)
+    return render(request, 'profile.html',{'dis':dis})
