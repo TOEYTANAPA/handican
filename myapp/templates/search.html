@@ -12,17 +12,18 @@
     }
     
     .inImg{
-    position: absolute;
+    /*position: absolute;*/
     
     width: 100%;
-    height: 150px;
+    height: 100px;
     object-fit: cover;
     }
     .imgCrop{
-    width: 100%;
-    height:40%;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     position:  relative;
+    border-radius: 50%;
     }
     .nav-inSearch{
     background-color: #47CCA6;
@@ -91,10 +92,10 @@
                     <h4 class="uk-margin-top" style="color: white">ยินดีต้อนรับสู่ระบบค้นหางาน !</h4>
                     <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
                         <form action="{% url 'disable_search_job' %}" method="GET" class="uk-search uk-search-default " >
-                                {% csrf_token %}
+                            {% csrf_token %}
                             
                             <div class="uk-grid-small " uk-grid>
-                               
+                                
                                 
                                 
                                 <div class="uk-width-1-4@m " >
@@ -146,59 +147,63 @@
                                     
                                 </div>
                             </div>
-                                
+                            
                         </form>
                     </div>
                     <br>
                 </div>
                 <!-- <hr> -->
-   
-                   {% if output_search  %}
-                   <!-- <hr>  -->
-                   <br> 
-                <h2 class="uk-heading-bullet uk-margin-remove-top">งานที่แนะนำ </h2>
-                <br>
-                <div class="container ">
-                    {% for o in output_search %}
-                        <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
-                            <div class="uk-width-auto@m  ">
-                                <a class="uk-link-text" href="{% url 'job_detail' o.name o.job_id %}"><img class="imgCrop uk-align-center imgRadius"  style="width: 90px;height: 90px" src="{{o.url_pic}}" alt="your image" /></a>  
-                                
-                            </div>
-                            <div class="uk-width-expand@m  ">
-                                <div  uk-grid>
-                                    <div class="uk-width-1-2@m uk-width-1-2@s">
-                                     <a class="uk-link-text" href="{% url 'job_detail' o.name o.job_id %}">  <b>{{o.name}}</b>  </a>  
-                                        
-                                        <!-- <h4>{{o.name}}  </h4> -->
-                                    </div>
-                                    <div class="uk-width-1-2@m uk-width-1-2@s ">
-                                        <div class="uk-margin uk-align-right">
-                                          <!--   <button  type="submit" class="uk-button uk-button-default  uk-button-small " >สมัครงาน</button> -->
-                                             <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
+                
+                {% if output_search  %}
+                    <!-- <hr>  -->
+                    <br>
+                    <h2 class="uk-heading-bullet uk-margin-remove-top">งานที่แนะนำ </h2>
+                    <br>
+                    <div class="container ">
+                        {% for o in output_search %}
+                            <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
+                                <div class="uk-width-auto@m  ">
+                                    <a class="uk-link-text" href="{% url 'job_detail' o.name o.job_id %}">
+                                        <div class="imgCrop">
+                                            <img class=" uk-align-center imgRadius inImg"   src="{{o.url_pic}}" alt="your image" />
                                         </div>
-                                        <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
+                                    </a>
+                                    
+                                </div>
+                                <div class="uk-width-expand@m  ">
+                                    <div  uk-grid>
+                                        <div class="uk-width-1-2@m uk-width-1-2@s">
+                                            <a class="uk-link-text" href="{% url 'job_detail' o.name o.job_id %}">  <b>{{o.name}}</b>  </a>
+                                            
+                                            <!-- <h4>{{o.name}}  </h4> -->
+                                        </div>
+                                        <div class="uk-width-1-2@m uk-width-1-2@s ">
+                                            <div class="uk-margin uk-align-right">
+                                                <!--   <button  type="submit" class="uk-button uk-button-default  uk-button-small " >สมัครงาน</button> -->
+                                                <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
+                                            </div>
+                                            <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
+                                        </div>
                                     </div>
+                                    
+                                    <!-- <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button> -->
+                                    <br>
+                                    <!-- <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> -->
+                                    <span class="uk-margin-right"><label class="">{{o.dis_cate}}</label></span>
+                                    <span class="uk-margin-right uk-margin-left"><b ><i class="fa fa-money " aria-hidden="true"></i> </b> {{o.salary1}} - {{o.salary2}} บาท/เดือน</span>
+                                    <span class=" uk-margin-left"><b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span>
+                                    
+                                    <div uk-grid>
+                                        <div class="uk-width-1-2"> <p class=" ">{{o.detail | safe}}</p></div>
+                                        <div  class="uk-width-1-2  uk-text-right "> <h1 class="score "><span><h4 class="uk-text-small">ผลลัพธ์การจับคู่</h4></span> {{o.score}} %</h1></div>
+                                    </div>
+                                    
                                 </div>
-                                
-                                <!-- <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button> -->
-                                <br>
-                                <!-- <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> -->
-                                <span class="uk-margin-right"><label class="">{{o.dis_cate}}</label></span>
-                                <span class="uk-margin-right uk-margin-left"><b ><i class="fa fa-money " aria-hidden="true"></i> </b> {{o.salary1}} - {{o.salary2}} บาท/เดือน</span>
-                                <span class=" uk-margin-left"><b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span>
-                                
-                                <div uk-grid>
-                                    <div class="uk-width-1-2"> <p class=" ">{{o.detail}}</p></div>
-                                    <div  class="uk-width-1-2  uk-text-right "> <h1 class="score uk-margin-left">{{o.score}} %</h1></div>
-                                </div>
-                                
                             </div>
-                        </div>
-                        <hr>
-                    {% endfor %}
-                </div>
-                  {% endif %}
+                            <hr>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 {% if search_job_list  %}
                     <div id="result" >
                         {% include "disable_search_result.html" with output_search=search_job_list %}

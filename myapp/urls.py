@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^search/$',views.search, name="search"),
     url(r'^employer-search/$',views.employer_search, name="employer_search"),
+    url(r'^job-create/$',views.create_job, name="create_job"),
     url(r'^job/(?P<job_name>.*)/(?P<job_id>\d+)$',views.job_detail, name="job_detail"),
     url(r'^detail/(?P<job_name>.*)/(?P<job_id>\d+)/(?P<noti_id>\d+)$',views.click_noti, name="click_noti"),
     url(r'^profile/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.disable_detail, name="dis_detail"),

@@ -60,30 +60,8 @@
   height: 200px;
   object-fit: cover;
   }
-  .fullWidth {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: initial;
-  position: relative;
-  }
-  .logo1{
-  position:absolute;
-  left: 50%;
-  top:20px;
-  margin-left: -100px;
-  z-index: 20;
   
-  }
-  .box1{
-  background-color:#0090C1;
-  height: 250px;
-  /*margin-bottom: 10px; */
-  }.box2{
-  background-color: white;
-  height: 120px;
-  /*margin-bottom: 10px; */
-  }
+
   .card {
   padding-top: 20px;
   margin: 10px 0 20px 0;
@@ -308,7 +286,7 @@
           
         </div>
         <div class="avatar">
-          <img src=" {{job.company_image.url}}" class="inImgProfile"  alt="">
+          <img src=" {{company.profile.profile_picture.url}}" class="inImgProfile"  alt="">
         </div>
         <div class="uk-text-center ">
            <div class="info uk-margin-bottom">
@@ -352,7 +330,7 @@
           <tbody>
             <tr>
               <td class="uk-width-1-6">รายละเอียดงาน:</td>
-              <td class="uk-table-expand">{{job.detail}}</td>
+              <td class="uk-table-expand">{{job.detail | safe}}</td>
               
             </tr>
             <tr>
@@ -366,9 +344,13 @@
             <tr>
               <td class="uk-width-1-6">คุณสมบัติ:</td>
               <td class="uk-table-expand">
-                <ul ><li> เพศ {{sex}}</li>
+                <ul ><li> เพศ {{job.sex}}</li>
                 <li> อายุ {{job.age1}} - {{job.age2}} ปี</li>
-                <li>{{job.qulification}}</li>
+                {% for q in qualification_list %}
+                 {% if q %}
+                <li>{{q }}</li>
+                {% endif %}
+                {% endfor %}
                 <!--   <li>UI design in both Sketch and Photoshop</li>
                 <li>Working hours 9 AM - 5 PM  Monday-Friday</li> -->
               </ul>
@@ -381,20 +363,13 @@
             <td class="uk-table-expand">{{job.salary1}} - {{job.salary2}} บาท</td>
             
           </tr>
-          <tr>
-            <td class="uk-width-1-6">สวัสดิการ:</td>
-            <td class="uk-table-expand">{{job.welfare}}</td>
-            
-          </tr>
-          <tr>
-            <td class="uk-width-1-6">การเดินทาง:</td>
-            <td class="uk-table-expand">{{job.traveling}}</td>
-            
-          </tr>
+         
+         
           <tr>
             <td class="uk-width-1-6">ติดต่อฝ่ายบุคคล:</td>
             <td class="uk-table-expand">
-<ul ><li> {{job.phone_no}}</li>     <li>{{company.fax}} </li>
+<ul ><li> {{job.phone_no}}</li>   
+  <li>{{company.fax}} </li>
                 <li> {{job.email}}</li>
              <li> {{company.address}}</li>
 

@@ -116,24 +116,13 @@
                   <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
                   {{form.welfare}}
                 </div>
-                <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
-                  <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
-                  <div > 
-                    <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
-                  </div>
                   
-                  <div >
-                    <div uk-form-custom="target: true" >
-                      {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
-                      <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
-                    </div>
-                  </div>
-                </div>
-                <div  class="uk-margin-bottom ">
-                  <label class=" "  for=" "> การเดินทาง <b>*</b></label>
-                  {{form.traveling  }}
-                </div>
-             
+               <div  class="uk-margin-bottom ">
+                                    <label  for=" ">รายละเอียดงาน <b>*</b></label>
+                                    {{form.media}} 
+                                    {{form.content}}
+                   
+                                </div>
                
                 <br>
                 {% if form.errors %}
