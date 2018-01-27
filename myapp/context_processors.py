@@ -35,7 +35,7 @@ def profile(request):
 				temp['obj'] = i.obj
 				temp['time'] = i.created_at
 				temp['is_read'] = i.is_read
-				temp['img'] = i.tarket.profile_picture.url
+				temp['img'] = p.profile_picture.url
 				temp['noti_id'] = i.id
 				if temp['is_read'] == False and read:
 					read = False

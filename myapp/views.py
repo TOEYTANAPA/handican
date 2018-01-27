@@ -68,7 +68,7 @@ def invite_job_to_disability(request,dis_id,job_id):
     job = Job.objects.get(id=job_id)
 
     Notifications.objects.get_or_create(user=request.user,job=job,tarket=tarket.profile,
-        action="ส่งคำเชิญ",obj="สมัครงาน", defaults={})
+        action="ส่งคำเชิญ",obj=job.title_th, defaults={})
     # Notifications.objects.create(user=request.user,job=job,tarket=tarket.profile,
     #     action="ส่งคำเชิญ",obj="สมัครงาน")
 
@@ -92,13 +92,16 @@ def job_detail(request,job_name,job_id):
         sex ="หญิง"
     elif job.sex=='2':
         sex ="หญิง, ชาย"    
+    print(status,":status")
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         
         try :
 
             invite = InviteProcess.objects.get(disability=dis,job=job) 
             status = invite.status
-            return render(request, 'job_detail.html', {'job':job,'company':company,'sex':sex,'status':status,'dis':dis.id})
+
+            print(status,":status")
+            return render(request, 'job_detail.html', {'job':job,'status':status,'dis':dis.id})
         except :
             pass
 
@@ -130,15 +133,57 @@ def confirm_job(request,dis_id,job_id):
     job = Job.objects.get(id=job_id)
     InviteProcess.objects.filter(disability__id=dis_id,job__id=job_id).update(status="ตอบรับคำเชิญ")
     status = InviteProcess.objects.get(disability__id=dis_id,job__id=job_id)
-    Notifications.objects.get_or_create(user=request.user,job=job,tarket=job.company.profile,
-        action="ตอบรับคำเชิญ",obj="สมัครงาน", defaults={})
     # return render(request, 'job_detail.html', {'job':job,'status':status.status})
     if User.objects.filter(pk=request.user.id, groups__name='company').exists() :
+        dis = DisabilityInfo.objects.get(id=dis_id)
+        Notifications.objects.get_or_create(user=request.user,job=job,tarket=dis.profile,
+        action="ตอบรับคำเชิญ",obj=job.title_th, defaults={})
         return render(request, 'disable_detail.html', {'job':job,'status':status.status})
     else :
+        Notifications.objects.get_or_create(user=request.user,job=job,tarket=job.company.profile,
+        action="ตอบรับคำเชิญ",obj=job.title_th, defaults={})
         return render(request, 'job_detail.html', {'job':job,'status':status.status})
 
-  
+def show_notifications(request):
+    list_noti =[]
+    print("dothis")
+    try :
+
+        profile = Profile.objects.get(user=request.user)
+        noti = Notifications.objects.filter(tarket=profile)
+        for i in noti:
+            
+            temp = {'actor': '', 'action': '','target':'', 'obj':'','time':None,'img':None,
+            'is_read': False,'job_id': None}
+            
+            if User.objects.filter(pk=request.user.id, groups__name='company').exists() :
+                p = Profile.objects.get(user=i.user)
+                dis = DisabilityInfo.objects.get(profile=p)
+                temp['actor'] = dis.th_name
+                temp['action'] = i.action
+                temp['obj'] = i.obj
+                temp['time'] = i.created_at
+                temp['is_read'] = i.is_read
+                temp['img'] = p.profile_picture.url
+            else :
+                p = Profile.objects.get(user=i.user)
+                comp = CompanyInfo.objects.get(profile=p)
+                temp['actor'] = comp.th_name
+                temp['action'] = i.action
+                temp['obj'] = i.obj
+                temp['time'] = i.created_at
+                temp['is_read'] = i.is_read
+                temp['img'] = p.profile_picture.url
+
+            list_noti.append(temp)
+
+
+            
+    except :
+        raise
+
+    print(list_noti,"555555")
+    return render(request, 'notifications.html', {'list_noti':list_noti})
 
 def apply_job(request,dis_id,job_id):
     job = Job.objects.get(id=job_id)
