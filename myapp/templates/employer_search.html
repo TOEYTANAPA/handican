@@ -40,7 +40,13 @@
     iframe{
     overflow:hidden;
     }
+    .requiredForm{
+        color: red;
+    }
     </style>
+
+
+
     {% block messages %}
         {% if messages %}
             {% for message in messages %}
@@ -137,23 +143,77 @@
                                     <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
                                     
                                     <div>
-                                        <label  for=" ">ชื่อตำแหน่งงาน (TH) <b>*</b></label>
+                                        <label  for=" ">ชื่อตำแหน่งงาน (TH) <b class="requiredForm">*</b></label>
                                         {{form.title_th |attr:"placeholder:โปรดระบุชื่องาน และชื่อตำแหน่งงาน"}}
                                     </div>
                                     <div>
-                                        <label  for=" ">ชื่อตำแหน่งงาน (EN) <b>*</b></label>
+                                        <label  for=" ">ชื่อตำแหน่งงาน (EN) <b class="requiredForm">*</b></label>
                                         {{form.title_en }}
                                     </div>
                                 </div>
-                                
+                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                   <div  class="uk-margin-bottom ">
+                                    <label  for=" ">อีเมลติดต่อกลับ <b class="requiredForm">*</b></label>
+                                    {{form.email}}
+                                </div>
+                                     <div  class="uk-margin-bottom ">
+                                    <label  for=" ">เบอร์โทรลติดต่อกลับ <b class="requiredForm">*</b></label>
+                                    {{form.phone_no}}
+                                </div>
+                                </div>
+                                <div  class="uk-margin-bottom ">
+                                    <label  for=" ">ที่ตั้งบริษัท <b class="requiredForm">*</b></label>
+                                    {{form.location}}
+                                </div>
+                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                   
+                                     <div  class="uk-margin-bottom ">
+                                    <label  for=" ">จังหวัด <b class="requiredForm">*</b></label>
+                                    {{form.province}}
+                                </div>
+                                </div>
+                               
                                 <div  class="uk-margin-bottom ">
                                     <label  for=" ">รายละเอียดงาน <b>*</b></label>
-                                    {{form.job_detail}}
+                                   <!--  {{form.job_detail}} -->
+                                    {% load wysiwyg %}
+{% wysiwyg_setup %}
+
+<textarea id="jobde"></textarea>
+
+{% wysiwyg_editor "jobde" %}
                                 </div>
-                                <div  class="uk-margin-bottom ">
-                                    <label  for=" ">ทักษะที่ต้องการ <b>*</b></label>
-                                    {{form.qualification}}
+                                
+                                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
+                                    
+                                    <div>
+                                        <label  for=" ">ทักษะที่ต้องการ  <b class="requiredForm">*</b></label>
+                                       {{form.qualification}} 
+                                        <p> </p>
+                                       {{form.qualification3 |attr:"placeholder:ทักษะที่ต้องการ (3)"}}  
+                                       <p> </p>
+                                       {{form.qualification5 |attr:"placeholder:ทักษะที่ต้องการ (5)"}}
+                                        <p> </p>
+                                       {{form.qualification7 |attr:"placeholder:ทักษะที่ต้องการ (7)"}}  
+                                        <p> </p>
+                                       {{form.qualification9 |attr:"placeholder:ทักษะที่ต้องการ (9)"}}  
+                                    </div>
+                                    <div>
+                                         <p> </p>
+                                       {{form.qualification2 |attr:"placeholder:ทักษะที่ต้องการ (2)"}}  
+                                        <p> </p>
+                                       {{form.qualification4 |attr:"placeholder:ทักษะที่ต้องการ (4)"}}  
+                                      
+                                        <p> </p>
+                                           {{form.qualification6 |attr:"placeholder:ทักษะที่ต้องการ (6)"}}
+                                           <p> </p>
+                                           {{form.qualification8 |attr:"placeholder:ทักษะที่ต้องการ (8)"}}
+                                           <p> </p>
+                                           {{form.qualification10 |attr:"placeholder:ทักษะที่ต้องการ (10)"}}
+                                    </div>
                                 </div>
+                                 
                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                     <div>
                                         <label class=" "  for=" "> เพศ
@@ -186,7 +246,7 @@
                                         {{form.disability_type  }}
                                     </div>
                                     <div>
-                                        <label class=" "  for=" "> เงินเดือน <b>*</b></label>
+                                        <label class=" "  for=" "> เงินเดือน <b class="requiredForm">*</b></label>
                                         
                                         <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
                                             <div class="form-group ">
@@ -204,27 +264,11 @@
                                     </div>
                                 </div>
                                 <div  class="uk-margin-bottom ">
-                                    <label class=" "  for=" "> สวัสดิการ <b>*</b></label>
+                                    <label class=" "  for=" "> สวัสดิการ <b class="requiredForm">*</b></label>
                                     {{form.welfare}}
                                 </div>
-                                <div  class="uk-margin-bottom uk-child-width-1-1@m uk-child-width-1-1@s "  uk-margin>
-                                    <label  for=" ">อัพโหลดรูปภาพภายในบริษัทของคุณ <b>*</b></label>
-                                    <div >
-                                        <img id="blah" class="imgCrop" style="width: 100px;height: 100px" src="{% static "images/comp.png" %}" alt="your image" />
-                                    </div>
-                                    
-                                    <div >
-                                        <div uk-form-custom="target: true" >
-                                            {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
-                                            <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เลือกรูปภาพ" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div  class="uk-margin-bottom ">
-                                    <label class=" "  for=" "> การเดินทาง <b>*</b></label>
-                                    {{form.traveling  }}
-                                </div>
                                 
+                             
                                 
                                 <br>
                                 {% if form.errors %}
