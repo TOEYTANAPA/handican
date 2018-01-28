@@ -192,6 +192,16 @@ def apply_job(request,dis_id,job_id):
     status,created = InviteProcess.objects.get_or_create(disability=DisabilityInfo.objects.get(id=dis_id),status="สมัครงาน",job=job, defaults={})
     return render(request, 'job_detail.html', {'job':job,'status':status.status})
 
+
+def refuse_job(request,dis_id,job_id):
+    job = Job.objects.get(id=job_id)
+    dis = DisabilityInfo.objects.get(id=dis_id)
+    Notifications.objects.get_or_create(user=request.user,job=job,tarket=dis.profile,
+        action="ปฎิเสธงาน",obj=job.title_th, defaults={})
+    status,created = InviteProcess.objects.get_or_create(disability=dis,status="ปฎิเสธงาน",job=job, defaults={})
+    return render(request, 'job_detail.html', {'job':job,'status':status.status})
+
+
 def contact(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:

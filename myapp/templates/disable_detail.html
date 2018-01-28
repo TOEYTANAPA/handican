@@ -89,29 +89,25 @@
             <p>User belongs to my group </p>
             {% if status == "ยังไม่ส่งคำเชิญ" %}
               <a href="#confirm_job" class="uk-button uk-button-default btn-active " type="button" uk-toggle>เชิญเข้าร่วมงาน</a>
-
-<!-- This is the modal -->
-<div id="confirm_job" uk-modal >
-    <div class="uk-modal-dialog uk-modal-body">
-        <h2>คุณต้องการเชิญเข้าร่วมงาน {{job.title_th}} ใช่หรือไม่ </h2>
-        <p>เมื่อตกลง ระบบจะส่งคำเชิญเข้าร่วมงานให้ผู้พิการทราบ หากต้องการยกเลิกคำเชิญ สามารถยกเลิกได้ที่หน้ารายการการเชิญ</p>
-        <p class="uk-text-right">
-            <a class="uk-button uk-button-default uk-modal-close" type="button">ยกเลิก</a>
-            <a href="{% url "request_job" dis.id job.id %}" class="uk-button uk-button-primary" type="button">ตกลง</a>
-        </p>
-    </div>
-</div>
-
+              <!-- This is the modal -->
+              <div id="confirm_job" uk-modal >
+                <div class="uk-modal-dialog uk-modal-body">
+                  <h2>คุณต้องการเชิญเข้าร่วมงาน {{job.title_th}} ใช่หรือไม่ </h2>
+                  <p>เมื่อตกลง ระบบจะส่งคำเชิญเข้าร่วมงานให้ผู้พิการทราบ หากต้องการยกเลิกคำเชิญ สามารถยกเลิกได้ที่หน้ารายการการเชิญ</p>
+                  <p class="uk-text-right">
+                    <a class="uk-button uk-button-default uk-modal-close" type="button">ยกเลิก</a>
+                    <a href="{% url "request_job" dis.id job.id %}" class="uk-button uk-button-primary" type="button">ตกลง</a>
+                  </p>
+                </div>
+              </div>
               {% elif status == "ตอบรับคำเชิญ" %}
-         
+              
               <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญงาน {{job}}
               {% elif status == "ส่งคำเชิญ" %}
               <button class="uk-button uk-button-default " type="button" disabled><i class="fa fa-check" aria-hidden="true"></i> ส่งคำเชิญแล้ว</button>
-
-               {% elif status == "สมัครงาน" %}
-                    <a href="{% url "confirm_job" dis.id job.id %}" class="uk-button uk-button-default btn-active " type="button"> ยืนยันการสมัครงาน</a>
-
-
+              {% elif status == "สมัครงาน" %}
+              <a href="{% url "confirm_job" dis.id job.id %}" class="uk-button uk-button-default btn-active " type="button"> ยืนยันการสมัครงาน</a>
+               <a href="{% url "refuse_job" dis.id job.id %}" class="uk-button uk-button-default btn-active " type="button"> ปิฏิเสธ</a>
             {% endif %}
           {% endif %}
         </div>
