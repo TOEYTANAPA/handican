@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+    {% load static %}{% load my_tags %}
     <head>
         <meta charset="utf-8">
         
@@ -168,6 +168,11 @@
     background-position: center center;
     background-repeat: no-repeat;
     }
+    .score{
+    font-size: 35px;
+    color:#00C853;
+    font-weight: bolder;
+    }
     .noti{
     margin-top:-15px ;
     /*margin-right: : -50px;*/
@@ -186,14 +191,12 @@
     margin-top: 20px;
     border-color: #1abc9c;
     }
-
- /*   .nav-hover:hover {
-        background-color: #fff;
-      
+    /*   .nav-hover:hover {
+    background-color: #fff;
+    
     }
-
     .nav-hover-text:hover{
-          color :#008080;
+    color :#008080;
     }*/
     /*end corusel*/
     #google-map{
@@ -304,11 +307,9 @@
     ul li a:hover {
     color: #4fe3b9;
     }
-
     #font-kanit {
-        font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit', sans-serif;
     }
-
     #input {
     color:#4D5656;
     font-family: 'Kanit', sans-serif;
@@ -846,7 +847,7 @@
                     <div class="row " >
                         <div class="col-md-3">
                             <div class="social pull-left">
-                                <a href=""> <img class="pull-left logo"  src="{% static "images/logo.png" %}"/> </a>
+                                <a href="{% url 'home' %}"> <img class="pull-left logo"  src="{% static "images/logo.png" %}"/> </a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -930,209 +931,192 @@
                     </div>
                 </div>
             </div>
-            <!-- <hr class="uk-box-shadow-medium "> -->
-            <nav class="uk-navbar-container  " uk-navbar style="background-color: #008080">
-                <div class="uk-navbar-center ">
-                    
-                    <ul class="uk-navbar-nav " style="">
-                        <li class="uk-active" ><a   href="#"  class="font-kanit "><i class="fa fa-home " aria-hidden="true"> หน้าหลัก</i></a></li>
-                        <li class="nav-hover ">
-                            <a href="#"  class="font-kanit " >บทความ</a>
-                            
-                        </li>
-                        <li class="nav-hover ">
-                            <a href="#" class="font-kanit  " >คำถามที่พบบ่อย</a>
-                            
-                        </li>
-                        <li class="nav-hover ">
-                            <a href="#"  class="font-kanit " >ติดต่อเรา</a>
-                            
-                        </li>
-                    </ul>
-                </div>
-                
-                
-            </nav>
-            <!-- <hr class="uk-box-shadow-medium uk-margin-remove"> -->
-            <!-- <div class="container">
-            </div>
-            -->
-            <!-- <nav class="uk-navbar-container uk-light uk-align-center" style="background-color: #189c95" uk-navbar> -->
-            <!-- <div >  -->
-            
-            <!-- </div> -->
-            <!-- <div class="container"> -->
-            <!-- <div class="uk-navbar-center" style="margin-top: -15px;margin-bottom: -15px">
-                
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#" class="uk-margin-small-right"  >
-                        <span ><i class="fa fa-home " aria-hidden="true"></i></span> <p> หนัาหลัก</p></a></li>
-                        <li><a href="#">ติดต่อเรา</a></li>
-                        <li><a href="#">ติดต่อเรา</a></li>
-                    </ul>
-                    
-                </div> -->
-                <!-- </div> -->
-                <!-- </nav> -->
-            </div>
-            <div class="nav-mobile">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="social pull-left">
+
+                <nav class="uk-navbar-container  " uk-navbar style="background-color: #008080">
+                    <div class="uk-navbar-center ">
+                        
+                        <ul class="uk-navbar-nav " style="">
+                            <li class="uk-active" ><a   href="{% url 'home' %}"  class="font-kanit "><i class="fa fa-home " aria-hidden="true"> หน้าหลัก</i></a></li>
+                            <li class="nav-hover ">
+                                <a href="#"  class="font-kanit " >บทความ</a>
                                 
-                                <a href=""> <img class="pull-left logo" style="width: 40px;height: auto;" src="{% static "images/gg.png" %}"/> </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                            </li>
+                            <li class="nav-hover ">
+                                <a href="#" class="font-kanit  " >คำถามที่พบบ่อย</a>
+                                
+                            </li>
+                            <li class="nav-hover ">
+                                <a href="{% url 'contactus' %}"  class="font-kanit " >ติดต่อเรา</a>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+                </nav>
+          
+            
+            
+        </div>
+        <!-- end desktop -->
+        <div class="nav-mobile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="social pull-left">
                             
-                            <div class="pull-right user">
-                                <ul id="inline">
-                                    <li id="inline-li">
-                                        <a  href="{% url 'noti' %}" class="uk-button uk-button-text uk-padding-small uk-padding-remove-bottom" type="button" >
-                                            <img class="noti"  src="{% static "images/notification.png" %}"/>
-                                        </a>
-                                        
-                                    </li>
-                                    
-                                    <li id="inline-li"><a href="{% url 'profile' %}" id="input"> <img class="img-user"  src="{{profile}}"/></a></li>
-                                    <li id="inline-li"><a href="{% url 'profile' %}" class="input uk-button-text">{{name}}</a>
-                                    
-                                    
+                            <a href=""> <img class="pull-left logo" style="width: 40px;height: auto;" src="{% static "images/gg.png" %}"/> </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <div class="pull-right user">
+                            <ul id="inline">
+                                <li id="inline-li">
+                                    <a  href="{% url 'noti' %}" class="uk-button uk-button-text uk-padding-small uk-padding-remove-bottom" type="button" >
+                                        <img class="noti"  src="{% static "images/notification.png" %}"/>
+                                    </a>
                                     
                                 </li>
                                 
+                                <li id="inline-li"><a href="{% url 'profile' %}" id="input"> <img class="img-user"  src="{{profile}}"/></a></li>
+                                <li id="inline-li"><a href="{% url 'profile' %}" class="input uk-button-text">{{name}}</a>
+                                
+                                
+                                
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--  <div class="row">
+                <div class="col-md-6">
+                    <div class="uk-text-center top-margin">
+                        <form action="" method="POST" class="uk-search uk-search-default serach-input" >
+                            {% csrf_token %}
+                            <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
+                            <input  name="search" class="uk-search-input " type="search" placeholder="Find Jobs/Find Disabled People" >
+                        </form>
+                        
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+{% else %}
+    <div class="nav-desktop ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="social pull-left">
+                        <a href=""> <img class="pull-left logo"  " src="{% static "images/logo.png" %}"/> </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!--   <div class="uk-margin  uk-text-center">
+                        <form action="" method="POST"  enctype="multipart/form-data" class="uk-search uk-search-default serach-input" >
+                            {% csrf_token %}
+                            <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
+                            <input  name="search" class="uk-search-input " type="search" placeholder="Find Jobs/Find Disabled People" >
+                        </form>
+                        
+                    </div> -->
+                </div>
+                <div class="col-md-3">
+                    <div class="action pull-right user">
+                        <ul>
+                            <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
+                            <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
+                            <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
+                            
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-mobile ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="social pull-left">
+                        
+                        <a href=""> <img class="pull-left logo"  src="{% static "images/logo.png" %}"/> </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="action pull-right user">
+                        <ul>
+                            <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
+                            <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
+                            <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
+                            
+                            
+                        </ul>
+                    </div>
+                    
+                    <!--  <nav class="navbar navbar-default action user">
+                        <div class="navbar-header">
+                            
+                            <button class="uk-button uk-button-default uk-button-small uk-margin-small-right " type="button" uk-toggle="target: #offcanvas-nav-primary;flip: true"><i class="fa fa-bars " aria-hidden="true" style="font-size: 20px;" ></i></button>
+                        </div>
+                        
+                    </nav>
+                    <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true;flip: true">
+                        <div class="uk-offcanvas-bar uk-dark uk-background-default">
+                            <ul class="uk-nav uk-nav-primary  uk-margin-auto-vertical">
+                                <li class="uk-parent">
+                                    <a href="#" id="input">เมนู</a>
+                                    <li class="uk-nav-divider uk-text-muted"></li>
+                                    <ul class="uk-nav-sub">
+                                        <li><a href="#modal-sections" class="uk-active"> <h3 id="input" >เข้าสู่ระบบ</h3></a></li>
+                                        <li><a href="#modal-sections" class="uk-active" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3 ></a></li>
+                                        <li><a href="#modal-sections" class="uk-active"> <h3 id="input"> คำถาม</h3></a></li>
+                                    </ul>
+                                </li>
                                 
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    
+                    
+                    
                 </div>
-                <!--  <div class="row">
-                    <div class="col-md-6">
-                        <div class="uk-text-center top-margin">
-                            <form action="" method="POST" class="uk-search uk-search-default serach-input" >
-                                {% csrf_token %}
-                                <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
-                                <input  name="search" class="uk-search-input " type="search" placeholder="Find Jobs/Find Disabled People" >
-                            </form>
-                            
-                        </div>
+            </div>
+            <div class="row">
+                <!--   <div class="col-md-12">
+                    <div class="uk-text-center top-margin">
+                        <form action="" method="POST" enctype="multipart/form-data" class="uk-search uk-search-default serach-input">
+                            {% csrf_token %}
+                            <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
+                            <input  name="search" class="uk-search-input" type="search" placeholder="Find Jobs/Find Disabled People" >
+                        </form>
+                        
                     </div>
                 </div> -->
             </div>
         </div>
-    {% else %}
-        <div class="nav-desktop ">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="social pull-left">
-                            <a href=""> <img class="pull-left logo"  " src="{% static "images/logo.png" %}"/> </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <!--   <div class="uk-margin  uk-text-center">
-                            <form action="" method="POST"  enctype="multipart/form-data" class="uk-search uk-search-default serach-input" >
-                                {% csrf_token %}
-                                <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
-                                <input  name="search" class="uk-search-input " type="search" placeholder="Find Jobs/Find Disabled People" >
-                            </form>
-                            
-                        </div> -->
-                    </div>
-                    <div class="col-md-3">
-                        <div class="action pull-right user">
-                            <ul>
-                                <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
-                                <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
-                                <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
-                                
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="nav-mobile ">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="social pull-left">
-                            
-                            <a href=""> <img class="pull-left logo"  src="{% static "images/logo.png" %}"/> </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="action pull-right user">
-                            <ul>
-                                <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
-                                <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
-                                <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
-                                
-                                
-                            </ul>
-                        </div>
-                        
-                        <!--  <nav class="navbar navbar-default action user">
-                            <div class="navbar-header">
-                                
-                                <button class="uk-button uk-button-default uk-button-small uk-margin-small-right " type="button" uk-toggle="target: #offcanvas-nav-primary;flip: true"><i class="fa fa-bars " aria-hidden="true" style="font-size: 20px;" ></i></button>
-                            </div>
-                            
-                        </nav>
-                        <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true;flip: true">
-                            <div class="uk-offcanvas-bar uk-dark uk-background-default">
-                                <ul class="uk-nav uk-nav-primary  uk-margin-auto-vertical">
-                                    <li class="uk-parent">
-                                        <a href="#" id="input">เมนู</a>
-                                        <li class="uk-nav-divider uk-text-muted"></li>
-                                        <ul class="uk-nav-sub">
-                                            <li><a href="#modal-sections" class="uk-active"> <h3 id="input" >เข้าสู่ระบบ</h3></a></li>
-                                            <li><a href="#modal-sections" class="uk-active" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3 ></a></li>
-                                            <li><a href="#modal-sections" class="uk-active"> <h3 id="input"> คำถาม</h3></a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </div> -->
-                        
-                        
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <!--   <div class="col-md-12">
-                        <div class="uk-text-center top-margin">
-                            <form action="" method="POST" enctype="multipart/form-data" class="uk-search uk-search-default serach-input">
-                                {% csrf_token %}
-                                <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button>
-                                <input  name="search" class="uk-search-input" type="search" placeholder="Find Jobs/Find Disabled People" >
-                            </form>
-                            
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    {% endif %}
-    <!-- <hr class="uk-box-shadow-medium uk-margin-remove-bottom"> -->
-    <div class="uk-background-muted ">
-        {% block content %} {% endblock %}
     </div>
+{% endif %}
+<!-- <hr class="uk-box-shadow-medium uk-margin-remove-bottom"> -->
+<div class="uk-background-muted ">
+    {% block content %} {% endblock %}
+</div>
 </body>
 <!-- <div class="uk-position-bottom-right"> -->
 <!-- </div> -->
 <!--     <div class="uk-section uk-section-secondary uk-light">
-    <div class="uk-container">
-        <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
-            <div>
-                <h4 style="">HANDICAN</h4>
-                <div >
-                </div>
+<div class="uk-container">
+    <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+        <div>
+            <h4 style="">HANDICAN</h4>
+            <div >
             </div>
         </div>
     </div>
+</div>
 </body> -->
 </html>

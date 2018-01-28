@@ -25,7 +25,6 @@ class CreateJobForm(forms.Form):
 
 	title_th =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	title_en =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-	# job_detail =  forms.CharField(max_length=2000, help_text='',widget=forms.Textarea(attrs={'id':'jobde','rows': 5,'class': 'uk-textarea', }))
 	disability_type =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	age1 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
 	age2 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
@@ -33,10 +32,8 @@ class CreateJobForm(forms.Form):
 	sex = forms.ChoiceField(required=False,choices = GENDER_CHOICES, label="",initial='', widget=forms.Select())
 	phone_no =  forms.CharField(max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	job_detail = RichTextFormField()
-	# welfare =  RichTextFormField()
 	salary1 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
 	salary2 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-	# welfare = forms.CharField(max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea', }))
 	qualification =  forms.CharField(max_length=2000,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	qualification2 =  forms.CharField(required=False,max_length=2000,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	qualification3 =  forms.CharField(required=False,max_length=2000,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
