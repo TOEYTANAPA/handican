@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^signup-company-2/(?P<uid>\d+)$', views.company_signup2, name='company_signup2'),
     url(r'^signup-success/$', views.signup_success, name='signup_success'),
     url(r'^settings/$', views.profile, name="profile"),
+    url(r'^settings/notifications$', views.profile_noti, name="profile_noti"),
     # url(r'^password/$', views.change_password, name='change_password'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
