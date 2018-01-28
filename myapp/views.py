@@ -159,7 +159,7 @@ def show_notifications(request):
             if User.objects.filter(pk=request.user.id, groups__name='company').exists() :
                 p = Profile.objects.get(user=i.user)
                 dis = DisabilityInfo.objects.get(profile=p)
-                temp['actor'] = dis.th_name
+                temp['actor'] = dis.first_name
                 temp['action'] = i.action
                 temp['obj'] = i.obj
                 temp['time'] = i.created_at
