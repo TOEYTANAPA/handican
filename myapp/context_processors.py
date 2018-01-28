@@ -18,18 +18,17 @@ def profile(request):
 			profile_id = temp.id
 
 			noti = Notifications.objects.filter(tarket=profile)
-	
+			
 			for i in noti:
 
 			
 				temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
 				'job_name':"",'job_id':0,'noti_id':0}
-				print(temp)
 				p = Profile.objects.get(user=i.user)
 				dis = CompanyInfo.objects.get(profile=p)
-				job = Job.objects.get(company=dis)
-				temp['job_name'] = job.title_th
-				temp['job_id'] = job.id
+				# job = Job.objects.get(company=dis,job=i.job)
+				temp['job_name'] = i.job.title_th
+				temp['job_id'] = i.job.id
 				temp['name'] = dis.th_name
 				temp['action'] = i.action
 				temp['obj'] = i.obj
@@ -37,6 +36,8 @@ def profile(request):
 				temp['is_read'] = i.is_read
 				temp['img'] = p.profile_picture.url
 				temp['noti_id'] = i.id
+				print(temp ,"554555555555555")
+				
 				if temp['is_read'] == False and read:
 					read = False
 
@@ -44,6 +45,7 @@ def profile(request):
 			
 		except :
 			# raise
+
 			temp = CompanyInfo.objects.get(profile=profile)	
 			profile_name = temp.th_name
 

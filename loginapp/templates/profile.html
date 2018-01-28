@@ -430,75 +430,112 @@
                             <div class="uk-container">
                                 
                                 <h3 class="uk-float-left"><i class="fa fa-check uk-text-success" aria-hidden="true"></i> ตั้งพาสเวิร์ดเรียบร้อย</h3>
-
-                               <button class="uk-button uk-button-default uk-float-right">เปลี่ยนพาสเวิร์ด</button>
-
-
-
-
+                                <button class="uk-button uk-button-default uk-float-right">เปลี่ยนพาสเวิร์ด</button>
                             </div>
-
-                              <div class="uk-container">
-                                            <p class="uk-text-muted">เปลี่ยนพาสเวิร์ดบ่อยครั้ง เพื่อความปลอดภัย</p>
-                                  
-
-
-                              </div>
-                               <!--  <div class="uk-padding-small uk-width-1-1" uk-alert>
+                            <div class="uk-container">
+                                <p class="uk-text-muted">เปลี่ยนพาสเวิร์ดบ่อยครั้ง เพื่อความปลอดภัย</p>
+                                
+                            </div>
+                            <!--  <div class="uk-padding-small uk-width-1-1" uk-alert>
                                 <div class="uk-container">
                                     <h2>พาสเวิร์ด</h2>
                                 </div>
                             </div> -->
-
                         </div>
-                        <div id="noti">noti</div>
-                        <br>
+                        <div id="noti">
+                          
+                             <div class="uk-padding-small " uk-alert>
+                                <div class="uk-container">
+                                    <h2>รายการแจ้งเตือน</h2>
+                                </div>
+                            </div>
+                            {% for o in noti %}
+                                <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-padding " uk-grid>
+                                    <div class="uk-width-auto@m  ">
+                                        <img class="imgCrop uk-align-center imgRadius"  style="width: 90px;height: 90px" src="{{o.img}}" alt="your image" />
+                                        
+                                    </div>
+                                    <div class="uk-width-expand@m  ">
+                                        <div  uk-grid>
+                                            <div class="uk-width-1-2@m uk-width-1-2@s">
+                                                <a class="uk-link-text" href="{% url 'job_detail' o.job_name  o.job_id %}">{{o.name}}   </a>
+                                                
+                                                <!-- <h4>{{o.name}}  </h4> -->
+                                            </div>
+                                            <div class="uk-width-1-2@m uk-width-1-2@s ">
+                                                <div class="uk-margin uk-align-right">
+                                                    <!-- <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button>  -->
+                                                    <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
+                                                </div>
+                                                <!--  <button  type="submit" class="uk-button uk-button-default uk-align-right " >รายละเอียดเพิ่มเติม</button> -->
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- <button  type="submit" class="uk-button  " style="color: white;">ค้นหางาน</button> -->
+                                        <br>
+                                        <!-- <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span> -->
+                                        <span class="uk-margin-right"><label class="">{{o.disability_cate}}</label></span>
+                                        <span class="uk-margin-right uk-margin-left"><b ><i class="fa fa-money " aria-hidden="true"></i> </b> {{o.salary1}} - {{o.salary2}} บาท/เดือน</span>
+                                        <span class=" uk-margin-left"><b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span>
+                                        
+                                        <div uk-grid>
+                                            <div class="uk-width-1-2"> <p class=" ">{{o.detail}}</p></div>
+                                            <!-- <div  class="uk-width-1-2  uk-text-right "> <h1 class="score uk-margin-left">{{o.score}} %</h1></div> -->
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <hr>
+                            {% endfor %}
+                        </div>
                     </div>
-                    
+                    <br>
                 </div>
                 
-                
             </div>
+            
+            
         </div>
     </div>
-    <br>
-    <script type="text/javascript">
-    
-    
-    $("#detail").css("display", "block");
-    $("#noti").css("display", "none");
-    $("#password").css("display", "none");
-    $(".click-detail").addClass( "active" );
-    $(".click-noti").removeClass("active");
-    $(".click-password").removeClass("active");
-    $(document).ready(function() {
-    
-    $(".click-detail").click(function(){
-    $("#detail").css("display", "block");
-    $("#noti").css("display", "none");
-    $("#password").css("display", "none");
-    $(".click-detail").addClass( "active" );
-    $(".click-noti").removeClass("active");
-    $(".click-password").removeClass("active");
-    
-    });
-    $(".click-noti").click(function(){
-    $("#detail").css("display", "none");
-    $("#noti").css("display", "block");
-    $("#password").css("display", "none");
-    $(".click-detail").removeClass( "active" );
-    $(".click-noti").addClass("active");
-    $(".click-password").removeClass("active");
-    });
-    $(".click-password").click(function(){
-    $("#detail").css("display", "none");
-    $("#noti").css("display", "none");
-    $("#password").css("display", "block");
-    $(".click-detail").removeClass( "active" );
-    $(".click-noti").removeClass("active");
-    $(".click-password").addClass("active");
-    });
-    
-    });
-    </script>
+</div>
+<br>
+<script type="text/javascript">
+
+
+$("#detail").css("display", "block");
+$("#noti").css("display", "none");
+$("#password").css("display", "none");
+$(".click-detail").addClass( "active" );
+$(".click-noti").removeClass("active");
+$(".click-password").removeClass("active");
+$(document).ready(function() {
+
+$(".click-detail").click(function(){
+$("#detail").css("display", "block");
+$("#noti").css("display", "none");
+$("#password").css("display", "none");
+$(".click-detail").addClass( "active" );
+$(".click-noti").removeClass("active");
+$(".click-password").removeClass("active");
+
+});
+$(".click-noti").click(function(){
+$("#detail").css("display", "none");
+$("#noti").css("display", "block");
+$("#password").css("display", "none");
+$(".click-detail").removeClass( "active" );
+$(".click-noti").addClass("active");
+$(".click-password").removeClass("active");
+});
+$(".click-password").click(function(){
+$("#detail").css("display", "none");
+$("#noti").css("display", "none");
+$("#password").css("display", "block");
+$(".click-detail").removeClass( "active" );
+$(".click-noti").removeClass("active");
+$(".click-password").addClass("active");
+});
+
+});
+</script>
 {% endblock %}
