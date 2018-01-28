@@ -258,6 +258,16 @@
     }
     </style>
     
+     {% block messages %}
+        {% if messages %}
+            {% for message in messages %}
+                <div id="alertMsg" class="alert alert-{{ message.tags }}">  <!-- singular -->
+                <a class="close" data-dismiss="alert">×</a>
+                {{ message|safe }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
     <!-- nav-desktop -->
     <div class="uk-background-muted ">
         <br>
@@ -278,7 +288,7 @@
                                 </tr>
                                 
                                 <tr>
-                                    <td class="click-password" ><a class="uk-link-reset " >พาสเวิร์ดและความปลอดภัย</a></td>
+                                    <td class="click-password" ><a href="{% url 'change_password' %}" class="uk-link-reset " >พาสเวิร์ดและความปลอดภัย</a></td>
                                     
                                 </tr >
                                 <tr >
