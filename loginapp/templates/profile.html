@@ -201,6 +201,7 @@
     background: url("{% static "images/pbg.jpg" %}")  ;
     background-size: cover;
     height: 230px;
+    margin-right: 40px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -259,9 +260,8 @@
     vertical-align: middle;
     margin: 10px 0;
     }
-
     .container{
-        width: 95%;
+    width: 95%;
     }
     </style>
     
@@ -276,6 +276,7 @@
                 <div class="uk-width-1-4@m uk-text-center">
                     
                     <div class="uk-card uk-card-default uk-card-body  uk-padding-remove uk-margin-right ">
+                        
                         <table class="uk-table uk-table-divider" style="   border: 1px solid #50E3B9;" >
                             
                             <tbody>
@@ -296,241 +297,240 @@
                                 
                             </tbody>
                         </table>
+                        <!-- </div> -->
+                        
                     </div>
                     
                 </div>
                 <div class="uk-width-3-4@m uk-grid-match " uk-grid>
-                   
-    <div class="uk-card uk-card-default  uk-margin-top" >
-      
-      
-      
-      <div class="card hovercard"  >
-        <div class="cardheader">
-          
-        </div>
-        <div class="avatar">
-          <img src=" {{dis.profile.profile_picture.url}}" class="inImgProfile"  alt="">
-        </div>
-        <div class="uk-text-center ">
-           <div class="info uk-margin-bottom">
-                   <h2 class="uk-text-large uk-margin"> {{dis.first_name}} {{dis.last_name}}</h2>
-                    <div class="desc"><p>{{dis.job_exp}}</p></div>
-                    <div class="desc "> {% if company.website  %}
-  {{company.website }} 
-{% endif %} </div>
-                </div>
-          
-
-   
-         
-          <label for="  "></label>
-          {% if status == "ส่งคำเชิญ" %}
-            
-            
-            <a href="{% url "confirm_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
-            <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
-            
-            {% elif status == "ตอบรับคำเชิญ" %}
-            <button class="uk-button uk-button-default " type="button" disabled>
-            <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญ</button>
-            {% elif status == "ยังไม่ส่งคำเชิญ" %}
-            <a href="{% url "apply_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">สมัครงาน</a>
-            {% elif status == "สมัครงาน" %}
-            <button class="uk-button uk-button-default " type="button" disabled>
-            <i class="fa fa-check" aria-hidden="true"></i>  สมัครงานแล้ว</button>
-          {% endif %}
-        </div>
-        
-        
-        
-      </div>
-      
-      <div class="uk-container ">   <hr>
-        
-        <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดงาน </h2>
-        <table class="uk-table">
-          
-          <tbody>
-            <tr>
-              <td class="uk-width-1-6">รายละเอียดงาน:</td>
-              <td class="uk-table-expand">{{job.detail | safe}}</td>
-              
-            </tr>
-            <tr>
-              <td class="uk-width-1-6">ประเภทความพิการ:</td>
-              <td class="uk-table-expand">{{job.disability_cate}}</td>
-              
-            </tr>
-            <tr>
-              
-            </tr>
-            <tr>
-              <td class="uk-width-1-6">คุณสมบัติ:</td>
-              <td class="uk-table-expand">
-                <ul ><li> เพศ {{sex}}</li>
-                <li> อายุ {{job.age1}} - {{job.age2}} ปี</li>
-                {% for q in qualification_list %}
-                 {% if q %}
-                <li>{{q }}</li>
-                {% endif %}
-                {% endfor %}
-                <!--   <li>UI design in both Sketch and Photoshop</li>
-                <li>Working hours 9 AM - 5 PM  Monday-Friday</li> -->
-              </ul>
-            </td>
-            
-          </tr>
-          
-          <tr>
-            <td class="uk-width-1-6">เงินเดือน:</td>
-            <td class="uk-table-expand">{{job.salary1}} - {{job.salary2}} บาท</td>
-            
-          </tr>
-         
-         
-          <tr>
-            <td class="uk-width-1-6">ติดต่อฝ่ายบุคคล:</td>
-            <td class="uk-table-expand">
-<ul ><li> {{job.phone_no}}</li>   
-  <li>{{company.fax}} </li>
-                <li> {{job.email}}</li>
-             <li> {{company.address}}</li>
-
-              </ul>
-
-            </td>
-            
-          </tr>
-           
-        </tbody>
-      </table>
-      <hr>
-      <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
-      <table class="uk-table">
-        
-        <tbody>
-          <tr>
-            <td class="uk-width-1-6">คำอธิบาย:</td>
-            <td class="uk-table-expand">{{company.info}}</td>
-            
-          </tr>
-          
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <br>
-  </div>
                     
-                </div>
+                    <div class="uk-card uk-card-default" >
+                        
+                        <!-- <div class="uk-width-1-1@s"> -->
+                            
+                            <div class="card hovercard"  >
+                                <div class="cardheader">
+                                    
+                                </div>
+                                <div class="avatar">
+                                    <img src=" {{dis.profile.profile_picture.url}}" class="inImgProfile"  alt="">
+                                </div>
+                                <div class="uk-text-center ">
+                                    <div class="info uk-margin-bottom">
+                                        <h2 class="uk-text-large uk-margin"> {{dis.first_name}} {{dis.last_name}}</h2>
+                                        <div class="desc"><p>{{dis.job_exp}}</p></div>
+                                        <div class="desc "> {% if company.website  %}
+                                            {{company.website }}
+                                        {% endif %} </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <label for="  "></label>
+                                    {% if status == "ส่งคำเชิญ" %}
+                                        
+                                        
+                                        <a href="{% url "confirm_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
+                                        <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
+                                        
+                                        {% elif status == "ตอบรับคำเชิญ" %}
+                                        <button class="uk-button uk-button-default " type="button" disabled>
+                                        <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญ</button>
+                                        {% elif status == "ยังไม่ส่งคำเชิญ" %}
+                                        <a href="{% url "apply_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">สมัครงาน</a>
+                                        {% elif status == "สมัครงาน" %}
+                                        <button class="uk-button uk-button-default " type="button" disabled>
+                                        <i class="fa fa-check" aria-hidden="true"></i>  สมัครงานแล้ว</button>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                
+                            </div>
+                            
+                            <div class="uk-container ">   <hr>
+                                
+                                <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดงาน </h2>
+                                <table class="uk-table">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="uk-width-1-6">รายละเอียดงาน:</td>
+                                            <td class="uk-table-expand">{{job.detail | safe}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-width-1-6">ประเภทความพิการ:</td>
+                                            <td class="uk-table-expand">{{job.disability_cate}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-width-1-6">คุณสมบัติ:</td>
+                                            <td class="uk-table-expand">
+                                                <ul ><li> เพศ {{sex}}</li>
+                                                <li> อายุ {{job.age1}} - {{job.age2}} ปี</li>
+                                                {% for q in qualification_list %}
+                                                    {% if q %}
+                                                        <li>{{q }}</li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <!--   <li>UI design in both Sketch and Photoshop</li>
+                                                <li>Working hours 9 AM - 5 PM  Monday-Friday</li> -->
+                                            </ul>
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="uk-width-1-6">เงินเดือน:</td>
+                                        <td class="uk-table-expand">{{job.salary1}} - {{job.salary2}} บาท</td>
+                                        
+                                    </tr>
+                                    
+                                    
+                                    <tr>
+                                        <td class="uk-width-1-6">ติดต่อฝ่ายบุคคล:</td>
+                                        <td class="uk-table-expand">
+                                            <ul ><li> {{job.phone_no}}</li>
+                                            <li>{{company.fax}} </li>
+                                            <li> {{job.email}}</li>
+                                            <li> {{company.address}}</li>
+                                        </ul>
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </tbody>
+                        </table></div>
+                        <hr>
+                        <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
+                        <table class="uk-table">
+                            
+                            <tbody>
+                                <tr>
+                                    <td class="uk-width-1-6">คำอธิบาย:</td>
+                                    <td class="uk-table-expand">{{company.info}}</td>
+                                    
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <br>
+               
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-    $("#alertMsg").fadeOut(5000);
-    if ($('#alerId').css('display') == 'block') {
-    swal("Success", "สมัครบัญชีผู้ใช้สำเร็จแล้ว", "success");
-    }
-    $("#love").css("display", "none");
-    $("#order").css("display", "none");
-    $("#review").css("display", "none");
-    // $("#add").css("display", "none");
-    $("#about").css("display", "block");
-    $("#coupon").css("display", "none");
-    $(".click-about").addClass( "active" );
-    $(".click-billing").removeClass("active");
-    $(".click-password").removeClass("active");
-    $(".click-setting-noti").removeClass("active");
-    // $(".click-add").removeClass("active");
-    $(document).ready(function() {
-    $('.icon-click').click(function() {
-    $("i", this).toggleClass("fa-angle-left fa-angle-down");
-    });
-    $(".click-about").click(function(){
-    $("#love").css("display", "none");
-    $("#order").css("display", "none");
-    $("#review").css("display", "none");
-    // $("#add").css("display", "block");
-    $("#about").css("display", "none");
-    $("#coupon").css("display", "none");
-    $(".click-about").addClass( "active" );
-    $(".click-love").removeClass("active");
-    $(".click-review").removeClass("active");
-    $(".click-order").removeClass("active");
-    // $(".click-add").removeClass("active");
-    $(".click-coupon").removeClass("active");
-    });
-    $(".click-love").click(function(){
-    $("#love").css("display", "block");
-    $("#order").css("display", "none");
-    $("#review").css("display", "none");
-    // $("#add").css("display", "none");
-    $("#about").css("display", "none");
-    $("#coupon").css("display", "none");
-    $(".click-love").addClass( "active" );
-    $(".click-about").removeClass("active");
-    $(".click-review").removeClass("active");
-    $(".click-order").removeClass("active");
-    // $(".click-add").removeClass("active");
-    $(".click-coupon").removeClass("active");
-    });
-    $(".click-order").click(function(){
-    $("#love").css("display", "none");
-    $("#order").css("display", "block");
-    $("#review").css("display", "none");
-    // $("#add").css("display", "none");
-    $("#about").css("display", "none");
-    $("#coupon").css("display", "none");
-    $(".click-order").addClass( "active" );
-    $(".click-about").removeClass("active");
-    $(".click-review").removeClass("active");
-    $(".click-love").removeClass("active");
-    // $(".click-add").removeClass("active");
-    $(".click-coupon").removeClass("active");
-    });
-    $(".click-review").click(function(){
-    $("#love").css("display", "none");
-    $("#order").css("display", "none");
-    $("#review").css("display", "block");
-    // $("#add").css("display", "none");
-    $("#about").css("display", "none");
-    $("#coupon").css("display", "none");
-    $(".click-review").addClass( "active" );
-    $(".click-about").removeClass("active");
-    $(".click-order").removeClass("active");
-    $(".click-love").removeClass("active");
-    // $(".click-add").removeClass("active");
-    $(".click-coupon").removeClass("active");
-    });
-    $(".click-add").click(function(){
-    $("#love").css("display", "none");
-    $("#order").css("display", "none");
-    $("#review").css("display", "none");
-    // $("#add").css("display", "block");
-    $("#about").css("display", "none");
-    $("#coupon").css("display", "none");
-    // $(".click-add").addClass( "active" );
-    $(".click-about").removeClass("active");
-    $(".click-order").removeClass("active");
-    $(".click-love").removeClass("active");
-    $(".click-review").removeClass("active");
-    $(".click-coupon").removeClass("active");
-    });
-    $(".click-coupon").click(function(){
-    $("#love").css("display", "none");
-    $("#order").css("display", "none");
-    $("#review").css("display", "none");
-    // $("#add").css("display", "none");
-    $("#about").css("display", "none");
-    $("#coupon").css("display", "block");
-    // $(".click-add").removeClass( "active" );
-    $(".click-about").removeClass("active");
-    $(".click-order").removeClass("active");
-    $(".click-love").removeClass("active");
-    $(".click-review").removeClass("active");
-    $(".click-coupon").addClass("active");
-    });
-    });
-    </script>
+</div>
+</div>
+<script type="text/javascript">
+$("#alertMsg").fadeOut(5000);
+if ($('#alerId').css('display') == 'block') {
+swal("Success", "สมัครบัญชีผู้ใช้สำเร็จแล้ว", "success");
+}
+$("#love").css("display", "none");
+$("#order").css("display", "none");
+$("#review").css("display", "none");
+// $("#add").css("display", "none");
+$("#about").css("display", "block");
+$("#coupon").css("display", "none");
+$(".click-about").addClass( "active" );
+$(".click-billing").removeClass("active");
+$(".click-password").removeClass("active");
+$(".click-setting-noti").removeClass("active");
+// $(".click-add").removeClass("active");
+$(document).ready(function() {
+$('.icon-click').click(function() {
+$("i", this).toggleClass("fa-angle-left fa-angle-down");
+});
+$(".click-about").click(function(){
+$("#love").css("display", "none");
+$("#order").css("display", "none");
+$("#review").css("display", "none");
+// $("#add").css("display", "block");
+$("#about").css("display", "none");
+$("#coupon").css("display", "none");
+$(".click-about").addClass( "active" );
+$(".click-love").removeClass("active");
+$(".click-review").removeClass("active");
+$(".click-order").removeClass("active");
+// $(".click-add").removeClass("active");
+$(".click-coupon").removeClass("active");
+});
+$(".click-love").click(function(){
+$("#love").css("display", "block");
+$("#order").css("display", "none");
+$("#review").css("display", "none");
+// $("#add").css("display", "none");
+$("#about").css("display", "none");
+$("#coupon").css("display", "none");
+$(".click-love").addClass( "active" );
+$(".click-about").removeClass("active");
+$(".click-review").removeClass("active");
+$(".click-order").removeClass("active");
+// $(".click-add").removeClass("active");
+$(".click-coupon").removeClass("active");
+});
+$(".click-order").click(function(){
+$("#love").css("display", "none");
+$("#order").css("display", "block");
+$("#review").css("display", "none");
+// $("#add").css("display", "none");
+$("#about").css("display", "none");
+$("#coupon").css("display", "none");
+$(".click-order").addClass( "active" );
+$(".click-about").removeClass("active");
+$(".click-review").removeClass("active");
+$(".click-love").removeClass("active");
+// $(".click-add").removeClass("active");
+$(".click-coupon").removeClass("active");
+});
+$(".click-review").click(function(){
+$("#love").css("display", "none");
+$("#order").css("display", "none");
+$("#review").css("display", "block");
+// $("#add").css("display", "none");
+$("#about").css("display", "none");
+$("#coupon").css("display", "none");
+$(".click-review").addClass( "active" );
+$(".click-about").removeClass("active");
+$(".click-order").removeClass("active");
+$(".click-love").removeClass("active");
+// $(".click-add").removeClass("active");
+$(".click-coupon").removeClass("active");
+});
+$(".click-add").click(function(){
+$("#love").css("display", "none");
+$("#order").css("display", "none");
+$("#review").css("display", "none");
+// $("#add").css("display", "block");
+$("#about").css("display", "none");
+$("#coupon").css("display", "none");
+// $(".click-add").addClass( "active" );
+$(".click-about").removeClass("active");
+$(".click-order").removeClass("active");
+$(".click-love").removeClass("active");
+$(".click-review").removeClass("active");
+$(".click-coupon").removeClass("active");
+});
+$(".click-coupon").click(function(){
+$("#love").css("display", "none");
+$("#order").css("display", "none");
+$("#review").css("display", "none");
+// $("#add").css("display", "none");
+$("#about").css("display", "none");
+$("#coupon").css("display", "block");
+// $(".click-add").removeClass( "active" );
+$(".click-about").removeClass("active");
+$(".click-order").removeClass("active");
+$(".click-love").removeClass("active");
+$(".click-review").removeClass("active");
+$(".click-coupon").addClass("active");
+});
+});
+</script>
 {% endblock %}

@@ -40,15 +40,10 @@
   overflow: hidden;
   position:  relative;
   border-radius: 50%;
-  margin-left: 20px;
-  margin-top: 40px;
   /*align-items: center;*/
   }
   
-  
-  
   .inImgProfile{
-  position: absolute;
   width: 100px;
   height: 100px;
   object-fit: cover;
@@ -65,318 +60,348 @@
   height: 200px;
   object-fit: cover;
   }
+  
+
+  .card {
+  padding-top: 20px;
+  margin: 10px 0 20px 0;
+  background-color: rgba(214, 224, 226, 0.2);
+  border-top-width: 0;
+  border-bottom-width: 2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  }
+  .card .card-heading {
+  padding: 0 20px;
+  margin: 0;
+  }
+  .card .card-heading.simple {
+  font-size: 20px;
+  font-weight: 300;
+  color: #777;
+  border-bottom: 1px solid #e5e5e5;
+  }
+  .card .card-heading.image img {
+  display: inline-block;
+  width: 46px;
+  height: 46px;
+  margin-right: 15px;
+  vertical-align: top;
+  border: 0;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  }
+  .card .card-heading.image .card-heading-header {
+  display: inline-block;
+  vertical-align: top;
+  }
+  .card .card-heading.image .card-heading-header h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 16px;
+  color: #262626;
+  }
+  .card .card-heading.image .card-heading-header span {
+  font-size: 12px;
+  color: #999999;
+  }
+  .card .card-body {
+  padding: 0 20px;
+  margin-top: 20px;
+  }
+  .card .card-media {
+  padding: 0 20px;
+  margin: 0 -14px;
+  }
+  .card .card-media img {
+  max-width: 100%;
+  max-height: 100%;
+  }
+  .card .card-actions {
+  min-height: 30px;
+  padding: 0 20px 20px 20px;
+  margin: 20px 0 0 0;
+  }
+  .card .card-comments {
+  padding: 20px;
+  margin: 0;
+  background-color: #f8f8f8;
+  }
+  .card .card-comments .comments-collapse-toggle {
+  padding: 0;
+  margin: 0 20px 12px 20px;
+  }
+  .card .card-comments .comments-collapse-toggle a,
+  .card .card-comments .comments-collapse-toggle span {
+  padding-right: 5px;
+  overflow: hidden;
+  font-size: 12px;
+  color: #999;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  }
+  .card-comments .media-heading {
+  font-size: 13px;
+  font-weight: bold;
+  }
+  .card.people {
+  position: relative;
+  display: inline-block;
+  width: 170px;
+  height: 300px;
+  padding-top: 0;
+  margin-left: 20px;
+  overflow: hidden;
+  vertical-align: top;
+  }
+  .card.people:first-child {
+  margin-left: 0;
+  }
+  .card.people .card-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 170px;
+  height: 150px;
+  background-color: #ffffff;
+  }
+  .card.people .card-top.green {
+  background-color: #53a93f;
+  }
+  .card.people .card-top.blue {
+  background-color: #427fed;
+  }
+  .card.people .card-info {
+  position: absolute;
+  top: 150px;
+  display: inline-block;
+  width: 100%;
+  height: 101px;
+  overflow: hidden;
+  background: #ffffff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  }
+  .card.people .card-info .title {
+  display: block;
+  margin: 8px 14px 0 14px;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #404040;
+  }
+  .card.people .card-info .desc {
+  display: block;
+  margin: 8px 14px 0 14px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 16px;
+  color: #737373;
+  text-overflow: ellipsis;
+  }
+  .card.people .card-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  padding: 10px 20px;
+  line-height: 29px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  }
+  .card.hovercard {
+  position: relative;
+  padding-top: 0;
+  overflow: hidden;
+  text-align: center;
+  background-color: white;
+  }
+  .card.hovercard .cardheader {
+  background: url("{% static "images/pbg.jpg" %}")  ;
+  background-size: cover;
+  height: 230px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position:center;
+  }
+  .card.hovercard .avatar {
+  position: relative;
+  top: -70px;
+  margin-bottom: -50px;
+  object-fit: cover;
+  /*position: absolute;*/
+  }
+  .card.hovercard .avatar img {
+  width: 140px;
+  height: 140px;
+  max-width: 150px;
+  max-height: 150px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.5);
+  }
+  .card.hovercard .bottom {
+  padding: 0 20px;
+  margin-bottom: 17px;
+  }
+  .card.people .card-info .desc {
+    display: block;
+    margin: 8px 14px 0 14px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 16px;
+    color: #737373;
+    text-overflow: ellipsis;
+}
+
+  .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
   </style>
-  <br>
   <!-- style="width: 100px;height: 100px" -->
-  <div class="container  ">
-    
-
-    งาน
+  <div class="container ">
     
     
-    
-    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-      <div class="uk-card-media-left uk-cover-container uk-width-auto">
-        <!-- <img src="../docs/images/light.jpg" alt="" uk-cover> -->
-        <!-- <canvas width="600" height="400"></canvas> -->
-        <!-- <div class="uk-width-auto" > -->
-        <div class="imgCropProfile">
-          <img src=" {% static "images/wcb.jpg" %}" class="inImgProfile" alt="">
-        </div>
-      </div>
-      <div>
-        <div class="uk-card-body">
-          <h1 class="uk-margin-remove-bottom  ">Web Course Bangkok</h1>
-          <!--   <h4>We give you skills to grow ideas</h4>
-          <label for="">We give you skills to grow ideas</label> -->
-          <p>We give you skills to grow ideas</p>
-            {% if status == "ส่งคำเชิญ" %}
-        
+    <div class="uk-card uk-card-default  uk-margin-top" >
+      
+      
+      
+      <div class="card hovercard"  >
+        <div class="cardheader">
           
-              <a href="{% url "confirm_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
-              <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
-              
+        </div>
+        <div class="avatar">
+          <img src=" {{company.profile.profile_picture.url}}" class="inImgProfile"  alt="">
+        </div>
+        <div class="uk-text-center ">
+           <div class="info uk-margin-bottom">
+                   <h2 class="uk-text-large uk-margin-remove-bottom uk-margin"> {{job.company}}</h2>
+                    <div class="desc">{{job.email}}</div>
+                    <div class="desc "> {% if company.website  %}
+  {{company.website }} 
+{% endif %} </div>
+                </div>
+          
+
+   
+         
+          <label for="  "></label>
+          {% if status == "ส่งคำเชิญ" %}
+            
+            
+            <a href="{% url "confirm_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">ตอบรับคำเชิญ</a>
+            <!-- <a href="" class="uk-button uk-button-default" type="button">เพิกเฉย</a> -->
+            
             {% elif status == "ตอบรับคำเชิญ" %}
-              <button class="uk-button uk-button-default " type="button" disabled>
-              <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญ</button>
-              {% elif status == "ยังไม่ส่งคำเชิญ" %}
-
-                <a href="{% url "apply_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">สมัครงาน</a>
-
-                {% elif status == "สมัครงาน" %}
-                <button class="uk-button uk-button-default " type="button" disabled>
-              <i class="fa fa-check" aria-hidden="true"></i>  สมัครงานแล้ว</button>
-            {% endif %}
+            <button class="uk-button uk-button-default " type="button" disabled>
+            <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญ</button>
+            {% elif status == "ยังไม่ส่งคำเชิญ" %}
+            <a href="{% url "apply_job" dis job.id %}" class="uk-button uk-button-default btn-active " type="button">สมัครงาน</a>
+            {% elif status == "สมัครงาน" %}
+            <button class="uk-button uk-button-default " type="button" disabled>
+            <i class="fa fa-check" aria-hidden="true"></i>  สมัครงานแล้ว</button>
+          {% endif %}
         </div>
-      </div>
-      <br>
-      <div class="  uk-margin-left uk-width-1-1@m">
-        <h4 class="uk-margin-top uk-margin-bottom "><label for="">Email:</label> info@webcoursesbangkok.com</h4>
-        <!-- <h2 class="uk-margin-remove-top">Company Details</h2> -->
-        <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
-        <div class="uk-margin-left">
-          <label for="">Web Courses Bangkok   <span>
-            <p>      http://www.webcoursesbangkok.com</p>
-            
-          </span> </label>
-          
-          <div  class="uk-margin-bottom uk-margin-remove-top  " uk-grid>
-            <div class="uk-width-auto@m">
-              <p class=" uk-text-right"  > คำอธิบาย:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  > Web Courses was founded on the idea of improving the skills of others through practical applications based on exciting ideas. We help those who have a passion to grow their ideas and skills into something more. Our vision has always been to help, inspire and excite through creativity and experience.
-                ​
-                In early 2013 we became a fully accredited web/graphic design school here in Bangkok. This was a huge step for both us and Thailand and we hope to continue to bring an international standard of design.
-                ​
-              Three is a lucky number which is why we also have Web Jobs and our Design Agency.​</p>
-            </div>
-            
-          </div>
-          <p class=" "  > รูปภาพการทำงาน:</p>
-          <div class="imgCrop uk-align-center">
-            <img class="inImg " src="{% static "images/off.jpg" %}" alt="">
-          </div>
-          
-        </div>
-        <!-- end section -->
-        <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดงาน </h2>
-        <div class="uk-margin-left">
-          <p class="uk-margin-remove-bottom"><label for="">Position:</label> UX/UI Designer</p>
-          
-          <p class="uk-margin-remove-top"> <label for="">Disables type:</label> Physical</p>
-          <div  class="   " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  > คำอธิบาย:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <ul >
-                <li>Looking for a good UX/UI designer who can build wireframe at low-fidelities designs</li>
-                <li>UX research, design and testing</li>
-                <li>UI design in both Sketch and Photoshop</li>
-                <li>Working hours 9 AM - 5 PM  Monday-Friday</li>
-              </ul>
-              <!--    <p class=" "  >Looking for a good UX/UI designer who can build wireframe at low-fidelities designs</p>
-              <p>UX research, design and testing</p>
-              <p>UI design in both Sketch and Photoshop</p>
-              <p>Working hours 9 AM - 5 PM  Monday-Friday</p> -->
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  > ทักษะที่ต้องการ:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >Invision & Proto.io</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  > เงินเดือน:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >12,000 บาท/เดือน</p>
-              
-            </div>
-            
-          </div>
-          
-          <div  class="" uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  > สวัสดิการ:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >Transportation 100 bath/day</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  > The character of disabled people:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >We want extrovert personality and can work as a team.</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-2@m">
-              <p class=" "  > Main requirements to be able to work (For those who are out of work, and would wish to work, the main perceived barriers are, in order of importance):</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <ul>
-                <li>Flexible work arrangements (45%)</li>
-                <li>Modified tasks (29%)</li>
-                <li>Wage subsidy (24%)</li>
-                <li>Transport/parking (17%)</li>
-                <li>Accessible building (13%)</li>
-                <li>Human support (7%)</li>
-                <li>Assistive technology or physical adjustments (4%)</li>
-              </ul>
-              
-              
-            </div>
-            
-          </div>
-        </div>
-        <!-- end section -->
-        <h2 class="uk-heading-bullet uk-margin-remove-top ">ติดต่อบริษัท </h2>
-        <div class="uk-margin-left">
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  >เจ้าของบริษัท:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >Carl Daniel Heaton</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  >ที่อยู่:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >Web Courses Bangkok Sathorn Training Centre Rama 4, Bangkok 10210</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  >เบอร์โทรศัพท์:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >02-679-8607</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  >Accessibilities:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >Take the MRT Lumpini Exit 1, walk 20 meters down Rama 4 and look for a gate, turn right and you'll find us.</p>
-              
-            </div>
-            
-          </div>
-          <div  class="  " uk-grid>
-            <div class="uk-width-1-6@m">
-              <p class=" uk-text-right"  >  Opening Hours:</p>
-              
-            </div>
-            <div class="uk-width-expand@m">
-              <p class=" "  >9am - 6pm</p>
-              
-            </div>
-            
-          </div>
-        </div>
-        <!--end section  -->
-        <br>
-        <h2 class="uk-heading-bullet uk-margin-remove-top ">Accessibilities </h2>
-        <div class="uk-margin-left">
-          <!--   <label for="">Web Courses Bangkok   <span>
-            <p>      http://www.webcoursesbangkok.com</p>
-            
-          </span> </label>
-          -->
-          
-          <p class=" "  > Accessibilities from you location :</p>
-          <div class=" uk-align-center uk-margin-remove-top">
-            <img style="width: 100%;height: 100%" src="{% static "images/map.png" %}" alt="">
-          </div>
-          
-        </div>
-        <!--end section -->
-        <hr>
+        
+        
         
       </div>
       
+      <div class="uk-container ">   <hr>
+        
+        <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดงาน </h2>
+        <table class="uk-table">
+          
+          <tbody>
+            <tr>
+              <td class="uk-width-1-6">รายละเอียดงาน:</td>
+              <td class="uk-table-expand">{{job.detail | safe}}</td>
+              
+            </tr>
+            <tr>
+              <td class="uk-width-1-6">ประเภทความพิการ:</td>
+              <td class="uk-table-expand">{{job.disability_cate}}</td>
+              
+            </tr>
+            <tr>
+              
+            </tr>
+            <tr>
+              <td class="uk-width-1-6">คุณสมบัติ:</td>
+              <td class="uk-table-expand">
+                <ul ><li> เพศ {{job.sex}}</li>
+                <li> อายุ {{job.age1}} - {{job.age2}} ปี</li>
+                {% for q in qualification_list %}
+                 {% if q %}
+                <li>{{q }}</li>
+                {% endif %}
+                {% endfor %}
+                <!--   <li>UI design in both Sketch and Photoshop</li>
+                <li>Working hours 9 AM - 5 PM  Monday-Friday</li> -->
+              </ul>
+            </td>
+            
+          </tr>
+          
+          <tr>
+            <td class="uk-width-1-6">เงินเดือน:</td>
+            <td class="uk-table-expand">{{job.salary1}} - {{job.salary2}} บาท</td>
+            
+          </tr>
+         
+         
+          <tr>
+            <td class="uk-width-1-6">ติดต่อฝ่ายบุคคล:</td>
+            <td class="uk-table-expand">
+<ul ><li> {{job.phone_no}}</li>   
+  <li>{{company.fax}} </li>
+                <li> {{job.email}}</li>
+             <li> {{company.address}}</li>
+
+              </ul>
+
+            </td>
+            
+          </tr>
+           
+        </tbody>
+      </table>
+      <hr>
+      <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
+      <table class="uk-table">
+        
+        <tbody>
+          <tr>
+            <td class="uk-width-1-6">คำอธิบาย:</td>
+            <td class="uk-table-expand">{{company.info}}</td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
     </div>
+    <br>
+    <br>
   </div>
   <br>
-  <!-- </div> -->
+  <br>
+</div>
+<!-- container -->
+<br>
+
 {% endblock %}
-<!-- </div> -->
-<!--
-<div class="uk-card uk-card-default">
-  <div class="uk-card-body uk-margin-remove">
-    
-    
-    <div class="uk-child-width-1-1@s uk-child-width-1-2@m " uk-grid>
-      <div class="uk-width-auto@m  ">
-        <img class="imgCrop uk-align-center"  style="width: 80px;height: 80px" src="{% static "images/test.jpg" %}" alt="your image" />
-        
-      </div>
-      <div class="uk-width-expand@m  ">
-        <div  uk-grid>
-          <div class="uk-width-1-2@m uk-width-1-2@s">
-            <label for="">Web Courses Bangkok     <p>Position: </p></label>
-          </div>
-          <div class="uk-width-1-2@m uk-width-1-2@s ">
-            <div class="uk-margin uk-align-right">
-              <button  type="submit" class="uk-button uk-button-default  uk-button-small " >รายละเอียดเพิ่มเติม</button> <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
-            </div>
-            
-          </div>
-        </div>
-        
-        
-        <br>
-        <span class="glyphicon glyphicon-eye-close uk-margin-right" aria-hidden="true"> </span><span class="uk-margin-right"> 8000 - 10,000 บาท/เดือน</span>
-        <span class="glyphicon glyphicon-map-marker" aria-hidden="true">Rama VI</span>
-        
-        <p> </p>
-        <p class="uk-text-muted">I am ready for the job and I hope you will give me a chance to work for you or with your team and company. I can do anything about maintenance.</p>
-      </div>
-    </div>
-    
-    <div uk-grid>
-      <div class="uk-width-1-6@m">
-        <div>
-        <img id="blah" class="imgCrop inImg " style="width: 100px;height: 100px" src="{% static "images/test.jpg" %}" alt="your image" /></div>
-      </div>
-      <div class="uk-width-expand@m">
-        <h1 class="uk-margin-left"> Web Course Bangkok</h1>
-      </div>
-    </div>
-    
-    
-    
-    <div uk-grid>
-      <div class="uk-width-1-6@m">
-        <div>
-        <img id="blah" class="imgCrop inImg " style="width: 100px;height: 100px" src="{% static "images/test.jpg" %}" alt="your image" /></div>
-      </div>
-      <div class="uk-width-expand@m">
-        <h1 class="uk-margin-left"> Web Course Bangkok</h1>
-      </div>
-    </div>
-    
-    
-    
-    <br>
-    
-    
-    
-  </div>
-</div> -->

@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm, Textarea,TextInput,FileInput,ChoiceField,Select
 from datetime import datetime
+
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
+
 # Create your models here.
 	
 class Profile(models.Model):
@@ -18,8 +23,8 @@ class DisabilityInfo(models.Model):
 	age = models.IntegerField()
 	sex = models.CharField(max_length=10)
 	email = models.EmailField(max_length=100)
-	phone_no = models.CharField(max_length=20,default="-")
-	address = models.CharField(max_length=5000,blank=True,null=True,default="-")
+	phone_no = models.CharField(max_length=20,default="ไม่ระบุ")
+	address = models.CharField(max_length=5000,blank=True,null=True,default="ไม่ระบุ")
 	disability_cate = models.CharField(max_length=100)
 	job_interest = models.CharField(max_length=100)
 	job_exp = models.CharField(max_length=5000,default="")
@@ -39,10 +44,10 @@ class CompanyInfo(models.Model):
 	profile = models.ForeignKey(Profile, on_delete=models.SET_NULL,blank=True,null=True)
 	th_name = models.CharField(max_length=100,editable=True )
 	en_name = models.CharField(max_length=100,editable=True )
-	phone_no = models.CharField(max_length=20,default="-")
-	address = models.CharField(max_length=5000,default="-")
-	info = models.CharField(max_length=5000,default="-")
-	website = models.CharField(max_length=50)
+	phone_no = models.CharField(max_length=20,default="ไม่ระบุ")
+	address = models.CharField(max_length=5000,default="ไม่ระบุ")
+	info = models.CharField(max_length=5000,default="ไม่ระบุ")
+	website = models.CharField(max_length=50,default="ไม่ระบุ")
 	fax = models.CharField(max_length=30)
 	company_type = models.CharField(max_length=100)
 	get_more_info = models.BooleanField()
@@ -55,18 +60,24 @@ class Job(models.Model):
 	company = models.ForeignKey(CompanyInfo, on_delete=models.SET_NULL,blank=True,null=True)
 	title_th = models.CharField(max_length=100,editable=True )
 	title_en = models.CharField(max_length=100,editable=True )
+	email = models.EmailField(max_length=100,blank=True,null=True)
 	age1 = models.IntegerField(blank=True,null=True)
 	age2 = models.IntegerField(blank=True,null=True)
 	sex = models.CharField(max_length=10)
-	detail = models.CharField(max_length=5000,default="")
+	detail = RichTextField(blank=True,null=True)
+	# welfare = RichTextField(blank=True,null=True)
+
+	# detail = models.CharField(max_length=5000,default="ไม่ระบุ")
+	phone_no = models.CharField(max_length=20,default="ไม่ระบุ")
 	disability_cate = models.CharField(max_length=100)
-	traveling = models.CharField(max_length=3000)
-	welfare = models.CharField(max_length=5000)
+	# welfare = models.CharField(max_length=5000)
 	salary1 = models.IntegerField(blank=True,null=True)
 	salary2 = models.IntegerField(blank=True,null=True)
-	qulification = models.CharField(max_length=5000,blank=True,null=True)
-	company_image=models.ImageField(upload_to="createJob/",default="")
+	qualification = models.CharField(max_length=5000,blank=True,null=True)
 	province = models.CharField(max_length=250,default="",blank=True,null=True,)
+	address = models.CharField(max_length=5000,default="ไม่ระบุ")
+
+
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
 	def __str__(self):
 		return "%s"%(self.title_th)
