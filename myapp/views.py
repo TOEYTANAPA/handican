@@ -378,7 +378,7 @@ def search(request):
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
             temp={"job_id":0 ,"name":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0}
+            "job_exp":"","dis_cate":"","province":"","score":0,"save":False}
             job_match = Job.objects.get(id=r)
 
             temp['score'] = temp_dict[r]
@@ -393,6 +393,23 @@ def search(request):
             c = CompanyInfo.objects.get(id=job_match.company.id)
             # print("cid",c.profile.id)
             temp['url_pic'] =  Profile.objects.get(id=c.profile.id).profile_picture.url
+
+            if Save.objects.filter(user=request.user,target=c.profile,name=job_match.title_th).exists():
+                print("saeeeeeeeeee")
+                temp['save'] = True
+            else:
+                temp['save'] = False    
+
+            # try:
+            #     s = Save.objects.get(user=request.user,target=dis.profile)
+            #     temp['save'] = True
+
+            # except Exception as e:
+            #     temp['save'] = False
+        
+
+
+
             output_match.append(temp)
         # print (output)
             # output_match.append(temp)
@@ -473,7 +490,7 @@ def employer_search(request):
             messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
             print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
             nextPage = "employer-search"
-            return HttpResponseRedirect(nextPage)
+            return redirect(nextPage)
 
 
     else :
@@ -604,10 +621,17 @@ def employer_search(request):
             temp['dis_cate'] = dis.disability_cate
             temp['province'] = dis.province
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
-            if Save.objects.filter(user=request.user,target=dis.profile).exists():
+            name =dis.first_name+" "+dis.last_name
+            try:
+                s = Save.objects.get(user=request.user,target=dis.profile,name=name)
                 temp['save'] = True
-            else:
+
+            except Exception as e:
                 temp['save'] = False
+        
+           
+                
+            
 
 
 
@@ -776,53 +800,94 @@ def disable_search_job(request):
     job_title_th = request.GET.get('job_title',"")
     dis_cate = request.GET.get('dis_cate',"")
     location = request.GET.get('location',"")
-    salary1 = request.GET.get('salary1',0)
-    salary2 = request.GET.get('salary2',0)
+    salary1 = request.GET.get('salary1',"")
+    salary2 = request.GET.get('salary2',"")
 
-    search_job_list = Job.objects.filter(
-    Q(title_th__icontains=job_title_th),
-    Q(province__icontains=location),
-    Q(disability_cate__icontains=dis_cate),
-    Q(salary1__gte=salary1) | Q(salary1__lte=salary2) & Q(salary2__lte=salary2),
-    )
+    if salary1 is "" or salary2 is "":
+        search_job_list = Job.objects.filter(
+        Q(title_th__icontains=job_title_th),
+        Q(province__icontains=location),
+        Q(disability_cate__icontains=dis_cate),
+        )
+    else:
+        search_job_list = Job.objects.filter(
+        Q(title_th__icontains=job_title_th),
+        Q(province__icontains=location),
+        Q(disability_cate__icontains=dis_cate),
+        Q(salary1__gte=salary1) | Q(salary1__lte=salary2) & Q(salary2__lte=salary2),
+        )
+    output =[]
+    for i in search_job_list:
+        temp={"id":0,"name":"","detail":"","url_pic":None,"salary1":0,"salary2":0,
+            "job_exp":"","dis_cate":"","province":"",}
+        temp['id'] = i.id         
+        temp['name'] = i.title_th
+        temp['detail'] = i.detail
+        temp['salary1'] = i.salary1
+        temp['salary2'] = i.salary2
+        temp['dis_cate'] = i.disability_cate
+        temp['province'] = i.province
+        temp['url_pic'] = i.company.profile.profile_picture.url
+        output.append(temp)
+    
+    print("type",type(salary2))
     print("job_title_th",job_title_th)
     print("searcj",search_job_list)
 
-    return render(request, 'search.html',{'search_job_list':search_job_list,
+    return render(request, 'search.html',{'search_job_list':output,
         'job_title_th':job_title_th,'dis_cate':dis_cate,'location':location,
         'salary1':salary1,'salary2':salary2})
 
 
 @login_required
-def checkIsSave(request):
+def company_save_disable(request):
     print("in checkIsSell")
     if request.method == 'POST':
         print("in post")
         # user = request.user
         dis_id = request.POST.get('dis_id', None)
-        isChecked = request.POST.get('isClicked', None)
-        # user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
-    # tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
+        title = request.POST.get('title', None)
+
+        print(title)
         dis =DisabilityInfo.objects.get(id=dis_id)
+        name =dis.first_name+" "+dis.last_name
         print(dis)
-        if isChecked:
-            pass
-            # if store.likes.filter(id=user.id).exists():
-            # store.likes.remove(user)
-            # u = User_session.objects.get(user=request.user,action="like",value=store.id)
-            # u.delete()
-
-            # else:
-            #     pass
-                # store.likes.add(user)
-                # collect_session(request,"like",store.id)
+        # print(isChecked)
+        if title == 'บันทึก':
+            Save.objects.create(user=request.user,target=dis.profile,name=name)
+            context = 'create'
         else:
-            Save.objects.get(user=request.user,tarket=dis.profile).delete()
+            Save.objects.filter(user=request.user,target=dis.profile,name=name).delete()
             print("delete")
+            context = 'delete'
 
-    context = 'success'
+    
     return HttpResponse(json.dumps(context), content_type='application/json')
 
+@login_required
+def disable_save_job(request):
+    print("in checkIsSell")
+    if request.method == 'POST':
+        print("in post")
+        # user = request.user
+        job_id = request.POST.get('job_id', None)
+        title = request.POST.get('title', None)
+
+        print(title)
+        job =Job.objects.get(id=job_id)
+        # profile = Profile.objects.get(company=job.company)
+        print(job)
+        # print(isChecked)
+        if title == 'บันทึก':
+            Save.objects.create(user=request.user,target=job.company.profile,name=job.title_th)
+            context = 'create'
+        else:
+            Save.objects.filter(user=request.user,target=job.company.profile,name=job.title_th).delete()
+            print("delete")
+            context = 'delete'
+
+    
+    return HttpResponse(json.dumps(context), content_type='application/json')
 
 def create_job(request):
     if request.method == 'POST':
