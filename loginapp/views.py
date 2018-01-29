@@ -9,6 +9,7 @@ from loginapp.forms import *
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.http import Http404
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 def signup(request):
@@ -18,6 +19,21 @@ def choose_signup(request):
     return render(request, 'choose_signup.html')
 def signup_success(request):
     return render(request, 'signup_success.html')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profile')
+        # else:
+        #     messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {'form': form})
 
 
 def job_signup(request):
@@ -156,11 +172,13 @@ def company_signup2(request,uid):
             # redirect process3
     else:
         form = CompanyInformationForm()
-    return render(request, 'company_signup2.html', {'form': form})    
+    return render(request, 'company_signup2.html', {'form': form})
 
+@login_required
 def profile(request):
     list_noti = []
-   
+    read =True
+
     profile = Profile.objects.get(user=request.user)
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         dis = DisabilityInfo.objects.get(profile=profile)
@@ -168,31 +186,56 @@ def profile(request):
             
         for i in noti:
             temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
-            'job_name':"",'job_id':0,'noti_id':0,'title_th':"",'disability_cate': '',
-            'salary1':0,'salary2': 0,'province':'','detail':""}
+            'job_name':"",'job_id':0,'noti_id':0}
             p = Profile.objects.get(user=i.user)
-            comp = CompanyInfo.objects.get(profile=p)
+            dis = CompanyInfo.objects.get(profile=p)
             temp['job_name'] = i.job.title_th
             temp['job_id'] = i.job.id
-            temp['name'] = comp.th_name
+            temp['name'] = dis.th_name
             temp['action'] = i.action
             temp['obj'] = i.obj
             temp['time'] = i.created_at
             temp['is_read'] = i.is_read
             temp['img'] = p.profile_picture.url
             temp['noti_id'] = i.id
-            temp['salary1'] = i.job.salary1
-            temp['salary2'] = i.job.salary2
-            temp['province'] = i.job.province
-            temp['detail'] = i.job.detail
-            temp['disability_cate'] = i.job.disability_cate
                 
             print(temp['is_read'])
             list_noti.append(temp)
 
         return render(request, 'profile.html',{'dis':dis,'noti':list_noti})
     else :
-         return render(request, 'profile.html',{'dis':"dis"})
+        print("ds")
+        return  redirect('company_profile')
+        # return render(request, 'profile.html',{'dis':"dis"})
+@login_required
+def company_profile(request):
+    read =True
+    list_noti = []
+    profile = Profile.objects.get(user=request.user)
+    company = CompanyInfo.objects.get(profile=profile)
+    noti = Notifications.objects.filter(tarket=profile)
+    for i in noti:
+            temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+            'job_name':"",'job_id':0,'noti_id':0}
+            # p = Profile.objects.get(user=i.user)
+            # dis = CompanyInfo.objects.get(profile=p)
+            # temp['job_name'] = i.job.title_th
+            # temp['job_id'] = i.job.id
+            # temp['name'] = dis.th_name
+            # temp['action'] = i.action
+            # temp['obj'] = i.obj
+            # temp['time'] = i.created_at
+            # temp['is_read'] = i.is_read
+            # temp['img'] = p.profile_picture.url
+            # temp['noti_id'] = i.id
+                
+            # if temp['is_read'] == False and read:
+            #     read = False
+
+            list_noti.append(temp)
+
+    
+    return render(request, 'company_profile.html',{'company':company,'noti':list_noti})       
 
 
 
