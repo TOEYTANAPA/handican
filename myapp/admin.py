@@ -28,6 +28,11 @@ class NotificationsAdmin(admin.ModelAdmin):
 	list_display=[f.name for f in Notifications._meta.fields]
 admin.site.register(Notifications, NotificationsAdmin)
 
+class SaveAdmin(admin.ModelAdmin):
+	list_display=[f.name for f in Save._meta.fields]
+admin.site.register(Save, SaveAdmin)
+
+
 class InviteProcessAdmin(admin.ModelAdmin):
 	list_display=[f.name for f in InviteProcess._meta.fields]
 admin.site.register(InviteProcess, InviteProcessAdmin)
