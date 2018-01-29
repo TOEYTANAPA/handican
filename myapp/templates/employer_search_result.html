@@ -42,9 +42,24 @@
                             </div>
                             <div class="uk-width-1-2@m uk-width-1-2@s ">
                                 <div class="uk-margin uk-align-right">
-                                    
-                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> <span> <button  type="submit" class="uk-button uk-button-default uk-button-small " >บันทึก</button></span>
+                                    {% if o.save %}
+                                    <div id="Save">
+                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
+                                    <span>
+                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                     <p></p>
+                                    </div>  
+                                    {% else %}
+
+                                   <div id="notSave">
+                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
+                                    <span>
+                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i></i> บันทึก</button></span>
+                                    <p></p>
+                                    </div>
+                                     
+
+                                    {% endif %}
                                <div class="uk-text-right "> <p class="uk-margin-remove-bottom">ผลลัพธ์การจับคู่</p>
                                     <p class="score uk-margin-remove-top"> {{o.score}} %</p></div>
                                 
@@ -61,5 +76,50 @@
          
                 </div>
             </div>
+
+            <script>
+
+$(document).ready(function(){
+$(".isSave").click(function(){
+    var id = $(this).attr('id');
+    var title = $(this).text();
+    if(title == "บันทึก"){
+        var clicked = true;
+ 
+        // $(this).addClass('ui-icon-check');
+
+        $(this).text('บันทึกแล้ว'); 
+         $(this).find('i').addClass('fa fa-check');
+
+        // $(this).css('background-color', 'red');
+    } else {
+        $(this).text('บันทึก');
+ 
+         var clicked = false;
+    }
+    console.log("click "+title);
+
+$.ajax({
+
+type: "POST",
+url: "{% url 'checkIsSave' %}",
+data: {'dis_id': id,'isClicked':clicked, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+dataType: "json",
+success: function(response) {
+console.log("success");
+
+}
+});
+});
+
+// alert("earn");
+// $(".cmn-toggle").on("click", function() {
+
+// console.log(document.getElementById("{{menu.id}}").checked);
+
+
+});
+// });
+</script>
         {% endblock %}
     <!-- </div>

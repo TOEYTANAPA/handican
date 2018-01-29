@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^apply_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.apply_job, name="apply_job"),
     url(r'^notificationsall/$',views.show_notifications, name="show_notifications"),
     url(r'^refuse_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.refuse_job, name="refuse_job"),
-  
+    url(r'^isSave/$', views.checkIsSave, name='checkIsSave'),
     
 
     # url(r'^contactus/$',views.contact, name="contactus"),
