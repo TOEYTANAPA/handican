@@ -111,5 +111,5 @@ class InviteProcess(models.Model):
 
 class Save(models.Model):
 	user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
-	tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
+	target = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)

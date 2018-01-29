@@ -42,18 +42,24 @@
                             </div>
                             <div class="uk-width-1-2@m uk-width-1-2@s ">
                                 <div class="uk-margin uk-align-right">
-                                   <div id="notSave">
-                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
-                                    <span>
-                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class=""></i>  บันทึก</button></span>
-                                    <p></p>
-                                    </div>
-                                     <div id="Save">
+                                    {% if o.save %}
+                                    <div id="Save">
                                     <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
                                     <span>
                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                     <p></p>
                                     </div>  
+                                    {% else %}
+
+                                   <div id="notSave">
+                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
+                                    <span>
+                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i></i> บันทึก</button></span>
+                                    <p></p>
+                                    </div>
+                                     
+
+                                    {% endif %}
                                <div class="uk-text-right "> <p class="uk-margin-remove-bottom">ผลลัพธ์การจับคู่</p>
                                     <p class="score uk-margin-remove-top"> {{o.score}} %</p></div>
                                 
@@ -79,18 +85,16 @@ $(".isSave").click(function(){
     var title = $(this).text();
     if(title == "บันทึก"){
         var clicked = true;
-         $("#notSave").hide();
-         $("#Save").show();
+ 
         // $(this).addClass('ui-icon-check');
 
-        // $(this).text('บันทึกแล้ว'); 
-         // $(this).find('i').toggleClass()
+        $(this).text('บันทึกแล้ว'); 
+         $(this).find('i').addClass('fa fa-check');
 
         // $(this).css('background-color', 'red');
     } else {
         $(this).text('บันทึก');
-          $("#notSave").show();
-         $("#Save").hide();
+ 
          var clicked = false;
     }
     console.log("click "+title);

@@ -592,7 +592,7 @@ def employer_search(request):
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
             temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0}
+            "job_exp":"","dis_cate":"","province":"","score":0,"save":True}
             dis = DisabilityInfo.objects.get(id=r)
             temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
@@ -604,10 +604,22 @@ def employer_search(request):
             temp['dis_cate'] = dis.disability_cate
             temp['province'] = dis.province
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
+            if Save.objects.filter(user=request.user,target=dis.profile).exists():
+                temp['save'] = True
+            else:
+                temp['save'] = False
+
+
+
             output_match.append(temp)
         # print (output)
             # output_match.append(temp)
         print (output_match)
+    
+
+        
+
+
         form = CreateJobForm()
 
         return render(request, 'employer_search.html',{'form':form,'job_declared':job_declared,'output':output_match,'job_id':job_required.id})
@@ -794,8 +806,16 @@ def checkIsSave(request):
         dis =DisabilityInfo.objects.get(id=dis_id)
         print(dis)
         if isChecked:
-            j = Save.objects.create(user=request.user,tarket=dis.profile)
-            print (j)
+            pass
+            # if store.likes.filter(id=user.id).exists():
+            # store.likes.remove(user)
+            # u = User_session.objects.get(user=request.user,action="like",value=store.id)
+            # u.delete()
+
+            # else:
+            #     pass
+                # store.likes.add(user)
+                # collect_session(request,"like",store.id)
         else:
             Save.objects.get(user=request.user,tarket=dis.profile).delete()
             print("delete")
@@ -865,7 +885,7 @@ def create_job(request):
             print(cj)
             messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
             print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            return HttpResponseRedirect("employer-search")
+            return redirect("employer-search")
 
 
     else :
