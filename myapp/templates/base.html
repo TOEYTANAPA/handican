@@ -871,37 +871,37 @@
                                             </a>
                                         {% endif %}
                                         
-                                        <div class="uk-padding-small uk-padding-remove-bottom" uk-dropdown="mode: click;pos: top-right" style="width: 80%">
-                                            <ul class="uk-nav uk-dropdown-nav uk-list-divider">
-                                                {% for i in noti %}
-                                                    {% if not i.is_read %}
-                                                        <li  class="uk-active">
-                                                            <a href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
+            <div class="uk-padding-small uk-padding-remove-bottom" uk-dropdown="mode: click;pos: top-right" style="width: 100%;">
+                <ul class="uk-list uk-list-divider">
+                    {% for i in noti %}
+                        {% if not i.is_read %}
+                            <li >
+                                <a class="uk-link-reset" href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
                                                                 
-                                                                <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                                                    <div class="uk-width-auto">
-                                                                        <img style="width: 50px;height: auto;" class="noti"  src="{{i.img}}" />
-                                                                    </div>
-                                                                    <div class="uk-width-expand">
-                                                                        
-                                                                        <p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
-                                                                        <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time}}</time></p>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <img style="width: 60px;height: auto;" class="noti"  src="{{i.img}}" />
+                                        </div>
+                                        <div class="uk-width-expand">
+                                                                            
+                                            <p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
+                                            <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time|timesince }}</time></p>
+                                        </div>
+                                   </div>
+                                </a>
+                            </li>
                                                     {% else %}
-                                                        <li  class="uk-margin-remove-top uk-background-muted uk-padding-small">
-                                                            <a href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
+                        <li  class="uk-margin-remove-top uk-background-muted uk-padding-small">
+                        <a class="uk-link-reset" href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
                                                                 
                                                                 
                                                                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                                                                     <div class="uk-width-auto">
-                                                                        <img style="width: 50px;height: auto;opacity: .5;" class="noti"  src="{{i.img}}" />
+                                                                        <img style="width: 60px;height: auto;opacity: .5;" class="noti"  src="{{i.img}}" />
                                                                     </div>
                                                                     <div class="uk-width-expand">
                                                                         <p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
-                                                                        <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time}}</time></p>
+                                                                        <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time|timesince }}</time></p>
                                                                     </div>
                                                                 </div>
                                                             </a>
@@ -913,7 +913,7 @@
                                                 
                                                 <!-- <li class="uk-nav-divider"></li> -->
                                                 <li class="uk-text-center uk-margin-remove-top uk-padding-remove">
-                                                    <a href="{% url 'show_notifications' %}" class="uk-button">ดูทั้งหมด</a>
+                                                    <a href="{% url 'profile_noti' %}" class="uk-button">ดูทั้งหมด</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -933,7 +933,7 @@
                 </div>
             </div>
 
-                <nav class="uk-navbar-container  " uk-navbar style="background-color: #008080">
+                <nav class="uk-navbar-container  " uk-navbar style="background-color: #083351">
                     <div class="uk-navbar-center ">
                         
                         <ul class="uk-navbar-nav " style="">

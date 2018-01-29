@@ -7,7 +7,9 @@ from myapp.models import *
 from django.views.generic.edit import UpdateView
 from django.db.models import Q
 import difflib
-
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 # change password
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -191,6 +193,16 @@ def apply_job(request,dis_id,job_id):
         action="สมัครงาน",obj=job.title_th, defaults={})
     status,created = InviteProcess.objects.get_or_create(disability=DisabilityInfo.objects.get(id=dis_id),status="สมัครงาน",job=job, defaults={})
     return render(request, 'job_detail.html', {'job':job,'status':status.status})
+
+
+def refuse_job(request,dis_id,job_id):
+    job = Job.objects.get(id=job_id)
+    dis = DisabilityInfo.objects.get(id=dis_id)
+    Notifications.objects.get_or_create(user=request.user,job=job,tarket=dis.profile,
+        action="ปฎิเสธงาน",obj=job.title_th, defaults={})
+    status,created = InviteProcess.objects.get_or_create(disability=dis,status="ปฎิเสธงาน",job=job, defaults={})
+    return render(request, 'job_detail.html', {'job':job,'status':status.status})
+
 
 def contact(request):
     if request.method == 'POST':
@@ -769,6 +781,97 @@ def disable_search_job(request):
         'salary1':salary1,'salary2':salary2})
 
 
+@login_required
+def checkIsSave(request):
+    print("in checkIsSell")
+    if request.method == 'POST':
+        print("in post")
+        # user = request.user
+        dis_id = request.POST.get('dis_id', None)
+        isChecked = request.POST.get('isClicked', None)
+        # user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
+    # tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
+        dis =DisabilityInfo.objects.get(id=dis_id)
+        print(dis)
+        if isChecked:
+            j = Save.objects.create(user=request.user,tarket=dis.profile)
+            print (j)
+        else:
+            Save.objects.get(user=request.user,tarket=dis.profile).delete()
+            print("delete")
+
+    context = 'success'
+    return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def create_job(request):
+    if request.method == 'POST':
+        form = CreateJobForm(request.POST, request.FILES)
+        if form.is_valid():
+            print("valid")
+            company = CompanyInfo.objects.get(profile__user=request.user)
+            age1 = 0
+            age2 = 0 
+            salary1 = 0
+            salary2 = 0
+            sex = ""
+            if form.cleaned_data['sex'] == 0:
+                sex = "ชาย"
+            elif form.cleaned_data['sex'] == 1:
+                sex = "หญิง"
+            elif form.cleaned_data['sex'] == 2:
+                sex = "หญิงชาย"    
+
+            all_qualification = (form.cleaned_data['qualification']+','
+                +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
+                +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
+                +','+form.cleaned_data['qualification6']+','+form.cleaned_data['qualification7']
+                +','+form.cleaned_data['qualification8']
+                +','+form.cleaned_data['qualification9']
+                +','+form.cleaned_data['qualification10'])
+
+            if form.cleaned_data['age1'] >= form.cleaned_data['age2'] :
+                age2 = form.cleaned_data['age1']
+                age1 = form.cleaned_data['age2']
+            else :
+                age1 = form.cleaned_data['age1']
+                age2 = form.cleaned_data['age2']
+
+            if form.cleaned_data['salary1'] >= form.cleaned_data['salary2'] :
+                salary2 = form.cleaned_data['salary1']
+                salary1 = form.cleaned_data['salary2']
+            else :
+                salary1 = form.cleaned_data['salary1']
+                salary2 = form.cleaned_data['salary2']
+                
+            cj = Job.objects.create(
+                company =company,
+                title_th=form.cleaned_data['title_th'],
+                title_en=form.cleaned_data['title_en'],
+                email=form.cleaned_data['email'],
+                phone_no=form.cleaned_data['phone_no'],
+                age1 = age1,
+                age2 = age2,
+                sex =sex,
+                detail = form.cleaned_data['job_detail'],
+                disability_cate = form.cleaned_data['disability_type'],
+                salary1 = salary1,
+                salary2 = salary2,
+                qualification = all_qualification,
+                province=form.cleaned_data['province'],
+                address=form.cleaned_data['location'],
+           
+                )
+            print(cj)
+            messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
+            print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
+            return HttpResponseRedirect("employer-search")
+
+
+    else :
+        form = CreateJobForm()
+    return render(request, 'create_job.html',{'form':form})
+
 # 'job_declared':job_declared,'job_title_th':job_title_th
     # company = CompanyInfo.objects.get(profile__user=request.user)
     # job_declared = Job.objects.filter(company=company)
@@ -938,72 +1041,3 @@ def disable_search_job(request):
     #     print(dis.expected_salary2)
     # print(job_required)
     # pass
-
-def create_job(request):
-    if request.method == 'POST':
-        form = CreateJobForm(request.POST, request.FILES)
-        if form.is_valid():
-            print("valid")
-            company = CompanyInfo.objects.get(profile__user=request.user)
-            age1 = 0
-            age2 = 0 
-            salary1 = 0
-            salary2 = 0
-            sex = ""
-            if form.cleaned_data['sex'] == 0:
-                sex = "ชาย"
-            elif form.cleaned_data['sex'] == 1:
-                sex = "หญิง"
-            elif form.cleaned_data['sex'] == 2:
-                sex = "หญิงชาย"    
-
-            all_qualification = (form.cleaned_data['qualification']+','
-                +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
-                +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
-                +','+form.cleaned_data['qualification6']+','+form.cleaned_data['qualification7']
-                +','+form.cleaned_data['qualification8']
-                +','+form.cleaned_data['qualification9']
-                +','+form.cleaned_data['qualification10'])
-
-            if form.cleaned_data['age1'] >= form.cleaned_data['age2'] :
-                age2 = form.cleaned_data['age1']
-                age1 = form.cleaned_data['age2']
-            else :
-                age1 = form.cleaned_data['age1']
-                age2 = form.cleaned_data['age2']
-
-            if form.cleaned_data['salary1'] >= form.cleaned_data['salary2'] :
-                salary2 = form.cleaned_data['salary1']
-                salary1 = form.cleaned_data['salary2']
-            else :
-                salary1 = form.cleaned_data['salary1']
-                salary2 = form.cleaned_data['salary2']
-                
-            cj = Job.objects.create(
-                company =company,
-                title_th=form.cleaned_data['title_th'],
-                title_en=form.cleaned_data['title_en'],
-                email=form.cleaned_data['email'],
-                phone_no=form.cleaned_data['phone_no'],
-                age1 = age1,
-                age2 = age2,
-                sex =sex,
-                detail = form.cleaned_data['job_detail'],
-                disability_cate = form.cleaned_data['disability_type'],
-                salary1 = salary1,
-                salary2 = salary2,
-                qualification = all_qualification,
-                province=form.cleaned_data['province'],
-                address=form.cleaned_data['location'],
-           
-                )
-            print(cj)
-            messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            return HttpResponseRedirect("employer-search")
-
-
-    else :
-        form = CreateJobForm()
-    return render(request, 'create_job.html',{'form':form})
-

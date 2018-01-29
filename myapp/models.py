@@ -65,12 +65,8 @@ class Job(models.Model):
 	age2 = models.IntegerField(blank=True,null=True)
 	sex = models.CharField(max_length=10)
 	detail = RichTextField(blank=True,null=True)
-	# welfare = RichTextField(blank=True,null=True)
-
-	# detail = models.CharField(max_length=5000,default="ไม่ระบุ")
 	phone_no = models.CharField(max_length=20,default="ไม่ระบุ")
 	disability_cate = models.CharField(max_length=100)
-	# welfare = models.CharField(max_length=5000)
 	salary1 = models.IntegerField(blank=True,null=True)
 	salary2 = models.IntegerField(blank=True,null=True)
 	qualification = models.CharField(max_length=5000,blank=True,null=True)
@@ -98,7 +94,6 @@ class Notifications(models.Model):
 	is_read = models.BooleanField(default=False)
 	message= models.CharField(max_length=5000,editable=True,blank=True,null=True)
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
-	# message= models.CharField(max_length=5000,editable=True )
 
 class InviteProcess(models.Model):
 	STATUS_CHOICES = (
@@ -113,3 +108,8 @@ class InviteProcess(models.Model):
 	status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 	job = models.ForeignKey(Job, on_delete=models.SET_NULL,blank=True,null=True)
 	created_at = models.DateTimeField(auto_now_add=True,null=True,)	
+
+class Save(models.Model):
+	user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
+	tarket = models.ForeignKey(Profile,on_delete=models.SET_NULL,blank=True,null=True)
+	created_at = models.DateTimeField(auto_now_add=True,null=True,)

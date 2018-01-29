@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^settings/$', views.profile, name="profile"),
     url(r'^profile-settings/$', views.company_profile, name="company_profile"),
     url(r'^password/$', views.change_password, name='change_password'),
-    # url(r'^password/$', views.change_password, name='change_password'),
+
+    url(r'^settings/notifications$', views.profile_noti, name="profile_noti"),
+    
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

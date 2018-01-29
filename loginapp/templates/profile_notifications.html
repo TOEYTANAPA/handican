@@ -258,16 +258,6 @@
     }
     </style>
     
-     {% block messages %}
-        {% if messages %}
-            {% for message in messages %}
-                <div id="alertMsg" class="alert alert-{{ message.tags }}">  <!-- singular -->
-                <a class="close" data-dismiss="alert">×</a>
-                {{ message|safe }}
-            </div>
-        {% endfor %}
-    {% endif %}
-{% endblock %}
     <!-- nav-desktop -->
     <div class="uk-background-muted ">
         <br>
@@ -288,7 +278,7 @@
                                 </tr>
                                 
                                 <tr>
-                                    <td class="click-password" ><a href="{% url 'change_password' %}" class="uk-link-reset " >พาสเวิร์ดและความปลอดภัย</a></td>
+                                    <td class="click-password" ><a class="uk-link-reset " >พาสเวิร์ดและความปลอดภัย</a></td>
                                     
                                 </tr >
                                 <tr >
@@ -369,7 +359,7 @@
                                         
                                         <tr>
                                             <td class="uk-text-right">เงินเดือนที่คาดหวัง :</td>
-                                            <td class="uk-table-expand">{{dis.expected_salary1}} - {{dis.expected_salary2}} บาท</td>
+                                            <td class="uk-table-expand">{{job.expected_salary1}} - {{job.expected_salary2}} บาท</td>
                                             
                                         </tr>
                                         
@@ -433,7 +423,7 @@
                                 <button class="uk-button uk-button-default uk-float-right">เปลี่ยนพาสเวิร์ด</button>
                             </div>
                             <div class="uk-container">
-                                <p class="uk-text-muted">ตั้งพาสเวิร์ดที่คาดเดายาก เพื่อความปลอดภัย</p>
+                                <p class="uk-text-muted">เปลี่ยนพาสเวิร์ดบ่อยครั้ง เพื่อความปลอดภัย</p>
                                 
                             </div>
                             <!--  <div class="uk-padding-small uk-width-1-1" uk-alert>
@@ -540,11 +530,11 @@
 </div>
 <br>
 <script type="text/javascript">
-$("#detail").css("display", "block");
-$("#noti").css("display", "none");
+$("#detail").css("display", "none");
+$("#noti").css("display", "block");
 $("#password").css("display", "none");
-$(".click-detail").addClass( "active" );
-$(".click-noti").removeClass("active");
+$(".click-detail").removeClass( "active" );
+$(".click-noti").addClass("active");
 $(".click-password").removeClass("active");
 $(document).ready(function() {
 $(".click-detail").click(function(){
