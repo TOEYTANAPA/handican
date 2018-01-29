@@ -43,20 +43,20 @@
                             <div class="uk-width-1-2@m uk-width-1-2@s ">
                                 <div class="uk-margin uk-align-right">
                                     {% if o.save %}
-                                    <div id="Save">
+                                   
                                     <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
                                     <span>
                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                     <p></p>
-                                    </div>  
+                                  
                                     {% else %}
 
-                                   <div id="notSave">
+                                 
                                     <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
                                     <span>
-                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i></i> บันทึก</button></span>
+                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button></span>
                                     <p></p>
-                                    </div>
+                                 
                                      
 
                                     {% endif %}
@@ -85,37 +85,31 @@ $(".isSave").click(function(){
     var title = $(this).text();
     if(title == "บันทึก"){
         var clicked = true;
- 
-        // $(this).addClass('ui-icon-check');
+        var buttons = document.getElementById(id);
+        buttons.innerHTML = '<i class="fa fa-check"></i> บันทึกแล้ว ';
 
-        $(this).text('บันทึกแล้ว'); 
-         $(this).find('i').addClass('fa fa-check');
-
-        // $(this).css('background-color', 'red');
+     
     } else {
+        var clicked = false;
         $(this).text('บันทึก');
- 
-         var clicked = false;
     }
     console.log("click "+title);
 
 $.ajax({
 
 type: "POST",
-url: "{% url 'checkIsSave' %}",
-data: {'dis_id': id,'isClicked':clicked, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+url: "{% url 'company_save_disable' %}",
+data: {'dis_id': id,'title':title, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
 dataType: "json",
 success: function(response) {
 console.log("success");
+console.log(response);
+// if(print(dis))
 
 }
 });
 });
 
-// alert("earn");
-// $(".cmn-toggle").on("click", function() {
-
-// console.log(document.getElementById("{{menu.id}}").checked);
 
 
 });
