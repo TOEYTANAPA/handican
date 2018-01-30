@@ -41,12 +41,9 @@
     overflow:hidden;
     }
     .requiredForm{
-        color: red;
+    color: red;
     }
     </style>
-
-
-
     {% block messages %}
         {% if messages %}
             {% for message in messages %}
@@ -111,18 +108,18 @@
                             <div><button  type="submit" class="uk-button   " id="searchBtn" style="color: white;">ค้นหาผู้สมัครงาน
                                 </button>
                             </div>
-                        
+                            
                         </div>
                         
                     </form>
                 </div>
-   
+                
                 <!-- <br> -->
                 <div id="result" >
                     {% include "employer_search_result.html" with output_search=output %}
                 </div>
-             
-             <!--    <hr> -->
+                
+                <!--    <hr> -->
                 <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
             </li>
             <li>
@@ -151,60 +148,59 @@
                                         {{form.title_en }}
                                     </div>
                                 </div>
-                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                   <div  class="uk-margin-bottom ">
-                                    <label  for=" ">อีเมลติดต่อกลับ <b class="requiredForm">*</b></label>
-                                    {{form.email}}
-                                </div>
-                                     <div  class="uk-margin-bottom ">
-                                    <label  for=" ">เบอร์โทรลติดต่อกลับ <b class="requiredForm">*</b></label>
-                                    {{form.phone_no}}
-                                </div>
+                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                    <div  class="uk-margin-bottom ">
+                                        <label  for=" ">อีเมลติดต่อกลับ <b class="requiredForm">*</b></label>
+                                        {{form.email}}
+                                    </div>
+                                    <div  class="uk-margin-bottom ">
+                                        <label  for=" ">เบอร์โทรลติดต่อกลับ <b class="requiredForm">*</b></label>
+                                        {{form.phone_no}}
+                                    </div>
                                 </div>
                                 <div  class="uk-margin-bottom ">
                                     <label  for=" ">ที่ตั้งบริษัท <b class="requiredForm">*</b></label>
                                     {{form.location}}
                                 </div>
                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                   
-                                     <div  class="uk-margin-bottom ">
-                                    <label  for=" ">จังหวัด <b class="requiredForm">*</b></label>
-                                    {{form.province}}
+                                    
+                                    <div  class="uk-margin-bottom ">
+                                        <label  for=" ">จังหวัด <b class="requiredForm">*</b></label>
+                                        {{form.province}}
+                                    </div>
                                 </div>
-                                </div>
-                               
-
                                 
-                                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                
+                                <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                     <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
                                     
                                     <div>
                                         <label  for=" ">ทักษะที่ต้องการ  <b class="requiredForm">*</b></label>
-                                       {{form.qualification}} 
+                                        {{form.qualification}}
                                         <p> </p>
-                                       {{form.qualification3 |attr:"placeholder:ทักษะที่ต้องการ (3)"}}  
-                                       <p> </p>
-                                       {{form.qualification5 |attr:"placeholder:ทักษะที่ต้องการ (5)"}}
+                                        {{form.qualification3 |attr:"placeholder:ทักษะที่ต้องการ (3)"}}
                                         <p> </p>
-                                       {{form.qualification7 |attr:"placeholder:ทักษะที่ต้องการ (7)"}}  
+                                        {{form.qualification5 |attr:"placeholder:ทักษะที่ต้องการ (5)"}}
                                         <p> </p>
-                                       {{form.qualification9 |attr:"placeholder:ทักษะที่ต้องการ (9)"}}  
+                                        {{form.qualification7 |attr:"placeholder:ทักษะที่ต้องการ (7)"}}
+                                        <p> </p>
+                                        {{form.qualification9 |attr:"placeholder:ทักษะที่ต้องการ (9)"}}
                                     </div>
                                     <div>
-                                         <p> </p>
-                                       {{form.qualification2 |attr:"placeholder:ทักษะที่ต้องการ (2)"}}  
                                         <p> </p>
-                                       {{form.qualification4 |attr:"placeholder:ทักษะที่ต้องการ (4)"}}  
-                                      
+                                        {{form.qualification2 |attr:"placeholder:ทักษะที่ต้องการ (2)"}}
                                         <p> </p>
-                                           {{form.qualification6 |attr:"placeholder:ทักษะที่ต้องการ (6)"}}
-                                           <p> </p>
-                                           {{form.qualification8 |attr:"placeholder:ทักษะที่ต้องการ (8)"}}
-                                           <p> </p>
-                                           {{form.qualification10 |attr:"placeholder:ทักษะที่ต้องการ (10)"}}
+                                        {{form.qualification4 |attr:"placeholder:ทักษะที่ต้องการ (4)"}}
+                                        
+                                        <p> </p>
+                                        {{form.qualification6 |attr:"placeholder:ทักษะที่ต้องการ (6)"}}
+                                        <p> </p>
+                                        {{form.qualification8 |attr:"placeholder:ทักษะที่ต้องการ (8)"}}
+                                        <p> </p>
+                                        {{form.qualification10 |attr:"placeholder:ทักษะที่ต้องการ (10)"}}
                                     </div>
                                 </div>
-                                 
+                                
                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                     <div>
                                         <label class=" "  for=" "> เพศ
@@ -254,17 +250,16 @@
                                         
                                     </div>
                                 </div>
-                                   <div  class="uk-margin-bottom ">
+                                <div  class="uk-margin-bottom ">
                                     <label  for=" ">รายละเอียดงาน <b class="requiredForm">*</b></label>
                                     <p></p>
-
-                                    {{form.media}} 
+                                    {{form.media}}
                                     {{form.job_detail}}
-                   
+                                    
                                 </div>
-                              
                                 
-                             
+                                
+                                
                                 
                                 <br>
                                 {% if form.errors %}
@@ -346,7 +341,9 @@
         </ul>
         
     </div>
+
 </div>
+
 <div class="nav-mobile ">
     <div class="uk-card uk-card-default uk-card-body">
         <ul uk-tab>       <li><a href="#">หาผู้สมัครงาน</a></li>
@@ -625,7 +622,8 @@
     </ul>
 </div>
 </div> -->
-<br><script src="jquery.js"></script>
+
+<script src="jquery.js"></script>
 <script>
 // document.getElementById("selectJob").selectedIndex =;
 // $(function(){
@@ -662,11 +660,9 @@ readURL(this);
 //             contentType: 'application/json; charset=utf-8',
 //             success: function(data) {
 //             alert("ใช้โค้ดสำเร็จ ถ้าต้องการยกเลิกการใช้คูปองให้สั่งใหม่");
-
 //             },
 //             error: function(data) {
 //                 alert("ไม่ถูกต้อง");
-
 //             }
 //     });
 // });

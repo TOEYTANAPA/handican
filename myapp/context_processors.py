@@ -8,7 +8,7 @@ def profile(request):
 	noti= ""
 	list_noti = []
 	read = True
-	print("do")
+	
 	try :
 		profile = Profile.objects.get(user=request.user)
 		profile_picture = profile.profile_picture.url
@@ -17,7 +17,8 @@ def profile(request):
 			profile_name = temp.first_name
 			profile_id = temp.id
 
-			noti = Notifications.objects.filter(tarket=profile)
+			noti = Notifications.objects.filter(tarket=profile).order_by('-created_at')
+			noti = noti[:5]
 			
 			for i in noti:
 
@@ -49,7 +50,8 @@ def profile(request):
 			temp = CompanyInfo.objects.get(profile=profile)	
 			profile_name = temp.th_name
 
-			noti = Notifications.objects.filter(tarket=profile)
+			noti = Notifications.objects.filter(tarket=profile).order_by('-created_at')
+			noti = noti[:5]
 		
 			for i in noti:
 

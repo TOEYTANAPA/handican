@@ -442,21 +442,22 @@
                                                 <div class="uk-margin uk-align-right">
                                                     {% if o.save %}
                                                         
-                                                      
+                                                        <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button>
                                                         <span>
                                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                                         <p></p>
                                                         
                                                     {% else %}
                                                         
-                                                     
+                                                        <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button>
                                                         <span>
                                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button></span>
                                                         <p></p>
                                                         
                                                         
                                                     {% endif %}
-                                                  
+                                                    <div class="uk-text-right "> <p class="uk-margin-remove-bottom">ผลลัพธ์การจับคู่</p>
+                                                    <p class="score uk-margin-remove-top"> {{o.score}} %</p></div>
                                                     
                                                 </div>
                                                 
@@ -491,21 +492,22 @@
                                                 <div class="uk-margin uk-align-right">
                                                     {% if o.save %}
                                                         
-                                                       
+                                                        <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button>
                                                         <span>
                                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                                         <p></p>
                                                         
                                                     {% else %}
                                                         
-                                                      
+                                                        <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button>
                                                         <span>
                                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button></span>
                                                         <p></p>
                                                         
                                                         
                                                     {% endif %}
-                                                  
+                                                    <div class="uk-text-right "> <p class="uk-margin-remove-bottom">ผลลัพธ์การจับคู่</p>
+                                                    <p class="score uk-margin-remove-top"> {{o.score}} %</p></div>
                                                     
                                                 </div>
                                                 
@@ -531,11 +533,11 @@
 </div>
 <br>
 <script type="text/javascript">
-$("#detail").css("display", "block");
-$("#noti").css("display", "none");
+$("#detail").css("display", "none");
+$("#noti").css("display", "block");
 $("#password").css("display", "none");
-$(".click-detail").addClass( "active" );
-$(".click-noti").removeClass("active");
+$(".click-detail").removeClass( "active" );
+$(".click-noti").addClass("active");
 $(".click-password").removeClass("active");
 $(document).ready(function() {
 $(".click-detail").click(function(){

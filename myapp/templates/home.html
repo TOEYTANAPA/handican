@@ -1,4 +1,4 @@
-{% extends 'base.html' %}{% load static %} {% block content %}
+{% extends 'base2.html' %}{% load static %} {% block content %}
 	<style type="text/css">
 	/*
 	Fade content bs-carousel with hero headers
@@ -106,7 +106,7 @@
 		<!-- //banner -->
 		<div class="uk-section uk-section-default">
 			<div class="container ">
-				<div class="uk-child-width-expand@s" uk-grid>
+				<div class="uk-child-width-1-2@s" uk-grid>
 				    <div class="">
 				        	<img  src="{% static "images/handican.png" %}" >
 				     </div>
@@ -427,11 +427,12 @@
 		<div class="uk-section uk-section-default">
 			<div class="container ">
 				<div class="uk-child-width-expand@s" uk-grid>
-				    <div class="uk-grid-item-match">
-				        
+				     <div class="">
+				        	
 				     </div>
-				    <div class="uk-text-right">
+				    <div class="uk-text-center">
 				        <h1>Handican คืออะไร</h1>
+				        <img src="{% static "images/handican.png" %}" >
 				        <h3>
 				           Handican เป็นตัวกลางในการจ้างงานระหว่างคนพิการกับบริษัท เราใช้ระบบ algorithm ดึงข้อมูลและข้อจำกัดต่างๆที่มีประโยชน์ของทั้งคนพิการและบริษัทเพื่อช่วยให้ทั้งสองฝ่ายสามารถค้นหาและจับคู่กันได้อย่างมีประสิทธิภาพและเราให้คำแนะนํา ส่งเสริม และประสานงานตลอดขั้นตอนการว่าจ้างเพื่อสนับสนุนให้ผู้พิการมีงานท่ีเหมาะสม และส่งเสริมให้หน่วยงานหรือบริษัทสามารถรับผู้พิการได้อย่างมีประสิทธิภาพ รวดเร็ว และยั่งยืน
 				        </h3>
