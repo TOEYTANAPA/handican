@@ -176,29 +176,27 @@
                                         <span class="uk-margin-left">
                                         <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span></b>
                                         <p class=" ">{{o.detail | safe}}</p>
-                                        </div>
+                                    </div>
                                     <div class="uk-width-1-2@m uk-width-1-2@s ">
                                         <div class="uk-margin uk-align-right">
-                                    
-                                                   {% if o.save %}
-                                  
-                                            <span>
-                                        <button   id="{{o.job_id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
-                                            <p></p>
-                                  
-                                                {% else %}
-
-                                 
-                                    
-                                    <span>
-                                        <button   id="{{o.job_id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button>
-                                    </span>
-                                    <p></p>
-                                 
-                                     
-
-                                    {% endif %}
-                                    
+                                            
+                                            {% if o.save %}
+                                                
+                                                <span>
+                                                <button   id="{{o.job_id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
+                                                <p></p>
+                                                
+                                            {% else %}
+                                                
+                                                
+                                                <span>
+                                                    <button   id="{{o.job_id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button>
+                                                </span>
+                                                <p></p>
+                                                
+                                                
+                                            {% endif %}
+                                            
                                             <p class="uk-margin-remove-bottom">ผลลัพธ์การจับคู่</p>
                                             <p class="score uk-margin-remove-top"> {{o.score}} %</p>
                                         </div>
@@ -429,28 +427,22 @@
 </div>
 <br>
 
-
-            <script>
-
+<script>
 $(document).ready(function(){
 $(".isSave").click(function(){
-    var id = $(this).attr('id');
-    var title = $(this).text();
-    if(title == "บันทึก"){
-        var clicked = true;
-        var buttons = document.getElementById(id);
-        buttons.innerHTML = '<i class="fa fa-check"></i> บันทึกแล้ว ';
-
-     
-    } else {
-        var clicked = false;
-        $(this).text('บันทึก');
-    }
-    console.log("click "+title);
-    console.log("click "+id);
-
+var id = $(this).attr('id');
+var title = $(this).text();
+if(title == "บันทึก"){
+var clicked = true;
+var buttons = document.getElementById(id);
+buttons.innerHTML = '<i class="fa fa-check"></i> บันทึกแล้ว ';
+} else {
+var clicked = false;
+$(this).text('บันทึก');
+}
+console.log("click "+title);
+console.log("click "+id);
 $.ajax({
-
 type: "POST",
 url: "{% url 'disable_save_job' %}",
 data: {'job_id': id,'title':title, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
@@ -459,13 +451,9 @@ success: function(response) {
 console.log("success");
 console.log(response);
 // if(print(dis))
-
 }
 });
 });
-
-
-
 });
 // });
 </script>
