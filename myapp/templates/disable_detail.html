@@ -61,7 +61,6 @@
   object-fit: cover;
   }
   
-
   .card {
   padding-top: 20px;
   margin: 10px 0 20px 0;
@@ -262,145 +261,188 @@
   margin-bottom: 17px;
   }
   .card.people .card-info .desc {
-    display: block;
-    margin: 8px 14px 0 14px;
-    overflow: hidden;
-    font-size: 12px;
-    line-height: 16px;
-    color: #737373;
-    text-overflow: ellipsis;
-}
-
+  display: block;
+  margin: 8px 14px 0 14px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 16px;
+  color: #737373;
+  text-overflow: ellipsis;
+  }
   .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
   </style>
   <!-- style="width: 100px;height: 100px" -->
   <div class="container ">
     
     
-
     <div class="uk-card uk-card-default  uk-margin-top" >
       
       
-     <div id="detail">
-                            
-                            <div class="card hovercard  uk-margin-remove-top "  >
-                                <div class="cardheader">
-                                    
-                                </div>
-                                <div class="avatar">
-                                    <img src=" {{dis.profile.profile_picture.url}}" class="inImgProfile"  alt="">
-                                </div>
-                                <div class="uk-text-center ">
-                                    <div class="info uk-margin-bottom">
-                                        <h2 class="uk-text-large uk-margin"> {{dis.first_name}} {{dis.last_name}}</h2>
-                                        
-                                        {% if dis.job_exp  %}
-                                            <div class="desc"><p><i class="fa fa-briefcase" aria-hidden="true"></i> {{dis.job_exp}}</p></div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                    
-                                </div>
-                                
-                                
-                                
-                            </div>
-                            <div class="uk-container ">
-                                <hr >
-                                
-                                <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลส่วนตัว </h2>
-                                <table class="uk-table ">
-                                    
-                                    <tbody>
-                                        <tr >
-                                            <td class="uk-width-1-5 uk-text-right">เพศ : </td>
-                                            <td class="uk-table-expand"> {{dis.sex}}</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="uk-text-right ">อายุ : </td>
-                                            <td class="uk-table-expand">{{dis.age}}</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="uk-text-right ">ประเภทความพิการ : </td>
-                                            <td class="uk-table-expand">{{dis.disability_cate}}</td>
-                                            
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td class="uk-text-right">งานที่สนใจ :</td>
-                                            <td class="uk-table-expand">
-                                                
-                                                {{dis.job_interest}}
-                                            </td>
-                                            
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td class="uk-text-right">เงินเดือนที่คาดหวัง :</td>
-                                            <td class="uk-table-expand">{{dis.expected_salary1}} - {{dis.expected_salary2}} บาท</td>
-                                            
-                                        </tr>
-                                        
-                                        
-                                        <tr>
-                                            <td class="uk-text-right">ความสามารถ :</td>
-                                            <td class="uk-table-expand">
-                                                <ul>
-                                                    <li> {{dis.talent}}</li>
-                                                    <li>{{dis.talent2}} </li>
-                                                    <li> {{dis.talent3}}</li>
-                                                </ul>
-                                            </td>
-                                            
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                                <hr>
-                                <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลติดต่อ </h2>
-                                <table class="uk-table">
-                                    
-                                    <tbody>
-                                        <tr>
-                                            <td class="uk-width-1-5 uk-text-right">อีเมลล์ :</td>
-                                            <td class="uk-table-expand">{{dis.email}}</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="uk-text-right">เบอร์โทรศัพท์ :</td>
-                                            <td class="uk-table-expand">
-                                                
-                                                {{dis.phone_no}}
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="uk-text-right">ที่อยู่ :</td>
-                                            <td class="uk-table-expand">
-                                                
-                                                {{dis.address}} {{dis.province}}
-                                            </td>
-                                            
-                                        </tr>
-                                        
-                                        
-                                    </tbody>
-                                </table>
-                                
-                            </div>
+      <div id="detail">
+        
+        <div class="card hovercard  uk-margin-remove-top "  >
+          <div class="cardheader">
+            
+          </div>
+          <div class="avatar">
+            <img src=" {{dis.profile.profile_picture.url}}" class="inImgProfile"  alt="">
+          </div>
+          <div class="uk-text-center ">
+            <div class="info uk-margin-bottom">
+              <h2 class="uk-text-large uk-margin"> {{dis.first_name}} {{dis.last_name}}</h2>
+              
+              {% if dis.job_exp  %}
+                <div class="desc"><p><i class="fa fa-briefcase" aria-hidden="true"></i> {{dis.job_exp}}</p></div>
+              {% endif %}
+            </div>
+            
+            {% if status == "ยังไม่ส่งคำเชิญ" %}
+              <a href="#confirm_job" class="uk-button uk-button-default btn-active " type="button" uk-toggle>เชิญเข้าร่วมงาน</a>
+              <!-- This is the modal -->
+              <div id="confirm_job" uk-modal >
+                <div class="uk-modal-dialog uk-modal-body">
+                  <h2>คุณต้องการเชิญเข้าร่วมงาน {{job.title_th}} ใช่หรือไม่ </h2>
+                  <p>เมื่อตกลง ระบบจะส่งคำเชิญเข้าร่วมงานให้ผู้พิการทราบ หากต้องการยกเลิกคำเชิญ สามารถยกเลิกได้ที่หน้ารายการการเชิญ</p>
+                  <p class="uk-text-right">
+                    <a class="uk-button uk-button-default uk-modal-close" type="button">ยกเลิก</a>
+                    <a href="{% url "request_job" dis.id job.id %}" class="uk-button uk-button-primary" type="button">ตกลง</a>
+                  </p>
+                </div>
+              </div>
+              {% elif status == "ตอบรับคำเชิญ" %}
+              
+              <i class="fa fa-check" aria-hidden="true"></i>  ตอบรับคำเชิญงาน {{job}}
+              {% elif status == "ส่งคำเชิญ" %}
+              <button class="uk-button uk-button-default " type="button" disabled><i class="fa fa-check" aria-hidden="true"></i> ส่งคำเชิญแล้ว</button>
+              {% elif status == "สมัครงาน" %}
+              <a href="{% url "confirm_job" dis.id job.id %}" class="uk-button uk-button-default btn-active uk-margin-small-right " type="button"> ยืนยันการสมัครงาน</a>
+              <a href="{% url "refuse_job" dis.id job.id %}" class="uk-button uk-button-default  " type="button"> ปฏิเสธ</a>
 
+              {% elif status == "ปฏิเสธงาน" %}
+                  <a href="{% url "confirm_job" dis.id job.id %}" class="uk-button uk-button-default btn-active uk-margin-small-right " type="button"> ยืนยันการสมัครงาน</a>
+              <button  class="uk-button uk-button-default  " type="button" disabled><i class="fa fa-check" aria-hidden="true"></i>  ปฏิเสธการสมัครงานแล้ว</button>
 
-                        </div>
+            {% endif %}
+            
+          </div>
+          
+          
+          
+        </div>
+        <div class="uk-container ">
+          <hr >
+          
+          <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลส่วนตัว </h2>
+          <table class="uk-table ">
+            
+            <tbody>
+              <tr >
+                <td class="uk-width-1-5 uk-text-right">เพศ : </td>
+                <td class="uk-table-expand"> {{dis.sex}}</td>
+                
+              </tr>
+              <tr>
+                <td class="uk-text-right ">อายุ : </td>
+                <td class="uk-table-expand">{{dis.age}}</td>
+                
+              </tr>
+              <tr>
+                <td class="uk-text-right ">ประเภทความพิการ : </td>
+                <td class="uk-table-expand">{{dis.disability_cate}}</td>
+                
+              </tr>
+              
+              <tr>
+                <td class="uk-text-right">งานที่สนใจ :</td>
+                <td class="uk-table-expand">
+                  
+                  {{dis.job_interest}}
+                </td>
+                
+              </tr>
+              
+              <tr>
+                <td class="uk-text-right">เงินเดือนที่คาดหวัง :</td>
+                <td class="uk-table-expand">{{dis.expected_salary1}} - {{dis.expected_salary2}} บาท</td>
+                
+              </tr>
+              
+              
+              <tr>
+                <td class="uk-text-right">ความสามารถ :</td>
+                <td class="uk-table-expand">
+                  <ul>
+                    <li> {{dis.talent}}</li>
+                    <li>{{dis.talent2}} </li>
+                    <li> {{dis.talent3}}</li>
+                  </ul>
+                </td>
+                
+              </tr>
+              
+            </tbody>
+          </table>
+          <hr>
+          <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลติดต่อ </h2>
+            {% if status == "ตอบรับคำเชิญ" %}
+          <table class="uk-table">
+            
+            <tbody>
+              <tr>
+                <td class="uk-width-1-5 uk-text-right">อีเมลล์ :</td>
+                <td class="uk-table-expand">{{dis.email}}</td>
+                
+              </tr>
+              <tr>
+                <td class="uk-text-right">เบอร์โทรศัพท์ :</td>
+                <td class="uk-table-expand">
+                  
+                  {{dis.phone_no}}
+                </td>
+                
+              </tr>
+              <tr>
+                <td class="uk-text-right">ที่อยู่ปัจจุบัน :</td>
+                <td class="uk-table-expand">
+                  
+                  {{dis.address}} {{dis.province}}
+                </td>
+                
+              </tr>
+              
+              
+            </tbody>
+          </table>
+        {% else %}
 
-        <!--end section -->
-  <br>
+          <table class="uk-table">
+            
+            <tbody>
+             
+              <tr>
+                <td class="uk-text-right">ที่อยู่ :</td>
+                <td class="uk-table-expand">
+                  
+                   {{dis.province}}
+                     <span class="uk-text-muted uk-text-small"><p>จะเปิดเผยข้อมูลติดต่อเมื่อได้รับยืนยันการสมัครงาน</p></span>
+                </td>
+                
+              </tr>
+              
+              
+            </tbody>
+          </table>
+
+            {% endif %}
+
+          
+        </div>
+      </div>
+      <!--end section -->
+      <br>
       
     </div>
-      <br>
+    <br>
   </div>
   <br>
-
-
 {% endblock %}

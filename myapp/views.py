@@ -54,12 +54,14 @@ def disable_detail(request,dis_id,job_id):
     dis = DisabilityInfo.objects.get(id=dis_id)
     status = "ยังไม่ส่งคำเชิญ"
     job = Job.objects.get(id=job_id)
+    print(dis,"dothis")
     try :
         status = InviteProcess.objects.get(disability=dis,job__id=job_id)
         status = status.status
+        print(status,"status")
 
     except :
-        pass
+        raise
 
     return render(request, 'disable_detail.html', {'dis':dis,'status':status,'job':job})
 
@@ -129,10 +131,12 @@ def click_noti(request,job_name,job_id,noti_id):
     else :
         p = Profile.objects.get(user=noti.user)
         profile = DisabilityInfo.objects.get(profile=p)
+        print("click_noti")
         return disable_detail(request,profile.id,job_id)
 
 def confirm_job(request,dis_id,job_id):
     job = Job.objects.get(id=job_id)
+    print("confirm_job")
     InviteProcess.objects.filter(disability__id=dis_id,job__id=job_id).update(status="ตอบรับคำเชิญ")
     status = InviteProcess.objects.get(disability__id=dis_id,job__id=job_id)
     # return render(request, 'job_detail.html', {'job':job,'status':status.status})
@@ -140,7 +144,8 @@ def confirm_job(request,dis_id,job_id):
         dis = DisabilityInfo.objects.get(id=dis_id)
         Notifications.objects.get_or_create(user=request.user,job=job,tarket=dis.profile,
         action="ตอบรับคำเชิญ",obj=job.title_th, defaults={})
-        return render(request, 'disable_detail.html', {'job':job,'status':status.status})
+        return disable_detail(request,dis_id,job_id)
+        # return render(request, 'disable_detail.html', {'job':job,'status':status.status})
     else :
         Notifications.objects.get_or_create(user=request.user,job=job,tarket=job.company.profile,
         action="ตอบรับคำเชิญ",obj=job.title_th, defaults={})
@@ -199,9 +204,11 @@ def refuse_job(request,dis_id,job_id):
     job = Job.objects.get(id=job_id)
     dis = DisabilityInfo.objects.get(id=dis_id)
     Notifications.objects.get_or_create(user=request.user,job=job,tarket=dis.profile,
-        action="ปฎิเสธงาน",obj=job.title_th, defaults={})
-    status,created = InviteProcess.objects.get_or_create(disability=dis,status="ปฎิเสธงาน",job=job, defaults={})
-    return render(request, 'job_detail.html', {'job':job,'status':status.status})
+        action="ปฏิเสธงาน",obj=job.title_th, defaults={})
+    status,created = InviteProcess.objects.update_or_create(disability=dis,job=job, defaults={'status':'ปฏิเสธงาน'})
+
+    return disable_detail(request,dis_id,job_id)
+    # return render(request, 'disable_detail.html', {'job':job,'status':status.status})
 
 
 def contact(request):

@@ -215,24 +215,28 @@ def company_profile(request):
     company = CompanyInfo.objects.get(profile=profile)
     noti = Notifications.objects.filter(tarket=profile)
     for i in noti:
-            temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
-            'job_name':"",'job_id':0,'noti_id':0}
-            # p = Profile.objects.get(user=i.user)
-            # dis = CompanyInfo.objects.get(profile=p)
-            # temp['job_name'] = i.job.title_th
-            # temp['job_id'] = i.job.id
-            # temp['name'] = dis.th_name
-            # temp['action'] = i.action
-            # temp['obj'] = i.obj
-            # temp['time'] = i.created_at
-            # temp['is_read'] = i.is_read
-            # temp['img'] = p.profile_picture.url
-            # temp['noti_id'] = i.id
-                
-            # if temp['is_read'] == False and read:
-            #     read = False
-
-            list_noti.append(temp)
+        temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+        'job_name':"",'job_id':0,'noti_id':0,'job_interest':"",'disability_cate': '',
+        'salary1':0,'salary2': 0,'province':'','job_exp':"",'dis_id':0}
+        p = Profile.objects.get(user=i.user)
+        dis = DisabilityInfo.objects.get(profile=p)
+        temp['job_name'] = i.job.title_th
+        temp['job_id'] = i.job.id
+        temp['name'] = dis.first_name +" "+ dis.last_name
+        temp['dis_id'] = dis.id
+        temp['action'] = i.action
+        temp['obj'] = i.obj
+        temp['time'] = i.created_at
+        temp['is_read'] = i.is_read
+        temp['img'] = p.profile_picture.url
+        temp['noti_id'] = i.id
+        temp['salary1'] = dis.expected_salary1
+        temp['salary2'] = dis.expected_salary2
+        temp['province'] = dis.province
+        temp['job_interest'] = dis.job_interest
+        temp['job_exp'] = dis.job_exp
+        temp['disability_cate'] = dis.disability_cate
+        list_noti.append(temp)
 
     
     return render(request, 'company_profile.html',{'company':company,'noti':list_noti})       
@@ -243,9 +247,9 @@ def profile_noti(request):
     list_noti = []
    
     profile = Profile.objects.get(user=request.user)
+    noti = Notifications.objects.filter(tarket=profile)
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         dis = DisabilityInfo.objects.get(profile=profile)
-        noti = Notifications.objects.filter(tarket=profile)
             
         for i in noti:
             temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
@@ -273,5 +277,31 @@ def profile_noti(request):
 
         return render(request, 'profile_notifications.html',{'dis':dis,'noti':list_noti})
     else :
-         return render(request, 'profile.html',{'dis':"dis"})
+        comp = CompanyInfo.objects.get(profile=profile)
+        for i in noti:
+            temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+            'job_name':"",'job_id':0,'noti_id':0,'job_interest':"",'disability_cate': '',
+            'salary1':0,'salary2': 0,'province':'','job_exp':"",'dis_id':0}
+            p = Profile.objects.get(user=i.user)
+            dis = DisabilityInfo.objects.get(profile=p)
+            temp['job_name'] = i.job.title_th
+            temp['job_id'] = i.job.id
+            temp['name'] = dis.first_name +" "+ dis.last_name
+            temp['dis_id'] = dis.id
+            temp['action'] = i.action
+            temp['obj'] = i.obj
+            temp['time'] = i.created_at
+            temp['is_read'] = i.is_read
+            temp['img'] = p.profile_picture.url
+            temp['noti_id'] = i.id
+            temp['salary1'] = dis.expected_salary1
+            temp['salary2'] = dis.expected_salary2
+            temp['province'] = dis.province
+            temp['job_interest'] = dis.job_interest
+            temp['job_exp'] = dis.job_exp
+            temp['disability_cate'] = dis.disability_cate
+
+                
+            list_noti.append(temp)
+        return render(request, 'profile_comp_notifications.html',{'dis':comp,'noti':list_noti})
         

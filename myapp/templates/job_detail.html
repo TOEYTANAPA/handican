@@ -61,7 +61,6 @@
   object-fit: cover;
   }
   
-
   .card {
   padding-top: 20px;
   margin: 10px 0 20px 0;
@@ -262,15 +261,14 @@
   margin-bottom: 17px;
   }
   .card.people .card-info .desc {
-    display: block;
-    margin: 8px 14px 0 14px;
-    overflow: hidden;
-    font-size: 12px;
-    line-height: 16px;
-    color: #737373;
-    text-overflow: ellipsis;
-}
-
+  display: block;
+  margin: 8px 14px 0 14px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 16px;
+  color: #737373;
+  text-overflow: ellipsis;
+  }
   .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
   </style>
   <!-- style="width: 100px;height: 100px" -->
@@ -289,17 +287,16 @@
           <img src=" {{job.company.profile.profile_picture.url}}" class="inImgProfile"  alt="">
         </div>
         <div class="uk-text-center ">
-           <div class="info uk-margin-bottom">
-                   <h2 class="uk-text-large uk-margin-remove-bottom uk-margin"> {{job.company}}</h2>
-                    <div class="desc">{{job.email}}</div>
-                    <div class="desc "> {% if company.website  %}
-  {{company.website }} 
-{% endif %} </div>
-                </div>
+          <div class="info uk-margin-bottom">
+            <h2 class="uk-text-large uk-margin-remove-bottom uk-margin"> {{job.company}}</h2>
+            <div class="desc">{{job.email}}</div>
+            <div class="desc "> {% if company.website  %}
+              {{company.website }}
+            {% endif %} </div>
+          </div>
           
-
-   
-         
+          
+          
           <label for="  "></label>
           {% if status == "ส่งคำเชิญ" %}
             
@@ -329,12 +326,12 @@
           
           <tbody>
             <tr>
-              <td class="uk-width-1-6">รายละเอียดงาน:</td>
+              <td class="uk-width-1-6 uk-text-right">รายละเอียดงาน :</td>
               <td class="uk-table-expand">{{job.detail | safe}}</td>
               
             </tr>
             <tr>
-              <td class="uk-width-1-6">ประเภทความพิการ:</td>
+              <td class="uk-width-1-6 uk-text-right">ประเภทความพิการ :</td>
               <td class="uk-table-expand">{{job.disability_cate}}</td>
               
             </tr>
@@ -342,14 +339,14 @@
               
             </tr>
             <tr>
-              <td class="uk-width-1-6">คุณสมบัติ:</td>
+              <td class="uk-width-1-6 uk-text-right">คุณสมบัติ :</td>
               <td class="uk-table-expand">
                 <ul ><li> เพศ {{job.sex}}</li>
                 <li> อายุ {{job.age1}} - {{job.age2}} ปี</li>
                 {% for q in qualification_list %}
-                 {% if q %}
-                <li>{{q }}</li>
-                {% endif %}
+                  {% if q %}
+                    <li>{{q }}</li>
+                  {% endif %}
                 {% endfor %}
                 <!--   <li>UI design in both Sketch and Photoshop</li>
                 <li>Working hours 9 AM - 5 PM  Monday-Friday</li> -->
@@ -359,49 +356,66 @@
           </tr>
           
           <tr>
-            <td class="uk-width-1-6">เงินเดือน:</td>
+            <td class="uk-width-1-6 uk-text-right">เงินเดือน :</td>
             <td class="uk-table-expand">{{job.salary1}} - {{job.salary2}} บาท</td>
             
           </tr>
-         
-         
-          <tr>
-            <td class="uk-width-1-6">ติดต่อฝ่ายบุคคล:</td>
-            <td class="uk-table-expand">
-<ul ><li> {{job.phone_no}}</li>   
-  <li>{{company.fax}} </li>
-                <li> {{job.email}}</li>
-             <li> {{company.address}}</li>
-
-              </ul>
-
-            </td>
-            
-          </tr>
-           
-        </tbody>
-      </table>
-      <hr>
-      <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
-      <table class="uk-table">
-        
-        <tbody>
-          <tr>
-            <td class="uk-width-1-6">คำอธิบาย:</td>
-            <td class="uk-table-expand">{{company.info}}</td>
-            
-          </tr>
           
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <br>
+            {% if status == "ตอบรับคำเชิญ" %}
+          <tr>
+            <td class="uk-width-1-6 uk-text-right">ติดต่อฝ่ายบุคคล:</td>
+            <td class="uk-table-expand">
+              <ul ><li> {{job.phone_no}}</li>
+              <li>{{company.fax}} </li>
+              <li> {{job.email}}</li>
+              <li> {{company.address}}</li>
+            </ul>
+          </td>
+          
+        </tr>
+
+         <tr>
+            <td class="uk-width-1-6 uk-text-right">สถานที่ตั้ง :</td>
+            <td class="uk-table-expand">
+             {{job.address}} จังหวัด{{job.province}} 
+          </td>
+          
+        </tr>
+
+         {% else %}
+ <tr>
+            <td class="uk-width-1-6 uk-text-right">สถานที่ตั้ง :</td>
+            <td class="uk-table-expand">
+            จังหวัด{{job.province}}  
+          <span class="uk-text-muted uk-text-small"><p>จะเปิดเผยข้อมูลติดต่อเมื่อได้รับยืนยันการสมัครงาน</p></span>
+          </td>
+        </tr>
+
+             {% endif %}
+
+        
+      </tbody>
+    </table>
+    <hr>
+    <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
+    <table class="uk-table">
+      
+      <tbody>
+        <tr>
+          <td class="uk-width-1-6 uk-text-right">คำอธิบาย :</td>
+          <td class="uk-table-expand">{{company.info}}</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
   </div>
   <br>
   <br>
 </div>
+<br>
+<br>
+</div>
 <!-- container -->
 <br>
-
 {% endblock %}
