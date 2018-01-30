@@ -377,45 +377,63 @@ def search(request):
         temp_dict_reverse = sorted(temp_dict, key=temp_dict.get, reverse=True)
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
-            temp={"job_id":0 ,"name":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0,"save":False}
+            temp={"job_id":0 ,"name":"","url_pic":None,"salary1":0,"salary2":0,
+            "detail":"","dis_cate":"","province":"","score":0,"save":False}
             job_match = Job.objects.get(id=r)
 
             temp['score'] = temp_dict[r]
             temp['job_id'] = job_match.id
             temp['name'] = job_match.title_th
-            # temp['job_interest'] = dis.job_interest
             temp['salary1'] = job_match.salary1
-            temp['salary12'] = job_match.salary2
+            temp['salary2'] = job_match.salary2
             temp['detail'] = job_match.detail
             temp['dis_cate'] = job_match.disability_cate
             temp['province'] = job_match.province
             c = CompanyInfo.objects.get(id=job_match.company.id)
-            # print("cid",c.profile.id)
             temp['url_pic'] =  Profile.objects.get(id=c.profile.id).profile_picture.url
 
             if Save.objects.filter(user=request.user,target=c.profile,name=job_match.title_th).exists():
-                print("saeeeeeeeeee")
+                
                 temp['save'] = True
             else:
-                temp['save'] = False    
-
-            # try:
-            #     s = Save.objects.get(user=request.user,target=dis.profile)
-            #     temp['save'] = True
-
-            # except Exception as e:
-            #     temp['save'] = False
-        
-
-
-
+                temp['save'] = False   
             output_match.append(temp)
-        # print (output)
-            # output_match.append(temp)
         print (output_match)
-        # form = CreateJobForm()
-    return render(request, 'search.html',{'output_search':output_match})
+        mysave = Save.objects.filter(user=request.user,)
+        print("mysave",mysave)
+
+
+        output_job = []
+        for s in mysave:
+            print("tar",s.target)
+            print("name",s.name)
+            temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary1":0,"salary2":0,
+            "detail":"","dis_cate":"","province":"","score":0,"save":True}
+             # {"job_name":None,"company_image_url":None}
+            # company = Comp/anyInfo.objects.get(profile=s.target)
+            # print(company)
+            job = Job.objects.get(company__profile=s.target,title_th=s.name)
+            print("job",job)
+            temp_job["job_id"] = job.id
+            temp_job["job_name"] = job.title_th
+            temp_job["salary1"] = job.salary1
+            temp_job["salary2"] = job.salary2
+            temp_job["dis_cate"] = job.disability_cate
+            temp_job["province"] = job.province
+            temp_job['detail'] = job.detail
+            temp_job["company_image_url"] = job.company.profile.profile_picture.url
+            
+
+            output_job.append(temp_job)
+        profile = Profile.objects.get(user=request.user)
+        invited = InviteProcess.objects.filter(disability__profile=profile)
+        print("invited",invited)
+        print("output_job",output_job)  
+
+
+
+
+    return render(request, 'search.html',{'output_search':output_match,'output_job':output_job,'invited':invited})
   
 @login_required
 def employer_search(request):
@@ -609,7 +627,7 @@ def employer_search(request):
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
             temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0,"save":True}
+            "job_exp":"","dis_cate":"","province":"","score":0,"save":False}
             dis = DisabilityInfo.objects.get(id=r)
             temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
@@ -625,6 +643,7 @@ def employer_search(request):
             try:
                 s = Save.objects.get(user=request.user,target=dis.profile,name=name)
                 temp['save'] = True
+                print("save")
 
             except Exception as e:
                 temp['save'] = False
@@ -639,9 +658,6 @@ def employer_search(request):
         # print (output)
             # output_match.append(temp)
         print (output_match)
-    
-
-        
 
 
         form = CreateJobForm()
@@ -779,7 +795,7 @@ def employer_search_disability(request):
         # print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
             temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0}
+            "job_exp":"","dis_cate":"","province":"","score":0,'save':False}
             dis = DisabilityInfo.objects.get(id=r)
             temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
@@ -791,6 +807,14 @@ def employer_search_disability(request):
             temp['dis_cate'] = dis.disability_cate
             temp['province'] = dis.province
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
+            name =dis.first_name+" "+dis.last_name
+            try:
+                s = Save.objects.get(user=request.user,target=dis.profile,name=name)
+                temp['save'] = True
+             
+            except Exception as e:
+                temp['save'] = False
+        
             output.append(temp)
         # print (output)
         return render(request, 'employer_search.html',{'output':output,'job_declared':job_declared,'job_title_th':job_title_th,'job_id':job_required.id})
@@ -819,7 +843,7 @@ def disable_search_job(request):
     output =[]
     for i in search_job_list:
         temp={"id":0,"name":"","detail":"","url_pic":None,"salary1":0,"salary2":0,
-            "job_exp":"","dis_cate":"","province":"",}
+            "job_exp":"","dis_cate":"","province":"","save":False}
         temp['id'] = i.id         
         temp['name'] = i.title_th
         temp['detail'] = i.detail
@@ -828,15 +852,54 @@ def disable_search_job(request):
         temp['dis_cate'] = i.disability_cate
         temp['province'] = i.province
         temp['url_pic'] = i.company.profile.profile_picture.url
+        c = CompanyInfo.objects.get(id=i.company.id)
+        try:
+            s = Save.objects.get(user=request.user,target=c.profile,name=i.title_th)
+            temp['save'] = True
+            print("<savetrue></savetrue>")
+
+        except Exception as e:
+            temp['save'] = False
+
         output.append(temp)
     
     print("type",type(salary2))
     print("job_title_th",job_title_th)
     print("searcj",search_job_list)
+    mysave = Save.objects.filter(user=request.user,)
+    print("mysave",mysave)
+
+
+    output_job = []
+    for s in mysave:
+        print("tar",s.target)
+        print("name",s.name)
+        temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary1":0,"salary2":0,
+        "detail":"","dis_cate":"","province":"","score":0,"save":True}
+             # {"job_name":None,"company_image_url":None}
+            # company = Comp/anyInfo.objects.get(profile=s.target)
+            # print(company)
+        job = Job.objects.get(company__profile=s.target,title_th=s.name)
+        print("job",job)
+        temp_job["job_id"] = job.id
+        temp_job["job_name"] = job.title_th
+        temp_job["salary1"] = job.salary1
+        temp_job["salary2"] = job.salary2
+        temp_job["dis_cate"] = job.disability_cate
+        temp_job["province"] = job.province
+        temp_job['detail'] = job.detail
+        temp_job["company_image_url"] = job.company.profile.profile_picture.url
+            
+
+        output_job.append(temp_job)
+        profile = Profile.objects.get(user=request.user)
+        invited = InviteProcess.objects.filter(disability__profile=profile)
+        print("invited",invited)
+        print("output_job",output_job) 
 
     return render(request, 'search.html',{'search_job_list':output,
         'job_title_th':job_title_th,'dis_cate':dis_cate,'location':location,
-        'salary1':salary1,'salary2':salary2})
+        'salary1':salary1,'salary2':salary2,'output_job':output_job,'invited':invited})
 
 
 @login_required
@@ -856,6 +919,7 @@ def company_save_disable(request):
         if title == 'บันทึก':
             Save.objects.create(user=request.user,target=dis.profile,name=name)
             context = 'create'
+            print("create")
         else:
             Save.objects.filter(user=request.user,target=dis.profile,name=name).delete()
             print("delete")
