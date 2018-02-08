@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^refuse_job/(?P<dis_id>\d+)/(?P<job_id>\d+)$',views.refuse_job, name="refuse_job"),
     url(r'^isSave/$', views.company_save_disable, name='company_save_disable'),
     url(r'^disIsSave/$', views.disable_save_job, name='disable_save_job'),
+    url(r'^question/$', views.question, name='question'),
     
 
     # url(r'^contactus/$',views.contact, name="contactus"),

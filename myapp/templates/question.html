@@ -1,0 +1,184 @@
+{% extends 'base.html' %}{% load static %} {% block content %}
+	<style type="text/css">
+	h1 {
+	font-weight: normal;
+	font-size: 40px;
+	margin: 20px 0 100px 10px;
+	}
+	.tabs {
+	width: 100%;
+	float: none;
+	list-style: none;
+	position: relative;
+
+	/*margin: 80px 0 0 10px;*/
+	}
+	.tabs li {
+	float: left;
+	display: block;
+
+	}
+	.tabs input[type="radio"] {
+	position: absolute;
+	top: -9999px;
+	left: -999px;
+
+	}
+	.tabs label {
+	display: block;
+	padding: 14px 51px;
+	/*border-radius: 2px 2px 0 0;*/
+	font-size: 20px;
+	background: #f8f8f8;
+	cursor: pointer;
+	position: relative;
+	top: 4px;
+	/*left: 110%;*/
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	 border: 1px solid #D5D8DC;
+	}
+	.tabs [id^="tab"]:checked + p {
+	color:black;
+	-moz-transition: all 2.2s ease-in-out;
+	-o-transition: all 2.2s ease-in-out;
+	-webkit-transition: all 2.2s ease-in-out;
+	transition: all 2.2s ease-in-out;
+	}
+	.tabs label:hover {
+	background: #fff;
+	}
+	.tabs .tab-content {
+	z-index: 2;
+	display: none;
+	overflow: hidden;
+	width: 100%;
+	font-size: 17px;
+	line-height: 25px;
+	padding: 25px;
+	position: absolute;
+	top: 53px;
+	left: 0;
+	background: #fff;
+	 border: 1px solid #D5D8DC;
+	}
+	.tabs [id^="tab"]:checked + label {
+	background: #fff;
+	}
+	.tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+	display: block;
+	}
+	.bg{
+		background: url('{% static "images/test2.jpg" %}') no-repeat center center ;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	/*height: 100%;*/
+		}
+
+	.ul-center {
+  display: flex;
+  justify-content: center;
+}
+
+	.ul-center .center {
+  /*padding: 0 8px;*/
+}
+	
+	</style>
+
+	<div class="uk-section-default " >
+		<div class="uk-section bg "  >
+		<div class="nav-desktop">
+			<!-- <div class="uk-container"> -->
+			<h1 class="uk-text-center">วิธีใช้งานเว็บไซต์ </h1>
+			<br>
+			<ul class="tabs ul-center">
+				
+				<li class="center">
+					
+					<input type=radio name=tabs id=tab1 checked>
+					<label for=tab1 id="font-kanit">วิธีใช้งานเว็บไซต์</label>
+					<div id=tab-content1 class=tab-content>
+					
+						<ul class="ul-center" uk-tab>
+						    <li class="center" ><a href="#">Item</a></li>
+						    <li class="center"><a href="#">Item</a></li>
+						    <li class="center"><a href="#">Item</a></li>
+						</ul>
+
+						<ul class="uk-switcher uk-margin">
+
+						    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+						    <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+						    <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.</li>
+						</ul>
+						
+					</div>
+					
+				</li>
+				
+				<li class="center">
+					
+					<input type=radio name=tabs id=tab2 >
+					<label for=tab2 id="font-kanit">คำถามที่พบบ่อย </label>
+					<div id=tab-content2 class=tab-content>
+						
+						<p>
+							In faucibus ullamcorper vulputate. Fusce massa ex,
+							posuere sit amet felis eu, ullamcorper pharetra nulla.
+							Morbi fringilla arcu accumsan, consequat sem vitae,
+							congue risus. Ut sit amet lobortis leo. Aenean erat
+							lectus, egestas vel rutrum eu, mattis vel est. In nec
+							nulla non turpis ornare mollis eu sit amet nulla.
+							Aliquam leo tortor, dictum in facilisis eu, viverra a
+							magna. Sed viverra euismod diam sed luctus.
+						</p>
+						
+					</div>
+					
+				</li>
+				<li class="center">
+					
+					<input type=radio name=tabs id=tab3 checked>
+					<label for=tab3 id="font-kanit">คำถามที่พบบ่อย </label>
+					<div id=tab-content3 class=tab-content>
+						
+						<p>
+							In faucibus ullamcorper vulputate. Fusce massa ex,
+							posuere sit amet felis eu, ullamcorper pharetra nulla.
+							Morbi fringilla arcu accumsan, consequat sem vitae,
+							congue risus. Ut sit amet lobortis leo. Aenean erat
+							lectus, egestas vel rutrum eu, mattis vel est. In nec
+							nulla non turpis ornare mollis eu sit amet nulla.
+							Aliquam leo tortor, dictum in facilisis eu, viverra a
+							magna. Sed viverra euismod diam sed luctus.
+						</p>
+						
+					</div>
+					
+				</li>
+			
+				
+				
+			</ul>
+			<!-- </div> -->
+		</div>
+			
+		</div>
+	</div>
+
+
+	<br>
+	
+	
+	<!-- 	<div class="nav-mobile" >
+			
+	</div>
+	-->
+	
+{% endblock %}

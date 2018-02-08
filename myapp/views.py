@@ -896,6 +896,10 @@ def disable_save_job(request):
     
     return HttpResponse(json.dumps(context), content_type='application/json')
 
+
+def question(request):
+    return render(request, 'question.html',{})
+
 def create_job(request):
     if request.method == 'POST':
         form = CreateJobForm(request.POST, request.FILES)
