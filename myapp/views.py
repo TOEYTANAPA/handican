@@ -20,7 +20,7 @@ from .forms import *
 # Create your views here.
 def home(request):
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
 
         if request.user.groups.filter(name='company').exists():
             return redirect('employer_search')

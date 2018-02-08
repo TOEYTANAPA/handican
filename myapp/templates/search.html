@@ -172,9 +172,9 @@
                                             <a class="uk-link-text" href="{% url 'job_detail' o.name o.job_id %}">  <b>{{o.name}}</b>  </a>
                                             <p></p>
                                             <label class="">{{o.dis_cate}}</label>
-                                        <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.salary1}} - {{o.salary2}} บาท/เดือน</p>
-                                        <span class="uk-margin-left">
-                                        <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span>
+                                        <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.salary1}} - {{o.salary2}} บาท/เดือน <span class="uk-margin-left">
+                                        <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span></p>
+                                        
                                         <p class=" ">{{o.detail | safe}}</p>
                                     </div>
                                     <div class="uk-width-1-2@m uk-width-1-2@s ">

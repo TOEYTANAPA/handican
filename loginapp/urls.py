@@ -11,7 +11,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     # url(r'^$', views.home, name='home'),
-    url(r'^',  include('myapp.urls',namespace='mainapp')),
+    url(r'^',  include('myapp.urls')),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout,{'next_page': 'home'}, name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
