@@ -1,6 +1,4 @@
-<!-- {% extends 'base2.html' %}{% load widget_tweaks %} -->
 {% load static %}
-<!-- <div style="background-color: white"> -->
 {% block content %}
     <style>
     
@@ -65,14 +63,14 @@
                                 {% if o.save %}
                                     
                                     <span>
-                                    <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
+                                    <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small savbtn" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                     <p></p>
                                     
                                 {% else %}
                                     
                                     
                                     <span>
-                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button>
+                                        <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small savbtn" >บันทึก</button>
                                     </span>
                                     <p></p>
                                     
@@ -94,7 +92,7 @@
       </div>
     <script>
     $(document).ready(function(){
-    $(".isSave").click(function(){
+    $(".savbtn").click(function(){
     var id = $(this).attr('id');
     var title = $(this).text();
     if(title == "บันทึก"){
