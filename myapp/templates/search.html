@@ -43,6 +43,25 @@
     .disabilityText{
     color: #47CCA6;
     }
+        .content-slider li{
+        /*background-color: #ed3020;*/
+        text-align: center;
+        color: #FFF;
+        }
+        .content-slider h3 {
+        margin: 0;
+        padding: 0px 0;
+        }
+
+        .content-slider2 li{
+        /*background-color: #ed3020;*/
+        text-align: center;
+        color: #FFF;
+        }
+        .content-slider2 h3 {
+        margin: 0;
+        padding: 0px 0;
+        }   
     </style>
     
     <!-- <div class="container" > -->
@@ -275,8 +294,33 @@
                     </div>
                 </div>
             </div> -->
-            <hr>
-            <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
+       <h2 class="uk-heading-divider uk-margin-bottom">กิจกรรมที่น่าสนใจ</h2>
+                <div class="demo ">
+                    
+                    <div class="item">
+                        <ul id="content-slider2" class="content-slider2">
+                            <li >
+                                <h3  > <img src="{% static "images/banner-1.jpg" %}">   </h3>
+                            
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-2.jpg" %}"> </h3>
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-1.jpg" %}"> </h3>
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-2.jpg" %}"> </h3>
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-1.jpg" %}"> </h3>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+
+           
         </li>
         <li>
 
@@ -523,7 +567,6 @@
 </div>
 <!-- </div> -->
 
-<<<<<<< HEAD
 <div >
     <button  type="submit" class="uk-button uk-button-default uk-button-small   " >อ่านเพิ่มเติม
     </button>
@@ -537,7 +580,31 @@
 <!-- <button  type="submit" class="uk-button uk-button-default uk-button-small t " ></button> -->
 <!-- <button  type="submit" class="uk-button uk-button-default uk-width-1-1" >รายละเอียดเพิ่มเติม</button> -->
 <hr>
-<h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
+     <h2 class="uk-heading-divider uk-margin-bottom">กิจกรรมที่น่าสนใจ</h2>
+                <div class="demo ">
+                    
+                    <div class="item">
+                        <ul id="content-slider2" class="content-slider2">
+                            <li >
+                                <h3  > <img src="{% static "images/banner-1.jpg" %}">   </h3>
+                            
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-2.jpg" %}"> </h3>
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-1.jpg" %}"> </h3>
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-2.jpg" %}"> </h3>
+                            </li>
+                            <li>
+                                <h3> <img src="{% static "images/banner-1.jpg" %}"> </h3>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
 </li>
 <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
 </li>
@@ -546,8 +613,31 @@
 </div>
 </div>
 <br>
-=======
->>>>>>> 356de96fca5a0534113283f8733e6591dcdd0609
+<script src="{% static 'js/lightslider.js' %}"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+            $("#content-slider").lightSlider({
+                    loop:true,
+                    keyPress:true,
+                    item :4,
+                    slideMove: 1
+                });
+            $("#content-slider2").lightSlider({
+                    loop:true,
+                    keyPress:true,
+                    item :2,
+                    slideMove: 1
+                });
+
+
+            });
+
+            
+
+            {% if status %}
+                    alert('ส่งฟอร์มสำเร็จ');
+            {% endif %}
+    </script>
 <script>
 $(document).ready(function(){
 $(".isSave").click(function(){

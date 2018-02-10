@@ -664,8 +664,23 @@ def employer_search(request):
             output_match.append(temp)
         # print (output)
             # output_match.append(temp)
-        print (output_match)
-
+        # print (output_match)
+        # profile = Profile.objects.get(user=request.user)
+        # # invited = InviteProcess.objects.filter(disability__profile=profile)
+        # # job_declared =  zip(job_declared,invited)
+        # print("invited",invited)
+        # out_job_declared =[]
+        # for j in job_declared:
+        #     temp = {"job_name":"","status":"","created_date":""}
+        #     temp['job_name'] =j.title_th
+        #     try:
+        #         InviteProcess.objects.filter(disability__profile=profile,job=j)
+        #     except Exception as e:
+        #         raise e
+        #     temp['created_date'] = j.created_at
+        #     out_job_declared.append(temp)
+           
+        # print("out_job_declared",out_job_declared)
 
         form = CreateJobForm()
 
