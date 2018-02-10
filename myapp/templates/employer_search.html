@@ -303,20 +303,30 @@
                     <thead>
                         <tr>
                             <th class="uk-table-expand">งานที่เคยลงประกาศ</th>
-                            <th class="uk-table-expand">ฉบับร่าง</th>
-                            <th class="uk-text-center">ผู้สมัครงาน</th>
+                            <!-- <th class="uk-table-expand">ฉบับร่าง</th> -->
+                            <!-- <th class="uk-text-center">ผู้สมัครงาน</th> -->
                             <th class="uk-text-center">วันที่ลงประกาศ</th>
-                            <th class="uk-text-center"> สถานะ
+                            <!-- <th class="uk-text-center"> สถานะ -->
                             </th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for j in job_declared %}
                         <tr>
+                            <td>{{j.title_th}}</td>
+                            <!-- <td>Table Data</t  d> -->
+                            <!-- <td class="uk-text-center">Table Data</td> -->
+                             <td class="uk-text-center">{{j.created_at}}</td>
+                            <!-- <td class="uk-text-center">Table Data</td> -->
+                           
+                        </tr>
+                         {% endfor %}
+                        <!-- <tr>
                             <td>Table Data</td>
                             <td>Table Data</td>
-                            <td class="uk-text-center">Table Data</td>
-                            <td class="uk-text-center">Table Data</td>
-                            <td class="uk-text-center">Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
                         </tr>
                         <tr>
                             <td>Table Data</td>
@@ -324,14 +334,7 @@
                             <td>Table Data</td>
                             <td>Table Data</td>
                             <td>Table Data</td>
-                        </tr>
-                        <tr>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </li>

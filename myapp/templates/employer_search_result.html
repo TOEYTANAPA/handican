@@ -1,4 +1,3 @@
-<!-- {% extends 'base2.html' %}{% load widget_tweaks %} -->
 {% load static %}
 <!-- <div style="background-color: white"> -->
 {% block content %}
@@ -33,9 +32,9 @@
                             <div class="uk-width-1-2@m uk-width-1-2@s">
                                 <a href="{% url "dis_detail" o.id job_id %}">{{o.name}}   </a><p></p>
                               <label class="">{{o.dis_cate}}</label>
-                                <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.expected_salary1}} - {{o.expected_salary2}} บาท/เดือน</p> 
-                                 <span class="uk-margin-left">
-                             <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span>
+                                <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.expected_salary1}} - {{o.expected_salary2}} บาท/เดือน    <span class="uk-margin-left">
+                             <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span></p> 
+                              
                                 
                                 <p></p>  <label class="uk-margin-remove-top" for="">งานที่สนใจ: <span> {{o.job_interest}}</span></label>
                                 <p class="uk-margin-remove-top ">{{o.job_exp}}</p>
