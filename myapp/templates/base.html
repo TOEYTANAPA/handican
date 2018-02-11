@@ -172,6 +172,13 @@
     color:#00C853;
     font-weight: bolder;
     }
+
+    #circle {
+    background: #f00;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
     .noti{
     margin-top:-15px ;
     /*margin-right: : -50px;*/
@@ -229,8 +236,8 @@
     
     .logo {
     height: auto;
-    width: 250px;
-    margin-top:-55px;
+    width: 200px;
+    margin-top:-48px;
     }
     .img-user{
     width: 40px;
@@ -857,16 +864,27 @@
                             
                             
                             <div class="pull-right user">
+
                                 <ul id="inline">
+                                  <li id="inline-li">
+                                <a class="uk-button uk-button-text " id="font-kanit"    href="{% url 'home' %}">หน้าหลัก</a>
+                                </li>
+                                 <li id="inline-li">
+                                <a id="font-kanit"   class="uk-button uk-button-text "   href="{% url 'question' %}">ช่วยเหลือ</a>
+                                </li>
+                                 <li id="inline-li">
+                               <a id="font-kanit"   class="uk-button uk-button-text " href="{% url 'contactus' %}">ติดต่อ</a>
+                                </li>
                                     <li id="inline-li">
-                                        {% if read %}
-                                            <a  href="" class="uk-button uk-button-text uk-padding-small uk-padding-remove-bottom" type="button" >
+                                        {% if not read %}
+                                            <a id="circle"   class="uk-button uk-button-link " type="button" disabled >
                                               <!--   <img class="noti"  src="{% static "images/notification.png" %}"/> -->
-                                              แจ้งเตือน
-                                            </a>
+                                             
+                                            </a> <span class="uk-button uk-button-text " type="button" id="font-kanit">แจ้งเตือน</span> 
                                         {% else %}
-                                            <a  href="" class="uk-button uk-button-text uk-padding-small uk-padding-remove-bottom" type="button" >
-                                                <img class="noti"  src="{% static "images/notification-active.png" %}"/>
+                                            <a id="font-kanit"    href="" class="uk-button uk-button-text " type="button" >
+                                             <!--    <img class="noti"  src="{% static "images/notification-active.png" %}"/> -->
+                                             แจ้งเตือน
                                             </a>
                                         {% endif %}
                                         
@@ -894,17 +912,17 @@
                         <a class="uk-link-reset" href="{% url "click_noti" i.job_name i.job_id i.noti_id  %}">
                                                                 
                                                                 
-                                                                <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                                                    <div class="uk-width-auto">
-                                                                        <img style="width: 60px;height: auto;opacity: .5;" class="noti"  src="{{i.img}}" />
-                                                                    </div>
-                                                                    <div class="uk-width-expand">
-                                                                        <p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
-                                                                        <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time|timesince }} ago</time></p>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <img style="width: 60px;height: auto;opacity: .5;" class="noti"  src="{{i.img}}" />
+                            </div>
+                            <div class="uk-width-expand">
+                                <p class="uk-margin-remove-bottom">{{i.name}}<b> {{i.action}} </b>{{i.obj}}</p>
+                                <p class="uk-text-meta uk-margin-remove-top uk-margin-bottom"><time >{{i.time|timesince }} ago</time></p>
+                           </div>
+                          </div>
+                        </a>
+                </li>
                                                     {% endif %}
 
                                                 {% endfor %}
@@ -919,12 +937,29 @@
                                         </div>
                                     </li>
                                     
-                                    <li id="inline-li"><a href="{% url 'profile' %}" id="input"> <img class="img-user"  src="{{profile}}"/></a></li>
-                                    <li id="inline-li"><a href="{% url 'profile' %}" class="input uk-button-text">{{name}}</a>
-                                    
-                                    
-                                    
-                                </li>
+                                    <li id="inline-li">
+
+<!--   <a class="uk-button uk-button-default" id="input"> <img class="img-user"  src="{{profile}}"/> <i class="fa fa-caret-down"></i></a> -->
+                                    <a class="uk-link-reset" href="{% url 'profile' %}" id="input" > 
+
+                                    <img class="img-user "  src="{{profile}}"/> <i class="fa fa-caret-down "></i>
+
+                                    </a>
+                                    <div uk-dropdown="mode: click" >
+                                        <ul class="uk-nav uk-dropdown-nav" id="font-kanit">
+                                            <li class="uk-active"><a href="{% url 'profile' %}">ข้อมูลของฉัน</a></li>
+                                             <li class="uk-active"><a href="{% url 'profile_noti' %}">แจ้งเตือน</a></li>
+                                              <li class="uk-active"><a href="{% url 'change_password' %}">เปลี่ยนพาสเวิร์ด</a></li>
+                                                    <li class="uk-nav-divider"></li>
+                                           <li class="uk-active"><a href="{% url 'logout' %}">ออกจากระบบ</a></li>
+                                      
+                                        </ul>
+                                    </div>
+
+
+                                    </li>
+                                 
+                              
                                 
                                 
                             </ul>
@@ -932,7 +967,7 @@
                     </div>
                 </div>
             </div>
-
+<!-- 
                 <nav class="uk-navbar-container  " uk-navbar style="background-color: #083351">
                     <div class="uk-navbar-center ">
                         
@@ -954,7 +989,7 @@
                     </div>
                     
                     
-                </nav>
+                </nav> -->
           
             
             
@@ -1030,7 +1065,7 @@
                         <ul>
                             <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
                             <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
-                            <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
+                            <li><a href="#modal-sections" > <h3 id="input"> ช่วยเหลือ</h3></a></li>
                             
                             
                         </ul>
@@ -1053,7 +1088,7 @@
                         <ul>
                             <!--  <li><a href="#modal-sections" ><h3 id="input"> สมัครบัญชีผู้ใช้</h3></a></li> -->
                             <li><a href="{% url 'login' %}" > <h3 id="input">เข้าสู่ระบบ</h3></a></li>
-                            <li><a href="#modal-sections" > <h3 id="input"> คำถาม</h3></a></li>
+                            <li><a href="#modal-sections" > <h3 id="input"> ช่วยเหลือ</h3></a></li>
                             
                             
                         </ul>
@@ -1115,8 +1150,8 @@
         <div class="uk-text-center">
             <span>
                 
-                <a href="https://www.facebook.com/handican.th/" class="uk-margin-small-right"><img class="logo-brand" style="width: 30px;height: auto; margin-right: " src="{% static "images/003-facebook.png" %}"  ></a>
-                <a href="line://ti/p/@jju9765m"><img class="logo-brand" style="width: 30px;height: auto;"  src="{% static "images/004-line.png" %}"  ></a>
+                <a href="https://www.facebook.com/handican.co/" class="uk-margin-small-right"><img class="logo-brand" style="width: 30px;height: auto; margin-right: " src="{% static "images/003-facebook.png" %}"  ></a>
+                <a href="line://ti/p/@handican"><img class="logo-brand" style="width: 30px;height: auto;"  src="{% static "images/004-line.png" %}"  ></a>
             </span>
             <!-- <hr class="uk-margin-small"> -->
             <!-- <hr class="uk-divider-icon uk-text-small"> -->
