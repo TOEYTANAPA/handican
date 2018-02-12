@@ -1,5 +1,11 @@
 {% extends 'base.html' %} {% load static %}{% load widget_tweaks %}
+
+   
+
+
 {% block content %}
+  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+
     <style>
     
     
@@ -76,7 +82,7 @@
             <li><a href="#" style="font-size: 1.12em;">หาผู้สมัครงาน</a></li>
             <li><a href="#" style="font-size: 1.12em;">สร้างประกาศงานใหม่</a></li>
             <li><a href="#" style="font-size: 1.12em;">งานที่เคยประกาศ</a></li>
-            <li><a href="#" style="font-size: 1.12em;">รายการคำเชิญ</a></li>
+            <!-- <li><a href="#" style="font-size: 1.12em;">รายการคำเชิญ</a></li> -->
         </ul>
         <!-- <button type="submit" href="" class="uk-search-icon-flip" uk-search-icon></button> -->
         <ul class="uk-switcher uk-margin">
@@ -299,26 +305,38 @@
                 </div>
             </li>
             <li>
-                <table class="uk-table  uk-table-divider">
+                <!-- <table  id="dataTables" class="uk-table  uk-table-divider"> -->
+                    <table  id="dataTables" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="uk-table-expand">งานที่เคยลงประกาศ</th>
-                            <!-- <th class="uk-table-expand">ฉบับร่าง</th> -->
-                            <!-- <th class="uk-text-center">ผู้สมัครงาน</th> -->
-                            <th class="uk-text-center">วันที่ลงประกาศ</th>
-                            <!-- <th class="uk-text-center"> สถานะ -->
-                            </th>
+                            <th class="">งานที่เคยลงประกาศ</th>
+                   <!--          <th class="uk-table-expand">ฉบับร่าง</th> -->
+                            <th class="uk-text-center">ผู้พิการ</th>
+                           
+                            <th class="uk-text-center"> สถานะ</th>
+                             <!-- <th class="uk-text-center"> การตอบรับ</th> -->
+                              <th class="uk-text-center">วันที่ลงประกาศ</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for j in job_declared %}
+                        {% for j in out_job_declared %}
                         <tr>
-                            <td>{{j.title_th}}</td>
-                            <!-- <td>Table Data</t  d> -->
-                            <!-- <td class="uk-text-center">Table Data</td> -->
-                             <td class="uk-text-center">{{j.created_at}}</td>
-                            <!-- <td class="uk-text-center">Table Data</td> -->
+                            <td>{{j.job_name}}</td>
+                      <!--       <td>Table Data</td> -->
+                            <td class="uk-text-center">  
+                
+                                 {{j.dis_name}}
+                          
+                            </td>
+
+                    <td class="uk-text-center">  
+                
+                                 {{j.status}}
+                          
+                            </td>
+                      
                            
+                                      <td class="uk-text-center">{{j.created_date}}</td>
                         </tr>
                          {% endfor %}
                         <!-- <tr>
@@ -338,9 +356,9 @@
                     </tbody>
                 </table>
             </li>
-            <li>
-                <!-- รายการคำเชิญ -->
-            </li>
+           <!--  <li>
+                รายการคำเชิญ
+            </li> -->
         </ul>
         
     </div>
@@ -625,9 +643,15 @@
     </ul>
 </div>
 </div> -->
-
+<script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="jquery.js"></script>
 <script>
+
+$(document).ready(function() {
+    $('#dataTables').DataTable();
+} );
+  
 // document.getElementById("selectJob").selectedIndex =;
 // $(function(){
 // $("#includedContent").load("search_result.html");

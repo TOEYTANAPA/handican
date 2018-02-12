@@ -655,36 +655,65 @@ def employer_search(request):
             except Exception as e:
                 temp['save'] = False
         
-           
-                
-            
-
-
 
             output_match.append(temp)
-        # print (output)
-            # output_match.append(temp)
-        # print (output_match)
-        # profile = Profile.objects.get(user=request.user)
-        # # invited = InviteProcess.objects.filter(disability__profile=profile)
-        # # job_declared =  zip(job_declared,invited)
-        # print("invited",invited)
-        # out_job_declared =[]
-        # for j in job_declared:
-        #     temp = {"job_name":"","status":"","created_date":""}
-        #     temp['job_name'] =j.title_th
-        #     try:
-        #         InviteProcess.objects.filter(disability__profile=profile,job=j)
-        #     except Exception as e:
-        #         raise e
-        #     temp['created_date'] = j.created_at
-        #     out_job_declared.append(temp)
+        
+        out_job_declared =[]
+        for j in job_declared:
+            # tem = {"job_name":"","invited_list":[],"candidate_list":[],"confirm_list":[],"created_date":""}
+            noti = Notifications.objects.filter(job=j)
+            if len(noti) > 0:
+                for n in noti:
+                 temp = {"job_name":"","dis_name":"","status":"","created_date":""}
+
+                 temp['job_name'] =j.title_th
+
+                 dis = DisabilityInfo.objects.get(profile__user=n.user)
+                 temp['dis_name'] =dis.first_name
+                 temp['status'] =n.action
+                 temp['created_date'] = j.created_at
+                 out_job_declared.append(temp)
+            elif len(noti) == 0:
+                temp = {"job_name":"","dis_name":"","status":"","created_date":""}
+                temp['job_name'] =j.title_th
+                temp['created_date'] = j.created_at
+                temp['dis_name'] ="-"
+                temp['status'] ="-"
+                out_job_declared.append(temp)
+
+
+            
+            # try:
+            #     invited = InviteProcess.objects.get(job=j)
+            #     temp['invited_list'].append(invited.disability)
+            #     noti = Notifications.objects.filter(job=j)
+            #     for n in noti:
+            #         if n.action == "สมัครงาน":
+            #             dis = DisabilityInfo.objects.get(profile__user=n.user)
+            #             temp['candidate_list'].append(dis)
+            #         elif n.action == "ตอบรับคำเชิญ":
+            #             dis = DisabilityInfo.objects.get(profile__user=n.user)
+            #             temp['confirm_list'].append(dis)
+            #         else:
+            #             temp['confirm_list'].append("")
+            #             temp['candidate_list'].append("")
+
+
+
+            # except Exception as e:
+            #     temp['invited_list'].append("")
+                # raise except
+            
+            
            
         # print("out_job_declared",out_job_declared)
 
         form = CreateJobForm()
 
-        return render(request, 'employer_search.html',{'form':form,'job_declared':job_declared,'output':output_match,'job_id':job_required.id})
+        return render(request, 'employer_search.html',{'form':form,
+            'job_declared':job_declared,
+            'out_job_declared':out_job_declared,
+            'output':output_match,'job_id':job_required.id})
 
 
 def contact(request):
