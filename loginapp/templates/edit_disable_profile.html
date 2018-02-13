@@ -312,7 +312,7 @@
                     <div class="uk-card uk-card-default uk-padding-remove-left uk-width-1-1" >
                         
                         <div id="detail">
-                            
+                             <form action="" method="POST" enctype='multipart/form-data'>
                             <div class="card hovercard  uk-margin-remove-top "  >
                                 <div class="cardheader">
                                     
@@ -324,15 +324,15 @@
 
                                 <div class="uk-text-center ">
                                     <div class="info uk-margin-bottom">
-                                        <h2 class="uk-text-large uk-margin"> {{dis.first_name}} {{dis.last_name}}</h2>
+                                        <h2 class="uk-text-large uk-margin"> 
+                                        {{form.first_name}} 
+                                    {{form.last_name}}</h2>
                                         
                                         {% if dis.job_exp  %}
                                             <div class="desc"><p><i class="fa fa-briefcase" aria-hidden="true"></i> {{dis.job_exp}}</p></div>
                                         {% endif %}
                                 
-                                <form action="{% url 'edit_disable_profile' %}">
-                                     <button class="uk-button uk-button-default uk-button-small">แก้ไขข้อมูลส่วนตัว</button>
-                                </form>
+                              
                                     </div>
                                     
                                     
@@ -426,7 +426,7 @@
                                 </table>
 
                             </div>
-
+                             </form>
                         </div>
                         <div id="password">
                             

@@ -39,8 +39,8 @@ class CompanySignUpForm(UserCreationForm):
 class JobInformationForm(forms.Form):
     
     GENDER_CHOICES = (
-    (0, 'ชาย'),
-    (1, 'หญิง')
+    ('ชาย', 'ชาย'),
+    ('หญิง', 'หญิง')
     )
 
     first_name =  forms.CharField(max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
@@ -80,6 +80,25 @@ class CompanyInformationForm(forms.Form):
     company_type =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     company_image = forms.FileField()
     get_more_info = forms.BooleanField(required=False,initial=False)
+
+
+class EditDisableProfileForm(forms.Form):
+    first_name =  forms.CharField(required=False,max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    last_name =  forms.CharField(required=False,max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    age =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+
+    address =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    job_interest =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
+    job_exp =  forms.CharField(required=False,max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea', }))
+    expected_salary1 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
+    expected_salary2 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
+    phone_no =  forms.CharField(required=False,max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    expected_welfare =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent2 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    profile_image = forms.FileField(required=False)
+    province =  forms.CharField(required=False,max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
 
 # class UserCreationForm(forms.ModelForm):
 #     """

@@ -204,9 +204,71 @@ def profile(request):
 
         return render(request, 'profile.html',{'dis':dis,'noti':list_noti})
     else :
-        print("ds")
+        
         return  redirect('company_profile')
-        # return render(request, 'profile.html',{'dis':"dis"})
+
+@login_required
+def edit_disable_profile(request):
+
+    form = EditDisableProfileForm() 
+    list_noti = []
+    read =True
+    profile = Profile.objects.get(user=request.user)
+    if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+        dis = DisabilityInfo.objects.get(profile=profile)
+        noti = Notifications.objects.filter(tarket=profile)
+            
+        for i in noti:
+            temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+            'job_name':"",'job_id':0,'noti_id':0}
+            p = Profile.objects.get(user=i.user)
+            dis = CompanyInfo.objects.get(profile=p)
+            temp['job_name'] = i.job.title_th
+            temp['job_id'] = i.job.id
+            temp['name'] = dis.th_name
+            temp['action'] = i.action
+            temp['obj'] = i.obj
+            temp['time'] = i.created_at
+            temp['is_read'] = i.is_read
+            temp['img'] = p.profile_picture.url
+            temp['noti_id'] = i.id
+                
+            print(temp['is_read'])
+            list_noti.append(temp)
+
+    if request.method == 'POST':
+        form = EditDisableProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            pass
+
+    # if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+    #     dis = DisabilityInfo.objects.get(profile=profile)
+    #     noti = Notifications.objects.filter(tarket=profile)
+            
+    #     for i in noti:
+    #         temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+    #         'job_name':"",'job_id':0,'noti_id':0}
+    #         p = Profile.objects.get(user=i.user)
+    #         dis = CompanyInfo.objects.get(profile=p)
+    #         temp['job_name'] = i.job.title_th
+    #         temp['job_id'] = i.job.id
+    #         temp['name'] = dis.th_name
+    #         temp['action'] = i.action
+    #         temp['obj'] = i.obj
+    #         temp['time'] = i.created_at
+    #         temp['is_read'] = i.is_read
+    #         temp['img'] = p.profile_picture.url
+    #         temp['noti_id'] = i.id
+                
+    #         print(temp['is_read'])
+    #         list_noti.append(temp)
+
+    return render(request, 'edit_disable_profile.html',{'dis':dis,'form':form,'noti':list_noti})
+
+@login_required
+def edit_company_profile(request):
+    return render(request, 'edit_disable_profile.html',{'dis':dis,'form':form,'noti':list_noti})
+
 @login_required
 def company_profile(request):
     read =True
