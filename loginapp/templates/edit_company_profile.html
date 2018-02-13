@@ -6,8 +6,8 @@
     input[type=text],
     input[type=password],
     input[type=email] {
-    background-color: #FAFFBD;
-    }
+/*    background-color: #FAFFBD;
+*/    }
     .title {
     color: black;
     }
@@ -312,7 +312,8 @@
                 <div class="uk-card uk-card-default uk-padding-remove-left uk-width-1-1" >
                     
                     <div id="detail">
-                        
+                           <form action="" method="post"  enctype='multipart/form-data'>
+                                 {% csrf_token %}
                         <div class="card hovercard  uk-margin-remove-top "  >
                             <div class="cardheader">
                                 
@@ -321,17 +322,19 @@
                                 <img src=" {{company.profile.profile_picture.url}}" class="inImgProfile"  alt="">
                             </div>
                             <div class="uk-text-center ">
+
                                 <div class="info uk-margin-bottom">
-                                    <h2 class="uk-text-large uk-margin-remove-bottom uk-margin"> {{company.th_name}}</h2>
-                                    {{company.phone_no}}
-                                    <!-- <div class="desc">{{job.email}}</div> -->
-                                    <div class="desc "> {% if company.website  %}
-                                        {{company.website }}
-                                    {% endif %} </div>
-<br>
-                                       <form action="{% url 'edit_company_profile' %}">
-                                     <button class="uk-button uk-button-default uk-button-small">แก้ไขข้อมูลส่วนตัว</button>
-                                </form>
+                                                <div uk-form-custom="target: true" >
+                      {{form.company_image|add_class:"uk-input"|attr:"id:imgInp"}}
+
+                      <input class="uk-input uk-form-width-medium uk-text-center"  type="text" placeholder="เปลี่ยนรูปภาพโปรไฟล์" disabled>
+                    </div>
+                                    <!-- <h2 class="uk-text-large uk-margin-remove-bottom uk-margin">  -->
+                                    <!-- {{company.th_name}}</h2>
+                                    {{company.phone_no}} -->
+                                    <!-- <div class="desc">{{job.email}}
+                                    </div> -->
+
                                 </div>
                                 
                                 
@@ -341,14 +344,24 @@
                             
                         </div>
                         <div class="uk-container ">
-                            <hr >
+                      
                             <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
                             <table class="uk-table">
                                 
                                 <tbody>
+                                     <tr>
+                                        <td class="uk-width-1-6">ชื่อภาษาไทย:</td>
+                                        <td class="uk-table-expand">{{form.th_name}}</td>
+                                        
+                                    </tr>
+                                     <tr>
+                                        <td class="uk-width-1-6">ชื่อภาษาอังกฤษ:</td>
+                                        <td class="uk-table-expand">{{form.en_name}}</td>
+                                        
+                                    </tr>
                                     <tr>
                                         <td class="uk-width-1-6">คำอธิบาย:</td>
-                                        <td class="uk-table-expand">{{company.info}}</td>
+                                        <td class="uk-table-expand">{{form.info |attr:"id:myTextArea"}}</td>
                                         
                                     </tr>
                                     
@@ -368,7 +381,7 @@
                                         <td class="uk-text-right">เบอร์โทรศัพท์ :</td>
                                         <td class="uk-table-expand">
                                             
-                                            {{company.phone_no}}
+                                            {{form.phone_no}}
                                         </td>
                                         
                                     </tr>
@@ -376,15 +389,22 @@
                                         <td class="uk-text-right">แฟกซ์ :</td>
                                         <td class="uk-table-expand">
                                             
-                                            {{company.fax}}
+                                            {{form.fax}}
                                         </td>
                                         
                                     </tr>
+                                     {% if company.website  %}
+                                            <tr>
+                                        <td class="uk-text-right">เว็บไซต์:</td>
+                                        <td class="uk-table-expand">{{form.website}}</td>
+                                        
+                                    </tr>
+                                    {% endif %} 
                                     <tr>
                                         <td class="uk-text-right">ที่ตั้ง :</td>
                                         <td class="uk-table-expand">
                                             
-                                            {{company.address}} {{company.province}}
+                                            {{form.address}} 
                                         </td>
                                         
                                     </tr>
@@ -393,6 +413,10 @@
                                 </tbody>
                             </table>
                         </div>
+                          <button type="submit" class="uk-button uk-align-center " style="color: white" >บันทึกการเปลี่ยนแปลง</button>
+                     <br>
+                            </div>
+                             </form>
                     </div>
                     <div id="password">
                         
@@ -534,6 +558,16 @@
     </div>
 </div>
 <br>
+<script>
+    // alert("I am an alert box!");
+    
+    var exp= '{{company.info}}';
+    console.log('exp',exp) ;
+    
+    document.getElementById("myTextArea").defaultValue = exp;
+
+</script>
+
 <script type="text/javascript">
 $("#detail").css("display", "block");
 $("#noti").css("display", "none");
@@ -566,6 +600,18 @@ $(".click-detail").removeClass( "active" );
 $(".click-noti").removeClass("active");
 $(".click-password").addClass("active");
 });
+});
+function readURL(input) {
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+reader.onload = function(e) {
+$('#blah').attr('src', e.target.result);
+}
+reader.readAsDataURL(input.files[0]);
+}
+}
+$("#imgInp").change(function() {
+readURL(this);
 });
 </script>
 {% endblock %}

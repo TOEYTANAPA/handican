@@ -83,22 +83,42 @@ class CompanyInformationForm(forms.Form):
 
 
 class EditDisableProfileForm(forms.Form):
-    first_name =  forms.CharField(required=False,max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
-    last_name =  forms.CharField(required=False,max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
-    age =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    first_name =  forms.CharField(required=False,max_length=100, help_text='',
+        widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium '}))
+    last_name =  forms.CharField(required=False,max_length=100, help_text='',
+        widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium '}))
+    age =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-small'}))
 
-    address =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    job_interest =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
-    job_exp =  forms.CharField(required=False,max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea', }))
-    expected_salary1 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    expected_salary2 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    phone_no =  forms.CharField(required=False,max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    expected_welfare =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent2 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    address =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input '}))
+    job_interest =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'})) 
+    job_exp =  forms.CharField(required=False,max_length=5000, help_text='',
+        widget=forms.Textarea(attrs={'rows': 5,'class': 'uk-textarea','id':'myTextArea' }))
+    expected_salary1 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-small','type':'number'}))
+    expected_salary2 =  forms.IntegerField(required=False,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-small','type':'number'}))
+    phone_no =  forms.CharField(required=False,max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    expected_welfare =  forms.CharField(required=False,max_length=1000, help_text='',
+        widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium',}))
+    talent =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    talent2 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
     profile_image = forms.FileField(required=False)
-    province =  forms.CharField(required=False,max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    province =  forms.CharField(required=False,max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+
+class EditCompanyProfileForm(forms.Form):
+
+    th_name =  forms.CharField(required=False,max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    en_name =  forms.CharField(required=False,max_length=100, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    address =  forms.CharField(required=False,max_length=5000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    info =  forms.CharField(required=False,max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 3,'class': 'uk-textarea', }))
+    website =  forms.CharField(required=False,max_length=50, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input  uk-form-width-medium'}))
+    phone_no =  forms.CharField(required=False,max_length=20,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    hr_no =  forms.CharField(required=False,max_length=13,help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'})) 
+    fax = forms.CharField(required=False,max_length=30, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    company_type =  forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+    company_image = forms.FileField(required=False)
+    # province =  forms.CharField(required=False,max_length=250, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input uk-form-width-medium'}))
+
+
 
 # class UserCreationForm(forms.ModelForm):
 #     """
