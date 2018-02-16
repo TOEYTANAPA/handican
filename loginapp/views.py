@@ -162,7 +162,7 @@ def company_signup2(request,uid):
                 fax = form.cleaned_data['fax'],
                 company_type = form.cleaned_data['company_type'],
                 get_more_info = form.cleaned_data['get_more_info'],
-           
+                hr_no=form.cleaned_data['hr_no'],
                 )
             # user_auth = authenticate(username=user.email,password=user.password)
             # login(request, user_auth, backend='django.contrib.auth.backends.ModelBackend')
@@ -183,7 +183,8 @@ def profile(request):
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         dis = DisabilityInfo.objects.get(profile=profile)
         noti = Notifications.objects.filter(tarket=profile)
-            
+       
+   
         for i in noti:
             temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
             'job_name':"",'job_id':0,'noti_id':0}
@@ -204,9 +205,181 @@ def profile(request):
 
         return render(request, 'profile.html',{'dis':dis,'noti':list_noti})
     else :
-        print("ds")
+        
         return  redirect('company_profile')
-        # return render(request, 'profile.html',{'dis':"dis"})
+
+@login_required
+def edit_disable_profile(request):
+
+    form = EditDisableProfileForm() 
+    list_noti = []
+    read =True
+    profile = Profile.objects.get(user=request.user)
+    if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+        dis = DisabilityInfo.objects.get(profile=profile)
+        noti = Notifications.objects.filter(tarket=profile)
+        form.fields['first_name'].widget.attrs['value'] = dis.first_name
+        form.fields['last_name'].widget.attrs['value'] = dis.last_name
+        form.fields['age'].widget.attrs['value'] = dis.age
+        form.fields['address'].widget.attrs['value'] = dis.address
+        form.fields['job_interest'].widget.attrs['value'] = dis.job_interest
+        # form.fields['job_exp'].widget.attrs['placeholder'] = dis.job_exp
+        form.fields['expected_welfare'].widget.attrs['value'] = dis.expected_welfare
+        form.fields['expected_salary1'].widget.attrs['value'] = dis.expected_salary1
+        form.fields['expected_salary2'].widget.attrs['value'] = dis.expected_salary2
+        form.fields['phone_no'].widget.attrs['value'] = dis.phone_no
+        form.fields['talent'].widget.attrs['value'] = dis.talent
+        form.fields['talent2'].widget.attrs['value'] = dis.talent2
+        form.fields['talent3'].widget.attrs['value'] = dis.talent3
+        form.fields['province'].widget.attrs['value'] = dis.province
+            
+        for i in noti:
+            temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+            'job_name':"",'job_id':0,'noti_id':0}
+            p = Profile.objects.get(user=i.user)
+            dis = CompanyInfo.objects.get(profile=p)
+            temp['job_name'] = i.job.title_th
+            temp['job_id'] = i.job.id
+            temp['name'] = dis.th_name
+            temp['action'] = i.action
+            temp['obj'] = i.obj
+            temp['time'] = i.created_at
+            temp['is_read'] = i.is_read
+            temp['img'] = p.profile_picture.url
+            temp['noti_id'] = i.id
+                
+            print(temp['is_read'])
+            list_noti.append(temp)
+
+    if request.method == 'POST':
+        form = EditDisableProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            expected_salary1 = 0 
+            expected_salary2 = 0   
+            if form.cleaned_data['expected_salary1'] >= form.cleaned_data['expected_salary2']:
+                expected_salary1 = form.cleaned_data['expected_salary2']
+                expected_salary2 = form.cleaned_data['expected_salary1']
+            else:
+                expected_salary1 = form.cleaned_data['expected_salary1']
+                expected_salary2 = form.cleaned_data['expected_salary2']
+            
+            try:
+                profile = Profile.objects.get(user=request.user)
+                profile.profile_picture =  request.FILES['profile_image']
+                profile.save()
+            except Exception as e:
+                pass
+            disability = DisabilityInfo.objects.filter(profile=profile).update(
+             
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                age = form.cleaned_data['age'],
+                phone_no = form.cleaned_data['phone_no'],
+                address = form.cleaned_data['address'],
+                job_interest = form.cleaned_data['job_interest'],
+                job_exp = form.cleaned_data['job_exp'],
+                expected_salary1 = expected_salary1,
+                expected_salary2 = expected_salary2,
+                expected_welfare = form.cleaned_data['expected_welfare'],
+                talent = form.cleaned_data['talent'],
+                talent2 = form.cleaned_data['talent2'],
+                talent3 = form.cleaned_data['talent3'],
+                province = form.cleaned_data['province'],
+              
+              
+                )
+            return redirect('profile')
+
+    # if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
+    #     dis = DisabilityInfo.objects.get(profile=profile)
+    #     noti = Notifications.objects.filter(tarket=profile)
+            
+    #     for i in noti:
+    #         temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+    #         'job_name':"",'job_id':0,'noti_id':0}
+    #         p = Profile.objects.get(user=i.user)
+    #         dis = CompanyInfo.objects.get(profile=p)
+    #         temp['job_name'] = i.job.title_th
+    #         temp['job_id'] = i.job.id
+    #         temp['name'] = dis.th_name
+    #         temp['action'] = i.action
+    #         temp['obj'] = i.obj
+    #         temp['time'] = i.created_at
+    #         temp['is_read'] = i.is_read
+    #         temp['img'] = p.profile_picture.url
+    #         temp['noti_id'] = i.id
+                
+    #         print(temp['is_read'])
+    #         list_noti.append(temp)
+
+    return render(request, 'edit_disable_profile.html',{'dis':dis,'form':form,'noti':list_noti})
+
+@login_required
+def edit_company_profile(request):
+    form = EditCompanyProfileForm() 
+    read =True
+    list_noti = []
+    profile = Profile.objects.get(user=request.user)
+    company = CompanyInfo.objects.get(profile=profile)
+    noti = Notifications.objects.filter(tarket=profile)
+    form.fields['th_name'].widget.attrs['value'] = company.th_name
+    form.fields['en_name'].widget.attrs['value'] = company.en_name
+    # form.fields['info'].widget.attrs['value'] = company.info
+    form.fields['address'].widget.attrs['value'] = company.address
+    form.fields['website'].widget.attrs['value'] = company.website
+    form.fields['company_type'].widget.attrs['value'] = company.company_type
+    form.fields['fax'].widget.attrs['value'] = company.fax
+    form.fields['hr_no'].widget.attrs['value'] = company.hr_no
+    form.fields['phone_no'].widget.attrs['value'] = company.phone_no
+
+
+
+    for i in noti:
+        temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
+        'job_name':"",'job_id':0,'noti_id':0,'job_interest':"",'disability_cate': '',
+        'salary1':0,'salary2': 0,'province':'','job_exp':"",'dis_id':0}
+        p = Profile.objects.get(user=i.user)
+        dis = DisabilityInfo.objects.get(profile=p)
+        temp['job_name'] = i.job.title_th
+        temp['job_id'] = i.job.id
+        temp['name'] = dis.first_name +" "+ dis.last_name
+        temp['dis_id'] = dis.id
+        temp['action'] = i.action
+        temp['obj'] = i.obj
+        temp['time'] = i.created_at
+        temp['is_read'] = i.is_read
+        temp['img'] = p.profile_picture.url
+        temp['noti_id'] = i.id
+        temp['salary1'] = dis.expected_salary1
+        temp['salary2'] = dis.expected_salary2
+        temp['province'] = dis.province
+        temp['job_interest'] = dis.job_interest
+        temp['job_exp'] = dis.job_exp
+        temp['disability_cate'] = dis.disability_cate
+        list_noti.append(temp)
+    if request.method == 'POST':
+        form = EditCompanyProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                profile.profile_picture =  request.FILES['company_image']
+                profile.save()
+            except Exception as e:
+                pass
+            company = CompanyInfo.objects.filter(profile=profile).update(
+                th_name=form.cleaned_data['th_name'],
+                en_name=form.cleaned_data['en_name'],
+                info = form.cleaned_data['info'],
+                website = form.cleaned_data['website'],
+                phone_no = form.cleaned_data['phone_no'],
+                address = form.cleaned_data['address'],
+                fax = form.cleaned_data['fax'],
+                company_type = form.cleaned_data['company_type'],
+                hr_no=form.cleaned_data['hr_no'],)
+            return  redirect('company_profile')
+             
+    
+    return render(request, 'edit_company_profile.html',{'form':form,'company':company,'noti':list_noti})  
+
 @login_required
 def company_profile(request):
     read =True

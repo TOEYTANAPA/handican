@@ -45,6 +45,7 @@ class CompanyInfo(models.Model):
 	th_name = models.CharField(max_length=100,editable=True )
 	en_name = models.CharField(max_length=100,editable=True )
 	phone_no = models.CharField(max_length=20,default="ไม่ระบุ")
+	hr_no = models.CharField(max_length=100,editable=True,blank=True,null=True )
 	address = models.CharField(max_length=5000,default="ไม่ระบุ")
 	info = models.CharField(max_length=5000,default="ไม่ระบุ")
 	website = models.CharField(max_length=50,default="ไม่ระบุ")

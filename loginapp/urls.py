@@ -11,7 +11,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     # url(r'^$', views.home, name='home'),
-    url(r'^',  include('myapp.urls')),
+    # url(r'^',  include('myapp.urls')),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout,{'next_page': 'home'}, name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
@@ -21,10 +21,12 @@ urlpatterns = [
     url(r'^signup-company/$', views.company_signup, name='company_signup'),
     url(r'^signup-company-2/(?P<uid>\d+)$', views.company_signup2, name='company_signup2'),
     url(r'^signup-success/$', views.signup_success, name='signup_success'),
-    url(r'^settings/$', views.profile, name="profile"),
-    url(r'^profile-settings/$', views.company_profile, name="company_profile"),
+    url(r'^profile/$', views.profile, name="profile"),
+    url(r'^company-profile/$', views.company_profile, name="company_profile"),
+    url(r'^disable-settings/$', views.edit_disable_profile, name="edit_disable_profile"),
+    url(r'^company-settings/$', views.edit_company_profile, name="edit_company_profile"),
     url(r'^password/$', views.change_password, name='change_password'),
-  
+    
 
     url(r'^settings/notifications$', views.profile_noti, name="profile_noti"),
     
