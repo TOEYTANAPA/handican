@@ -106,6 +106,8 @@ def job_signup2(request,uid):
                 province = form.cleaned_data['province'],
                 get_more_info = form.cleaned_data['get_more_info'],
                 )
+            profile.profile_picture =  request.FILES['profile_image']
+            profile.save()
             # messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
             # print(user.password)
             # user = authenticate(username=user.email,password=user.password)
@@ -164,6 +166,9 @@ def company_signup2(request,uid):
                 get_more_info = form.cleaned_data['get_more_info'],
                 hr_no=form.cleaned_data['hr_no'],
                 )
+          
+            profile.profile_picture =  request.FILES['company_image']
+            profile.save()
             # user_auth = authenticate(username=user.email,password=user.password)
             # login(request, user_auth, backend='django.contrib.auth.backends.ModelBackend')
             # messages.success(request, "คุณได้สมัครบัญชีผู้ใช้สำเร็จแล้ว")
