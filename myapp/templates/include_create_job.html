@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
+ {% load static %}{% load widget_tweaks %} {% block content %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css">
 <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
@@ -54,8 +54,7 @@
   <div class="" style="margin-top: -20px;">
     <div class="container  ">
       <br>  
-      <div class="uk-card uk-card-default">
-        <div class="uk-card-body uk-margin-remove">
+   
           <h2 class="text-center">สร้างประกาศงาน</h2>
           
           <div class="container" id="inContainer">
@@ -103,14 +102,13 @@
                                     {{form.province}}
                                 </div>
                                 </div>
-<div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                    
                                      <div  class="uk-margin-bottom ">
                                     <p  for=" ">ประเภทงาน<b class="requiredForm">*</b></p>
                                     {{form.work_type |attr:"placeholder:งานบริการ, งานออกแบบ, งานบัญชี "}}
                                 </div>
                                 </div>
-
                                  <div  class="uk-margin-bottom ">
                                     <p  for=" ">รายละเอียดงาน <b class="requiredForm">*</b></p>
                                     <p></p>
@@ -317,9 +315,7 @@
         </div>
       </div>
     </div>
-  </div>
-  
-</div>
+
 <!-- </div> -->
 
 <script>

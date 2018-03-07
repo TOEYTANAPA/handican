@@ -51,8 +51,12 @@
                             <div class="uk-width-1-2@m uk-width-1-2@s">
                                 <a class="uk-link-text"  href="{% url 'job_detail' o.name  o.id %}">  <b>{{o.name}}</b>  </a>
                                 <p></p>
-                                <label class="">{{o.dis_cate}}</label>
-                            <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.salary1}} - {{o.salary2}} บาท/เดือน</span>
+                                {{o.dis_cate}}
+                              {% for c in o.dis_cate %}
+                                                <label class="">{{c.name_cate}}</label>
+                                            {% endfor %}
+                                            
+                            <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.salary}} บาท/เดือน</span>
                             <span class="uk-margin-left">
                             <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span></b>
                             <p class=" ">{{o.detail | safe}}</p>

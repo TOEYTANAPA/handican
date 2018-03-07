@@ -76,12 +76,12 @@ def job_signup2(request,uid):
                 more_resume = None
             expected_salary1 = 0 
             expected_salary2 = 0   
-            if form.cleaned_data['expected_salary1'] >= form.cleaned_data['expected_salary2']:
-                expected_salary1 = form.cleaned_data['expected_salary2']
-                expected_salary2 = form.cleaned_data['expected_salary1']
-            else:
-                expected_salary1 = form.cleaned_data['expected_salary1']
-                expected_salary2 = form.cleaned_data['expected_salary2']
+            # if form.cleaned_data['expected_salary1'] >= form.cleaned_data['expected_salary2']:
+            #     expected_salary1 = form.cleaned_data['expected_salary2']
+            #     expected_salary2 = form.cleaned_data['expected_salary1']
+            # else:
+            #     expected_salary1 = form.cleaned_data['expected_salary1']
+            #     expected_salary2 = form.cleaned_data['expected_salary2']
 
             profile = Profile.objects.create(user=user,profile_picture = request.FILES['profile_image'],)
             disability = DisabilityInfo.objects.create(
@@ -91,21 +91,79 @@ def job_signup2(request,uid):
                 email = user.email,
                 sex = form.cleaned_data['sex'],
                 age = form.cleaned_data['age'],
+                birth_date = form.cleaned_data['birth_date'],
+                citizen_id = form.cleaned_data['citizen_id'],
+                disable_id = form.cleaned_data['disable_id'],
+                region = form.cleaned_data['region'],
                 phone_no = form.cleaned_data['phone_no'],
-                address = form.cleaned_data['address'],
+                registration_address = form.cleaned_data['registration_address'],
+                registration_province = form.cleaned_data['registration_province'],
+                current_address = form.cleaned_data['current_address'],
+                current_province = form.cleaned_data['current_province'],
+                graduate = form.cleaned_data['graduate'],
+                graduate_year = form.cleaned_data['graduate_year'],
+                educational_institution = form.cleaned_data['educational_institution'],
+                faculty = form.cleaned_data['faculty'],
+                branch = form.cleaned_data['branch'],
+
+                language = form.cleaned_data['language'],
+                listen_skill = form.cleaned_data['listen_skill'],
+                speaking_skill = form.cleaned_data['speaking_skill'],
+                reading_skill = form.cleaned_data['reading_skill'],
+                writing_skill = form.cleaned_data['writing_skill'],
+
+                computer_skill1 = form.cleaned_data['computer_skill1'],
+                computer_skill2 = form.cleaned_data['computer_skill2'],
+                computer_skill3 = form.cleaned_data['computer_skill3'],
+                computer_skill4 = form.cleaned_data['computer_skill4'],
+                computer_skill5 = form.cleaned_data['computer_skill5'],
+                level_computer_skill1 = form.cleaned_data['level_computer_skill1'],
+                level_computer_skill2 = form.cleaned_data['level_computer_skill2'],
+                level_computer_skill3 = form.cleaned_data['level_computer_skill3'],
+                level_computer_skill4 = form.cleaned_data['level_computer_skill4'],
+                level_computer_skill5 = form.cleaned_data['level_computer_skill5'],
+
+
+
+
+                helping_myself = form.cleaned_data['helping_myself'],
+                traveling_by_myself = form.cleaned_data['traveling_by_myself'],
+                work_in_other_province = form.cleaned_data['work_in_other_province'],
+                working_time = form.cleaned_data['working_time'],
+                current_status = form.cleaned_data['current_status'],
+
                 disability_cate = form.cleaned_data['disability_cate'],
-                job_interest = form.cleaned_data['job_interest'],
+                disability_level = form.cleaned_data['disability_level'],
+                disability_reason = form.cleaned_data['disability_reason'],
+                disabled_year = form.cleaned_data['disabled_year'],
+                disabled_equiptment = form.cleaned_data['disabled_equiptment'],
+                congenital_disease = form.cleaned_data['congenital_disease'],
+                lawsuit = form.cleaned_data['lawsuit'],
+
+
+
                 job_exp = form.cleaned_data['job_exp'],
-                expected_salary1 = expected_salary1,
-                expected_salary2 = expected_salary2,
+                last_company_name = form.cleaned_data['last_company_name'],
+                position = form.cleaned_data['position'],
+                working_start_date = form.cleaned_data['working_start_date'],
+                working_end_date = form.cleaned_data['working_end_date'],
+                quit_job_reason = form.cleaned_data['quit_job_reason'],
+
+
+
+                job_interest1 = form.cleaned_data['job_interest1'],
+                job_interest2 = form.cleaned_data['job_interest2'],
+                job_interest3 = form.cleaned_data['job_interest3'],
+                expected_salary1 = form.cleaned_data['expected_salary1'],
+                expected_salary2 = form.cleaned_data['expected_salary2'],
+                expected_salary3 = form.cleaned_data['expected_salary3'],
+                
+                
+
                 expected_welfare = form.cleaned_data['expected_welfare'],
-                talent = form.cleaned_data['talent'],
-                talent2 = form.cleaned_data['talent2'],
-                talent3 = form.cleaned_data['talent3'],
-                more_resume = more_resume,
-                province = form.cleaned_data['province'],
-                get_more_info = form.cleaned_data['get_more_info'],
+          
                 )
+
             profile.profile_picture =  request.FILES['profile_image']
             profile.save()
             # messages.success(request, "สมัครบัญชีผู้ใช้สำเร็จแล้ว")
@@ -167,6 +225,7 @@ def company_signup2(request,uid):
                 hr_no=form.cleaned_data['hr_no'],
                 )
           
+   
             profile.profile_picture =  request.FILES['company_image']
             profile.save()
             # user_auth = authenticate(username=user.email,password=user.password)

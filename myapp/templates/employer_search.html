@@ -126,10 +126,10 @@
                 </div>
                 
                 <!--    <hr> -->
-                <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2>
+                <!-- <h2 class="uk-heading-bullet uk-margin-remove-top">กิจกรรมที่น่าสนใจ </h2> -->
             </li>
             <li>
-                <h2 class="text-center">สร้างประกาศงาน</h2>
+            <!--     <h2 class="text-center">สร้างประกาศงาน</h2>
                 
                 <div class="container" id="inContainer">
                     
@@ -137,13 +137,11 @@
                     
                     
                     <div class="panel-body uk-text-left">
-                        <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
                         
                         <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
                             {% csrf_token %}
                             <div class="form-group">
                                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
                                     
                                     <div>
                                         <label  for=" ">ชื่อตำแหน่งงาน (TH) <b class="requiredForm">*</b></label>
@@ -178,7 +176,6 @@
                                 
                                 
                                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
                                     
                                     <div>
                                         <label  for=" ">ทักษะที่ต้องการ  <b class="requiredForm">*</b></label>
@@ -259,7 +256,6 @@
                                 <div  class="uk-margin-bottom ">
                                     <label  for=" ">รายละเอียดงาน <b class="requiredForm">*</b></label>
                                     <p></p>
-                                    {{form.media}}
                                     {{form.job_detail}}
                                     
                                 </div>
@@ -300,9 +296,10 @@
                         
                         <br>
                         
-                        <!-- </div> -->
+                  
                     </div>
-                </div>
+                </div> -->
+                 {% include "include_create_job.html"  %}
             </li>
             <li>
                 <!-- <table  id="dataTables" class="uk-table  uk-table-divider"> -->

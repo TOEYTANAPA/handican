@@ -46,7 +46,7 @@ class JobInformationForm(forms.Form):
     )
  
     SKILL_CHOICES = (
-    ('ไม่มี', 'ไม่มี'),
+
     ('เล็กน้อย', 'เล็กน้อย'),
     ('ปานกลาง', 'ปานกลาง'),
     ('ดี', 'ดี'),
@@ -74,7 +74,7 @@ class JobInformationForm(forms.Form):
     WORKING_TIME_CHOICES= (
     ('กลางวัน', 'กลางวัน'),
     ('กลางคืน', 'กลางคืน'),
-    ('Part-time', 'time'),
+    ('Part-time', 'Part-time'),
     )
     OTHER_PROVINCE_CHOICES= (
     (True, 'ได้'),
@@ -129,7 +129,15 @@ class JobInformationForm(forms.Form):
 
   
     )
-
+    SARALY_CHOICES =(
+    ('ไม่ระบุ','ไม่ระบุ'),
+    ('น้อยกว่า 10,000','น้อยกว่า 10,000' ),
+    ('10,000-19,000','10,000-19,000'),
+    ('20,000-29,999','20,000-29,999'),
+    ('30,000-39,000','30,000-39,000'),
+    ('40,000-49,000','40,000-49,000'),
+    ('50,000 ขึ้นไป','50,000 ขึ้นไป')
+    )
     
     PROVINCE_CHOICES= (
     ('กรุงเทพมหานคร', 'กรุงเทพมหานคร'),
@@ -233,8 +241,6 @@ class JobInformationForm(forms.Form):
      widget=forms.Select(attrs={'class': ' uk-select '}))
     current_province =  forms.ChoiceField(choices = PROVINCE_CHOICES, label="",initial='',
      widget=forms.Select(attrs={'class': ' uk-select '}))
-   
-
 
     # birthdate
     birth_date= forms.DateField(label='', initial=datetime.datetime.now(),
@@ -248,39 +254,75 @@ class JobInformationForm(forms.Form):
     educational_institution = forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     faculty = forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     branch =  forms.CharField(max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    honor_name =  forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    honor_year =  forms.ChoiceField(required=False,choices = YEAR_CHOICES,initial=datetime.datetime.now().year, label="",
+     widget=forms.Select(attrs={'class': 'uk-select'}))
+    agency_honor = forms.CharField(required=False,max_length=500, help_text='',
+        widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    hobbies = forms.CharField(max_length=2500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    interesting_work_cate = forms.CharField(max_length=2500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     
+
     # last company
     job_exp = forms.ChoiceField(choices = HAVE_CHOICES, label="",initial='', 
         widget=forms.Select(attrs={'class': 'uk-select','id':"job_exp"}))
     last_company_name = forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    last_company_province = forms.ChoiceField(choices = PROVINCE_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    last_company_province = forms.ChoiceField(required=False,choices = PROVINCE_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
     
     position = forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    working_start_date =forms.DateField(label='', initial=datetime.datetime.now(),
+    working_start_date =forms.DateField(required=False,label='', initial=datetime.datetime.now(),
      widget=forms.SelectDateWidget(years=YEARS,attrs={'class': ' uk-select '}))
-    working_end_date =forms.DateField(label='', initial=datetime.datetime.now(),
+    working_end_date =forms.DateField(required=False,label='', initial=datetime.datetime.now(),
      widget=forms.SelectDateWidget(years=YEARS,attrs={'class': ' uk-select '}))
     quit_job_reason=forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     
     # quality additional skll
-    language = forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    listen_skill = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
-    speaking_skill = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
-    reading_skill = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
-    writeing_skill = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    language1 = forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    listen_skill1 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    speaking_skill1 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    reading_skill1 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    writing_skill1 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    language2 = forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    listen_skill2 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    speaking_skill2 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    reading_skill2 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    writing_skill2 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    language3 = forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    listen_skill3 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    speaking_skill3 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    reading_skill3 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    writing_skill3 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    language4 = forms.CharField(required=False,max_length=500, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    listen_skill4 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    speaking_skill4 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    reading_skill4 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    writing_skill4 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    computer_skill1 = forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    computer_skill2 = forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    computer_skill3 = forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    computer_skill4 = forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    computer_skill5 = forms.CharField(required=False,max_length=200, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    
+    level_computer_skill1 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    level_computer_skill2 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    level_computer_skill3 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    level_computer_skill4 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+    level_computer_skill5 = forms.ChoiceField(choices = SKILL_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
+
+
     # computer skill
     
     # working
     helping_myself = forms.ChoiceField(choices = TRUE_FALSE_CHOICES, label="",initial='', 
-        widget=forms.Select(attrs={'class': 'uk-radio','type':'radio','name':'radio1'}))
+        widget=forms.RadioSelect(attrs={}))
     traveling_by_myself = forms.ChoiceField(choices = TRUE_FALSE_CHOICES, label="",initial='', 
-        widget=forms.Select(attrs={'class': 'uk-radio','type':'radio','name':'radio1'}))
+        widget=forms.RadioSelect(attrs={}))
     work_in_other_province = forms.ChoiceField(choices = TRUE_FALSE_CHOICES, label="",initial='', 
-        widget=forms.Select(attrs={'class': 'uk-radio','type':'radio','name':'radio1'}))
+        widget=forms.RadioSelect(attrs={}))
     working_time = forms.ChoiceField(choices = WORKING_TIME_CHOICES, label="",initial='', 
-        widget=forms.Select(attrs={'class': 'uk-radio','type':'radio','name':'radio1'}))
+        widget=forms.Select(attrs={'class': 'uk-select'}))
     current_status = forms.ChoiceField(choices = STATUS_CHOICES, label="",initial='', 
-        widget=forms.Select(attrs={'class': 'uk-radio','type':'radio','name':'radio1'}))
+        widget=forms.Select(attrs={'class': 'uk-select'}))
     
     # disable category
     disability_cate = forms.ChoiceField(choices = DIS_CATE_CHOICES, label="",initial='', 
@@ -300,34 +342,31 @@ class JobInformationForm(forms.Form):
     # disease
     congenital_disease =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
     # law
-    lawsuit = forms.ChoiceField(choices = HAVE_CHOICES, label="",initial='', widget=forms.Select(attrs={'class': 'uk-select'}))
-    
+    lawsuit = forms.ChoiceField(choices = HAVE_CHOICES, label="",initial='', 
+        widget=forms.RadioSelect(attrs={}))
 
 
     job_interest1 =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
     job_interest2 =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
     job_interest3 =  forms.CharField(required=False,max_length=2000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'})) 
-
-    # expected_salary1_1 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    # expected_salary2_1 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    # expected_salary1_2 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    # expected_salary2_2 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    # expected_salary1_3 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    # expected_salary2_3 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    expected_salary1 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    expected_salary2 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    expected_salary3 =  forms.IntegerField(help_text='',widget=forms.TextInput(attrs={'class': 'uk-input','type':'number'}))
-    
+    expected_salary1 =  forms.ChoiceField(choices = SARALY_CHOICES, label="",initial='', 
+        widget=forms.Select(attrs={'class': 'uk-select'})) 
+    expected_salary2 =  forms.ChoiceField(choices = SARALY_CHOICES, label="",initial='', 
+        widget=forms.Select(attrs={'class': 'uk-select'}))
+    expected_salary3 =  forms.ChoiceField(choices = SARALY_CHOICES, label="",initial='', 
+        widget=forms.Select(attrs={'class': 'uk-select'}))
 
     expected_welfare =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+   
+
     
-    address =   forms.CharField(max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 3,'class': 'uk-textarea', }))
-    talent =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent2 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    more_resume = forms.FileField(required=False,)
+    # address =   forms.CharField(max_length=5000, help_text='',widget=forms.Textarea(attrs={'rows': 3,'class': 'uk-textarea', }))
+    # talent =  forms.CharField(max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    # talent2 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    # talent3 =  forms.CharField(required=False,max_length=1000, help_text='',widget=forms.TextInput(attrs={'class': 'uk-input'}))
+    # more_resume = forms.FileField(required=False,)
     profile_image = forms.FileField()
-    get_more_info = forms.BooleanField(required=False,initial=False)
+    # get_more_info = forms.BooleanField(required=False,initial=False)
 
 class CompanyInformationForm(forms.Form):
     
