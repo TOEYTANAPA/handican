@@ -10,6 +10,8 @@ import difflib
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import ast
+
 # change password
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -298,20 +300,35 @@ def search(request):
         'สมุทรสาคร' ,'สระบุรี' ,'สิงห์บุรี', 'สุโขทัย','สุพรรณบุรี', 'อ่างทอง', 'อุทัยธานี']
 
         zone = ""
-        if me.province in north:
+        if me.current_province in north:
             zone = "ภาคเหนือ"
-        elif me.province in north_east:
+        elif me.current_province in north_east:
             zone = "ภาคตะวันออกเฉียงเหนือ"
-        elif me.province in central:
+        elif me.current_province in central:
             zone = "ภาคกลาง"
-        elif me.province in east:
+        elif me.current_province in east:
             zone = "ภาคตะวันออก"
-        elif me.province in west:
+        elif me.current_province in west:
             zone = "ภาคตะวันตก"
 
         # job_interest = me.job_interest
-        the_string = me.job_interest
-        myjob_interest_split = the_string.split(",")
+        myjob1 = me.job_interest1
+        myjob2 = me.job_interest2
+        myjob3 = me.job_interest3
+        print("myjob1",myjob1)
+        print("myjob1",myjob2)
+        print("myjob1",myjob2)
+        me_computer_skill = []
+        me_computer_skill.append(me.computer_skill1)
+        me_computer_skill.append(me.computer_skill2)
+        me_computer_skill.append(me.computer_skill3)
+        me_computer_skill.append(me.computer_skill4)
+        me_computer_skill.append(me.computer_skill5)
+
+        # me_language = me.language.split(",")
+        # myjob1_interest_split = the_string1.split(",")
+        # myjob2_interest_split = the_string2.split(",")
+        # myjob3_interest_split = the_string3.split(",")
 
         for job in job_list:
             score = 0
@@ -320,10 +337,44 @@ def search(request):
             # founded_province = False 
             # the_string = d.job_interest
             # j_split = the_string.split(",")
+            job_required_cate = ast.literal_eval(job.disability_cate)
+            # sp = job_required.disability_cate.split("[,]")
+            # cate = (job_required.disability_cate)
+            # print(type(cate))
+            for jc in job_required_cate:
+                print(jc)
+                if me.disability_cate == jc:
+                    score +=20
+         
+            if me.expected_welfare in job.disabled_welfare:
+                score += 5
+            if me.graduate == job.history_of_education:
+                score += 10 
+            
+            dis_work_cate = me.interesting_work_cate.split(",")
+            for i in dis_work_cate:
+                if i in job.work_type:
+                    score+=5
+                
+            # dis_salary ="ไม่ระบุ"
+            if me.expected_salary1 == job.salary:
+                # dis_salary = me.expected_salary1
+                score += 15
+            elif me.expected_salary2 == job.salary:
+                # dis_salary = me.expected_salary2
+                score += 15
+            elif me.expected_salary3 == job.salary:
+                # dis_salary = me.expected_salary3
+                score += 15      
 
-            if me.disability_cate in job.disability_cate:
-                score +=20
-            if me.province in job.province:
+
+            if me.working_time == job.working_time:
+                score += 5    
+
+
+
+
+            if me.current_province in job.province:
                 score += 5
             else:
                 if job.province in north:
@@ -338,15 +389,14 @@ def search(request):
                     company_zone = "ภาคตะวันตก"           
 
                 if zone == company_zone:
-                    score +=5
+                    score +=3
 
 
             if me.sex in job.sex:
                 score +=5
 
-            for myjob in myjob_interest_split:
-                
-                seq = difflib.SequenceMatcher(None,job.title_th,myjob)
+            try:
+                seq = difflib.SequenceMatcher(0,job.title_th,myjob1)
                 percen = seq.ratio()*100
                 print("percen ",percen)
                 if percen >= 30.0:
@@ -354,22 +404,111 @@ def search(request):
                 elif percen>=10.0 and percen <=29.0:
                     score += 10
                 elif percen < 10.0:
-                    score+=0   
-           
-            qualification_list = job.qualification.split(",")
-            for i in qualification_list:
-                if i :
-                    if me.talent in i or me.talent2 in i or me.talent3 in i:
-                        score+=25
-                        break
+                    score+=0             
+                
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0
 
-            if me.expected_salary1 <= job.salary1 or me.expected_salary1 <= job.salary2 :
-                if me.expected_salary2 <= job.salary2:
-                    score +=10
-                elif me.expected_salary2 > job.salary2  :
-                    score +=5
-                else:
-                    score +=5
+            try:
+                seq = difflib.SequenceMatcher(0,job.title_th,myjob2)
+                percen = seq.ratio()*100
+                print("percen ",percen)
+                if percen >= 30.0:
+                    score += 25
+                elif percen>=10.0 and percen <=29.0:
+                    score += 10
+                elif percen < 10.0:
+                    score+=0             
+                
+
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0  
+
+            try:
+                seq = difflib.SequenceMatcher(0,job.title_th,myjob3)
+                percen = seq.ratio()*100
+                print("percen ",percen)
+                if percen >= 30.0:
+                    score += 25
+                elif percen>=10.0 and percen <=29.0:
+                    score += 10
+                elif percen < 10.0:
+                    score+=0  
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0
+            
+
+            dis_language = []
+            dis_language.append(me.language1)
+            dis_language.append(me.language2)
+            dis_language.append(me.language3)
+            dis_language.append(me.language4)
+            print("job.language",job.language)
+            try:
+                language_required = job.language.split(",")
+                for i in dis_language:
+                    print(i)
+                    for j in language_required:
+                        if j in i:
+                            score+=10
+            except Exception as e:
+                pass
+           
+
+            
+        
+
+            # if job.listen_skill != "ไม่มี":
+            #     if job.listen_skill == me.listen_skill:
+            #         score+=10
+            #     elif me.listen_skill != "ไม่มี":
+            #         score+=3
+
+            # if job.speaking_skill != "ไม่มี":
+            #     if job.speaking_skill == me.speaking_skill:
+            #         score+=10
+            #     elif me.speaking_skill != "ไม่มี":
+            #         score+=3        
+
+            # if job.reading_skill != "ไม่มี":
+            #     if job.reading_skill == me.reading_skill:
+            #         score+=10
+            #     elif me.reading_skill != "ไม่มี":
+            #         score+=3  
+
+            # if job.writing_skill != "ไม่มี":
+            #     if job.writing_skill == me.writing_skill:
+            #         score+=10
+            #     elif me.writing_skill != "ไม่มี":
+            #         score+=3  
+            
+            # job_computer_skill = []
+            # job_computer_skill.append(job.computer_skill1)
+            # job_computer_skill.append(job.computer_skill2)
+            # job_computer_skill.append(job.computer_skill3)
+
+
+            # for 
+            # qualification_list = job.qualification.split(",")
+            # for i in qualification_list:
+            #     if i :
+            #         if me.talent in i or me.talent2 in i or me.talent3 in i:
+            #             score+=25
+            #             break
+
+            # if me.expected_salary1 <= job.salary1 or me.expected_salary1 <= job.salary2 :
+            #     if me.expected_salary2 <= job.salary2:
+            #         score +=10
+            #     elif me.expected_salary2 > job.salary2  :
+            #         score +=5
+            #     else:
+            #         score +=5
             
 
             if me.age >= job.age1 and me.age <= job.age2 :
@@ -384,15 +523,28 @@ def search(request):
         temp_dict_reverse = sorted(temp_dict, key=temp_dict.get, reverse=True)
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
-            temp={"job_id":0 ,"name":"","url_pic":None,"salary1":0,"salary2":0,
-            "detail":"","dis_cate":"","province":"","score":0,"save":False}
+            temp={"job_id":0 ,"name":"","url_pic":None,"salary":0,
+            "detail":"","dis_cate1":"","dis_cate2":"","dis_cate3":"","province":"","score":0,"save":True}
             job_match = Job.objects.get(id=r)
+
+           
+            
+            job_required_cate = ast.literal_eval(job_match.disability_cate)
+        
+         
+            
+            temp["dis_cate1"] = job_required_cate[0]
+            temp["dis_cate2"] = job_required_cate[1]
+            temp["dis_cate3"] = job_required_cate[2]
+
+
+        
 
             temp['score'] = temp_dict[r]
             temp['job_id'] = job_match.id
             temp['name'] = job_match.title_th
-            temp['salary1'] = job_match.salary1
-            temp['salary2'] = job_match.salary2
+            temp['salary'] = job_match.salary
+            # temp['salary2'] = job_match.salary2
             temp['detail'] = job_match.detail
             temp['dis_cate'] = job_match.disability_cate
             temp['province'] = job_match.province
@@ -414,24 +566,45 @@ def search(request):
         for s in mysave:
             print("tar",s.target)
             print("name",s.name)
-            temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary1":0,"salary2":0,
-            "detail":"","dis_cate":"","province":"","score":0,"save":True}
+            temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
+            "detail":"","dis_cate1":"","dis_cate2":"","dis_cate3":"","province":"","score":0,"save":True}
              # {"job_name":None,"company_image_url":None}
             # company = Comp/anyInfo.objects.get(profile=s.target)
             # print(company)
+            
+            job_required_cate = ast.literal_eval(job.disability_cate)
+            tempcate = []
+            print("job_required_cate",job_required_cate)
+            cate = {"name_cate1":"","name_cate2":"","name_cate3":""}
+
+            temp_job["dis_cate1"] = job_required_cate[0]
+            temp_job["dis_cate2"] = job_required_cate[1]
+            temp_job["dis_cate3"] = job_required_cate[2]
+
+
+            print("cate",cate)
+           # for i in job_required_cate:
+                
+           #      cate["name_cate"] = i
+           #      tempcate.append(cate) 
+                
+
+
             job = Job.objects.get(company__profile=s.target,title_th=s.name)
-            print("job",job)
+    
             temp_job["job_id"] = job.id
             temp_job["job_name"] = job.title_th
-            temp_job["salary1"] = job.salary1
-            temp_job["salary2"] = job.salary2
-            temp_job["dis_cate"] = job.disability_cate
+            temp_job["salary"] = job.salary
+            temp_job["dis_cate"]=cate
+            # temp_job["salary2"] = job.salary2
+            
             temp_job["province"] = job.province
             temp_job['detail'] = job.detail
             temp_job["company_image_url"] = job.company.profile.profile_picture.url
-            
+             
 
             output_job.append(temp_job)
+        print("cate",cate)
         profile = Profile.objects.get(user=request.user)
         invited = InviteProcess.objects.filter(disability__profile=profile)
         print("invited",invited)
@@ -453,70 +626,7 @@ def employer_search(request):
     # dis_person = DisabilityInfo.objects.get(profile__user=request.user)
 
     if request.method == 'POST':
-        print("ads")
-        form = CreateJobForm(request.POST, request.FILES)
-        print(form.errors)
-        if form.is_valid():
-            print("valid")
-            company = CompanyInfo.objects.get(profile__user=request.user)
-            age1 = 0
-            age2 = 0 
-            salary1 = 0
-            salary2 = 0
-            sex = ""
-            if form.cleaned_data['sex'] == 0:
-                sex = "ชาย"
-            elif form.cleaned_data['sex'] == 1:
-                sex = "หญิง"
-            elif form.cleaned_data['sex'] == 2:
-                sex = "หญิงชาย"    
-
-            all_qualification = (form.cleaned_data['qualification']+','
-                +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
-                +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
-                +','+form.cleaned_data['qualification6']+','+form.cleaned_data['qualification7']
-                +','+form.cleaned_data['qualification8']
-                +','+form.cleaned_data['qualification9']
-                +','+form.cleaned_data['qualification10'])
-
-            if form.cleaned_data['age1'] >= form.cleaned_data['age2'] :
-                age2 = form.cleaned_data['age1']
-                age1 = form.cleaned_data['age2']
-            else :
-                age1 = form.cleaned_data['age1']
-                age2 = form.cleaned_data['age2']
-
-            if form.cleaned_data['salary1'] >= form.cleaned_data['salary2'] :
-                salary2 = form.cleaned_data['salary1']
-                salary1 = form.cleaned_data['salary2']
-            else :
-                salary1 = form.cleaned_data['salary1']
-                salary2 = form.cleaned_data['salary2']
-                
-            cj = Job.objects.create(
-                company =company,
-                title_th=form.cleaned_data['title_th'],
-                title_en=form.cleaned_data['title_en'],
-                email=form.cleaned_data['email'],
-                phone_no=form.cleaned_data['phone_no'],
-                age1 = age1,
-                age2 = age2,
-                sex =sex,
-                detail = form.cleaned_data['job_detail'],
-                disability_cate = form.cleaned_data['disability_type'],
-                salary1 = salary1,
-                salary2 = salary2,
-                qualification = all_qualification,
-                province=form.cleaned_data['province'],
-                address=form.cleaned_data['location'],
-           
-                )
-            print(cj)
-            messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            nextPage = "employer-search"
-            return redirect(nextPage)
-
+      pass
 
     else :
         temp_dict = {}
@@ -533,7 +643,7 @@ def employer_search(request):
             return redirect('create_job')
 
         
-       
+        language_required =job_required.language.split(",")
 
        
         dis_list = DisabilityInfo.objects.all()
@@ -558,12 +668,44 @@ def employer_search(request):
             dis_zone = ""
             # lower_north_central_top = "สุโขทัย"
             founded_province = False 
-            the_string = d.job_interest
-            j_split = the_string.split(",")
+            # the_string = d.job_interest1
+            dis_cate = ast.literal_eval(job_required.disability_cate)
+            # sp = job_required.disability_cate.split("[,]")
+            # cate = (job_required.disability_cate)
+            # print(type(cate))
+            for dc in dis_cate:
+                print(dc)
+                if d.disability_cate == dc:
+                    score +=20
+         
+            if d.expected_welfare in job_required.disabled_welfare:
+                score += 5
+            if d.graduate == job_required.history_of_education:
+                score += 10 
+            
+            dis_work_cate = d.interesting_work_cate.split(",")
+            for i in dis_work_cate:
+                if i in job_required.work_type:
+                    score+=5
+                
+            dis_salary ="ไม่ระบุ"
+            if d.expected_salary1 == job_required.salary:
+                dis_salary = d.expected_salary1
+                score += 15
+            elif d.expected_salary2 == job_required.salary:
+                dis_salary = d.expected_salary2
+                score += 15
+            elif d.expected_salary3 == job_required.salary:
+                dis_salary = d.expected_salary3
+                score += 15      
 
-            if d.disability_cate in job_required.disability_cate:
-                score +=20
-            if d.province in job_required.province:
+
+            if d.working_time == job_required.working_time:
+                score += 5    
+
+
+
+            if d.current_province in job_required.province:
                 score += 5
             else:
                 if job_required.province in north:
@@ -577,46 +719,117 @@ def employer_search(request):
                 elif job_required.province in west:
                     zone = "ภาคตะวันตก"           
 
-                if d.province in north:
+                if d.current_province in north:
                     dis_zone = "ภาคเหนือ"
-                elif d.province in north_east:
+                elif d.current_province in north_east:
                     dis_zone = "ภาคตะวันออกเฉียงเหนือ"
-                elif d.province in central:
+                elif d.current_province in central:
                     dis_zone = "ภาคกลาง"
-                elif d.province in east:
+                elif d.current_province in east:
                     dis_zone = "ภาคตะวันออก"
-                elif d.province in west:
+                elif d.current_province in west:
                     dis_zone = "ภาคตะวันตก" 
                 if zone == dis_zone:
-                    score +=5
-            for jl in j_split:
-                
-                seq = difflib.SequenceMatcher(None,job_required.title_th,jl)
+                    score +=3
+
+            myjob1 = d.job_interest1
+            myjob2 = d.job_interest2
+            myjob3 = d.job_interest3
+
+            try:
+                seq = difflib.SequenceMatcher(0,job_required.title_th,myjob1)
                 percen = seq.ratio()*100
                 print("percen ",percen)
                 if percen >= 30.0:
-                    score += 25
+                    score += 10
                 elif percen>=10.0 and percen <=29.0:
-                    score += 5
+                    score += 3
                 elif percen < 10.0:
-                    score+=0   
-            qualification_list = job_required.qualification.split(",")
-            for i in qualification_list:
-                if i :
-                    if d.talent in i or  d.talent2 in i or d.talent3 in i:
-                        score+=25
-                        break
+                    score+=0             
+                
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0
+
+            try:
+                seq = difflib.SequenceMatcher(0,job_required.title_th,myjob2)
+                percen = seq.ratio()*100
+                print("percen ",percen)
+                if percen >= 30.0:
+                    score += 10
+                elif percen>=10.0 and percen <=29.0:
+                    score += 3
+                elif percen < 10.0:
+                    score+=0             
+                
+
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0  
+
+            try:
+                seq = difflib.SequenceMatcher(0,job_required.title_th,myjob3)
+                percen = seq.ratio()*100
+                print("percen ",percen)
+                if percen >= 30.0:
+                    score += 10
+                elif percen>=10.0 and percen <=29.0:
+                    score += 3
+                elif percen < 10.0:
+                    score+=0  
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0
+            
 
 
+            # if d.expected_salary1 <= job_required.salary1 or d.expected_salary1 <= job_required.salary2 :
+            #     if d.expected_salary2 <= job_required.salary2:
+            #         score +=10
+            #     elif d.expected_salary2 > job_required.salary2  :
+            #         score +=5
+            #     else:
+            #         score +=5
+            dis_language = []
+            dis_language.append(d.language1)
+            dis_language.append(d.language2)
+            dis_language.append(d.language3)
+            dis_language.append(d.language4)
 
+            # dis_language = d.language1.split(",")
+            for i in dis_language:
+                print(i)
+                for j in language_required:
+                    if j in i:
+                        score+=10
 
-            if d.expected_salary1 <= job_required.salary1 or d.expected_salary1 <= job_required.salary2 :
-                if d.expected_salary2 <= job_required.salary2:
-                    score +=10
-                elif d.expected_salary2 > job_required.salary2  :
-                    score +=5
-                else:
-                    score +=5
+            # if job_required.writing_skill != "ไม่มี":
+            #     if job_required.writing_skill == d.writing_skill:
+            #         score+=10
+            #     elif d.writing_skill != "ไม่มี":
+            #         score+=3
+            # if job_required.reading_skill != "ไม่มี":
+            #     if job_required.reading_skill == d.reading_skill:
+            #         score+=10
+            #     elif d.reading_skill != "ไม่มี":
+            #         score+=3
+            # if job_required.speaking_skill != "ไม่มี":
+            #     if job_required.speaking_skill == d.speaking_skill:
+            #         score+=10
+            #     elif d.speaking_skill != "ไม่มี":
+            #         score+=3                  
+            
+            # if job_required.listen_skill != "ไม่มี":
+            #     if job_required.listen_skill == d.listen_skill:
+            #         score+=10
+            #     elif d.listen_skill != "ไม่มี":
+            #         score+=3
+                    
+
+   
             if d.sex in job_required.sex:
                 score +=5        
 
@@ -633,18 +846,30 @@ def employer_search(request):
         temp_dict_reverse = sorted(temp_dict, key=temp_dict.get, reverse=True)
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
-            temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0,"save":False}
+            temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary":0,
+            "job_exp":"","dis_cate":"","province":"","score":0,'save':False,'current_status':""}
             dis = DisabilityInfo.objects.get(id=r)
+
+
+            dis_salary = dis.expected_salary1
+            if dis.expected_salary1 == job_required.salary:
+                dis_salary = dis.expected_salary1
+                
+            elif dis.expected_salary2 == job_required.salary:
+                dis_salary = dis.expected_salary2
+             
+            elif dis.expected_salary3 == job_required.salary:
+                dis_salary = dis.expected_salary3
+              
+            temp['expected_salary'] = dis_salary
             temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
             temp['name'] = dis.first_name+" "+dis.last_name
-            temp['job_interest'] = dis.job_interest
+            # temp['job_interest'] = dis.job_interest
             temp['expected_salary1'] = dis.expected_salary1
             temp['expected_salary2'] = dis.expected_salary2
             temp['job_exp'] = dis.job_exp
             temp['dis_cate'] = dis.disability_cate
-            temp['province'] = dis.province
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
             name =dis.first_name+" "+dis.last_name
             try:
@@ -750,6 +975,12 @@ def employer_search_disability(request):
         dis_list = DisabilityInfo.objects.all()
         print(dis_list)
 
+        language_required =job_required.language.split(",")
+
+       
+        dis_list = DisabilityInfo.objects.all()
+        print(dis_list)
+
         south = ['จังหวัดกระบี่','จังหวัดชุมพร', 'จังหวัดตรัง', 'จังหวัดนครศรีธรรมราช' ,'จังหวัดนราธิวาส',
         'จังหวัดปัตตานี', 'จังหวัดพังงา', 'จังหวัดพัทลุง','จังหวัดภูเก็ต' ,'จังหวัดยะลา' ,'จังหวัดระนอง' ,
         'จังหวัดสงขลา', 'จังหวัดสตูล', 'จังหวัดสุราษฎร์ธานี']
@@ -769,12 +1000,58 @@ def employer_search_disability(request):
             dis_zone = ""
             # lower_north_central_top = "สุโขทัย"
             founded_province = False 
-            the_string = d.job_interest
-            j_split = the_string.split(",")
+            # the_string = d.job_interest1
+            # print("job_required.disability_cate:",job_required.disability_cate)
+            dis_cate = ast.literal_eval(job_required.disability_cate)
+            # sp = job_required.disability_cate.split("[,]")
+            # cate = (job_required.disability_cate)
+            # print(type(cate))
+            for dc in dis_cate:
+                print(dc)
+                if d.disability_cate == dc:
+                    score +=20
+         
+            if d.expected_welfare in job_required.disabled_welfare:
+                score += 5
+            if d.graduate == job_required.history_of_education:
+                score += 10 
+            
+            dis_work_cate = d.interesting_work_cate.split(",")
+            for i in dis_work_cate:
+                if i in job_required.work_type:
+                    score+=5
+                
+            dis_salary ="ไม่ระบุ"
+            if d.expected_salary1 == job_required.salary:
+                dis_salary = d.expected_salary1
+                score += 15
+            elif d.expected_salary2 == job_required.salary:
+                dis_salary = d.expected_salary2
+                score += 15
+            elif d.expected_salary3 == job_required.salary:
+                dis_salary = d.expected_salary3
+                score += 15      
 
-            if d.disability_cate in job_required.disability_cate:
-                score +=20
-            if d.province in job_required.province:
+
+            dis_language = []
+            dis_language.append(d.language1)
+            dis_language.append(d.language2)
+            dis_language.append(d.language3)
+            dis_language.append(d.language4)
+
+            # dis_language = d.language1.split(",")
+            for i in dis_language:
+                print(i)
+                for j in language_required:
+                    if j in i:
+                        score+=10
+
+            if d.working_time == job_required.working_time:
+                score += 5    
+
+
+
+            if d.current_province in job_required.province:
                 score += 5
             else:
                 if job_required.province in north:
@@ -788,46 +1065,77 @@ def employer_search_disability(request):
                 elif job_required.province in west:
                     zone = "ภาคตะวันตก"           
 
-                if d.province in north:
+                if d.current_province in north:
                     dis_zone = "ภาคเหนือ"
-                elif d.province in north_east:
+                elif d.current_province in north_east:
                     dis_zone = "ภาคตะวันออกเฉียงเหนือ"
-                elif d.province in central:
+                elif d.current_province in central:
                     dis_zone = "ภาคกลาง"
-                elif d.province in east:
+                elif d.current_province in east:
                     dis_zone = "ภาคตะวันออก"
-                elif d.province in west:
+                elif d.current_province in west:
                     dis_zone = "ภาคตะวันตก" 
                 if zone == dis_zone:
-                    score +=5
-            for jl in j_split:
-                
-                seq = difflib.SequenceMatcher(None,job_required.title_th,jl)
+                    score +=3
+
+            myjob1 = d.job_interest1
+            myjob2 = d.job_interest2
+            myjob3 = d.job_interest3
+
+            try:
+                seq = difflib.SequenceMatcher(0,job_required.title_th,myjob1)
                 percen = seq.ratio()*100
                 print("percen ",percen)
                 if percen >= 30.0:
-                    score += 25
+                    score += 10
                 elif percen>=10.0 and percen <=29.0:
-                    score += 5
+                    score += 3
                 elif percen < 10.0:
-                    score+=0   
-            qualification_list = job_required.qualification.split(",")
-            for i in qualification_list:
-                if i :
-                    if d.talent in i or  d.talent2 in i or d.talent3 in i:
-                        score+=25
-                        break
+                    score+=0             
+                
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0
+
+            try:
+                seq = difflib.SequenceMatcher(0,job_required.title_th,myjob2)
+                percen = seq.ratio()*100
+                print("percen ",percen)
+                if percen >= 30.0:
+                    score += 10
+                elif percen>=10.0 and percen <=29.0:
+                    score += 3
+                elif percen < 10.0:
+                    score+=0             
+                
+
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0  
+
+            try:
+                seq = difflib.SequenceMatcher(0,job_required.title_th,myjob3)
+                percen = seq.ratio()*100
+                print("percen ",percen)
+                if percen >= 30.0:
+                    score += 10
+                elif percen>=10.0 and percen <=29.0:
+                    score += 3
+                elif percen < 10.0:
+                    score+=0  
+            except TypeError as e:
+                # because myjob interest is none
+                print("score == 0")
+                score+=0
+            
 
 
 
+                    
 
-            if d.expected_salary1 <= job_required.salary1 or d.expected_salary1 <= job_required.salary2 :
-                if d.expected_salary2 <= job_required.salary2:
-                    score +=10
-                elif d.expected_salary2 > job_required.salary2  :
-                    score +=5
-                else:
-                    score +=5
+   
             if d.sex in job_required.sex:
                 score +=5        
 
@@ -839,24 +1147,37 @@ def employer_search_disability(request):
                 score +=5
 
 
+
             # print (score)
             temp_dict[d.id] = score
         output = []
         temp_dict_reverse = sorted(temp_dict, key=temp_dict.get, reverse=True)
         # print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
-            temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary1":0,"expected_salary2":0,
-            "job_exp":"","dis_cate":"","province":"","score":0,'save':False}
+            temp={"id":0,"name":"","job_interest":"","url_pic":None,"expected_salary":0,
+            "job_exp":"","dis_cate":"","province":"","score":0,'save':False,'current_status':""}
             dis = DisabilityInfo.objects.get(id=r)
+
+
+            dis_salary = dis.expected_salary1
+            if dis.expected_salary1 == job_required.salary:
+                dis_salary = dis.expected_salary1
+                
+            elif dis.expected_salary2 == job_required.salary:
+                dis_salary = dis.expected_salary2
+             
+            elif dis.expected_salary3 == job_required.salary:
+                dis_salary = dis.expected_salary3
+              
+            temp['expected_salary'] = dis_salary
             temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
             temp['name'] = dis.first_name+" "+dis.last_name
-            temp['job_interest'] = dis.job_interest
-            temp['expected_salary1'] = dis.expected_salary1
-            temp['expected_salary2'] = dis.expected_salary2
             temp['job_exp'] = dis.job_exp
             temp['dis_cate'] = dis.disability_cate
-            temp['province'] = dis.province
+            temp['dis_level'] = dis.disability_level
+            temp['province'] = dis.current_province
+            temp['current_status'] = dis.current_status
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
             name =dis.first_name+" "+dis.last_name
             try:
@@ -868,7 +1189,10 @@ def employer_search_disability(request):
         
             output.append(temp)
         # print (output)
-        return render(request, 'employer_search.html',{'output':output,'job_declared':job_declared,'job_title_th':job_title_th,'job_id':job_required.id})
+        return render(request, 'employer_search.html',
+            {'output':output,'job_declared':job_declared,
+            'job_title_th':job_title_th,'job_id':job_required.id
+            })
 
 @login_required
 def disable_search_job(request):
@@ -889,7 +1213,6 @@ def disable_search_job(request):
         Q(title_th__icontains=job_title_th),
         Q(province__icontains=location),
         Q(disability_cate__icontains=dis_cate),
-        Q(salary1__gte=salary1) | Q(salary1__lte=salary2) & Q(salary2__lte=salary2),
         )
     output =[]
     for i in search_job_list:
@@ -898,8 +1221,8 @@ def disable_search_job(request):
         temp['id'] = i.id         
         temp['name'] = i.title_th
         temp['detail'] = i.detail
-        temp['salary1'] = i.salary1
-        temp['salary2'] = i.salary2
+        temp['salary'] = i.salary
+        # temp['salary2'] = i.salary2
         temp['dis_cate'] = i.disability_cate
         temp['province'] = i.province
         temp['url_pic'] = i.company.profile.profile_picture.url
@@ -925,8 +1248,8 @@ def disable_search_job(request):
     for s in mysave:
         print("tar",s.target)
         print("name",s.name)
-        temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary1":0,"salary2":0,
-        "detail":"","dis_cate":"","province":"","score":0,"save":True}
+        temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
+        "detail":"","dis_cate":[],"province":"","score":0,"save":True}
              # {"job_name":None,"company_image_url":None}
             # company = Comp/anyInfo.objects.get(profile=s.target)
             # print(company)
@@ -934,9 +1257,18 @@ def disable_search_job(request):
         print("job",job)
         temp_job["job_id"] = job.id
         temp_job["job_name"] = job.title_th
-        temp_job["salary1"] = job.salary1
-        temp_job["salary2"] = job.salary2
-        temp_job["dis_cate"] = job.disability_cate
+        temp_job["salary"] = job.salary
+        # temp_job["salary2"] = job.salary2
+        cate = {"name_cate":""}
+        job_required_cate = ast.literal_eval(job.disability_cate)
+        print("job_required_cate",job_required_cate)
+        for i in job_required_cate:
+            cate["name_cate"] = i
+            # temp_job["dis_cate"].append(i)
+        # print("cate",cate)
+
+        temp_job["dis_cate"] = cate
+        print("temp_job",type(temp_job["dis_cate"]))
         temp_job["province"] = job.province
         temp_job['detail'] = job.detail
         temp_job["company_image_url"] = job.company.profile.profile_picture.url
@@ -1016,23 +1348,16 @@ def create_job(request):
             company = CompanyInfo.objects.get(profile__user=request.user)
             age1 = 0
             age2 = 0 
-            salary1 = 0
-            salary2 = 0
-            sex = ""
-            if form.cleaned_data['sex'] == 0:
-                sex = "ชาย"
-            elif form.cleaned_data['sex'] == 1:
-                sex = "หญิง"
-            elif form.cleaned_data['sex'] == 2:
-                sex = "หญิงชาย"    
-
-            all_qualification = (form.cleaned_data['qualification']+','
-                +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
-                +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
-                +','+form.cleaned_data['qualification6']+','+form.cleaned_data['qualification7']
-                +','+form.cleaned_data['qualification8']
-                +','+form.cleaned_data['qualification9']
-                +','+form.cleaned_data['qualification10'])
+            # salary1 = 0
+            # salary2 = 0
+      
+            # all_qualification = (form.cleaned_data['qualification']+','
+            #     +form.cleaned_data['qualification2']+','+form.cleaned_data['qualification3']
+            #     +','+form.cleaned_data['qualification4']+','+form.cleaned_data['qualification5']
+            #     +','+form.cleaned_data['qualification6']+','+form.cleaned_data['qualification7']
+            #     +','+form.cleaned_data['qualification8']
+            #     +','+form.cleaned_data['qualification9']
+            #     +','+form.cleaned_data['qualification10'])
 
             if form.cleaned_data['age1'] >= form.cleaned_data['age2'] :
                 age2 = form.cleaned_data['age1']
@@ -1041,12 +1366,12 @@ def create_job(request):
                 age1 = form.cleaned_data['age1']
                 age2 = form.cleaned_data['age2']
 
-            if form.cleaned_data['salary1'] >= form.cleaned_data['salary2'] :
-                salary2 = form.cleaned_data['salary1']
-                salary1 = form.cleaned_data['salary2']
-            else :
-                salary1 = form.cleaned_data['salary1']
-                salary2 = form.cleaned_data['salary2']
+            # if form.cleaned_data['salary1'] >= form.cleaned_data['salary2'] :
+            #     salary2 = form.cleaned_data['salary1']
+            #     salary1 = form.cleaned_data['salary2']
+            # else :
+            #     salary1 = form.cleaned_data['salary1']
+            #     salary2 = form.cleaned_data['salary2']
                 
             cj = Job.objects.create(
                 company =company,
@@ -1056,12 +1381,34 @@ def create_job(request):
                 phone_no=form.cleaned_data['phone_no'],
                 age1 = age1,
                 age2 = age2,
-                sex =sex,
+                sex =form.cleaned_data['sex'],
                 detail = form.cleaned_data['job_detail'],
-                disability_cate = form.cleaned_data['disability_type'],
-                salary1 = salary1,
-                salary2 = salary2,
-                qualification = all_qualification,
+                disability_cate = form.cleaned_data['disability_cate'],
+                # disability_level= form.cleaned_data['disability_level'],
+                
+
+                history_of_education = form.cleaned_data['history_of_education'],
+                working_time = form.cleaned_data['working_time'],
+                work_from_hour = form.cleaned_data['work_from_hour'],
+                work_to_hour = form.cleaned_data['work_to_hour'],
+                work_type = form.cleaned_data['work_type'],
+                
+                language= form.cleaned_data['language'],
+                # listen_skill= form.cleaned_data['listen_skill'],
+                # speaking_skill= form.cleaned_data['speaking_skill'],
+                # reading_skill= form.cleaned_data['reading_skill'],
+                # writing_skill= form.cleaned_data['writing_skill'],
+
+                computer_skill1= form.cleaned_data['computer_skill1'],
+                computer_skill2= form.cleaned_data['computer_skill2'],
+                computer_skill3= form.cleaned_data['computer_skill3'],
+                level_computer_skill1= form.cleaned_data['level_computer_skill1'],
+                level_computer_skill2= form.cleaned_data['level_computer_skill2'],
+                level_computer_skill3= form.cleaned_data['level_computer_skill3'],
+
+                salary = form.cleaned_data['salary'],
+                disabled_welfare = form.cleaned_data['disabled_welfare'],
+                # salary2 = salary2,
                 province=form.cleaned_data['province'],
                 address=form.cleaned_data['location'],
            
@@ -1069,7 +1416,7 @@ def create_job(request):
             print(cj)
             messages.success(request, "คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
             print("คุณได้สร้างประกาศงานเรียบร้อยแล้ว")
-            return redirect("employer-search")
+            return redirect("employer_search")
 
 
     else :

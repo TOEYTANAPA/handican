@@ -1,5 +1,10 @@
 {% extends 'base.html' %} {% load static %}{% load widget_tweaks %} {% block content %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css">
+<link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
+ <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js"></script>
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+
   <style>
   .additionalTxt{
   color: #C4C4C4;
@@ -64,80 +69,112 @@
            <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
                             {% csrf_token %}
                             <div class="form-group">
+                              <h2>รายละเอียดงาน</h2>
                                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
+                                    <!-- <p  for=" ">พาสเวิร์ดเก่า</p> -->
                                     
                                     <div>
-                                        <label  for=" ">ชื่อตำแหน่งงาน (TH) <b class="requiredForm">*</b></label>
+                                        <p  for=" ">ชื่อตำแหน่งงาน (TH) <b class="requiredForm">*</b></p>
                                         {{form.title_th |attr:"placeholder:โปรดระบุชื่องาน และชื่อตำแหน่งงาน"}}
                                     </div>
                                     <div>
-                                        <label  for=" ">ชื่อตำแหน่งงาน (EN) <b class="requiredForm">*</b></label>
+                                        <p  for=" ">ชื่อตำแหน่งงาน (EN) <b class="requiredForm">*</b></p>
                                         {{form.title_en }}
                                     </div>
                                 </div>
                                  <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                    <div  class="uk-margin-bottom ">
-                                    <label  for=" ">อีเมลติดต่อกลับ <b class="requiredForm">*</b></label>
+                                    <p  for=" ">อีเมลติดต่อกลับ <b class="requiredForm">*</b></p>
                                     {{form.email}}
                                 </div>
                                      <div  class="uk-margin-bottom ">
-                                    <label  for=" ">เบอร์โทรลติดต่อกลับ <b class="requiredForm">*</b></label>
+                                    <p  for=" ">เบอร์โทรติดต่อกลับ <b class="requiredForm">*</b></p>
                                     {{form.phone_no}}
                                 </div>
                                 </div>
                                 <div  class="uk-margin-bottom ">
-                                    <label  for=" ">ที่ตั้งบริษัท <b class="requiredForm">*</b></label>
+                                    <p  for=" ">ที่ตั้งบริษัท <b class="requiredForm">*</b></p>
                                     {{form.location}}
                                 </div>
                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                    
                                      <div  class="uk-margin-bottom ">
-                                    <label  for=" ">จังหวัด <b class="requiredForm">*</b></label>
+                                    <p  for=" ">จังหวัดที่ตั้งบริษัท<b class="requiredForm">*</b></p>
                                     {{form.province}}
                                 </div>
                                 </div>
-                               
-
-                                
-                                 <div  class="uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                    <!-- <label  for=" ">พาสเวิร์ดเก่า</label> -->
-                                    
-                                    <div>
-                                        <label  for=" ">ทักษะที่ต้องการ  <b class="requiredForm">*</b></label>
-                                       {{form.qualification}} 
-                                        <p> </p>
-                                       {{form.qualification3 |attr:"placeholder:ทักษะที่ต้องการ (3)"}}  
-                                       <p> </p>
-                                       {{form.qualification5 |attr:"placeholder:ทักษะที่ต้องการ (5)"}}
-                                        <p> </p>
-                                       {{form.qualification7 |attr:"placeholder:ทักษะที่ต้องการ (7)"}}  
-                                        <p> </p>
-                                       {{form.qualification9 |attr:"placeholder:ทักษะที่ต้องการ (9)"}}  
-                                    </div>
-                                    <div>
-                                         <p> </p>
-                                       {{form.qualification2 |attr:"placeholder:ทักษะที่ต้องการ (2)"}}  
-                                        <p> </p>
-                                       {{form.qualification4 |attr:"placeholder:ทักษะที่ต้องการ (4)"}}  
-                                      
-                                        <p> </p>
-                                           {{form.qualification6 |attr:"placeholder:ทักษะที่ต้องการ (6)"}}
-                                           <p> </p>
-                                           {{form.qualification8 |attr:"placeholder:ทักษะที่ต้องการ (8)"}}
-                                           <p> </p>
-                                           {{form.qualification10 |attr:"placeholder:ทักษะที่ต้องการ (10)"}}
-                                    </div>
+<div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                   
+                                     <div  class="uk-margin-bottom ">
+                                    <p  for=" ">ประเภทงาน<b class="requiredForm">*</b></p>
+                                    {{form.work_type |attr:"placeholder:งานบริการ, งานออกแบบ, งานบัญชี "}}
                                 </div>
+                                </div>
+
+                                 <div  class="uk-margin-bottom ">
+                                    <p  for=" ">รายละเอียดงาน <b class="requiredForm">*</b></p>
+                                    <p></p>
+                             
+                                    <!-- {{form.media}}  -->
+                                    {{form.job_detail}}
+                   
+                                </div>
+                                 <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                            
+<div>
+                                            <p for=" ">เวลาการทำงาน <b class="requiredForm">*</b></p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.working_time }}</p>
+                                                
+                                                
+                                        </div>
+                                          <div >
+                                        <p class=" "  for=" "> ช่วงเวลาในการทำงาน <b class="requiredForm">*</b></p>
+                                        
+                                        <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
+                                            <div class="form-group ">
+                                                <div class="input-group">
+                                                    {{form.work_from_hour}}
+                                                    <div class="input-group-addon">
+                                                        ถึง
+                                                    </div>
+                                                    {{form.work_to_hour}}
+                                                </div>
+                                            </div>
+                                            
+                                      </div>  
+
+                                    </div>
                                  
-                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
-                                    <div>
-                                        <label class=" "  for=" "> เพศ
-                                        </label>
+                                        
+                                   </div>
+
+                                         <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                   
+                                       <div>       
+                            <p class=" "  for=" "> เงินเดือน <b class="requiredForm">*</b></p>
+                                         {{form.salary }}
+                                     
+                                      </div>
+<div>
+ <p class=" "  for=" "> สวัสดิการสำหรับผู้พิการ <b class="requiredForm">*</b></p>
+ {{form.disabled_welfare}}
+</div>
+                                </div>
+   <br>
+   <hr>
+                                
+<h2>คุณสมบัติที่ต้องการ</h2>
+                             
+                                 
+                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-3@m uk-child-width-1-1@s " uk-grid>
+                                    <div class="uk-width-small">
+                                        <p> เพศ <b class="requiredForm">*</b></p>
+                                
                                         {{form.sex |add_class:"uk-select" }}
                                     </div>
-                                    <div>
-                                        <label class=" "  for=" "> อายุ </label>
+                                    <div >
+                                        <p class=" "  for=" "> อายุ <b class="requiredForm">*</b></p>
                                         
                                         <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
                                             <div class="form-group ">
@@ -150,45 +187,97 @@
                                                 </div>
                                             </div>
                                             
-                                        </div>
-                                        
+                                      </div>  
+
                                     </div>
+                                        
+                                    <div class="uk-width-medium">
+                                     
+                                        
+                                        
+                                  
                                     
+                                    </div> 
                                 </div>
                                 
-                                <div  class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                              <div class="uk-margin-remove-top uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                     <div>
-                                        <label class=" "  for=" "> ประเภทความพิการ <b class="requiredForm"> *</b></label>
-                                        {{form.disability_type  }}
+                                        <p >เลือกประเภทความพิการ </p>
+                                        {{form.disability_cate }}
                                     </div>
+                                    <div></div>
+                               
+                                </div>
+                                <div class="uk-margin-remove-top uk-margin-bottom  uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
                                     <div>
-                                        <label class=" "  for=" "> เงินเดือน <b class="requiredForm">*</b></label>
-                                        
-                                        <div  class="uk-margin-bottom uk-margin-remove-top " uk-grid>
-                                            <div class="form-group ">
-                                                <div class="input-group">
-                                                    {{form.salary1}}
-                                                    <div class="input-group-addon">
-                                                        ถึง
-                                                    </div>
-                                                    {{form.salary2}}
-                                                </div>
-                                            </div>
-                                            
+                                        <p >ประวัติการศึกษา </p>
+                                        {{form.history_of_education }}
+                                    </div>
+                                    <div></div>
+                               
+                                </div>
+                                  
+<div class="uk-margin-bottom">
+
+                                   <!--  {{form.language |add_class:"uk-input"|attr:"placeholder:  " }}  -->
+                                    <p for=" ">ความรู้ทางด้านภาษา ( กรณีที่มีหลายภาษาให้ขั้นด้วยลูกน้ำ (,) )</p>
+                                    {{form.language |add_class:"uk-input"|attr:"placeholder: ภาษาอังกฤษ, ภาษาจีน, ภาษาญี่ปุ่น " }}
+                                </div>
+
+                        <!--         <div class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-4@m uk-child-width-1-1@s " uk-grid>
+                                        <div>
+                                            <p for=" ">การฟัง </p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.listen_skill }}</p>
                                         </div>
-                                        
-                                    </div>
-                                </div>
-                                   <div  class="uk-margin-bottom ">
-                                    <label  for=" ">รายละเอียดงาน <b class="requiredForm">*</b></label>
-                                    <p></p>
+                                        <div>
+                                            <p for=" "> การพูด</p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.speaking_skill }}</p>
+                                        </div>
+                                            <div>
+                                            <p for=" ">การอ่าน </p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.reading_skill }}</p>
+                                        </div>
+                                            <div>
+                                            <p for=" ">การเขียน </p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.writing_skill }}</p>
+                                        </div>
+                                    </div> -->
+
+
+
+  <div class="uk-margin-bottom uk-margin-remove-top uk-child-width-1-2@m uk-child-width-1-1@s " uk-grid>
+                                        <div>
+                                            <p for=" ">ทักษะทางด้านคอมพิวเตอร์ </p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.computer_skill1 |attr:"placeholder: 1."}}</p>
+                                                 <p class="uk-margin-remove-top">
+                                                {{form.computer_skill2 |attr:"placeholder: 2."}}</p>
+                                                 <p class="uk-margin-remove-top">
+                                                {{form.computer_skill3 |attr:"placeholder: 3."}}</p>
+                                                 <p class="uk-margin-remove-top">
+                                                {{form.computer_skill4 |attr:"placeholder: 4."}}</p>
+                                                 <p class="uk-margin-remove-top">
+                                                {{form.computer_skill5 |attr:"placeholder: 5."}}</p>
+                                        </div>
+                                        <div>
+                                            <p for=" "> ระดับความขำนาญ</p>
+                                            <p class="uk-margin-remove-top">
+                                                {{form.level_computer_skill1 }}</p>
+                                                <p>{{form.level_computer_skill2 }}</p>
+                                                <p>{{form.level_computer_skill3 }}</p>
+                                                      <p>{{form.level_computer_skill4 }}</p>
+                                                            <p>{{form.level_computer_skill5 }}</p>
+                                                 
+                                                  
+                                        </div>
+                                            
+                                    </div>    
                              
-                                    {{form.media}} 
-                                    {{form.job_detail}}
-                   
-                                </div>
-                            
-                             
+                                   
                                 
                                 <br>
                                 {% if form.errors %}
@@ -234,6 +323,40 @@
 <!-- </div> -->
 
 <script>
+   $('#timepicker1').timepicker();
+
+
+ $('#timepicker2').timepicker();
+
+
+
+  var eye = document.getElementById("disabled_eyes");
+var ear = document.getElementById("disabled_ears");
+var body = document.getElementById("disabled_body");
+ear.style.display = "none";
+body.style.display = "none";
+
+$("#disability_cate").change(function() {
+
+    if ($(this).val() == "ทางการมองเห็น") {
+        eye.style.display = "block";
+        ear.style.display = "none";
+        body.style.display = "none";
+
+    } else if ($(this).val() == "ทางการได้ยินหรือการสื่อความหมาย") {
+        eye.style.display = "none";
+        ear.style.display = "block";
+        body.style.display = "none";
+
+    } else {
+        eye.style.display = "none";
+        ear.style.display = "none";
+        body.style.display = "block";
+
+
+    }
+
+});
 function readURL(input) {
 if (input.files && input.files[0]) {
 var reader = new FileReader();
