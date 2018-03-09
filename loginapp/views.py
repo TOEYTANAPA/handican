@@ -687,7 +687,5 @@ def profile_noti(request):
             temp['disability_cate'] = dis.disability_cate
             list_noti.append(temp)
 
-                
-            list_noti.append(temp)
         return render(request, 'profile_comp_notifications.html',{'dis':comp,'noti':list_noti})
         
