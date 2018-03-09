@@ -84,6 +84,34 @@ def job_signup2(request,uid):
             #     expected_salary2 = form.cleaned_data['expected_salary2']
 
             profile = Profile.objects.create(user=user,profile_picture = request.FILES['profile_image'],)
+            computer_skill1=""
+            computer_skill2=""
+            computer_skill3=""
+            computer_skill4=""
+            if form.cleaned_data['computer_skill1'] == "":
+                computer_skill1 = "ไม่ระบุ"
+            else:
+                computer_skill1 = form.cleaned_data['computer_skill1'],
+
+            if form.cleaned_data['computer_skill2'] == "":
+                computer_skill2 = "ไม่ระบุ"
+            else:
+                computer_skill2 = form.cleaned_data['computer_skill2'],
+
+            if form.cleaned_data['computer_skill3'] == "":
+                computer_skill3 = "ไม่ระบุ"
+            else:
+                computer_skill3 = form.cleaned_data['computer_skill3'],
+
+            if form.cleaned_data['computer_skill4'] == "":
+                computer_skill4 = "ไม่ระบุ"
+            else:
+                computer_skill4 = form.cleaned_data['computer_skill4'],
+
+            if form.cleaned_data['computer_skill5'] == "":
+                computer_skill5 = "ไม่ระบุ"
+            else:
+                computer_skill5 = form.cleaned_data['computer_skill5'],
             disability = DisabilityInfo.objects.create(
                 profile = profile,
                 first_name=form.cleaned_data['first_name'],
@@ -106,17 +134,32 @@ def job_signup2(request,uid):
                 faculty = form.cleaned_data['faculty'],
                 branch = form.cleaned_data['branch'],
 
-                language = form.cleaned_data['language'],
-                listen_skill = form.cleaned_data['listen_skill'],
-                speaking_skill = form.cleaned_data['speaking_skill'],
-                reading_skill = form.cleaned_data['reading_skill'],
-                writing_skill = form.cleaned_data['writing_skill'],
+                language1 = form.cleaned_data['language1'],
+                listen_skill1 = form.cleaned_data['listen_skill1'],
+                speaking_skill1 = form.cleaned_data['speaking_skill1'],
+                reading_skill1 = form.cleaned_data['reading_skill1'],
+                writing_skill1 = form.cleaned_data['writing_skill1'],
+                language2 = form.cleaned_data['language2'],
+                listen_skill2 = form.cleaned_data['listen_skill2'],
+                speaking_skill2 = form.cleaned_data['speaking_skill2'],
+                reading_skill2 = form.cleaned_data['reading_skill2'],
+                writing_skill2 = form.cleaned_data['writing_skill2'],
+                language3 = form.cleaned_data['language3'],
+                listen_skill3 = form.cleaned_data['listen_skill3'],
+                speaking_skill3 = form.cleaned_data['speaking_skill3'],
+                reading_skill3 = form.cleaned_data['reading_skill3'],
+                writing_skill3 = form.cleaned_data['writing_skill3'],
+                language4 = form.cleaned_data['language4'],
+                listen_skill4 = form.cleaned_data['listen_skill4'],
+                speaking_skill4 = form.cleaned_data['speaking_skill4'],
+                reading_skill4 = form.cleaned_data['reading_skill4'],
+                writing_skill4 = form.cleaned_data['writing_skill4'],
 
-                computer_skill1 = form.cleaned_data['computer_skill1'],
-                computer_skill2 = form.cleaned_data['computer_skill2'],
-                computer_skill3 = form.cleaned_data['computer_skill3'],
-                computer_skill4 = form.cleaned_data['computer_skill4'],
-                computer_skill5 = form.cleaned_data['computer_skill5'],
+                computer_skill1 = computer_skill1,
+                computer_skill2 = computer_skill2,
+                computer_skill3 = computer_skill3,
+                computer_skill4 = computer_skill4,
+                
                 level_computer_skill1 = form.cleaned_data['level_computer_skill1'],
                 level_computer_skill2 = form.cleaned_data['level_computer_skill2'],
                 level_computer_skill3 = form.cleaned_data['level_computer_skill3'],
@@ -247,7 +290,108 @@ def profile(request):
     if User.objects.filter(pk=request.user.id, groups__name='disability').exists() :
         dis = DisabilityInfo.objects.get(profile=profile)
         noti = Notifications.objects.filter(tarket=profile)
+        
        
+        language = []
+        temp_language = {"language":"","listen":"","speak":"","read":"","write":""}
+
+        if dis.language1 != "ไม่ระบุ":
+            temp_language["language"] = dis.language1
+            temp_language["listen"] = dis.listen_skill1
+            temp_language["speak"] = dis.speaking_skill1
+            temp_language["read"] = dis.reading_skill1
+            temp_language["write"] = dis.writing_skill1
+            language.append(temp_language)  
+        if dis.language2 != "ไม่ระบุ":
+            temp_language["language"] = dis.language2
+            temp_language["listen"] = dis.listen_skill2
+            temp_language["speak"] = dis.speaking_skill2
+            temp_language["read"] = dis.reading_skill2
+            temp_language["write"] = dis.writing_skill2
+            language.append(temp_language)  
+        if dis.language3 != "ไม่ระบุ":
+            temp_language["language"] = dis.language3
+            temp_language["listen"] = dis.listen_skill3
+            temp_language["speak"] = dis.speaking_skill3
+            temp_language["read"] = dis.reading_skill3
+            temp_language["write"] = dis.writing_skill3
+            language.append(temp_language)  
+        if dis.language4 != "ไม่ระบุ":
+            temp_language["language"] = dis.language4
+            temp_language["listen"] = dis.listen_skill4
+            temp_language["speak"] = dis.speaking_skill4
+            temp_language["read"] = dis.reading_skill4
+            temp_language["write"] = dis.writing_skill4
+            language.append(temp_language)  
+
+        computer_skill = []
+        temp_com_skill = {"name":"","level":""}
+
+        if dis.computer_skill1 != "ไม่ระบุ":
+            temp_com_skill["name"] = dis.computer_skill1
+            temp_com_skill["level"] = dis.level_computer_skill1
+            computer_skill.append(temp_com_skill)
+        if dis.computer_skill2 != "ไม่ระบุ":
+            temp_com_skill["name"] = dis.computer_skill2
+            temp_com_skill["level"] = dis.level_computer_skill2
+            computer_skill.append(temp_com_skill)
+        if dis.computer_skill3 != "ไม่ระบุ":
+            temp_com_skill["name"] = dis.computer_skill3
+            temp_com_skill["level"] = dis.level_computer_skill3
+            computer_skill.append(temp_com_skill)
+        if dis.computer_skill4 != "ไม่ระบุ":
+            temp_com_skill["name"] = dis.computer_skill4
+            temp_com_skill["level"] = dis.level_computer_skill4
+            computer_skill.append(temp_com_skill)
+        if dis.computer_skill5 != "ไม่ระบุ":
+            temp_com_skill["name"] = dis.computer_skill5
+            temp_com_skill["level"] = dis.level_computer_skill5
+            computer_skill.append(temp_com_skill)   
+
+        other_things = []
+   
+        if dis.helping_myself =="ได้":
+            other_things.append("สามารถช่วยเหลือตัวเองได้")
+        if dis.traveling_by_myself =="ได้":
+            other_things.append("สามารถเดินทางด้วยรถสาธารณะได้")
+        if dis.work_in_other_province =="ได้":
+            other_things.append("สามารถทำงานต่างจังหวัดได้")
+    #     computer_skill1 = models.CharField(max_length=100,blank=True,null=True,default="ไม่ระบุ")
+    # computer_skill2 = models.CharField(max_length=100,blank=True,null=True,default="ไม่ระบุ")
+    # computer_skill3 = models.CharField(max_length=100,blank=True,null=True,default="ไม่ระบุ")
+    # computer_skill4 = models.CharField(max_length=100,blank=True,null=True,default="ไม่ระบุ")
+    # computer_skill5 = models.CharField(max_length=100,blank=True,null=True,default="ไม่ระบุ")
+
+    # level_computer_skill1 = models.CharField(max_length=50,blank=True,null=True,default="ไม่ระบุ")
+    # level_computer_skill2 = models.CharField(max_length=50,blank=True,null=True,default="ไม่ระบุ")
+    # level_computer_skill3 = models.CharField(max_length=50,blank=True,null=True,default="ไม่ระบุ")
+    # level_computer_skill4 = models.CharField(max_length=50,blank=True,null=True,default="ไม่ระบุ")
+    # level_computer_skill5 = models.CharField(max_length=50,blank=True,null=True,default="ไม่ระบุ")
+    #     # language_loop.append(dis.language1)
+    #     # language_loop.append(dis.language2)
+        # language_loop.append(dis.language3)
+        # language_loop.append(dis.language4)
+
+        # listen_loop.append(dis.listen_skill1)
+        # listen_loop.append(dis.listen_skill2)
+        # listen_loop.append(dis.listen_skill3)
+        # listen_loop.append(dis.listen_skill4)
+
+        # speak_loop.append(dis.speaking_skill1)
+        # speak_loop.append(dis.speaking_skill2)
+        # speak_loop.append(dis.speaking_skill3)
+        # speak_loop.append(dis.speaking_skill4)        
+
+        # read_loop.append(dis.reading_skill1)
+        # read_loop.append(dis.reading_skill2)
+        # read_loop.append(dis.reading_skill3)
+        # read_loop.append(dis.reading_skill4)
+
+        # write_loop.append(dis.writing_skill1)
+        # write_loop.append(dis.writing_skill2)
+        # write_loop.append(dis.writing_skill3)
+        # write_loop.append(dis.writing_skill4)
+
    
         for i in noti:
             temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
@@ -267,7 +411,11 @@ def profile(request):
             print(temp['is_read'])
             list_noti.append(temp)
 
-        return render(request, 'profile.html',{'dis':dis,'noti':list_noti})
+        return render(request, 'profile.html',{'dis':dis,
+            'noti':list_noti,
+            'language':language,
+            'computer_skill':computer_skill,
+            'other_things':other_things})
     else :
         
         return  redirect('company_profile')
@@ -454,7 +602,7 @@ def company_profile(request):
     for i in noti:
         temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
         'job_name':"",'job_id':0,'noti_id':0,'job_interest':"",'disability_cate': '',
-        'salary1':0,'salary2': 0,'province':'','job_exp':"",'dis_id':0}
+        'expected_salary':0,'province':'','job_exp':"",'dis_id':0}
         p = Profile.objects.get(user=i.user)
         dis = DisabilityInfo.objects.get(profile=p)
         temp['job_name'] = i.job.title_th
@@ -467,10 +615,10 @@ def company_profile(request):
         temp['is_read'] = i.is_read
         temp['img'] = p.profile_picture.url
         temp['noti_id'] = i.id
-        temp['salary1'] = dis.expected_salary1
-        temp['salary2'] = dis.expected_salary2
-        temp['province'] = dis.province
-        temp['job_interest'] = dis.job_interest
+        temp['expected_salary'] = dis.expected_salary1
+      
+        temp['province'] = dis.current_province
+        temp['job_interest'] = dis.job_interest1
         temp['job_exp'] = dis.job_exp
         temp['disability_cate'] = dis.disability_cate
         list_noti.append(temp)
@@ -518,7 +666,7 @@ def profile_noti(request):
         for i in noti:
             temp = {'name': '', 'action': '', 'obj':'','time':None,'img':None,'is_read': False,
             'job_name':"",'job_id':0,'noti_id':0,'job_interest':"",'disability_cate': '',
-            'salary1':0,'salary2': 0,'province':'','job_exp':"",'dis_id':0}
+            'expected_salary':0,'province':'','job_exp':"",'dis_id':0}
             p = Profile.objects.get(user=i.user)
             dis = DisabilityInfo.objects.get(profile=p)
             temp['job_name'] = i.job.title_th
@@ -531,12 +679,13 @@ def profile_noti(request):
             temp['is_read'] = i.is_read
             temp['img'] = p.profile_picture.url
             temp['noti_id'] = i.id
-            temp['salary1'] = dis.expected_salary1
-            temp['salary2'] = dis.expected_salary2
-            temp['province'] = dis.province
-            temp['job_interest'] = dis.job_interest
+            temp['expected_salary'] = dis.expected_salary1
+          
+            temp['province'] = dis.current_province
+            temp['job_interest'] = dis.job_interest1
             temp['job_exp'] = dis.job_exp
             temp['disability_cate'] = dis.disability_cate
+            list_noti.append(temp)
 
                 
             list_noti.append(temp)

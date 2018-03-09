@@ -57,15 +57,86 @@ def disable_detail(request,dis_id,job_id):
     status = "ยังไม่ส่งคำเชิญ"
     job = Job.objects.get(id=job_id)
     print(dis,"dothis")
+    language = []
+    temp_language = {"language":"","listen":"","speak":"","read":"","write":""}
+
+    if dis.language1 != "ไม่ระบุ":
+        temp_language["language"] = dis.language1
+        temp_language["listen"] = dis.listen_skill1
+        temp_language["speak"] = dis.speaking_skill1
+        temp_language["read"] = dis.reading_skill1
+        temp_language["write"] = dis.writing_skill1
+        language.append(temp_language)  
+    if dis.language2 != "ไม่ระบุ":
+        temp_language["language"] = dis.language2
+        temp_language["listen"] = dis.listen_skill2
+        temp_language["speak"] = dis.speaking_skill2
+        temp_language["read"] = dis.reading_skill2
+        temp_language["write"] = dis.writing_skill2
+        language.append(temp_language)  
+    if dis.language3 != "ไม่ระบุ":
+        temp_language["language"] = dis.language3
+        temp_language["listen"] = dis.listen_skill3
+        temp_language["speak"] = dis.speaking_skill3
+        temp_language["read"] = dis.reading_skill3
+        temp_language["write"] = dis.writing_skill3
+        language.append(temp_language)  
+    if dis.language4 != "ไม่ระบุ":
+        temp_language["language"] = dis.language4
+        temp_language["listen"] = dis.listen_skill4
+        temp_language["speak"] = dis.speaking_skill4
+        temp_language["read"] = dis.reading_skill4
+        temp_language["write"] = dis.writing_skill4
+        language.append(temp_language)  
+
+    computer_skill = []
+    temp_com_skill = {"name":"","level":""}
+
+    if dis.computer_skill1 != "ไม่ระบุ":
+        temp_com_skill["name"] = dis.computer_skill1
+        temp_com_skill["level"] = dis.level_computer_skill1
+        computer_skill.append(temp_com_skill)
+    if dis.computer_skill2 != "ไม่ระบุ":
+        temp_com_skill["name"] = dis.computer_skill2
+        temp_com_skill["level"] = dis.level_computer_skill2
+        computer_skill.append(temp_com_skill)
+    if dis.computer_skill3 != "ไม่ระบุ":
+        temp_com_skill["name"] = dis.computer_skill3
+        temp_com_skill["level"] = dis.level_computer_skill3
+        computer_skill.append(temp_com_skill)
+    if dis.computer_skill4 != "ไม่ระบุ":
+        temp_com_skill["name"] = dis.computer_skill4
+        temp_com_skill["level"] = dis.level_computer_skill4
+        computer_skill.append(temp_com_skill)
+    if dis.computer_skill5 != "ไม่ระบุ":
+        temp_com_skill["name"] = dis.computer_skill5
+        temp_com_skill["level"] = dis.level_computer_skill5
+        computer_skill.append(temp_com_skill)   
+
+    other_things = []
+   
+    if dis.helping_myself =="ได้":
+        other_things.append("สามารถช่วยเหลือตัวเองได้")
+    if dis.traveling_by_myself =="ได้":
+        other_things.append("สามารถเดินทางด้วยรถสาธารณะได้")
+    if dis.work_in_other_province =="ได้":
+        other_things.append("สามารถทำงานต่างจังหวัดได้")
+
+    print("computer_skill",computer_skill)
     try :
         status = InviteProcess.objects.get(disability=dis,job__id=job_id)
         status = status.status
         print(status,"status")
 
     except :
-        raise
+        pass
 
-    return render(request, 'disable_detail.html', {'dis':dis,'status':status,'job':job})
+    return render(request, 'disable_detail.html', {'dis':dis,
+        'status':status,
+        'job':job,
+        'language':language,
+        'computer_skill':computer_skill,
+        'other_things':other_things})
 
 def invite_job_to_disability(request,dis_id,job_id):
     tarket = DisabilityInfo.objects.get(id=dis_id)
@@ -91,8 +162,39 @@ def job_detail(request,job_name,job_id):
     status = "ยังไม่ส่งคำเชิญ"
     profile = Profile.objects.get(user=request.user)
     dis = DisabilityInfo.objects.get(profile=profile)
-    job_qualification = ""
-    qualification_list = job.qualification.split(",") 
+
+    cate = []
+    language = []
+    isLanguage = False
+    language_required = job.language.split(",")
+    print("language_required",language_required)
+    for i in language_required:
+        if i != "ไม่ระบุ":
+            isLanguage=True
+
+
+    temp={"job_id":0 ,"name":"","url_pic":None,"salary":0,
+            "detail":"","dis_cate":[],"province":"","score":0,"save":True}
+    # job_match = Job.objects.get(id=r)
+    job_required_cate = ast.literal_eval(job.disability_cate)
+    print("job_required_cate",job_required_cate)    
+         
+    for j in job_required_cate:
+        cate.append(j)
+        # job_detail_cate["dis_cate"].append(j)
+    print("job_detail_cate",cate)
+
+        
+
+    # temp['score'] = temp_dict[r]
+    # temp['job_id'] = r
+    # temp['name'] = job_match.title_th
+    # temp['salary'] = job_match.salary
+    # temp['detail'] = job_match.detail
+    # temp['province'] = job_match.province
+    # temp['url_pic'] =  Profile.objects.get(id=c.profile.id).profile_picture.url
+
+    # qualification_list = job.qualification.split(",") 
     # for q in qualification_list:
 
 
@@ -106,14 +208,16 @@ def job_detail(request,job_name,job_id):
             status = invite.status
 
             print(status,":status")
-            return render(request, 'job_detail.html', {'job':job,'status':status,'dis':dis.id})
+            return render(request, 'job_detail.html', {'job':job,'status':status,
+                'dis':dis.id,'cate':cate,'language_required':language_required,'isLanguage':isLanguage})
         except :
             pass
 
 
     # print("info ",company)
     return render(request, 'job_detail.html', {'job':job,'company':company,'status':status,
-        'dis':dis.id,'qualification_list':qualification_list})
+        'dis':dis.id,'qualification_list':qualification_list,
+        'cate':cate,"language_required":language_required,'isLanguage':isLanguage})
 
 
 def click_noti(request,job_name,job_id,noti_id):
@@ -524,7 +628,7 @@ def search(request):
         print("temp_dict_reverse",temp_dict_reverse)   
         for r in temp_dict_reverse:
             temp={"job_id":0 ,"name":"","url_pic":None,"salary":0,
-            "detail":"","dis_cate1":"","dis_cate2":"","dis_cate3":"","province":"","score":0,"save":True}
+            "detail":"","dis_cate":[],"province":"","score":0,"save":True}
             job_match = Job.objects.get(id=r)
 
            
@@ -532,21 +636,18 @@ def search(request):
             job_required_cate = ast.literal_eval(job_match.disability_cate)
         
          
-            
-            temp["dis_cate1"] = job_required_cate[0]
-            temp["dis_cate2"] = job_required_cate[1]
-            temp["dis_cate3"] = job_required_cate[2]
+            for j in job_required_cate:
+                temp["dis_cate"].append(j)
 
 
         
 
             temp['score'] = temp_dict[r]
-            temp['job_id'] = job_match.id
+            temp['job_id'] = r
             temp['name'] = job_match.title_th
             temp['salary'] = job_match.salary
             # temp['salary2'] = job_match.salary2
             temp['detail'] = job_match.detail
-            temp['dis_cate'] = job_match.disability_cate
             temp['province'] = job_match.province
             c = CompanyInfo.objects.get(id=job_match.company.id)
             temp['url_pic'] =  Profile.objects.get(id=c.profile.id).profile_picture.url
@@ -557,7 +658,7 @@ def search(request):
             else:
                 temp['save'] = False   
             output_match.append(temp)
-        print (output_match)
+        print ("output_match",output_match)
         mysave = Save.objects.filter(user=request.user,)
         print("mysave",mysave)
 
@@ -567,35 +668,22 @@ def search(request):
             print("tar",s.target)
             print("name",s.name)
             temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
-            "detail":"","dis_cate1":"","dis_cate2":"","dis_cate3":"","province":"","score":0,"save":True}
+            "detail":"","dis_cate":[],"dis_cate2":"","dis_cate3":"","province":"","score":0,"save":True}
              # {"job_name":None,"company_image_url":None}
             # company = Comp/anyInfo.objects.get(profile=s.target)
             # print(company)
-            
-            job_required_cate = ast.literal_eval(job.disability_cate)
-            tempcate = []
-            print("job_required_cate",job_required_cate)
-            cate = {"name_cate1":"","name_cate2":"","name_cate3":""}
-
-            temp_job["dis_cate1"] = job_required_cate[0]
-            temp_job["dis_cate2"] = job_required_cate[1]
-            temp_job["dis_cate3"] = job_required_cate[2]
-
-
-            print("cate",cate)
-           # for i in job_required_cate:
-                
-           #      cate["name_cate"] = i
-           #      tempcate.append(cate) 
-                
-
-
             job = Job.objects.get(company__profile=s.target,title_th=s.name)
+
+            job_required_cate = ast.literal_eval(job.disability_cate)
+            for j in job_required_cate:
+                temp_job["dis_cate"].append(j)
+
+
+
     
             temp_job["job_id"] = job.id
             temp_job["job_name"] = job.title_th
             temp_job["salary"] = job.salary
-            temp_job["dis_cate"]=cate
             # temp_job["salary2"] = job.salary2
             
             temp_job["province"] = job.province
@@ -604,16 +692,50 @@ def search(request):
              
 
             output_job.append(temp_job)
-        print("cate",cate)
+
+        out_invited = []
         profile = Profile.objects.get(user=request.user)
         invited = InviteProcess.objects.filter(disability__profile=profile)
-        print("invited",invited)
-        print("output_job",output_job)  
+        for i in invited:
+            # print("invited")
+
+            # job_required_cate = ast.literal_eval(i.job.disability_cate)
+            temp_job_invited ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
+            "detail":"","dis_cate":[],"province":"","score":0,"save":True}
+             # {"job_name":None,"company_image_url":None}
+            # company = Comp/anyInfo.objects.get(profile=s.target)
+            # print(company)
+            
+            job_required_cate = ast.literal_eval(i.job.disability_cate)
+            for j in job_required_cate:
+                temp_job_invited["dis_cate"].append(j) 
 
 
 
 
-    return render(request, 'search.html',{'output_search':output_match,'output_job':output_job,'invited':invited})
+            # job = Job.objects.get(company__profile=s.target,title_th=s.name)
+    
+            temp_job_invited["job_id"] = i.job.id
+            temp_job_invited["job_name"] = i.job.title_th
+            # print("earn",temp_job_invited["job_name"])
+            temp_job_invited["salary"] = i.job.salary
+            # temp_job["salary2"] = job.salary2
+            
+            temp_job_invited["province"] = i.job.province
+            temp_job_invited['detail'] = i.job.detail
+            temp_job_invited["company_image_url"] = i.job.company.profile.profile_picture.url
+             
+
+            out_invited.append(temp_job_invited)
+
+        # print("invited",invited)
+        # print("output_job",output_job)  
+
+
+
+
+    return render(request, 'search.html',{'output_search':output_match,
+        'output_job':output_job,'invited':out_invited})
   
 @login_required
 def employer_search(request):
@@ -865,11 +987,13 @@ def employer_search(request):
             temp['id'] = dis.id 
             temp['score'] = temp_dict[r]
             temp['name'] = dis.first_name+" "+dis.last_name
+
             # temp['job_interest'] = dis.job_interest
-            temp['expected_salary1'] = dis.expected_salary1
-            temp['expected_salary2'] = dis.expected_salary2
+ 
             temp['job_exp'] = dis.job_exp
             temp['dis_cate'] = dis.disability_cate
+            temp['current_status'] = dis.current_status
+            temp['province'] = dis.current_province
             temp['url_pic'] = Profile.objects.get(id=dis.profile.id).profile_picture.url
             name =dis.first_name+" "+dis.last_name
             try:
@@ -934,7 +1058,8 @@ def employer_search(request):
         # print("out_job_declared",out_job_declared)
 
         form = CreateJobForm()
-
+        print("out_job_declared",out_job_declared)
+        print("output_match",output_match)
         return render(request, 'employer_search.html',{'form':form,
             'job_declared':job_declared,
             'out_job_declared':out_job_declared,
@@ -973,9 +1098,12 @@ def employer_search_disability(request):
    
         job_required = Job.objects.get(title_th=job_title_th) 
         dis_list = DisabilityInfo.objects.all()
-        print(dis_list)
+        print("ob_required.language",job_required.language)
+        try:
+            language_required =job_required.language.split(",")
 
-        language_required =job_required.language.split(",")
+        except Exception as e:
+            language_required = []
 
        
         dis_list = DisabilityInfo.objects.all()
@@ -1198,32 +1326,73 @@ def employer_search_disability(request):
 def disable_search_job(request):
     job_title_th = request.GET.get('job_title',"")
     dis_cate = request.GET.get('dis_cate',"")
-    location = request.GET.get('location',"")
-    salary1 = request.GET.get('salary1',"")
-    salary2 = request.GET.get('salary2',"")
-
-    if salary1 is "" or salary2 is "":
+    location = request.GET.get('province',"")
+    salary = request.GET.get('salary',0)
+    # salary2 = request.GET.get('salary2',0)
+    print("salary",salary)
+    print("province",location)
+    print("dis_cate",dis_cate)
+    if job_title_th == "" :
         search_job_list = Job.objects.filter(
-        Q(title_th__icontains=job_title_th),
+        Q(salary=salary),
         Q(province__icontains=location),
         Q(disability_cate__icontains=dis_cate),
+        )
+    elif job_title_th == "" and salary == 0 and location == "" and dis_cate =="":
+        search_job_list = Job.objects.all()
+    elif job_title_th == "" or salary == 0 or location == "" or dis_cate =="":
+        print("elif or ")
+        # print("salary",salary)
+        search_job_list = Job.objects.filter(
+        Q(title_th__icontains=job_title_th)|
+        Q(province=location)|
+        Q(disability_cate=dis_cate)|
+        Q(salary=salary),
         )
     else:
+        print("else")
+        print("salary",salary)
         search_job_list = Job.objects.filter(
         Q(title_th__icontains=job_title_th),
         Q(province__icontains=location),
         Q(disability_cate__icontains=dis_cate),
+        Q(salary=salary),
         )
+        # for js in search_job_list:
+
+    print("search_job_list",search_job_list)
+
+    #      ('น้อยกว่า 10,000','น้อยกว่า 10,000' ),
+    # ('10,000-19,000','10,000-19,000'),
+    # ('20,000-29,000','20,000-29,000'),
+    # ('30,000-39,000','30,000-39,000'),
+    # ('40,000-49,000','40,000-49,000'),
+    # ('50,000 ขึ้นไป','50,000 ขึ้นไป')
+    # )
     output =[]
     for i in search_job_list:
-        temp={"id":0,"name":"","detail":"","url_pic":None,"salary1":0,"salary2":0,
-            "job_exp":"","dis_cate":"","province":"","save":False}
+        # temp={"id":0,"name":"","detail":"","url_pic":None,"salary1":0,
+        #     "job_exp":"","dis_cate":"","province":"","save":False}
+        temp={"job_id":0 ,"name":"","url_pic":None,"salary":0,
+            "detail":"","dis_cate":[],
+            "province":"","save":True}
+            # job_match = Job.objects.get(id=r)
+
+           
+            
+        job_required_cate = ast.literal_eval(i.disability_cate)
+        for j in job_required_cate:
+            temp["dis_cate"].append(j) 
+
+        # print("job_required_cate",job_required_cate)
+         
+            
+        # ired_cate[2]   
+
         temp['id'] = i.id         
         temp['name'] = i.title_th
         temp['detail'] = i.detail
         temp['salary'] = i.salary
-        # temp['salary2'] = i.salary2
-        temp['dis_cate'] = i.disability_cate
         temp['province'] = i.province
         temp['url_pic'] = i.company.profile.profile_picture.url
         c = CompanyInfo.objects.get(id=i.company.id)
@@ -1237,7 +1406,7 @@ def disable_search_job(request):
 
         output.append(temp)
     
-    print("type",type(salary2))
+    # print("type",type(salary2))
     print("job_title_th",job_title_th)
     print("searcj",search_job_list)
     mysave = Save.objects.filter(user=request.user,)
@@ -1248,27 +1417,24 @@ def disable_search_job(request):
     for s in mysave:
         print("tar",s.target)
         print("name",s.name)
-        temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
-        "detail":"","dis_cate":[],"province":"","score":0,"save":True}
-             # {"job_name":None,"company_image_url":None}
-            # company = Comp/anyInfo.objects.get(profile=s.target)
-            # print(company)
-        job = Job.objects.get(company__profile=s.target,title_th=s.name)
-        print("job",job)
+        # temp_job ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
+        # "detail":"","dis_cate":[],"province":"","score":0,"save":True}
+
+        temp_job={"job_id":0 ,"job_name":"","url_pic":None,"salary":0,
+            "detail":"","dis_cate":[],
+            "province":"","save":True}
+            # job_match = Job.objects.get(id=r)
+
+           
+        job = Job.objects.get(company__profile=s.target,title_th=s.name)    
+        job_required_cate = ast.literal_eval(job.disability_cate)
+
+        for j in job_required_cate:
+            temp_job["dis_cate"].append(j)   
+
         temp_job["job_id"] = job.id
         temp_job["job_name"] = job.title_th
         temp_job["salary"] = job.salary
-        # temp_job["salary2"] = job.salary2
-        cate = {"name_cate":""}
-        job_required_cate = ast.literal_eval(job.disability_cate)
-        print("job_required_cate",job_required_cate)
-        for i in job_required_cate:
-            cate["name_cate"] = i
-            # temp_job["dis_cate"].append(i)
-        # print("cate",cate)
-
-        temp_job["dis_cate"] = cate
-        print("temp_job",type(temp_job["dis_cate"]))
         temp_job["province"] = job.province
         temp_job['detail'] = job.detail
         temp_job["company_image_url"] = job.company.profile.profile_picture.url
@@ -1277,12 +1443,42 @@ def disable_search_job(request):
         output_job.append(temp_job)
         profile = Profile.objects.get(user=request.user)
         invited = InviteProcess.objects.filter(disability__profile=profile)
-        print("invited",invited)
-        print("output_job",output_job) 
+        out_invited = []
+        for i in invited:
+            # print("invited")
+
+            # job_required_cate = ast.literal_eval(i.job.disability_cate)
+            temp_job_invited ={"job_id":0 ,"job_name":"","company_image_url":None,"salary":0,
+            "detail":"","dis_cate":[],"province":"","score":0,"save":True}
+             # {"job_name":None,"company_image_url":None}
+            # company = Comp/anyInfo.objects.get(profile=s.target)
+            # print(company)
+            
+            job_required_cate = ast.literal_eval(i.job.disability_cate)
+            for j in job_required_cate:
+                temp_job_invited["dis_cate"].append(j) 
+
+
+
+
+            # job = Job.objects.get(company__profile=s.target,title_th=s.name)
+    
+            temp_job_invited["job_id"] = i.job.id
+            temp_job_invited["job_name"] = i.job.title_th
+            # print("earn",temp_job_invited["job_name"])
+            temp_job_invited["salary"] = i.job.salary
+            # temp_job["salary2"] = job.salary2
+            
+            temp_job_invited["province"] = i.job.province
+            temp_job_invited['detail'] = i.job.detail
+            temp_job_invited["company_image_url"] = i.job.company.profile.profile_picture.url
+             
+
+            out_invited.append(temp_job_invited) 
 
     return render(request, 'search.html',{'search_job_list':output,
-        'job_title_th':job_title_th,'dis_cate':dis_cate,'location':location,
-        'salary1':salary1,'salary2':salary2,'output_job':output_job,'invited':invited})
+        'job_title_th':job_title_th,'dis_cate':dis_cate,'province':location,
+        'salary':salary,'output_job':output_job,'invited':out_invited})
 
 
 @login_required
@@ -1343,6 +1539,7 @@ def question(request):
 def create_job(request):
     if request.method == 'POST':
         form = CreateJobForm(request.POST, request.FILES)
+        print("create_job")
         if form.is_valid():
             print("valid")
             company = CompanyInfo.objects.get(profile__user=request.user)

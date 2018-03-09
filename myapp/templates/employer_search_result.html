@@ -12,6 +12,10 @@
     .disabilityText{
     color: #47CCA6;
     }
+      .money{
+            color:#429146;
+        }
+        
     </style>
     <div class="uk-background-default">
         <br>
@@ -33,6 +37,8 @@
                                 <a href="{% url "dis_detail" o.id job_id %}">{{o.name}}   </a><p></p>
                               <p class="uk-margin-remove-bottom">ความพิการ: {{o.dis_cate}} 
                           </p>
+                           <p class="uk-margin-remove-bottom"> <i class="fa fa-money money" aria-hidden="true"></i> {{o.expected_salary}}  บาท/เดือน  
+                                </p> 
                                 <p class="uk-margin-remove-bottom"> สถานะ: {{o.current_status}}  <span class="uk-margin-left">
                              <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span></p> 
                               
@@ -42,8 +48,7 @@
                             <div class="uk-width-1-2@m uk-width-1-2@s ">
                                 <div class="uk-margin uk-align-right">
                                     {% if o.save %}
-                                   
-                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
+                                  
                                     <span>
                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" ><i class="fa fa-check"></i>  บันทึกแล้ว</button></span>
                                     <p></p>
@@ -51,7 +56,7 @@
                                     {% else %}
 
                                  
-                                    <button  type="submit" class="uk-button uk-button-default  uk-button-small " >เชิญร่วมงาน</button> 
+                                   
                                     <span>
                                         <button   id="{{o.id}}" type="submit" class="uk-button uk-button-default uk-button-small isSave" >บันทึก</button></span>
                                     <p></p>

@@ -256,6 +256,15 @@
     .container{
     width: 95%;
     }
+        .money{
+            color:#429146;
+        }
+        .place{
+             color: #616161;
+        }
+          .imgRadius{
+    border-radius: 50%;
+    }
     </style>
     
     {% block messages %}
@@ -383,8 +392,9 @@
                                     <tr>
                                         <td class="uk-text-right">ที่ตั้ง :</td>
                                         <td class="uk-table-expand">
+                                            <p>{{company.address}}</p>
+                                            <p> {{company.province}}</p>
                                             
-                                            {{company.address}} {{company.province}}
                                         </td>
                                         
                                     </tr>
@@ -431,17 +441,19 @@
                                     </div>
                                     <div class="uk-width-expand@m  ">
                                         <div  uk-grid>
-                                            <div class="uk-width-1-2@m uk-width-1-2@s">
-                                                
-                                                <a href="{% url "dis_detail" o.dis_id o.job_id %}">{{o.name}} <b> {{o.action}} </b>{{o.obj}}  </a><p></p>
-                                                <label class="">{{o.disability_cate}}</label>
-                                                <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.salary1}} - {{o.salary2}} บาท/เดือน</p>
-                                                <span class="uk-margin-left">
-                                                <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span>
-                                                
-                                                <p></p>  <label class="uk-margin-remove-top" for="">งานที่สนใจ: <span> {{o.job_interest}}</span></label>
-                                                <p class="uk-margin-remove-top ">{{o.job_exp}}</p>
-                                            </div>
+                                          
+                                             <div class="uk-width-1-2@m uk-width-1-2@s">
+                                <a href="{% url "dis_detail" o.dis_id o.job_id %}">{{o.name}}   </a><p></p>
+                              <p class="uk-margin-remove-bottom">ความพิการ: {{o.disability_cate}} 
+                          </p>
+                           <p class="uk-margin-remove-bottom"> <i class="fa fa-money money" aria-hidden="true"></i> {{o.expected_salary}}  บาท/เดือน  
+                                </p> 
+                                <p class="uk-margin-remove-bottom"> สถานะ: {{o.current_status}}  <span class="uk-margin-left">
+                             <b><i class="fa fa-map-marker " style="color: red" aria-hidden="true"></i></b> {{o.province}}</span></p> 
+                              
+                                <p class="uk-margin-remove-bottom"></p>
+                               
+                            </div>
                                             <div class="uk-width-1-2@m uk-width-1-2@s ">
                                                 <div class="uk-margin uk-align-right">
                                                     {% if o.save %}
