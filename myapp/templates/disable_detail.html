@@ -290,10 +290,10 @@
           <div class="uk-text-center ">
             <div class="info uk-margin-bottom">
               <h2 class="uk-text-large uk-margin"> {{dis.first_name}} {{dis.last_name}}</h2>
-              
+              <!-- 
               {% if dis.job_exp  %}
                 <div class="desc"><p><i class="fa fa-briefcase" aria-hidden="true"></i> {{dis.job_exp}}</p></div>
-              {% endif %}
+              {% endif %} -->
             </div>
             
             {% if status == "ยังไม่ส่งคำเชิญ" %}
@@ -332,86 +332,325 @@
         <div class="uk-container ">
           <hr >
           
-          <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลส่วนตัว </h2>
-          <table class="uk-table ">
-            
-            <tbody>
-              <tr >
-                <td class="uk-width-1-5 uk-text-right">เพศ : </td>
-                <td class="uk-table-expand"> {{dis.sex}}</td>
-                
-              </tr>
-              <tr>
-                <td class="uk-text-right ">อายุ : </td>
-                <td class="uk-table-expand">{{dis.age}}</td>
-                
-              </tr>
-              <tr>
-                <td class="uk-text-right ">ประเภทความพิการ : </td>
-                <td class="uk-table-expand">{{dis.disability_cate}}</td>
-                
-              </tr>
-              
-              <tr>
-                <td class="uk-text-right">งานที่สนใจ :</td>
-                <td class="uk-table-expand">
-                  
-                  {{dis.job_interest}}
-                </td>
-                
-              </tr>
-              
-              <tr>
-                <td class="uk-text-right">เงินเดือนที่คาดหวัง :</td>
-                <td class="uk-table-expand">{{dis.expected_salary1}} - {{dis.expected_salary2}} บาท</td>
-                
-              </tr>
-              
-              
-              <tr>
-                <td class="uk-text-right">ความสามารถ :</td>
-                <td class="uk-table-expand">
-                  <ul>
-                    <li> {{dis.talent}}</li>
-                    <li>{{dis.talent2}} </li>
-                    <li> {{dis.talent3}}</li>
-                  </ul>
-                </td>
-                
-              </tr>
-              
-            </tbody>
-          </table>
+           <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลส่วนตัว </h2>
+                                <table class="uk-table ">
+                                    
+                                    <tbody>
+                                        <tr >
+                                            <td class="uk-width-1-5 uk-text-right">เพศ : </td>
+                                            <td class="uk-table-expand"> {{dis.sex}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right ">อายุ : </td>
+                                            <td class="uk-table-expand">{{dis.age}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right ">ประเภทความพิการ : </td>
+                                            <td class="uk-table-expand">{{dis.disability_cate}} ระดับ {{dis.disability_level}}</td>
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td class="uk-text-right ">อุปกรณ์ช่วยเหลือ : </td>
+                                            <td class="uk-table-expand">{{dis.disabled_equiptment}} </td>
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td class="uk-text-right ">สาเหตุความพิการ : </td>
+                                            <td class="uk-table-expand">{{dis.disability_reason}} </td>
+                                            
+                                        </tr>
+                                          <tr>
+                                            <td class="uk-text-right ">ปีที่พิการ : </td>
+                                            <td class="uk-table-expand">{{dis.disabled_year}} </td>
+                                            
+                                        </tr>
+
+                                            <tr >
+                                            <td class="uk-width-1-5 uk-text-right">งานอดิเรก : </td>
+                                            <td class="uk-table-expand"> {{dis.hobbies}}</td>
+                                            
+                                        </tr>
+                                       
+                                        
+                                            <tr>
+                                            <td class="uk-text-right ">ประเภทงานที่สนใจ : </td>
+                                            <td class="uk-table-expand">{{dis.interesting_work_cate}} </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right ">ช่วงเวลาทำงาน : </td>
+                                            <td class="uk-table-expand">{{dis.working_time}} </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right">ตำแหน่งงานที่สนใจ :</td>
+                                            <td class="uk-table-expand">
+                                                <ul>
+                                                <li>
+                                                    {{dis.job_interest1}} เงินเดือน {{dis.expected_salary1}}
+                                                </li>
+                                                <li>
+                                                    {{dis.job_interest2}} เงินเดือน {{dis.expected_salary2}}
+                                                </li>
+                                                <li>
+                                                    {{dis.job_interest3}} เงินเดือน {{dis.expected_salary3}}
+                                                </li>
+                                            </ul>
+                                               
+                                            </td>
+                                            
+                                        </tr>
+
+
+                                          <tr>
+                                            <td class="uk-text-right">สวัสดิการที่คาดหวัง :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                {{dis.expected_welfare}}
+                                            </td>
+                                            
+                                        </tr>
+                                      
+                                        
+                                          <tr >
+                                            <td class="uk-width-1-5 uk-text-right">โรคประจำตัว : </td>
+                                            <td class="uk-table-expand"> {{dis.congenital_disease}}</td>
+                                            
+                                        </tr>
+                                         <tr >
+                                            <td class="uk-width-1-5 uk-text-right">คดีความ : </td>
+                                            <td class="uk-table-expand"> {{dis.lawsuit}}</td>
+                                            
+                                        </tr>
+                                        {% if other_things %}
+                                        <tr >
+                                            <td class="uk-width-1-5 uk-text-right">อื่นๆ : </td>
+                                            <td class="uk-table-expand"> 
+                                            <ul>
+                                                {% for i in other_things %}
+                                                <li>
+                                                    <p>{{i}}</p>
+
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            </td>
+                                            
+                                        </tr>
+
+                                        
+                                        <tr>
+                                            <td class="uk-text-right ">สถานะปัจจุบัน : </td>
+                                            <td class="uk-table-expand">{{dis.current_status}} </td>
+                                            
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+
+                                <h2 class="uk-heading-bullet uk-margin-remove-top ">ประสบการณ์การทำงาน </h2>
+                                {% if dis.job_exp == " มี" %}
+                                <table class="uk-table">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="uk-width-1-5 uk-text-right">ชื่อบริษัท:</td>
+                                            <td class="uk-table-expand">{{dis.last_company_name}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right">จังหวัด :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                {{dis.last_company_province}}
+                                            </td>
+                                            
+                                        </tr>
+                                          <tr>
+                                            <td class="uk-text-right">ตำแหน่ง :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                {{dis.position}}
+                                            </td>
+                                            
+                                        </tr>
+                                            <tr>
+                                            <td class="uk-text-right">เริ่ม - สิ้นสุด :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                {{dis.working_start_date}} - {{dis.working_end_date}}
+                                            </td>
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td class="uk-text-right">เหตุผลที่ออก :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                {{dis.quit_job_reason}} 
+                                            </td>
+                                            
+                                        </tr>
+                                 
+                                        
+                                        
+                                    </tbody>
+                                      {% else %}
+                                      <p class="uk-margin-left">ไม่มีประสบการณ์การทำงาน</p>
+                                        {% endif %}
+                                </table>
+                                    <h2 class="uk-heading-bullet uk-margin-remove-top ">ประวัติการศึกษา </h2>
+                              
+                                <table class="uk-table">
+                                    
+                                    <tbody>
+                                        
+                                                         <tr>
+                                        
+                                            <td class="uk-width-1-5 uk-text-right ">วุฒิการศึกษา : </td>
+                                            <td class="uk-table-expand">{{dis.graduate}} </td>
+                                            
+                                        </tr>
+                                       <tr>
+                                            <td class="uk-text-right ">ปีที่สำเร็จการศึกษา : </td>
+                                            <td class="uk-table-expand">{{dis.graduate_year}} </td>
+                                            
+                                        </tr>
+                                          <tr>
+                                            <td class="uk-text-right ">สถาบัน : </td>
+                                            <td class="uk-table-expand">{{dis.educational_institution}} </td>
+                                            
+                                        </tr>
+                                       <tr>
+                                            <td class="uk-text-right ">คณะ / หลักสูตร : </td>
+                                            <td class="uk-table-expand">{{dis.faculty}} </td>
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td class="uk-text-right ">สาขา / วิชาเอก : </td>
+                                            <td class="uk-table-expand">{{dis.branch}} </td>
+                                            
+                                        </tr>
+                                            <tr>
+                                            <td class="uk-text-right ">ประกาศเกียรติคุณ : </td>
+                                            <td class="uk-table-expand">{{dis.honor_name}} {{dis.honor_year}} มอบโดย {{dis.agency_honor}}</td>
+                                            
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                                 
+
+
+                                        
+                                        
+                                  
+
+
+                                <hr>
+
+                                     <!-- <h2></h2> -->
+ <h2 class="uk-heading-bullet uk-margin-remove-top ">คุณสมบัติอื่นๆ </h2>
+                 {% if language %}
+                         <table class="uk-table uk-table-divider">
+                                     <thead>
+                            <tr>
+                                <th>ภาษา </th>
+                                <th>การฟัง </th>
+                                <th>การพูด </th>
+                                <th>การอ่าน </th>
+                                <th>การเขียน </th>
+                            </tr>
+                        </thead>
+                                    <tbody>
+                                {% for i in language %}
+                                <tr>
+
+                                       <td>{{i.language}}  </td>
+                                             <td>{{i.listen}}</td>    
+                                              <td>{{i.speak}}</td>  
+                                               <td>{{i.read}}</td>
+                                                <td>{{i.write}}</td>
+
+                                 
+                                    </tr>
+                                      {% endfor %}      
+                                    </tbody>
+                                </table>
+                            {% else %}
+                            <p class="uk-margin-left">คุณสมบัติทางด้านภาษาไม่ระบุ</p>
+                                 {% endif %}
+                                
+ {% if computer_skill %}
+                         <table class="uk-table uk-table-divider">
+                                     <thead>
+                            <tr>
+                                <th>ชื่อ </th>
+                                <th>ระดับความสามารถ </th>
+                               
+                            </tr>
+                        </thead>
+                                    <tbody>
+                                {% for i in computer_skill %}
+                                <tr>
+
+                                       <td>{{i.name}}  </td>
+                                             <td>{{i.level}}</td>    
+                                             
+                                 
+                                    </tr>
+                                      {% endfor %}      
+                                    </tbody>
+                                </table>
+                                 {% else %}
+                            <p class="uk-margin-left">คุณสมบัติทางด้านคอมพิวเตอร์ไม่ระบุ</p>
+                                 {% endif %}
+
+
+                        
           <hr>
           <h2 class="uk-heading-bullet uk-margin-remove-top ">ข้อมูลติดต่อ </h2>
             {% if status == "ตอบรับคำเชิญ" %}
           <table class="uk-table">
             
-            <tbody>
-              <tr>
-                <td class="uk-width-1-5 uk-text-right">อีเมลล์ :</td>
-                <td class="uk-table-expand">{{dis.email}}</td>
                 
-              </tr>
-              <tr>
-                <td class="uk-text-right">เบอร์โทรศัพท์ :</td>
-                <td class="uk-table-expand">
-                  
-                  {{dis.phone_no}}
-                </td>
-                
-              </tr>
-              <tr>
-                <td class="uk-text-right">ที่อยู่ปัจจุบัน :</td>
-                <td class="uk-table-expand">
-                  
-                  {{dis.address}} {{dis.province}}
-                </td>
-                
-              </tr>
-              
-              
-            </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td class="uk-width-1-5 uk-text-right">อีเมล:</td>
+                                            <td class="uk-table-expand">{{dis.email}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right">เบอร์โทรศัพท์ :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                {{dis.phone_no}}
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-width-1-5  ">ที่อยู่ตามทะเบียนบ้าน:</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                <p>
+                                                   {{dis.registration_address}} 
+                                                </p> 
+                                                <p>{{dis.registration_province}}</p>
+                                            </td>
+                                             </tr> <tr>
+                                              <td class="uk-width-1-5 uk-text-right">ที่อยู่ปัจจุบัน :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                <p>
+                                                   {{dis.current_address}} 
+                                                </p> 
+                                                <p>{{dis.current_province}}</p>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
           </table>
         {% else %}
 
@@ -419,16 +658,27 @@
             
             <tbody>
              
-              <tr>
-                <td class="uk-text-right">ที่อยู่ :</td>
-                <td class="uk-table-expand">
-                  
-                   {{dis.province}}
-                     <span class="uk-text-muted uk-text-small"><p>จะเปิดเผยข้อมูลติดต่อเมื่อได้รับยืนยันการสมัครงาน</p></span>
-                </td>
-                
-              </tr>
-              
+           
+               <tr>
+                                            <td class="uk-width-1-5  ">ที่อยู่ตามทะเบียนบ้าน:</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                <p>
+                                                   {{dis.registration_address}} 
+                                                </p> 
+                                                <p>{{dis.registration_province}}</p>
+                                            </td>
+                                             </tr> <tr>
+                                              <td class="uk-width-1-5 uk-text-right">ที่อยู่ปัจจุบัน :</td>
+                                            <td class="uk-table-expand">
+                                                
+                                                <p>
+                                                   {{dis.current_address}} 
+                                                </p> 
+                                                <p>{{dis.current_province}}</p>
+                                                 <span class="uk-text-muted uk-text-small"><p>จะเปิดเผยข้อมูลติดต่อเมื่อได้รับยืนยันการสมัครงาน</p></span>
+                                            </td>
+                                        </tr>
               
             </tbody>
           </table>

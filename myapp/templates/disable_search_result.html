@@ -10,18 +10,21 @@
     color:#3C8A2E;
     font-weight: bolder;
     }
-    .inImg{
+     .inImg{
     /*position: absolute;*/
     
     width: 100%;
-    height: 100px;
+    height: 80px;
     object-fit: cover;
     }
     .imgCrop{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     overflow: hidden;
     position:  relative;
+    border-radius: 50%;
+    }
+    .imgRadius{
     border-radius: 50%;
     }
     .disabilityText{
@@ -41,26 +44,31 @@
                 <div class="uk-child-width-1-1@s uk-child-width-1-1@m " uk-grid>
                     <div class="uk-width-auto@m  ">
                         <div class="imgCrop">
-                            <img class=" uk-align-center inImg"   src="{{o.url_pic}}" alt="your image" />
+                            <img class=" uk-align-center inImg imgRadius"     src="{{o.url_pic}}" alt="your image" >
                         </div>
                         
                         
                     </div>
                     <div class="uk-width-expand@m  ">
                         <div  uk-grid>
-                            <div class="uk-width-1-2@m uk-width-1-2@s">
-                                <a class="uk-link-text"  href="{% url 'job_detail' o.name  o.id %}">  <b>{{o.name}}</b>  </a>
+                                  <div class="uk-width-1-2@m uk-width-1-2@s">
+                                <a href="{% url 'job_detail' o.name o.job_id %}">{{o.name}}   </a>
                                 <p></p>
-                                {{o.dis_cate}}
-                              {% for c in o.dis_cate %}
-                                                <label class="">{{c.name_cate}}</label>
-                                            {% endfor %}
-                                            
-                            <p class="uk-margin-remove-top"><i class="fa fa-money " aria-hidden="true"></i> {{o.salary}} บาท/เดือน</span>
-                            <span class="uk-margin-left">
-                            <b><i class="fa fa-map-marker" aria-hidden="true"></i></b> {{o.province}}</span></b>
-                            <p class=" ">{{o.detail | safe}}</p>
-                        </div>
+                               <p class="uk-margin-remove-bottom">ความพิการ</p>      
+                              <ul class="uk-margin-remove-top"> {% for i in o.dis_cate %}
+                                  
+                                    <li> {{i}} </li>
+                           
+
+                            {% endfor %}
+                             </ul> 
+                                <p class="uk-margin-remove-bottom"> <i class="fa fa-money money" aria-hidden="true"></i> {{o.salary}}  บาท/เดือน  
+                                </p> 
+                              
+                                <p class="uk-margin-remove-bottom"> <span class="">
+                             <b><i class="fa fa-map-marker province" aria-hidden="true"></i></b> {{o.province}}</span></p>
+                               
+                            </div>
                         <div class="uk-width-1-2@s ">
                             <div class="uk-margin uk-align-right">
                                 
@@ -92,10 +100,15 @@
         </div>
             {% endfor %}
     </div>
- 
+
       </div>
     <script>
-    $(document).ready(function(){
+
+    //  var province = document.getElementById('province');
+    //     province.value = ;
+    // }
+
+
     $(".savbtn").click(function(){
     var id = $(this).attr('id');
     var title = $(this).text();

@@ -65,7 +65,7 @@
           <div class="panel-body uk-text-left">
             <!-- <h3>เพียง 2 ขั้นตอนในการสร้างโปรไฟล์พร้อมรับเสนองาน</h3> -->
          
-           <form id="register-form" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
+           <form id="register-form" action="{% url 'create_job' %}" role="form" autocomplete="off" enctype='multipart/form-data' class="form" method="post">
                             {% csrf_token %}
                             <div class="form-group">
                               <h2>รายละเอียดงาน</h2>

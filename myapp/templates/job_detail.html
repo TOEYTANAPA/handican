@@ -319,45 +319,102 @@
         
       </div>
       
-      <div class="uk-container ">   <hr>
+      <div class="uk-container ">
+  <h2 class="uk-heading-bullet uk-margin-remove-top ">คุณสมบัติผู้พิการ </h2>
+    <table class="uk-table">
+      
+      <tbody>
+         <tr>
+              <td class="uk-width-1-6 uk-text-right">ประเภทความพิการ : </td>
+              <td class="uk-table-expand">
+                <ul  >
+
+                  {% for i in cate %}
+                  <li><p> {{i}}</p></li>
+               {% endfor %}
+            </ul>
+              </td>
+              
+            </tr>
+             {% if isLanguage %}
+          <tr>
+              <td class="uk-width-1-6 uk-text-right">ด้านภาษา : </td>
+              <td class="uk-table-expand">
+                <ul >
+        
+                  {% for i in language_required %}
+                   
+                  <li><p> {{i}}</p></li>
+                 
+               {% endfor %}
+            
+            </ul>
+              </td>
+              
+            </tr>
+                {% endif %}
+                  <tr>
+              <td class="uk-width-1-6 uk-text-right">การศึกษา : </td>
+              <td class="uk-table-expand">
+                     <p>{{job.history_of_education}}  </p>   
+              
+              </td>
+              
+            </tr>
+            <tr>
+              <td class="uk-width-1-6 uk-text-right">เพศ : </td>
+              <td class="uk-table-expand">
+                    <p>{{job.sex}}</p>    
+              
+              </td>
+              
+            </tr>
+       <tr>
+              <td class="uk-width-1-6 uk-text-right">อายุ : </td>
+              <td class="uk-table-expand">
+                       <p>{{job.age1}} - {{job.age2}} ปี</p> 
+              
+              </td>
+              
+            </tr>
+          
+
+      </tbody>
+    </table>
+
+         <hr>
         
         <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดงาน </h2>
         <table class="uk-table">
           
-          <tbody>
+          <tbody>   
+
+                <tr>
+              <td class="uk-width-1-6 uk-text-right">ประเภทงาน :</td>
+              <td class="uk-table-expand"><p>{{job.work_type }}</p></td>
+              
+            </tr>
             <tr>
               <td class="uk-width-1-6 uk-text-right">รายละเอียดงาน :</td>
-              <td class="uk-table-expand">{{job.detail | safe}}</td>
+              <td class="uk-table-expand"><p>{{job.detail | safe}}</p></td>
               
             </tr>
             <tr>
-              <td class="uk-width-1-6 uk-text-right">ประเภทความพิการ :</td>
-              <td class="uk-table-expand">{{job.disability_cate}}</td>
+              <td class="uk-width-1-6 uk-text-right">สวัสดิการผู้พิการ :</td>
+              <td class="uk-table-expand"><p>{{job.disabled_welfare }}</p></td>
               
             </tr>
             <tr>
-              
+              <td class="uk-width-1-6 uk-text-right">ช่วงเวลาทำงาน :</td>
+              <td class="k-width-1-5 "><p>{{job.working_time}} <span class="uk-margin-left">{{job.work_from_hour}} - {{job.work_to_hour}}</span></p></td>
+                  <td class="k-width-1-3 "></td>
             </tr>
-            <tr>
-              <td class="uk-width-1-6 uk-text-right">คุณสมบัติ :</td>
-              <td class="uk-table-expand">
-                <ul ><li> เพศ {{job.sex}}</li>
-                <li> อายุ {{job.age1}} - {{job.age2}} ปี</li>
-                {% for q in qualification_list %}
-                  {% if q %}
-                    <li>{{q }}</li>
-                  {% endif %}
-                {% endfor %}
-                <!--   <li>UI design in both Sketch and Photoshop</li>
-                <li>Working hours 9 AM - 5 PM  Monday-Friday</li> -->
-              </ul>
-            </td>
             
-          </tr>
+         
           
           <tr>
             <td class="uk-width-1-6 uk-text-right">เงินเดือน :</td>
-            <td class="uk-table-expand">{{job.salary1}} - {{job.salary2}} บาท</td>
+            <td class="uk-table-expand"><p>{{job.salary}}  บาท</p></td>
             
           </tr>
           
@@ -365,10 +422,15 @@
           <tr>
             <td class="uk-width-1-6 uk-text-right">ติดต่อฝ่ายบุคคล:</td>
             <td class="uk-table-expand">
-              <ul ><li> {{job.phone_no}}</li>
-              <li>{{company.fax}} </li>
-              <li> {{job.email}}</li>
-              <li> {{company.address}}</li>
+              <ul >
+
+                <li> <p>{{job.phone_no}}</p></li>
+                {% if company.fax %}
+                <li><p>{{company.fax}}</p> </li>
+                {% endif %}
+              
+              <li><p> {{job.email}}</p></li>
+              <li> <p>{{company.address}}</p></li>
             </ul>
           </td>
           
@@ -377,7 +439,8 @@
          <tr>
             <td class="uk-width-1-6 uk-text-right">สถานที่ตั้ง :</td>
             <td class="uk-table-expand">
-             {{job.address}} จังหวัด{{job.province}} 
+           <p>{{job.address}} </p> 
+           <p>จังหวัด{{job.province}} </p> 
           </td>
           
         </tr>
@@ -397,13 +460,14 @@
       </tbody>
     </table>
     <hr>
+
     <h2 class="uk-heading-bullet uk-margin-remove-top ">รายละเอียดบริษัท </h2>
     <table class="uk-table">
       
       <tbody>
         <tr>
           <td class="uk-width-1-6 uk-text-right">คำอธิบาย :</td>
-          <td class="uk-table-expand">{{company.info}}</td>
+          <td class="uk-table-expand"> <p>{{company.info}}</p></td>
           
         </tr>
         
